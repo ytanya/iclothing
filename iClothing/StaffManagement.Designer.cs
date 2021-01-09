@@ -42,7 +42,7 @@
             this.txtNhanVienID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotalPage = new System.Windows.Forms.Label();
-            this.dvgColor = new ADGV.AdvancedDataGridView();
+            this.dvgStaff = new ADGV.AdvancedDataGridView();
             this.NhanvienID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Role = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenTruyCap = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +53,7 @@
             this.Sodt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ngaytao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ngaysua = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblMess = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblRole = new System.Windows.Forms.Label();
@@ -72,7 +73,7 @@
             this.pbNext = new System.Windows.Forms.PictureBox();
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.pbFirst = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgStaff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
@@ -108,7 +109,6 @@
             this.btnImport.TabIndex = 64;
             this.btnImport.Text = "Tải lên";
             this.btnImport.UseVisualStyleBackColor = false;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // txtFile
             // 
@@ -131,7 +131,6 @@
             this.btnDelete.TabIndex = 62;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // txtUsername
             // 
@@ -172,13 +171,13 @@
             this.lblTotalPage.TabIndex = 55;
             this.lblTotalPage.Text = "Total rows: 0";
             // 
-            // dvgColor
+            // dvgStaff
             // 
-            this.dvgColor.AllowUserToAddRows = false;
-            this.dvgColor.AutoGenerateContextFilters = true;
-            this.dvgColor.BackgroundColor = System.Drawing.Color.White;
-            this.dvgColor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dvgColor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dvgStaff.AllowUserToAddRows = false;
+            this.dvgStaff.AutoGenerateContextFilters = true;
+            this.dvgStaff.BackgroundColor = System.Drawing.Color.White;
+            this.dvgStaff.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dvgStaff.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -186,9 +185,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgColor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dvgColor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgColor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dvgStaff.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dvgStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgStaff.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NhanvienID,
             this.Role,
             this.TenTruyCap,
@@ -199,7 +198,7 @@
             this.Sodt,
             this.Ngaytao,
             this.Ngaysua});
-            this.dvgColor.DateWithTime = false;
+            this.dvgStaff.DateWithTime = false;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -207,21 +206,21 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dvgColor.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dvgColor.EnableHeadersVisualStyles = false;
-            this.dvgColor.GridColor = System.Drawing.Color.White;
-            this.dvgColor.Location = new System.Drawing.Point(22, 375);
-            this.dvgColor.Name = "dvgColor";
+            this.dvgStaff.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dvgStaff.EnableHeadersVisualStyles = false;
+            this.dvgStaff.GridColor = System.Drawing.Color.White;
+            this.dvgStaff.Location = new System.Drawing.Point(22, 375);
+            this.dvgStaff.Name = "dvgStaff";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgColor.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dvgColor.Size = new System.Drawing.Size(813, 294);
-            this.dvgColor.TabIndex = 54;
-            this.dvgColor.TimeFilter = false;
+            this.dvgStaff.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dvgStaff.Size = new System.Drawing.Size(813, 294);
+            this.dvgStaff.TabIndex = 54;
+            this.dvgStaff.TimeFilter = false;
             // 
             // NhanvienID
             // 
@@ -300,6 +299,14 @@
             this.Ngaysua.Name = "Ngaysua";
             this.Ngaysua.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
+            // lblMess
+            // 
+            this.lblMess.AutoSize = true;
+            this.lblMess.Location = new System.Drawing.Point(44, 45);
+            this.lblMess.Name = "lblMess";
+            this.lblMess.Size = new System.Drawing.Size(0, 13);
+            this.lblMess.TabIndex = 30;
+            // 
             // btnSave
             // 
             this.btnSave.AutoSize = true;
@@ -313,7 +320,6 @@
             this.btnSave.TabIndex = 53;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblUsername
             // 
@@ -431,6 +437,7 @@
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(184, 26);
             this.txtTen.TabIndex = 78;
+
             // 
             // txtHo
             // 
@@ -506,6 +513,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.lblMess);
             this.Controls.Add(this.pbLast);
             this.Controls.Add(this.pbNext);
             this.Controls.Add(this.pbPrev);
@@ -533,12 +541,12 @@
             this.Controls.Add(this.txtNhanVienID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTotalPage);
-            this.Controls.Add(this.dvgColor);
+            this.Controls.Add(this.dvgStaff);
             this.Controls.Add(this.btnSave);
             this.Name = "StaffManagement";
             this.Size = new System.Drawing.Size(870, 750);
             this.Load += new System.EventHandler(this.StaffManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dvgColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgStaff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
@@ -549,6 +557,7 @@
         }
 
         #endregion
+        private System.Windows.Forms.Label lblMess;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnImport;
@@ -558,7 +567,7 @@
         private System.Windows.Forms.TextBox txtNhanVienID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalPage;
-        private ADGV.AdvancedDataGridView dvgColor;
+        private ADGV.AdvancedDataGridView dvgStaff;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblRole;

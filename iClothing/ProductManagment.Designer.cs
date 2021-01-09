@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductManagment));
             this.txtMieuta = new System.Windows.Forms.TextBox();
             this.lblLoai = new System.Windows.Forms.Label();
@@ -42,12 +42,12 @@
             this.txtDiaChi = new System.Windows.Forms.TextBox();
             this.lblDai = new System.Windows.Forms.Label();
             this.txtTen = new System.Windows.Forms.TextBox();
-            this.txtKHID = new System.Windows.Forms.TextBox();
+            this.txtBarcode = new System.Windows.Forms.TextBox();
             this.lblKihieu = new System.Windows.Forms.Label();
             this.lblBarcode = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotalPage = new System.Windows.Forms.Label();
-            this.dvgColor = new ADGV.AdvancedDataGridView();
+            this.dvgProduct = new ADGV.AdvancedDataGridView();
             this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Kihieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dai = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,7 +74,7 @@
             this.pbNext = new System.Windows.Forms.PictureBox();
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.pbFirst = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
@@ -158,7 +158,6 @@
             this.btnDelete.TabIndex = 68;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // txtDiaChi
             // 
@@ -191,15 +190,15 @@
             this.txtTen.Size = new System.Drawing.Size(251, 26);
             this.txtTen.TabIndex = 65;
             // 
-            // txtKHID
+            // txtBarcode
             // 
-            this.txtKHID.BackColor = System.Drawing.Color.White;
-            this.txtKHID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtKHID.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtKHID.Location = new System.Drawing.Point(132, 92);
-            this.txtKHID.Name = "txtKHID";
-            this.txtKHID.Size = new System.Drawing.Size(251, 26);
-            this.txtKHID.TabIndex = 64;
+            this.txtBarcode.BackColor = System.Drawing.Color.White;
+            this.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBarcode.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarcode.Location = new System.Drawing.Point(132, 92);
+            this.txtBarcode.Name = "txtBarcode";
+            this.txtBarcode.Size = new System.Drawing.Size(251, 26);
+            this.txtBarcode.TabIndex = 64;
             // 
             // lblKihieu
             // 
@@ -242,23 +241,23 @@
             this.lblTotalPage.TabIndex = 58;
             this.lblTotalPage.Text = "Total rows: 0";
             // 
-            // dvgColor
+            // dvgProduct
             // 
-            this.dvgColor.AllowUserToAddRows = false;
-            this.dvgColor.AutoGenerateContextFilters = true;
-            this.dvgColor.BackgroundColor = System.Drawing.Color.White;
-            this.dvgColor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dvgColor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgColor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dvgColor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgColor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dvgProduct.AllowUserToAddRows = false;
+            this.dvgProduct.AutoGenerateContextFilters = true;
+            this.dvgProduct.BackgroundColor = System.Drawing.Color.White;
+            this.dvgProduct.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dvgProduct.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dvgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgProduct.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Barcode,
             this.Kihieu,
             this.Dai,
@@ -270,29 +269,29 @@
             this.DVT,
             this.Ngaytao,
             this.Ngaysua});
-            this.dvgColor.DateWithTime = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dvgColor.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dvgColor.EnableHeadersVisualStyles = false;
-            this.dvgColor.GridColor = System.Drawing.Color.White;
-            this.dvgColor.Location = new System.Drawing.Point(2, 418);
-            this.dvgColor.Name = "dvgColor";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgColor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dvgColor.Size = new System.Drawing.Size(866, 260);
-            this.dvgColor.TabIndex = 57;
-            this.dvgColor.TimeFilter = false;
+            this.dvgProduct.DateWithTime = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dvgProduct.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dvgProduct.EnableHeadersVisualStyles = false;
+            this.dvgProduct.GridColor = System.Drawing.Color.White;
+            this.dvgProduct.Location = new System.Drawing.Point(2, 418);
+            this.dvgProduct.Name = "dvgProduct";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dvgProduct.Size = new System.Drawing.Size(866, 260);
+            this.dvgProduct.TabIndex = 57;
+            this.dvgProduct.TimeFilter = false;
             // 
             // Barcode
             // 
@@ -399,7 +398,6 @@
             this.btnSave.TabIndex = 55;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblSon
             // 
@@ -557,18 +555,18 @@
             this.Controls.Add(this.txtDiaChi);
             this.Controls.Add(this.lblDai);
             this.Controls.Add(this.txtTen);
-            this.Controls.Add(this.txtKHID);
+            this.Controls.Add(this.txtBarcode);
             this.Controls.Add(this.lblKihieu);
             this.Controls.Add(this.lblBarcode);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTotalPage);
-            this.Controls.Add(this.dvgColor);
+            this.Controls.Add(this.dvgProduct);
             this.Controls.Add(this.lblMess);
             this.Controls.Add(this.btnSave);
             this.Name = "ProductManagment";
             this.Size = new System.Drawing.Size(870, 750);
             this.Load += new System.EventHandler(this.ProductManagment_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dvgColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
@@ -589,12 +587,12 @@
         private System.Windows.Forms.TextBox txtDiaChi;
         private System.Windows.Forms.Label lblDai;
         private System.Windows.Forms.TextBox txtTen;
-        private System.Windows.Forms.TextBox txtKHID;
+        private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label lblKihieu;
         private System.Windows.Forms.Label lblBarcode;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalPage;
-        private ADGV.AdvancedDataGridView dvgColor;
+        private ADGV.AdvancedDataGridView dvgProduct;
         private System.Windows.Forms.Label lblMess;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblSon;

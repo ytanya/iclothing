@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerManagement));
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnImport = new System.Windows.Forms.Button();
@@ -44,7 +44,7 @@
             this.lblKHID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotalPage = new System.Windows.Forms.Label();
-            this.dvgColor = new ADGV.AdvancedDataGridView();
+            this.dvgCustomer = new ADGV.AdvancedDataGridView();
             this.SonID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Diachi = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,7 +62,7 @@
             this.pbNext = new System.Windows.Forms.PictureBox();
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.pbFirst = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
@@ -197,23 +197,23 @@
             this.lblTotalPage.TabIndex = 32;
             this.lblTotalPage.Text = "Total rows: 0";
             // 
-            // dvgColor
+            // dvgCustomer
             // 
-            this.dvgColor.AllowUserToAddRows = false;
-            this.dvgColor.AutoGenerateContextFilters = true;
-            this.dvgColor.BackgroundColor = System.Drawing.Color.White;
-            this.dvgColor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dvgColor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgColor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dvgColor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgColor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dvgCustomer.AllowUserToAddRows = false;
+            this.dvgCustomer.AutoGenerateContextFilters = true;
+            this.dvgCustomer.BackgroundColor = System.Drawing.Color.White;
+            this.dvgCustomer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dvgCustomer.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgCustomer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dvgCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SonID,
             this.Ten,
             this.Diachi,
@@ -221,29 +221,29 @@
             this.Email,
             this.Ngaytao,
             this.Ngaysua});
-            this.dvgColor.DateWithTime = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dvgColor.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dvgColor.EnableHeadersVisualStyles = false;
-            this.dvgColor.GridColor = System.Drawing.Color.White;
-            this.dvgColor.Location = new System.Drawing.Point(2, 350);
-            this.dvgColor.Name = "dvgColor";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgColor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dvgColor.Size = new System.Drawing.Size(866, 303);
-            this.dvgColor.TabIndex = 31;
-            this.dvgColor.TimeFilter = false;
+            this.dvgCustomer.DateWithTime = false;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dvgCustomer.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dvgCustomer.EnableHeadersVisualStyles = false;
+            this.dvgCustomer.GridColor = System.Drawing.Color.White;
+            this.dvgCustomer.Location = new System.Drawing.Point(2, 350);
+            this.dvgCustomer.Name = "dvgCustomer";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgCustomer.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.dvgCustomer.Size = new System.Drawing.Size(866, 303);
+            this.dvgCustomer.TabIndex = 31;
+            this.dvgCustomer.TimeFilter = false;
             // 
             // SonID
             // 
@@ -429,13 +429,13 @@
             this.Controls.Add(this.lblKHID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTotalPage);
-            this.Controls.Add(this.dvgColor);
+            this.Controls.Add(this.dvgCustomer);
             this.Controls.Add(this.lblMess);
             this.Controls.Add(this.btnSave);
             this.Name = "CustomerManagement";
             this.Size = new System.Drawing.Size(870, 750);
             this.Load += new System.EventHandler(this.CustomerManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dvgColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
@@ -458,7 +458,7 @@
         private System.Windows.Forms.Label lblKHID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalPage;
-        private ADGV.AdvancedDataGridView dvgColor;
+        private ADGV.AdvancedDataGridView dvgCustomer;
         private System.Windows.Forms.Label lblMess;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtEmail;

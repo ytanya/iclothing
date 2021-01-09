@@ -36,7 +36,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotalPage = new System.Windows.Forms.Label();
-            this.dvgColor = new ADGV.AdvancedDataGridView();
+            this.dvgSupplier = new ADGV.AdvancedDataGridView();
             this.NhaccID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mieuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +53,7 @@
             this.txtFile = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.txtMieuta = new System.Windows.Forms.TextBox();
+            this.lblMess = new System.Windows.Forms.Label();
             this.lblMieuta = new System.Windows.Forms.Label();
             this.txtTen = new System.Windows.Forms.TextBox();
             this.txtNhacc = new System.Windows.Forms.TextBox();
@@ -65,7 +66,7 @@
             this.pbNext = new System.Windows.Forms.PictureBox();
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.pbFirst = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgSupplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
@@ -99,13 +100,13 @@
             this.lblTotalPage.TabIndex = 55;
             this.lblTotalPage.Text = "Total rows: 0";
             // 
-            // dvgColor
+            // dvgSupplier
             // 
-            this.dvgColor.AllowUserToAddRows = false;
-            this.dvgColor.AutoGenerateContextFilters = true;
-            this.dvgColor.BackgroundColor = System.Drawing.Color.White;
-            this.dvgColor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dvgColor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dvgSupplier.AllowUserToAddRows = false;
+            this.dvgSupplier.AutoGenerateContextFilters = true;
+            this.dvgSupplier.BackgroundColor = System.Drawing.Color.White;
+            this.dvgSupplier.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dvgSupplier.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -113,9 +114,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgColor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dvgColor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgColor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dvgSupplier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dvgSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgSupplier.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NhaccID,
             this.Ten,
             this.Mieuta,
@@ -124,7 +125,7 @@
             this.Email,
             this.Ngaytao,
             this.Ngaysua});
-            this.dvgColor.DateWithTime = false;
+            this.dvgSupplier.DateWithTime = false;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -132,21 +133,21 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dvgColor.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dvgColor.EnableHeadersVisualStyles = false;
-            this.dvgColor.GridColor = System.Drawing.Color.White;
-            this.dvgColor.Location = new System.Drawing.Point(22, 375);
-            this.dvgColor.Name = "dvgColor";
+            this.dvgSupplier.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dvgSupplier.EnableHeadersVisualStyles = false;
+            this.dvgSupplier.GridColor = System.Drawing.Color.White;
+            this.dvgSupplier.Location = new System.Drawing.Point(22, 375);
+            this.dvgSupplier.Name = "dvgSupplier";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgColor.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dvgColor.Size = new System.Drawing.Size(813, 294);
-            this.dvgColor.TabIndex = 54;
-            this.dvgColor.TimeFilter = false;
+            this.dvgSupplier.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dvgSupplier.Size = new System.Drawing.Size(813, 294);
+            this.dvgSupplier.TabIndex = 54;
+            this.dvgSupplier.TimeFilter = false;
             // 
             // NhaccID
             // 
@@ -266,7 +267,6 @@
             this.btnImport.TabIndex = 83;
             this.btnImport.Text = "Tải lên";
             this.btnImport.UseVisualStyleBackColor = false;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // txtFile
             // 
@@ -289,7 +289,6 @@
             this.btnDelete.TabIndex = 81;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // txtMieuta
             // 
@@ -301,6 +300,15 @@
             this.txtMieuta.Name = "txtMieuta";
             this.txtMieuta.Size = new System.Drawing.Size(251, 112);
             this.txtMieuta.TabIndex = 80;
+
+            // 
+            // lblMess
+            // 
+            this.lblMess.AutoSize = true;
+            this.lblMess.Location = new System.Drawing.Point(44, 45);
+            this.lblMess.Name = "lblMess";
+            this.lblMess.Size = new System.Drawing.Size(0, 13);
+            this.lblMess.TabIndex = 30;
             // 
             // lblMieuta
             // 
@@ -368,7 +376,6 @@
             this.btnSave.TabIndex = 74;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtDiaChi
             // 
@@ -459,11 +466,12 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTotalPage);
-            this.Controls.Add(this.dvgColor);
+            this.Controls.Add(this.dvgSupplier);
+            this.Controls.Add(this.lblMess);
             this.Name = "SupplierManagement";
             this.Size = new System.Drawing.Size(870, 750);
             this.Load += new System.EventHandler(this.SupplierManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dvgColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgSupplier)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
@@ -477,7 +485,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalPage;
-        private ADGV.AdvancedDataGridView dvgColor;
+        private ADGV.AdvancedDataGridView dvgSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn NhaccID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ten;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mieuta;
@@ -506,5 +514,6 @@
         private System.Windows.Forms.PictureBox pbNext;
         private System.Windows.Forms.PictureBox pbPrev;
         private System.Windows.Forms.PictureBox pbFirst;
+        private System.Windows.Forms.Label lblMess;
     }
 }

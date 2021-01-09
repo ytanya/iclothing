@@ -24,21 +24,6 @@ namespace iClothing
             InitializeComponent();
         }
 
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void SupplierManagement_Load(object sender, EventArgs e)
         {
             if (DBAccess.IsServerConnected())

@@ -24,23 +24,6 @@ namespace iClothing
             InitializeComponent();
         }
 
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
-
         private void StaffManagement_Load(object sender, EventArgs e)
         {
             if (DBAccess.IsServerConnected())
@@ -55,9 +38,13 @@ namespace iClothing
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            txtArtID.Enabled = false;
+            txtNhanVienID.Enabled = false;
             txtTen.Enabled = false;
-            txtMieuta.Enabled = false;
+            txtAddress.Enabled = false;
+            txtHo.Enabled = false;
+            txtPassword.Enabled = false;
+            txtPhone.Enabled = false;
+            txtUsername.Enabled = false;
             btnSave.Enabled = false;
 
             try
@@ -83,9 +70,9 @@ namespace iClothing
                         SourceURl = dialog.FileName;
                         if (dtNew.Rows != null && dtNew.Rows.ToString() != String.Empty)
                         {
-                            dvgArt.DataSource = dtNew;
+                            dvgStaff.DataSource = dtNew;
                         }
-                        foreach (DataGridViewRow row in dvgArt.Rows)
+                        foreach (DataGridViewRow row in dvgStaff.Rows)
                         {
                             if (Convert.ToString(row.Cells["ART"].Value) == "")
                             {
@@ -97,7 +84,7 @@ namespace iClothing
                                 ImportedRecord += 1;
                             }
                         }
-                        if (dvgArt.Rows.Count == 0)
+                        if (dvgStaff.Rows.Count == 0)
                         {
                             btnSave.Enabled = false;
                             MessageBox.Show("Không đọc được dữ liệu trong file", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -119,23 +106,27 @@ namespace iClothing
         {
             try
             {
-                if (dvgArt.DataSource != null)
+                if (dvgStaff.DataSource != null)
                 {
-                    DataTable dtItem = (DataTable)(dvgArt.DataSource);
-                    string id, name, desc, createDate, modifyDate;
+                    DataTable dtItem = (DataTable)(dvgStaff.DataSource);
+                    string id, ten, ho, diachi, matkhau, sodt, username, createDate, modifyDate;
                     string InsertItemQry = "";
                     int count = 0;
                     var csv = new StringBuilder();
                     //foreach (DataRow dr in dtItem.Rows)
                     //{
-                    id = txtArtID.Text;
-                    name = txtTen.Text;
-                    desc = txtMieuta.Text;
+                    id = txtNhanVienID.Text;
+                    ten = txtTen.Text;
+                    diachi = txtAddress.Text;
+                    ho = txtHo.Text;
+                    matkhau = txtPassword.Text;
+                    sodt= txtPhone.Text;
+                    username = txtUsername.Text;
                     createDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
                     modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
                     if (id != "")
                     {
-                        InsertItemQry += "INSERT INTO [ART] (ARTID,Ten,Mota,Anh, Ngaytao,Ngaysua)VALUES('" + id + "','" + name + "','" + desc + "','" + null + "','" + createDate + "','" + modifyDate + "');";
+                        InsertItemQry += "INSERT INTO [Staff] (NhanVienID,Ten,Ho,Diachi, Sodt, Tentruycap,Matkhau, Ngaytao,Ngaysua)VALUES('" + id + "','" + ten + "','" + ho + "','" + diachi + "','" + sodt+"','" + username + "','" +matkhau+ "','" + createDate + "','" + modifyDate + "');";
                         //var newLine = $"{id},{name},{desc},{createDate},{modifyDate}";
                         //csv.AppendLine(newLine);
                         //count++;
@@ -169,7 +160,7 @@ namespace iClothing
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            string id = txtArtID.Text;
+            string id = txtNhanVienID.Text;
             if (!string.IsNullOrEmpty(id))
             {
                 string query = "DELETE FROM Art WHERE ARTID ='" + id + "';";
@@ -225,8 +216,8 @@ namespace iClothing
             dtnew = new DataTable();
             dtnew = DBAccess.FillDataTable(query, dt);
 
-            dvgArt.AutoGenerateColumns = false;
-            dvgArt.DataSource = dtnew;
+            dvgStaff.AutoGenerateColumns = false;
+            dvgStaff.DataSource = dtnew;
             int rowCount = dtnew.Rows.Count;
             pageSize = rowCount / rowPerPage;
             // if any row left after calculated pages, add one more page 
@@ -264,26 +255,26 @@ namespace iClothing
             pbNext.Enabled = true;
         }
 
-        private void dvgArt_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dvgStaff_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
             {
-                DataGridViewRow dgvRow = dvgArt.Rows[e.RowIndex];
-                txtArtID.Text = dgvRow.Cells[0].Value.ToString();
-                txtArtID.Enabled = false;
+                DataGridViewRow dgvRow = dvgStaff.Rows[e.RowIndex];
+                txtNhanVienID.Text = dgvRow.Cells[0].Value.ToString();
+                txtNhanVienID.Enabled = false;
                 txtTen.Text = dgvRow.Cells[1].Value.ToString();
-                txtMieuta.Text = dgvRow.Cells[2].Value.ToString();
+                txtHo.Text = dgvRow.Cells[2].Value.ToString();
                 btnSave.Enabled = false;
             }
         }
 
-        private void dvgArt_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dvgStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 5)
             {
-                string ARTID = Convert.ToString(dvgArt.Rows[e.RowIndex].Cells["ARTID"].Value);
-                string Ten = Convert.ToString(dvgArt.Rows[e.RowIndex].Cells["Ten"].Value);
-                string Mieuta = Convert.ToString(dvgArt.Rows[e.RowIndex].Cells["Mota"].Value);
+                string ARTID = Convert.ToString(dvgStaff.Rows[e.RowIndex].Cells["ARTID"].Value);
+                string Ten = Convert.ToString(dvgStaff.Rows[e.RowIndex].Cells["Ten"].Value);
+                string Mieuta = Convert.ToString(dvgStaff.Rows[e.RowIndex].Cells["Mota"].Value);
                 string now = System.DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
                 if (!string.IsNullOrEmpty(ARTID))
                 {
@@ -299,7 +290,7 @@ namespace iClothing
             }
             if (e.ColumnIndex == 6)
             {
-                string ARTID = Convert.ToString(dvgArt.Rows[e.RowIndex].Cells["ARTID"].Value);
+                string ARTID = Convert.ToString(dvgStaff.Rows[e.RowIndex].Cells["ARTID"].Value);
                 if (!string.IsNullOrEmpty(ARTID))
                 {
                     string query = "DELETE FROM ART WHERE ARTID= " + ARTID;

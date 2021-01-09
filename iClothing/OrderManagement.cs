@@ -15,6 +15,17 @@ namespace iClothing
         public OrderManagement()
         {
             InitializeComponent();
+            rbNhap.Checked = true;
+        }
+
+        private void rbNhap_CheckedChanged(object sender, EventArgs e)
+        {
+            rbXuat.Checked = false;
+        }
+
+        private void rbXuat_CheckedChanged(object sender, EventArgs e)
+        {
+            rbNhap.Checked = false;
         }
     }
 }

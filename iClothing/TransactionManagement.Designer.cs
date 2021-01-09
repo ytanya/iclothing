@@ -55,6 +55,7 @@
             this.pbNext = new System.Windows.Forms.PictureBox();
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.pbFirst = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgTransaction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
@@ -74,7 +75,7 @@
             // btnSearch
             // 
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.Location = new System.Drawing.Point(758, 25);
+            this.btnSearch.Location = new System.Drawing.Point(604, 21);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(59, 24);
             this.btnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -304,11 +305,21 @@
             this.pbFirst.TabIndex = 91;
             this.pbFirst.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Orange;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Location = new System.Drawing.Point(37, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(826, 3);
+            this.label1.TabIndex = 95;
+            // 
             // TransactionManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pbLast);
             this.Controls.Add(this.pbNext);
             this.Controls.Add(this.pbPrev);
@@ -359,5 +370,6 @@
         private System.Windows.Forms.PictureBox pbNext;
         private System.Windows.Forms.PictureBox pbPrev;
         private System.Windows.Forms.PictureBox pbFirst;
+        private System.Windows.Forms.Label label1;
     }
 }

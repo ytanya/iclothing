@@ -72,8 +72,8 @@ namespace iClothing
             dtnew = new DataTable();
             dtnew = DBAccess.FillDataTable(query, dt);
 
-            dvgArt.AutoGenerateColumns = false;
-            dvgArt.DataSource = dtnew;
+            dvgTransaction.AutoGenerateColumns = false;
+            dvgTransaction.DataSource = dtnew;
             int rowCount = dtnew.Rows.Count;
             pageSize = rowCount / rowPerPage;
             // if any row left after calculated pages, add one more page 

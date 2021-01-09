@@ -40,7 +40,7 @@
             this.txtMieuta = new System.Windows.Forms.TextBox();
             this.lblMieuta = new System.Windows.Forms.Label();
             this.txtTen = new System.Windows.Forms.TextBox();
-            this.txtSonID = new System.Windows.Forms.TextBox();
+            this.txtTypeID = new System.Windows.Forms.TextBox();
             this.lblSon = new System.Windows.Forms.Label();
             this.lblLoaiID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -140,15 +140,15 @@
             this.txtTen.Size = new System.Drawing.Size(323, 26);
             this.txtTen.TabIndex = 63;
             // 
-            // txtSonID
+            // txtTypeID
             // 
-            this.txtSonID.BackColor = System.Drawing.Color.White;
-            this.txtSonID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSonID.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSonID.Location = new System.Drawing.Point(179, 84);
-            this.txtSonID.Name = "txtSonID";
-            this.txtSonID.Size = new System.Drawing.Size(323, 26);
-            this.txtSonID.TabIndex = 62;
+            this.txtTypeID.BackColor = System.Drawing.Color.White;
+            this.txtTypeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTypeID.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTypeID.Location = new System.Drawing.Point(179, 84);
+            this.txtTypeID.Name = "txtTypeID";
+            this.txtTypeID.Size = new System.Drawing.Size(323, 26);
+            this.txtTypeID.TabIndex = 62;
             // 
             // lblSon
             // 
@@ -361,7 +361,7 @@
             this.Controls.Add(this.txtMieuta);
             this.Controls.Add(this.lblMieuta);
             this.Controls.Add(this.txtTen);
-            this.Controls.Add(this.txtSonID);
+            this.Controls.Add(this.txtTypeID);
             this.Controls.Add(this.lblSon);
             this.Controls.Add(this.lblLoaiID);
             this.Controls.Add(this.label2);
@@ -390,7 +390,7 @@
         private System.Windows.Forms.TextBox txtMieuta;
         private System.Windows.Forms.Label lblMieuta;
         private System.Windows.Forms.TextBox txtTen;
-        private System.Windows.Forms.TextBox txtSonID;
+        private System.Windows.Forms.TextBox txtTypeID;
         private System.Windows.Forms.Label lblSon;
         private System.Windows.Forms.Label lblLoaiID;
         private System.Windows.Forms.Label label2;

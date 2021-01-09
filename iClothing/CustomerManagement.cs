@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace iClothing
 {
@@ -19,6 +20,7 @@ namespace iClothing
         private int pageSize = 1;
         private int rowPerPage = 10;
         private string currentOrderByItem = "KHID";
+        public static string ConnectionString = "Data Source=" + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         public CustomerManagement()
         {
             InitializeComponent();

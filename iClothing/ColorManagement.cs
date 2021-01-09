@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Configuration;
 
 namespace iClothing
 {
@@ -20,6 +21,7 @@ namespace iClothing
         private int pageSize = 1;
         private int rowPerPage=10;
         private string currentOrderByItem = "SonID";
+        public static string ConnectionString = "Data Source=" + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         public ColorManagement()
         {
             InitializeComponent();

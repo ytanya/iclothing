@@ -52,6 +52,15 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.login2 = new iClothing.Login();
             this.colorManagement1 = new iClothing.ColorManagement();
+            this.customerManagement1 = new iClothing.CustomerManagement();
+            this.artManagement1 = new iClothing.ArtManagement();
+            this.orderManagement1 = new iClothing.OrderManagement();
+            this.productManagment1 = new iClothing.ProductManagment();
+            this.staffManagement1 = new iClothing.StaffManagement();
+            this.stockManagement1 = new iClothing.StockManagement();
+            this.supplierManagement1 = new iClothing.SupplierManagement();
+            this.typeManagement1 = new iClothing.TypeManagement();
+            this.transactionManagement1 = new iClothing.TransactionManagement();
             this.pnLeft.SuspendLayout();
             this.pnStuff.SuspendLayout();
             this.pnSystem.SuspendLayout();
@@ -366,6 +375,96 @@
             this.colorManagement1.Size = new System.Drawing.Size(870, 750);
             this.colorManagement1.TabIndex = 3;
             // 
+            // customerManagement1
+            // 
+            this.customerManagement1.BackColor = System.Drawing.Color.White;
+            this.customerManagement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerManagement1.ForeColor = System.Drawing.Color.Orange;
+            this.customerManagement1.Location = new System.Drawing.Point(237, 38);
+            this.customerManagement1.Name = "colorManagement1";
+            this.customerManagement1.Size = new System.Drawing.Size(870, 750);
+            this.customerManagement1.TabIndex = 3;
+            // 
+            // artManagement1
+            // 
+            this.artManagement1.BackColor = System.Drawing.Color.White;
+            this.artManagement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.artManagement1.ForeColor = System.Drawing.Color.Orange;
+            this.artManagement1.Location = new System.Drawing.Point(237, 38);
+            this.artManagement1.Name = "colorManagement1";
+            this.artManagement1.Size = new System.Drawing.Size(870, 750);
+            this.artManagement1.TabIndex = 3;
+            // 
+            // orderManagement1
+            // 
+            this.orderManagement1.BackColor = System.Drawing.Color.White;
+            this.orderManagement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.orderManagement1.ForeColor = System.Drawing.Color.Orange;
+            this.orderManagement1.Location = new System.Drawing.Point(237, 38);
+            this.orderManagement1.Name = "colorManagement1";
+            this.orderManagement1.Size = new System.Drawing.Size(870, 750);
+            this.orderManagement1.TabIndex = 3;
+            // 
+            // productManagment1
+            // 
+            this.productManagment1.BackColor = System.Drawing.Color.White;
+            this.productManagment1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productManagment1.ForeColor = System.Drawing.Color.Orange;
+            this.productManagment1.Location = new System.Drawing.Point(237, 38);
+            this.productManagment1.Name = "colorManagement1";
+            this.productManagment1.Size = new System.Drawing.Size(870, 750);
+            this.productManagment1.TabIndex = 3;
+            // 
+            // staffManagement1
+            // 
+            this.staffManagement1.BackColor = System.Drawing.Color.White;
+            this.staffManagement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.staffManagement1.ForeColor = System.Drawing.Color.Orange;
+            this.staffManagement1.Location = new System.Drawing.Point(237, 38);
+            this.staffManagement1.Name = "colorManagement1";
+            this.staffManagement1.Size = new System.Drawing.Size(870, 750);
+            this.staffManagement1.TabIndex = 3;
+            // 
+            // stockManagement1
+            // 
+            this.stockManagement1.BackColor = System.Drawing.Color.White;
+            this.stockManagement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockManagement1.ForeColor = System.Drawing.Color.Orange;
+            this.stockManagement1.Location = new System.Drawing.Point(237, 38);
+            this.stockManagement1.Name = "colorManagement1";
+            this.stockManagement1.Size = new System.Drawing.Size(870, 750);
+            this.stockManagement1.TabIndex = 3;
+            // 
+            // supplierManagement1
+            // 
+            this.supplierManagement1.BackColor = System.Drawing.Color.White;
+            this.supplierManagement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supplierManagement1.ForeColor = System.Drawing.Color.Orange;
+            this.supplierManagement1.Location = new System.Drawing.Point(237, 38);
+            this.supplierManagement1.Name = "colorManagement1";
+            this.supplierManagement1.Size = new System.Drawing.Size(870, 750);
+            this.supplierManagement1.TabIndex = 3;
+            // 
+            // typeManagement1
+            // 
+            this.typeManagement1.BackColor = System.Drawing.Color.White;
+            this.typeManagement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.typeManagement1.ForeColor = System.Drawing.Color.Orange;
+            this.typeManagement1.Location = new System.Drawing.Point(237, 38);
+            this.typeManagement1.Name = "colorManagement1";
+            this.typeManagement1.Size = new System.Drawing.Size(870, 750);
+            this.typeManagement1.TabIndex = 3;
+            // 
+            // transactionManagement1
+            // 
+            this.transactionManagement1.BackColor = System.Drawing.Color.White;
+            this.transactionManagement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transactionManagement1.ForeColor = System.Drawing.Color.Orange;
+            this.transactionManagement1.Location = new System.Drawing.Point(237, 38);
+            this.transactionManagement1.Name = "colorManagement1";
+            this.transactionManagement1.Size = new System.Drawing.Size(870, 750);
+            this.transactionManagement1.TabIndex = 3;
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,15 +511,14 @@
         private System.Windows.Forms.Panel pnStuff;
         private System.Windows.Forms.Button btnStuff;
         private ColorManagement colorManagement1;
-        //private CustomerManagement customerManagement1;
-        //private ArtManagement artManagement1;
-        //private PaintManagement paintManagment1;
-        //private OrderManagement orderManagement1;
-        //private ProductManagment productManagment1;
-        //private StaffManagement staffManagement1;
-        //private StockManagement stockManagement1;
-        //private SupplierManagement supplierManagement1;
-        //private TypeManagement typeManagement1;
-        //private TransactionManagement transactionManagement1;
+        private CustomerManagement customerManagement1;
+        private ArtManagement artManagement1;
+        private OrderManagement orderManagement1;
+        private ProductManagment productManagment1;
+        private StaffManagement staffManagement1;
+        private StockManagement stockManagement1;
+        private SupplierManagement supplierManagement1;
+        private TypeManagement typeManagement1;
+        private TransactionManagement transactionManagement1;
     }
 }

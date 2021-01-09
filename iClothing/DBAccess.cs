@@ -13,7 +13,7 @@ namespace iClothing
     {
         private static SqlCeConnection objConnection;
         private static SqlCeDataAdapter objDataAdapter;
-        public static string ConnectionString = "Data Source="+ ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=True";
+        public static string ConnectionString = "Data Source="+ ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         private static void OpenConnection()
         {
             try

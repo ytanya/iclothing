@@ -57,11 +57,14 @@ namespace iClothing
         private void btnCustomer_Click(object sender, EventArgs e)
         {
             btnCustomer.Font = new Font(btnCustomer.Font.Name, btnCustomer.Font.Size, FontStyle.Bold);
+            colorManagement1.SendToBack();
+            customerManagement1.BringToFront();
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
             btnOrder.Font = new Font(btnOrder.Font.Name, btnOrder.Font.Size, FontStyle.Bold);
+            orderManagement1.BringToFront();
         }
 
         private void btnStuff_Click(object sender, EventArgs e)
@@ -75,28 +78,33 @@ namespace iClothing
         private void btnProduct_Click(object sender, EventArgs e)
         {
             btnProduct.Font = new Font(btnProduct.Font.Name, btnProduct.Font.Size, FontStyle.Bold);
+            productManagment1.BringToFront();
         }
 
         private void btnTransaction_Click(object sender, EventArgs e)
         {
             btnTransaction.Font = new Font(btnTransaction.Font.Name, btnTransaction.Font.Size, FontStyle.Bold);
+            transactionManagement1.BringToFront();
         }
 
         private void btnSupplier_Click(object sender, EventArgs e)
         {
             btnSupplier.Font = new Font(btnSupplier.Font.Name, btnSupplier.Font.Size, FontStyle.Bold);
+            supplierManagement1.BringToFront();
 
         }
 
         private void btnType_Click(object sender, EventArgs e)
         {
             btnType.Font = new Font(btnType.Font.Name, btnType.Font.Size, FontStyle.Bold);
+            typeManagement1.BringToFront();
         }
 
         private void btnArt_Click(object sender, EventArgs e)
         {
             btnArt.Font = new Font(btnArt.Font.Name, btnArt.Font.Size, FontStyle.Bold);
-            
+            artManagement1.BringToFront();
+
         }
 
         private void btnPaint_Click(object sender, EventArgs e)
@@ -110,11 +118,13 @@ namespace iClothing
         private void btnStaff_Click(object sender, EventArgs e)
         {
             btnStaff.Font = new Font(btnStaff.Font.Name, btnStaff.Font.Size, FontStyle.Bold);
+            staffManagement1.BringToFront();
         }
 
         private void btnStock_Click(object sender, EventArgs e)
         {
             btnStock.Font = new Font(btnStock.Font.Name, btnStock.Font.Size, FontStyle.Bold);
+            stockManagement1.BringToFront();
         }
 
         private void btnSystem_Click(object sender, EventArgs e)
@@ -170,7 +180,7 @@ namespace iClothing
 
         private void ShowAllButton()
         {
-            //customerManagement1.Visible = true;
+            customerManagement1.Visible = true;
             //orderManagement1.Visible = true;
             //typeManagement1.Visible = true;
             colorManagement1.Visible = true;

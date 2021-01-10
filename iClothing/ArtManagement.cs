@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using Microsoft.Office.Interop.Excel;
+using ExcelDataReader;
 
 namespace iClothing
 {
     public partial class ArtManagement : UserControl
     {
-        private DataTable dt = new DataTable();
-        private DataTable dtnew = new DataTable();
-        private DataTable OrignalADGVdt = null;
+        private System.Data.DataTable dt = new System.Data.DataTable();
+        private System.Data.DataTable dtnew = new System.Data.DataTable();
+        private System.Data.DataTable OrignalADGVdt = null;
         private int currentPageNumber = 1;
         private int pageSize = 1;
         private int rowPerPage = 10;
@@ -40,7 +43,78 @@ namespace iClothing
 
             try
             {
-                OpenFileDialog dialog = new OpenFileDialog();
+                using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx|Excel Workbook 97-2003|*.xls", ValidateNames = true })
+                {
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        using (var stream = File.Open(ofd.FileName, FileMode.Open, FileAccess.Read))
+                        {
+                            IExcelDataReader reader;
+                            if (ofd.FilterIndex == 2)
+                            {
+                                reader = ExcelReaderFactory.CreateBinaryReader(stream);
+                            }
+                            else
+                            {
+                                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                            }
+
+                            DataSet ds = reader.AsDataSet(new ExcelDataSetConfiguration()
+                            {
+                                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                                {
+                                    UseHeaderRow = true
+                                }
+                            });
+
+                            foreach (System.Data.DataTable dt in ds.Tables)
+                            {
+                                if (Convert.ToString(dt.Columns[0]).ToLower() != "ART")
+                                {
+                                    MessageBox.Show("File bị lỗi!");
+                                    btnSave.Enabled = false;
+                                    return;
+                                }
+                                else
+                                {
+                                    string id, name, desc, createDate, modifyDate;
+                                    string InsertItemQry = "";
+                                    int count = 0;
+                                    var csv = new StringBuilder();
+                                    //foreach (DataRow dr in dtItem.Rows)
+                                    //{
+                                    id = txtArtID.Text;
+                                    name = txtTen.Text;
+                                    desc = txtMieuta.Text;
+                                    createDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                                    modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                                    if (id != "")
+                                    {
+                                        InsertItemQry += "INSERT INTO [ART] (ARTID,Ten,Mota,Anh, Ngaytao,Ngaysua)VALUES('" + id + "','" + name + "','" + desc + "','" + null + "','" + createDate + "','" + modifyDate + "');";
+                                        //var newLine = $"{id},{name},{desc},{createDate},{modifyDate}";
+                                        //csv.AppendLine(newLine);
+                                        //count++;
+                                    }
+                                    //
+                                    if (DBAccess.IsServerConnected())
+                                    {
+                                        if (InsertItemQry.Length > 5)
+                                        {
+                                            bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                                            if (isSuccess)
+                                            {
+                                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            reader.Close();
+
+                        }
+                    }
+
+                    OpenFileDialog dialog = new OpenFileDialog();
                 dialog.ShowDialog();
                 int ImportedRecord = 0, inValidItem = 0;
                 string SourceURl = "";
@@ -49,8 +123,8 @@ namespace iClothing
                 {
                     if (dialog.FileName.EndsWith(".xlsx"))
                     {
-                        DataTable dtNew = new DataTable();
-                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName);
+                        
+                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
                         if (Convert.ToString(dtNew.Columns[0]).ToLower() != "ART")
                         {
                             MessageBox.Show("File bị lỗi!");

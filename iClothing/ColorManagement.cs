@@ -29,14 +29,14 @@ namespace iClothing
 
         public void ColorManagement_Load(object sender, EventArgs e)
         {
-            if (DBAccess.IsServerConnected())
-            {
-                PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-            }
-            else
-            {
-                //string query = "Select `SonID,`Ten`.`MieuTa`,`NgayTao`,`NgaySua` from `Color`";
-            }
+            //if (DBAccess.IsServerConnected())
+            //{
+            //    PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+            //}
+            //else
+            //{
+            //    //string query = "Select `SonID,`Ten`.`MieuTa`,`NgayTao`,`NgaySua` from `Color`";
+            //}
         }
 
         private void dvgColor_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -50,12 +50,12 @@ namespace iClothing
                 if (!string.IsNullOrEmpty(SonId))
                 {
                     string query = "UPDATE Color SET Ten = '" + Ten + "',Mieuta = '" + Mieuta + "',Ngaytao = '" + now + "',Ngaysua = '" + now + "' WHERE SonID= " + SonId;
-                    bool isSuccess = DBAccess.ExecuteQuery(query);
-                    if (isSuccess)
-                    {
-                        PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-                        lblMess.Text = " Ban da sua thanh cong SonID: " + SonId;
-                    }
+                    //bool isSuccess = DBAccess.ExecuteQuery(query);
+                    //if (isSuccess)
+                    //{
+                    //    PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+                    //    lblMess.Text = " Ban da sua thanh cong SonID: " + SonId;
+                    //}
                 }
 
             }
@@ -65,12 +65,12 @@ namespace iClothing
                 if (!string.IsNullOrEmpty(SonId))
                 {
                     string query = "DELETE FROM Color WHERE SonID= " + SonId;
-                    bool isSuccess = DBAccess.ExecuteQuery(query);
-                    if (isSuccess)
-                    {
-                        PopulateData(currentPageNumber, pageSize, currentOrderByItem);
-                        lblMess.Text = " Ban da xoa thanh cong SonID: " + SonId;
-                    }
+                    //bool isSuccess = DBAccess.ExecuteQuery(query);
+                    //if (isSuccess)
+                    //{
+                    //    PopulateData(currentPageNumber, pageSize, currentOrderByItem);
+                    //    lblMess.Text = " Ban da xoa thanh cong SonID: " + SonId;
+                    //}
                 }
             }
         }
@@ -82,7 +82,7 @@ namespace iClothing
             string query = "SELECT SonID, Ten, Mieuta, Ngaytao, Ngaysua FROM Color Order by " + orderbyItem + " OFFSET " + skipRecord.ToString() +" ROWS FETCH NEXT " + rowPerPage.ToString() +" ROWS ONLY; ";
             dt = new DataTable();
             dtnew = new DataTable();
-            dtnew = DBAccess.FillDataTable(query, dt);
+            //dtnew = DBAccess.FillDataTable(query, dt);
 
             dvgColor.AutoGenerateColumns = false;
             dvgColor.DataSource = dtnew;
@@ -170,17 +170,17 @@ namespace iClothing
                         //count++;
                     }
                     //
-                    if (DBAccess.IsServerConnected())
-                    {
-                        if (InsertItemQry.Length > 5)
-                        {
-                            bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
-                            if (isSuccess)
-                            {
-                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
+                    //if (DBAccess.IsServerConnected())
+                    //{
+                    //    if (InsertItemQry.Length > 5)
+                    //    {
+                    //        bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                    //        if (isSuccess)
+                    //        {
+                    //            MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        }
+                    //    }
+                    //}
                     //else
                     //{
                     //    File.AppendAllText(pathCSV, csv.ToString());
@@ -202,19 +202,19 @@ namespace iClothing
             if (!string.IsNullOrEmpty(id))
             {
                 string query = "DELETE FROM Color WHERE SonID ='" + id + "';";
-                if (DBAccess.IsServerConnected())
-                {
-                    if (query.Length > 5)
-                    {
-                        bool isSuccess = DBAccess.ExecuteQuery(query);
-                        if (isSuccess)
-                        {
-                            MessageBox.Show("Số sản phẩm đã nhập Thành công: ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        // Update datalist
-                        PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-                    }
-                }
+                //if (DBAccess.IsServerConnected())
+                //{
+                //    if (query.Length > 5)
+                //    {
+                //        bool isSuccess = DBAccess.ExecuteQuery(query);
+                //        if (isSuccess)
+                //        {
+                //            MessageBox.Show("Số sản phẩm đã nhập Thành công: ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //        }
+                //        // Update datalist
+                //        PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+                //    }
+                //}
 
             }
         }
@@ -251,7 +251,7 @@ namespace iClothing
                     if (dialog.FileName.EndsWith(".xlsx"))
                     {
                         DataTable dtNew = new DataTable();
-                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName);
+                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
                         if (Convert.ToString(dtNew.Columns[0]).ToLower() != "MaSon")
                         {
                             MessageBox.Show("File bị lỗi!");

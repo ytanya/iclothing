@@ -59,7 +59,7 @@ namespace iClothing
                     if (dialog.FileName.EndsWith(".xlsx"))
                     {
                         DataTable dtNew = new DataTable();
-                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName);
+                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
                         if (Convert.ToString(dtNew.Columns[0]).ToLower() != "ART")
                         {
                             MessageBox.Show("File bị lỗi!");

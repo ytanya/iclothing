@@ -47,7 +47,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.lblCurrentUser = new System.Windows.Forms.Label();
             this.customerManagement1 = new iClothing.CustomerManagement();
-            this.artManagement1 = new iClothing.ArtManagement();
+            this.artManagement1 = new iClothing.ArtManagement1();
             this.colorManagement1 = new iClothing.ColorManagement();
             this.orderManagement1 = new iClothing.OrderManagement();
             this.productManagment1 = new iClothing.ProductManagment();
@@ -459,10 +459,10 @@
         private CustomerManagement customerManagement1;
         private System.Windows.Forms.Button btnStock;
         private System.Windows.Forms.Button btnTransaction;
-        private System.Windows.Forms.Button btnStaff;
+        public System.Windows.Forms.Button btnStaff;
         private System.Windows.Forms.Label lblCurrentUser;
         private System.Windows.Forms.Label lblVersion;
-        private ArtManagement artManagement1;
+        private ArtManagement1 artManagement1;
         private ColorManagement colorManagement1;
         private OrderManagement orderManagement1;
         private ProductManagment productManagment1;

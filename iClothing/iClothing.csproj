@@ -37,6 +37,16 @@
     <Reference Include="AdvancedDataGridView, Version=0.1.0.10, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ADGV.0.1.0.10\lib\net40\AdvancedDataGridView.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -47,6 +57,7 @@
     <Reference Include="System.Data.SqlServerCe">
       <HintPath>E:\help\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,13 +67,19 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="zxing, Version=0.16.6.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.6\lib\net461\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.6.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.6\lib\net461\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArtManagement.cs">
+    <Compile Include="ArtManagement1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ArtManagement.Designer.cs">
-      <DependentUpon>ArtManagement.cs</DependentUpon>
+    <Compile Include="ArtManagement1.Designer.cs">
+      <DependentUpon>ArtManagement1.cs</DependentUpon>
     </Compile>
     <Compile Include="ColorManagement.cs">
       <SubType>UserControl</SubType>
@@ -70,6 +87,7 @@
     <Compile Include="ColorManagement.Designer.cs">
       <DependentUpon>ColorManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommonHelper.cs" />
     <Compile Include="CSVHelper.cs" />
     <Compile Include="CustomerManagement.cs">
       <SubType>UserControl</SubType>
@@ -96,6 +114,12 @@
     <Compile Include="MainPage.Designer.cs">
       <DependentUpon>MainPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="MasterPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MasterPage.Designer.cs">
+      <DependentUpon>MasterPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="MySecondCustmControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +131,12 @@
     </Compile>
     <Compile Include="OrderManagement.Designer.cs">
       <DependentUpon>OrderManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductManagement1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProductManagement1.Designer.cs">
+      <DependentUpon>ProductManagement1.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductManagment.cs">
       <SubType>UserControl</SubType>
@@ -146,8 +176,8 @@
     <Compile Include="TypeManagement.Designer.cs">
       <DependentUpon>TypeManagement.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ArtManagement.resx">
-      <DependentUpon>ArtManagement.cs</DependentUpon>
+    <EmbeddedResource Include="ArtManagement1.resx">
+      <DependentUpon>ArtManagement1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ColorManagement.resx">
       <DependentUpon>ColorManagement.cs</DependentUpon>
@@ -164,11 +194,17 @@
     <EmbeddedResource Include="MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MasterPage.resx">
+      <DependentUpon>MasterPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MySecondCustmControl.resx">
       <DependentUpon>MySecondCustmControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderManagement.resx">
       <DependentUpon>OrderManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductManagement1.resx">
+      <DependentUpon>ProductManagement1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductManagment.resx">
       <DependentUpon>ProductManagment.cs</DependentUpon>

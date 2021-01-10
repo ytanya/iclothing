@@ -26,6 +26,7 @@ namespace iClothing
 
         private void txtBarcode_TextChanged(object sender, EventArgs e)
         {
+            dtMain = new DataTable();
             CalculateAfterStopTyping();
         }
 
@@ -51,7 +52,7 @@ namespace iClothing
                     string id = txtBarcode.Text;
                     if (DBAccess.IsServerConnected())
                     {
-                        string query = "Select * from Stock where Barcode = '" + id + "'; ";
+                        string query = "Select TonkhoID, Product.Kyhieu, Type.Ten, Stock.Mieuta, Soluongcon, Stock.Ngaytao  from Stock join Product on Stock.Barcode = Product.Barcode join Type on Type.LoaiID = Stock.LoaiID where Stock.Barcode = '" + id + "'; ";
 
                         using (SqlCeConnection connection = new SqlCeConnection(conn))
                         {
@@ -62,10 +63,7 @@ namespace iClothing
                                 sda.Fill(dt);
                                 dtMain.Merge(dt);
 
-                                for (int ccc = 0; ccc < dtMain.Columns.Count; ccc++)
-                                {
-                                    textBox2.Text = dtMain.Columns["price"].ToString();
-                                }
+                                dvgStock.DataSource = dtMain;
 
                             }
                         }

@@ -135,7 +135,6 @@
             this.btnImport.TabIndex = 70;
             this.btnImport.Text = "Tải lên";
             this.btnImport.UseVisualStyleBackColor = false;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // txtFile
             // 

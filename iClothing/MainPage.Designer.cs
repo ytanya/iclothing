@@ -58,11 +58,13 @@
             this.SidePanelLeft = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.transactionManagement11 = new iClothing.TransactionManagement1();
             this.stockManagement1 = new iClothing.StockManagement();
             this.artManagement11 = new iClothing.ArtManagement1();
             this.productManagement11 = new iClothing.ProductManagement1();
             this.orderManagement1 = new iClothing.OrderManagement();
             this.login2 = new iClothing.Login();
+            this.customerManagement11 = new iClothing.CustomerManagement1();
             this.pnMenu.SuspendLayout();
             this.pnLeft.SuspendLayout();
             this.pnStuff.SuspendLayout();
@@ -474,6 +476,14 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // transactionManagement11
+            // 
+            this.transactionManagement11.BackColor = System.Drawing.Color.White;
+            this.transactionManagement11.Location = new System.Drawing.Point(238, 43);
+            this.transactionManagement11.Name = "transactionManagement11";
+            this.transactionManagement11.Size = new System.Drawing.Size(870, 750);
+            this.transactionManagement11.TabIndex = 8;
+            // 
             // stockManagement1
             // 
             this.stockManagement1.BackColor = System.Drawing.Color.White;
@@ -516,12 +526,22 @@
             this.login2.TabIndex = 0;
             this.login2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.login2_KeyDown);
             // 
+            // customerManagement11
+            // 
+            this.customerManagement11.BackColor = System.Drawing.Color.White;
+            this.customerManagement11.Location = new System.Drawing.Point(238, 45);
+            this.customerManagement11.Name = "customerManagement11";
+            this.customerManagement11.Size = new System.Drawing.Size(870, 750);
+            this.customerManagement11.TabIndex = 9;
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1111, 778);
+            this.Controls.Add(this.customerManagement11);
+            this.Controls.Add(this.transactionManagement11);
             this.Controls.Add(this.stockManagement1);
             this.Controls.Add(this.artManagement11);
             this.Controls.Add(this.productManagement11);
@@ -584,5 +604,7 @@
         private ProductManagement1 productManagement11;
         private ArtManagement1 artManagement11;
         private StockManagement stockManagement1;
+        private TransactionManagement1 transactionManagement11;
+        private CustomerManagement1 customerManagement11;
     }
 }

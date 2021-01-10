@@ -55,10 +55,10 @@ namespace iClothing
         {
         }
 
-        void GetAllCustomer()
-        {
+        //private List<string> GetAllCustomer()
+        //{
 
-        }
+        //}
 
         void GetAllSupplier()
         {

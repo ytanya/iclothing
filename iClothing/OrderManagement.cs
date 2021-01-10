@@ -18,18 +18,19 @@ namespace iClothing
             InitializeComponent();
             rbNhap.Checked = true;
             panel2.Visible = false;
+
         }
 
         private void rbNhap_CheckedChanged(object sender, EventArgs e)
         {
-            rbXuat.Checked = false;
+            //rbXuat.Checked = false;
             panel1.Visible = true;
             panel2.Visible = false;
         }
 
         private void rbXuat_CheckedChanged(object sender, EventArgs e)
         {
-            rbNhap.Checked = false;
+            //rbNhap.Checked = false;
             panel2.Visible = true;
             panel1.Visible = false;
         }
@@ -52,6 +53,26 @@ namespace iClothing
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+        }
+
+        //private List<string> GetAllCustomer()
+        //{
+
+        //}
+
+        void GetAllSupplier()
+        {
+
+        }
+
+        void GetAllKyHieu()
+        {
+
+        }
+
+        void GetAllType()
+        {
+
         }
     }
 }

@@ -95,6 +95,12 @@
     <Compile Include="CustomerManagement.Designer.cs">
       <DependentUpon>CustomerManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomerManagement1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomerManagement1.Designer.cs">
+      <DependentUpon>CustomerManagement1.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBAccess.cs" />
     <Compile Include="Login.cs">
       <SubType>UserControl</SubType>
@@ -170,6 +176,12 @@
     <Compile Include="TransactionManagement.Designer.cs">
       <DependentUpon>TransactionManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransactionManagement1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TransactionManagement1.Designer.cs">
+      <DependentUpon>TransactionManagement1.cs</DependentUpon>
+    </Compile>
     <Compile Include="TypeManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -184,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerManagement.resx">
       <DependentUpon>CustomerManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerManagement1.resx">
+      <DependentUpon>CustomerManagement1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -230,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TransactionManagement.resx">
       <DependentUpon>TransactionManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransactionManagement1.resx">
+      <DependentUpon>TransactionManagement1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TypeManagement.resx">
       <DependentUpon>TypeManagement.cs</DependentUpon>

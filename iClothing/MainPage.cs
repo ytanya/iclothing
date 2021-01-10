@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace iClothing
@@ -15,7 +9,7 @@ namespace iClothing
         int PW1, PW2;
         bool submenuHided1, submenuHided2;
         public MainPage()
-        {           
+        {
             InitializeComponent();
             PW1 = pnSystem.Height;
             PW2 = pnStuff.Height;
@@ -56,13 +50,15 @@ namespace iClothing
                     submenuHided1 = false;
                     this.Refresh();
                 }
-                         
+
             }
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
         {
             btnCustomer.Font = new Font(btnCustomer.Font.Name, btnCustomer.Font.Size, FontStyle.Bold);
+            customerManagement11.Visible = true;
+            customerManagement11.BringToFront();
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
@@ -77,7 +73,7 @@ namespace iClothing
             SidePanelLeft.Height = btnStuff.Height;
             SidePanelLeft.Top = pnStuff.Top + btnStuff.Top;
             submenuHided2 = !(submenuHided2);
-            if (submenuHided2) pnSystem.Top = PW2+54;
+            if (submenuHided2) pnSystem.Top = PW2 + 54;
             else pnSystem.Top = 54 + 54;
             timer2.Start();
         }
@@ -92,6 +88,8 @@ namespace iClothing
         private void btnTransaction_Click(object sender, EventArgs e)
         {
             btnTransaction.Font = new Font(btnTransaction.Font.Name, btnTransaction.Font.Size, FontStyle.Bold);
+            transactionManagement11.Visible = true;
+            transactionManagement11.BringToFront();
         }
 
         private void btnSupplier_Click(object sender, EventArgs e)
@@ -115,7 +113,7 @@ namespace iClothing
         {
             ShowAllButton();
             btnPaint.Font = new Font(btnPaint.Font.Name, btnPaint.Font.Size, FontStyle.Bold);
-            btnPaint.ForeColor = Color.FromArgb(255,128,0);
+            btnPaint.ForeColor = Color.FromArgb(255, 128, 0);
         }
 
         private void btnStaff_Click(object sender, EventArgs e)
@@ -126,6 +124,7 @@ namespace iClothing
         private void btnStock_Click(object sender, EventArgs e)
         {
             btnStock.Font = new Font(btnStock.Font.Name, btnStock.Font.Size, FontStyle.Bold);
+
             stockManagement1.Visible = true;
             stockManagement1.BringToFront();
         }
@@ -134,13 +133,13 @@ namespace iClothing
         {
             SidePanelLeft.Height = btnSystem.Height;
             SidePanelLeft.Top = pnSystem.Top + btnSystem.Top;
-            submenuHided1 = !(submenuHided1);           
+            submenuHided1 = !(submenuHided1);
             timer1.Start();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            
+
             if (submenuHided2)
             {
                 pnStuff.Height = pnStuff.Height + 120;
@@ -200,7 +199,7 @@ namespace iClothing
 
         private void HideAllButton()
         {
-            //customerManagement1.Visible = false;
+            customerManagement11.Visible = false;
             orderManagement1.Visible = false;
             //typeManagement1.Visible = false;
             //colorManagement1.Visible = false;
@@ -209,7 +208,7 @@ namespace iClothing
             //staffManagement1.Visible = false;
             //supplierManagement1.Visible = false;
             artManagement11.Visible = false;
-            //transactionManagement1.Visible = false;
+            transactionManagement11.Visible = false;
         }
 
         private void ShowAllButton()

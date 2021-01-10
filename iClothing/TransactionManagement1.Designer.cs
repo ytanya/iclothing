@@ -38,19 +38,8 @@
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.lblTo = new System.Windows.Forms.Label();
             this.lblFrom = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.Ngaysua = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngaytao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DVT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Loai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mieuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Son = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Hoatiet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kihieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.pbFirst = new System.Windows.Forms.PictureBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.PictureBox();
@@ -125,103 +114,19 @@
             this.lblFrom.TabIndex = 102;
             this.lblFrom.Text = "Từ";
             // 
-            // dateTimePicker2
+            // dtpTo
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(353, 80);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(134, 20);
-            this.dateTimePicker2.TabIndex = 101;
+            this.dtpTo.Location = new System.Drawing.Point(353, 80);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(134, 20);
+            this.dtpTo.TabIndex = 101;
             // 
-            // dateTimePicker1
+            // dtpFrom
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(74, 80);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(107, 20);
-            this.dateTimePicker1.TabIndex = 100;
-            // 
-            // Ngaysua
-            // 
-            this.Ngaysua.DataPropertyName = "Ngaysua";
-            this.Ngaysua.HeaderText = "Ngay Sua";
-            this.Ngaysua.MinimumWidth = 22;
-            this.Ngaysua.Name = "Ngaysua";
-            this.Ngaysua.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ngaytao
-            // 
-            this.Ngaytao.DataPropertyName = "Ngaytao";
-            this.Ngaytao.HeaderText = "Ngay Tao";
-            this.Ngaytao.MinimumWidth = 22;
-            this.Ngaytao.Name = "Ngaytao";
-            this.Ngaytao.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // DVT
-            // 
-            this.DVT.HeaderText = "DVT";
-            this.DVT.MinimumWidth = 22;
-            this.DVT.Name = "DVT";
-            this.DVT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Loai
-            // 
-            this.Loai.HeaderText = "Loai";
-            this.Loai.MinimumWidth = 22;
-            this.Loai.Name = "Loai";
-            this.Loai.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Mieuta
-            // 
-            this.Mieuta.HeaderText = "Mieu Ta";
-            this.Mieuta.MinimumWidth = 22;
-            this.Mieuta.Name = "Mieuta";
-            this.Mieuta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Son
-            // 
-            this.Son.HeaderText = "Son";
-            this.Son.MinimumWidth = 22;
-            this.Son.Name = "Son";
-            this.Son.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Hoatiet
-            // 
-            this.Hoatiet.DataPropertyName = "Hoa Tiet";
-            this.Hoatiet.HeaderText = "Hoa Tiet";
-            this.Hoatiet.MinimumWidth = 22;
-            this.Hoatiet.Name = "Hoatiet";
-            this.Hoatiet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Rong
-            // 
-            this.Rong.DataPropertyName = "Rong";
-            this.Rong.HeaderText = "Rong";
-            this.Rong.MinimumWidth = 22;
-            this.Rong.Name = "Rong";
-            this.Rong.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Dai
-            // 
-            this.Dai.DataPropertyName = "Dai";
-            this.Dai.HeaderText = "Dai";
-            this.Dai.MinimumWidth = 22;
-            this.Dai.Name = "Dai";
-            this.Dai.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Kihieu
-            // 
-            this.Kihieu.DataPropertyName = "Hihieu";
-            this.Kihieu.HeaderText = "Ki Hiieu";
-            this.Kihieu.MinimumWidth = 22;
-            this.Kihieu.Name = "Kihieu";
-            this.Kihieu.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Barcode
-            // 
-            this.Barcode.DataPropertyName = "KHID";
-            this.Barcode.HeaderText = "Barcode";
-            this.Barcode.MinimumWidth = 22;
-            this.Barcode.Name = "Barcode";
-            this.Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dtpFrom.Location = new System.Drawing.Point(74, 80);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(107, 20);
+            this.dtpFrom.TabIndex = 100;
             // 
             // pbFirst
             // 
@@ -250,6 +155,7 @@
             this.btnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnSearch.TabIndex = 98;
             this.btnSearch.TabStop = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lblTotalPage
             // 
@@ -278,18 +184,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dvgTransaction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dvgTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Barcode,
-            this.Kihieu,
-            this.Dai,
-            this.Rong,
-            this.Hoatiet,
-            this.Son,
-            this.Mieuta,
-            this.Loai,
-            this.DVT,
-            this.Ngaytao,
-            this.Ngaysua});
             this.dvgTransaction.DateWithTime = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
@@ -325,8 +219,8 @@
             this.Controls.Add(this.pbPrev);
             this.Controls.Add(this.lblTo);
             this.Controls.Add(this.lblFrom);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpTo);
+            this.Controls.Add(this.dtpFrom);
             this.Controls.Add(this.pbFirst);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.btnSearch);
@@ -334,6 +228,7 @@
             this.Controls.Add(this.dvgTransaction);
             this.Name = "TransactionManagement1";
             this.Size = new System.Drawing.Size(870, 750);
+            this.Load += new System.EventHandler(this.TransactionManagement1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
@@ -353,19 +248,8 @@
         private System.Windows.Forms.PictureBox pbPrev;
         private System.Windows.Forms.Label lblTo;
         private System.Windows.Forms.Label lblFrom;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngaysua;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngaytao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DVT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Loai;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mieuta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Son;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Hoatiet;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dai;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Kihieu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Barcode;
+        private System.Windows.Forms.DateTimePicker dtpTo;
+        private System.Windows.Forms.DateTimePicker dtpFrom;
         private System.Windows.Forms.PictureBox pbFirst;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.PictureBox btnSearch;

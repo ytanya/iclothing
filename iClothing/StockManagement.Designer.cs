@@ -134,6 +134,7 @@
             this.btnExport.TabIndex = 57;
             this.btnExport.Text = "Truy Xuất File";
             this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // pbLast
             // 
@@ -212,6 +213,7 @@
             this.Controls.Add(this.txtBarcode);
             this.Name = "StockManagement";
             this.Size = new System.Drawing.Size(870, 750);
+            this.Load += new System.EventHandler(this.StockManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvgStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();

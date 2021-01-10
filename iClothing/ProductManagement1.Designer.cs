@@ -32,14 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.Son = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbLast = new System.Windows.Forms.PictureBox();
             this.pbNext = new System.Windows.Forms.PictureBox();
-            this.Loai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DVT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngaytao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngaysua = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mieuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbFirst = new System.Windows.Forms.PictureBox();
             this.cbLoai = new System.Windows.Forms.ComboBox();
             this.cbSon = new System.Windows.Forms.ComboBox();
@@ -52,7 +46,6 @@
             this.lblARTID = new System.Windows.Forms.Label();
             this.lblMess = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.Hoatiet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.txtMieuta = new System.Windows.Forms.TextBox();
             this.lblLoai = new System.Windows.Forms.Label();
@@ -69,10 +62,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotalPage = new System.Windows.Forms.Label();
             this.dvgProduct = new ADGV.AdvancedDataGridView();
-            this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kihieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
@@ -80,13 +69,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgProduct)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Son
-            // 
-            this.Son.HeaderText = "Son";
-            this.Son.MinimumWidth = 22;
-            this.Son.Name = "Son";
-            this.Son.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // pbLast
             // 
@@ -97,6 +79,7 @@
             this.pbLast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLast.TabIndex = 128;
             this.pbLast.TabStop = false;
+            this.pbLast.Click += new System.EventHandler(this.pbLast_Click);
             // 
             // pbNext
             // 
@@ -107,43 +90,7 @@
             this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbNext.TabIndex = 127;
             this.pbNext.TabStop = false;
-            // 
-            // Loai
-            // 
-            this.Loai.HeaderText = "Loai";
-            this.Loai.MinimumWidth = 22;
-            this.Loai.Name = "Loai";
-            this.Loai.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // DVT
-            // 
-            this.DVT.HeaderText = "DVT";
-            this.DVT.MinimumWidth = 22;
-            this.DVT.Name = "DVT";
-            this.DVT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ngaytao
-            // 
-            this.Ngaytao.DataPropertyName = "Ngaytao";
-            this.Ngaytao.HeaderText = "Ngay Tao";
-            this.Ngaytao.MinimumWidth = 22;
-            this.Ngaytao.Name = "Ngaytao";
-            this.Ngaytao.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ngaysua
-            // 
-            this.Ngaysua.DataPropertyName = "Ngaysua";
-            this.Ngaysua.HeaderText = "Ngay Sua";
-            this.Ngaysua.MinimumWidth = 22;
-            this.Ngaysua.Name = "Ngaysua";
-            this.Ngaysua.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Mieuta
-            // 
-            this.Mieuta.HeaderText = "Mieu Ta";
-            this.Mieuta.MinimumWidth = 22;
-            this.Mieuta.Name = "Mieuta";
-            this.Mieuta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.pbNext.Click += new System.EventHandler(this.pbNext_Click);
             // 
             // pbFirst
             // 
@@ -154,6 +101,7 @@
             this.pbFirst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbFirst.TabIndex = 125;
             this.pbFirst.TabStop = false;
+            this.pbFirst.Click += new System.EventHandler(this.pbFirst_Click);
             // 
             // cbLoai
             // 
@@ -183,10 +131,10 @@
             // 
             this.txtRong.BackColor = System.Drawing.Color.White;
             this.txtRong.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRong.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRong.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRong.Location = new System.Drawing.Point(318, 164);
             this.txtRong.Name = "txtRong";
-            this.txtRong.Size = new System.Drawing.Size(66, 26);
+            this.txtRong.Size = new System.Drawing.Size(66, 24);
             this.txtRong.TabIndex = 121;
             // 
             // lblRong
@@ -204,10 +152,10 @@
             // 
             this.txtDVT.BackColor = System.Drawing.Color.White;
             this.txtDVT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDVT.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDVT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDVT.Location = new System.Drawing.Point(544, 200);
             this.txtDVT.Name = "txtDVT";
-            this.txtDVT.Size = new System.Drawing.Size(251, 26);
+            this.txtDVT.Size = new System.Drawing.Size(251, 24);
             this.txtDVT.TabIndex = 119;
             // 
             // lblDVT
@@ -256,7 +204,7 @@
             this.btnSave.AutoSize = true;
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Location = new System.Drawing.Point(533, 253);
             this.btnSave.Name = "btnSave";
@@ -265,14 +213,6 @@
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // Hoatiet
-            // 
-            this.Hoatiet.DataPropertyName = "Hoa Tiet";
-            this.Hoatiet.HeaderText = "Hoa Tiet";
-            this.Hoatiet.MinimumWidth = 22;
-            this.Hoatiet.Name = "Hoatiet";
-            this.Hoatiet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // pbPrev
             // 
@@ -283,12 +223,13 @@
             this.pbPrev.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPrev.TabIndex = 126;
             this.pbPrev.TabStop = false;
+            this.pbPrev.Click += new System.EventHandler(this.pbPrev_Click);
             // 
             // txtMieuta
             // 
             this.txtMieuta.BackColor = System.Drawing.Color.White;
             this.txtMieuta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMieuta.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMieuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMieuta.Location = new System.Drawing.Point(543, 78);
             this.txtMieuta.Multiline = true;
             this.txtMieuta.Name = "txtMieuta";
@@ -330,7 +271,7 @@
             this.btnImport.AutoSize = true;
             this.btnImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImport.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImport.ForeColor = System.Drawing.Color.White;
             this.btnImport.Location = new System.Drawing.Point(327, 17);
             this.btnImport.Name = "btnImport";
@@ -353,7 +294,7 @@
             this.btnDelete.AutoSize = true;
             this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
             this.btnDelete.Location = new System.Drawing.Point(668, 253);
             this.btnDelete.Name = "btnDelete";
@@ -367,10 +308,10 @@
             // 
             this.txtDiaChi.BackColor = System.Drawing.Color.White;
             this.txtDiaChi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDiaChi.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiaChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiaChi.Location = new System.Drawing.Point(133, 159);
             this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(66, 26);
+            this.txtDiaChi.Size = new System.Drawing.Size(66, 24);
             this.txtDiaChi.TabIndex = 108;
             // 
             // lblDai
@@ -388,10 +329,10 @@
             // 
             this.txtTen.BackColor = System.Drawing.Color.White;
             this.txtTen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTen.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTen.Location = new System.Drawing.Point(133, 118);
             this.txtTen.Name = "txtTen";
-            this.txtTen.Size = new System.Drawing.Size(251, 26);
+            this.txtTen.Size = new System.Drawing.Size(251, 24);
             this.txtTen.TabIndex = 106;
             // 
             // lblKihieu
@@ -451,18 +392,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dvgProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dvgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgProduct.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Barcode,
-            this.Kihieu,
-            this.Dai,
-            this.Rong,
-            this.Hoatiet,
-            this.Son,
-            this.Mieuta,
-            this.Loai,
-            this.DVT,
-            this.Ngaytao,
-            this.Ngaysua});
             this.dvgProduct.DateWithTime = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
@@ -486,47 +415,19 @@
             this.dvgProduct.Size = new System.Drawing.Size(866, 260);
             this.dvgProduct.TabIndex = 100;
             this.dvgProduct.TimeFilter = false;
-            // 
-            // Barcode
-            // 
-            this.Barcode.DataPropertyName = "KHID";
-            this.Barcode.HeaderText = "Barcode";
-            this.Barcode.MinimumWidth = 22;
-            this.Barcode.Name = "Barcode";
-            this.Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Kihieu
-            // 
-            this.Kihieu.DataPropertyName = "Hihieu";
-            this.Kihieu.HeaderText = "Ki Hiieu";
-            this.Kihieu.MinimumWidth = 22;
-            this.Kihieu.Name = "Kihieu";
-            this.Kihieu.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Dai
-            // 
-            this.Dai.DataPropertyName = "Dai";
-            this.Dai.HeaderText = "Dai";
-            this.Dai.MinimumWidth = 22;
-            this.Dai.Name = "Dai";
-            this.Dai.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Rong
-            // 
-            this.Rong.DataPropertyName = "Rong";
-            this.Rong.HeaderText = "Rong";
-            this.Rong.MinimumWidth = 22;
-            this.Rong.Name = "Rong";
-            this.Rong.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dvgProduct.SortStringChanged += new System.EventHandler(this.dvgProduct_SortStringChanged);
+            this.dvgProduct.FilterStringChanged += new System.EventHandler(this.dvgProduct_FilterStringChanged);
+            this.dvgProduct.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgProduct_CellClick);
+            this.dvgProduct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgProduct_CellContentClick);
             // 
             // txtBarcode
             // 
             this.txtBarcode.BackColor = System.Drawing.Color.White;
             this.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBarcode.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBarcode.Location = new System.Drawing.Point(133, 78);
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(251, 26);
+            this.txtBarcode.Size = new System.Drawing.Size(251, 24);
             this.txtBarcode.TabIndex = 105;
             // 
             // ProductManagement1
@@ -567,6 +468,7 @@
             this.Controls.Add(this.txtBarcode);
             this.Name = "ProductManagement1";
             this.Size = new System.Drawing.Size(870, 750);
+            this.Load += new System.EventHandler(this.ProductManagement1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).EndInit();
@@ -578,15 +480,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn Son;
         private System.Windows.Forms.PictureBox pbLast;
         private System.Windows.Forms.PictureBox pbNext;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Loai;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DVT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngaytao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngaysua;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mieuta;
         private System.Windows.Forms.PictureBox pbFirst;
         private System.Windows.Forms.ComboBox cbLoai;
         private System.Windows.Forms.ComboBox cbSon;
@@ -599,7 +494,6 @@
         private System.Windows.Forms.Label lblARTID;
         private System.Windows.Forms.Label lblMess;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Hoatiet;
         private System.Windows.Forms.PictureBox pbPrev;
         private System.Windows.Forms.TextBox txtMieuta;
         private System.Windows.Forms.Label lblLoai;
@@ -616,10 +510,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalPage;
         private ADGV.AdvancedDataGridView dvgProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Kihieu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dai;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rong;
         private System.Windows.Forms.TextBox txtBarcode;
     }
 }

@@ -17,6 +17,13 @@ namespace iClothing
 {
     public partial class ProductManagement1 : UserControl
     {
+        private DataTable dt = new DataTable();
+        private DataTable dtnew = new DataTable();
+        private DataTable OrignalADGVdt = null;
+        private int currentPageNumber = 1;
+        private int pageSize = 1;
+        private int rowPerPage = 10;
+        private string currentOrderByItem = "Kyhieu";
         bool isSuccess = true;
         public static string conn = "Data Source=" + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         public ProductManagement1()
@@ -139,6 +146,162 @@ namespace iClothing
                     }
 
                     return resultLookup;
+        }
+
+        private void ProductManagement1_Load(object sender, EventArgs e)
+        {
+            if (DBAccess.IsServerConnected())
+            {
+                //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+            }
+        }
+
+        //private void PopulateData(int currentPageNumber, int rowPerPage, string orderbyItem)
+        //{
+        //    int skipRecord = currentPageNumber - 1;
+        //    if (skipRecord != 0) skipRecord = currentPageNumber * rowPerPage;
+        //    string query = "SELECT * FROM Product Order by " + orderbyItem + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+        //    dt = new DataTable();
+        //    dtnew = new DataTable();
+        //    using (SqlCeConnection connection = new SqlCeConnection(conn))
+        //    {
+        //        using (SqlCeCommand command = new SqlCeCommand(query, connection))
+        //        {
+        //            SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+        //            DataTable dt = new DataTable();
+        //            sda.Fill(dt);
+        //            dtnew.Merge(dt);
+
+        //            dvgProduct.DataSource = dtnew;
+        //            lblTotalPage.Text = dtnew.Rows.Count.ToString();
+        //        }
+        //    }
+        //    //dtnew = DBAccess.FillDataTable(query, dt);
+
+        //    //dvgProduct.DataSource = dtnew;
+        //    int rowCount = dtnew.Rows.Count;
+        //    pageSize = rowCount / rowPerPage;
+        //    // if any row left after calculated pages, add one more page 
+        //    if (rowCount % rowPerPage > 0)
+        //        pageSize += 1;
+        //    lblTotalPage.Text = "Total rows:" + dtnew.Rows.Count.ToString();
+        //    DisablePagingButton(currentPageNumber, pageSize);
+        //}
+
+        void DisablePagingButton(int currentPageNumber, int pageSize)
+        {
+            // Show all paging button
+            ShowAllPagingButton();
+
+            // Disable First and Previous button if it's the first page
+            if (currentPageNumber == 1)
+            {
+                pbFirst.Enabled = false;
+                pbPrev.Enabled = false;
+            }
+            // Disable Last and Next button if it's the last page
+            if (currentPageNumber == pageSize)
+            {
+                pbLast.Enabled = false;
+                pbNext.Enabled = false;
+            }
+
+        }
+
+        void ShowAllPagingButton()
+        {
+            pbFirst.Enabled = true;
+            pbPrev.Enabled = true;
+            pbLast.Enabled = true;
+            pbNext.Enabled = true;
+        }
+
+        private void pbFirst_Click(object sender, EventArgs e)
+        {
+            currentPageNumber = 1;
+            //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+        }
+
+        private void pbPrev_Click(object sender, EventArgs e)
+        {
+            currentPageNumber -= 1;
+            //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+        }
+
+        private void pbNext_Click(object sender, EventArgs e)
+        {
+            currentPageNumber += 1;
+            //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+        }
+
+        private void pbLast_Click(object sender, EventArgs e)
+        {
+            currentPageNumber = pageSize;
+            //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+        }
+
+        private void dvgProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dvgProduct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                DataGridViewRow dgvRow = dvgProduct.Rows[e.RowIndex];
+                txtBarcode.Text = dgvRow.Cells[0].Value.ToString();
+                txtBarcode.Enabled = false;
+                txtTen.Text = dgvRow.Cells[1].Value.ToString();
+                txtMieuta.Text = dgvRow.Cells[2].Value.ToString();
+                btnSave.Enabled = false;
+            }
+        }
+
+        private void dvgProduct_FilterStringChanged(object sender, EventArgs e)
+        {
+            ADGV.AdvancedDataGridView fdgv = dvgProduct;
+            DataTable dt = null;
+            if (OrignalADGVdt == null)
+            {
+                OrignalADGVdt = (DataTable)fdgv.DataSource;
+            }
+            else
+            {
+                int row = OrignalADGVdt.Rows.Count;
+                fdgv.DataSource = OrignalADGVdt;
+            }
+            if (fdgv.FilterString.Length > 0)
+            {
+                dt = (DataTable)fdgv.DataSource;
+            }
+            else//Clear Filter
+            {
+                dt = OrignalADGVdt;
+            }
+
+            fdgv.DataSource = dt.Select(fdgv.FilterString).CopyToDataTable();
+        }
+
+        private void dvgProduct_SortStringChanged(object sender, EventArgs e)
+        {
+            ADGV.AdvancedDataGridView fdgv = dvgProduct;
+            if (fdgv.SortString.Length == 0)
+            {
+                return;
+            }
+            string[] strtok = fdgv.SortString.Split(',');
+            currentOrderByItem = String.Join(",", strtok);
+            foreach (string str in strtok)
+            {
+                string[] columnorder = str.Split(']');
+                ListSortDirection lds = ListSortDirection.Ascending;
+                if (columnorder[1].Trim().Equals("DESC"))
+                {
+                    lds = ListSortDirection.Descending;
+                }
+                dvgProduct.Sort(dvgProduct.Columns[columnorder[0].Replace('[', ' ').Trim()], lds);
+            }
         }
     }
 }

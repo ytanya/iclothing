@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Data.SqlServerCe;
+using System.IO;
 
 namespace iClothing
 {
@@ -22,6 +23,7 @@ namespace iClothing
         public StockManagement()
         {
             InitializeComponent();
+
         }
 
         private void txtBarcode_TextChanged(object sender, EventArgs e)
@@ -64,11 +66,11 @@ namespace iClothing
                                 dtMain.Merge(dt);
 
                                 dvgStock.DataSource = dtMain;
-
+                                lblTotalPage.Text = dtMain.Rows.Count.ToString();
                             }
                         }
                     }
-                    
+
 
                     txtBarcode.Text = string.Empty;
 
@@ -76,6 +78,66 @@ namespace iClothing
             });
 
             delayedCalculationThread.Start();
+        }
+
+        private void StockManagement_Load(object sender, EventArgs e)
+        {
+            this.ActiveControl = txtBarcode;
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            //Creating Save File Dialog
+            SaveFileDialog save = new SaveFileDialog();
+            //Showing the dialog
+            save.ShowDialog();
+            //Setting default directory
+            save.InitialDirectory = @"C:\";
+            save.RestoreDirectory = true;
+            string fileName = save.FileName;
+            save.AddExtension = true;
+            save.Filter = "Excel|*.xls|Excel 2010|*.xlsx";
+            //Setting title
+            save.Title = "Select save location and input file name";
+            //filtering to only show .xlsx files in the directory
+            save.DefaultExt = "xlsx";
+            //Write Data To Excel
+            ToExcel(fileName);
+        }
+        private void ToExcel(string fileName)
+        {
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), fileName + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".xlsx");
+            // creating Excel Application  
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = true;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            worksheet = workbook.Sheets["Sheet1"];
+            worksheet = workbook.ActiveSheet;
+            // changing the name of active sheet  
+            worksheet.Name = "Exported from gridview";
+            // storing header part in Excel  
+            for (int i = 1; i < dvgStock.Columns.Count + 1; i++)
+            {
+                worksheet.Cells[1, i] = dvgStock.Columns[i - 1].HeaderText;
+            }
+            // storing Each row and column value to excel sheet  
+            for (int i = 0; i < dvgStock.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < dvgStock.Columns.Count; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1] = dvgStock.Rows[i].Cells[j].Value.ToString();
+                }
+            }
+            // save the application  
+            workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            // Exit from the application  
+            app.Quit();
         }
     }
 }

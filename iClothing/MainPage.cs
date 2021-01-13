@@ -106,7 +106,8 @@ namespace iClothing
         private void btnArt_Click(object sender, EventArgs e)
         {
             btnArt.Font = new Font(btnArt.Font.Name, btnArt.Font.Size, FontStyle.Bold);
-
+            artManagement11.Visible = true;
+            artManagement11.BringToFront();
         }
 
         private void btnPaint_Click(object sender, EventArgs e)

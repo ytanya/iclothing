@@ -216,7 +216,6 @@
             // btnArt
             // 
             this.btnArt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
-            this.btnArt.Enabled = false;
             this.btnArt.FlatAppearance.BorderSize = 0;
             this.btnArt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnArt.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

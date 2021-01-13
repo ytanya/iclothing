@@ -17,8 +17,8 @@ namespace iClothing
 {
     public partial class ProductManagement1 : UserControl
     {
-        private DataTable dt = new DataTable();
-        private DataTable dtnew = new DataTable();
+        private DataTable dtMain = new DataTable();
+        private DataTable dtCurrent = new DataTable();
         private DataTable OrignalADGVdt = null;
         private int currentPageNumber = 1;
         private int pageSize = 1;
@@ -29,6 +29,10 @@ namespace iClothing
         public ProductManagement1()
         {
             InitializeComponent();
+            cbPageSize.SelectedText = "10";
+            btnAdd.Visible = true;
+            btnUpdate.Visible = false;
+            txtBarcode.Enabled = true;
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -82,8 +86,8 @@ namespace iClothing
                                     MaSP = Convert.ToString(dt.Rows[i][2]);
                                     Dai = Convert.ToString(dt.Rows[i][3]);
                                     Rong = Convert.ToString(dt.Rows[i][4]);
-                                    ARTID = Lookup("ART","ARTID", "Ten",Convert.ToString(dt.Rows[i][5]));
-                                    SonID = Lookup("Color", "SonID", "Ten", Convert.ToString(dt.Rows[i][6]));
+                                    ARTID = DBHelper.Lookup("ART","ARTID", "Ten",Convert.ToString(dt.Rows[i][5]));
+                                    SonID = DBHelper.Lookup("Color", "SonID", "Ten", Convert.ToString(dt.Rows[i][6]));
                                     DVT = Convert.ToString(dt.Rows[i][8]);
                                     Mieuta = string.Empty;
                                     ngaytao = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
@@ -124,69 +128,218 @@ namespace iClothing
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (dvgProduct.DataSource != null)
+                {
+                    List<DBModel> dbModels = new List<DBModel>();
+                    DBModel itemModel = new DBModel();
+                    DataTable dtItem = (DataTable)(dvgProduct.DataSource);
+                    int dai, rong;
+                    string barcode, ten, ARTID, SonID, DVT, Mieuta, MaSP, createDate, modifyDate;
+                    string InsertItemQry = "";
+                    int count = 0;
+                    var csv = new StringBuilder();
+                    //foreach (DataRow dr in dtItem.Rows)
+                    //{
+                    // Barcode
+                    barcode = txtBarcode.Text;
+                    itemModel.text = "Barcode";
+                    itemModel.value = barcode;
+                    itemModel.type = "string";
+                    dbModels.Add(itemModel);
+                    // Ten
+                    itemModel = new DBModel();
+                    ten = txtTen.Text;
+                    itemModel.text = "Kyhieu";
+                    itemModel.type = "string";
+                    itemModel.value = ten;
+                    dbModels.Add(itemModel);
+                    // Dai
+                    itemModel = new DBModel();
+                    dai = Convert.ToInt32(txtDai.Text);
+                    itemModel.text = "Dai";
+                    itemModel.type = "int";
+                    itemModel.value = dai.ToString();
+                    dbModels.Add(itemModel);
+                    // Rong
+                    itemModel = new DBModel();
+                    rong = Convert.ToInt32(txtRong.Text);
+                    itemModel.text = "Rong";
+                    itemModel.value = rong.ToString();
+                    itemModel.type = "int";
+                    dbModels.Add(itemModel);
+                    // ARTID
+                    itemModel = new DBModel();
+                    ARTID = cbArt.SelectedValue.ToString();
+                    itemModel.text = "ArtID";
+                    itemModel.value = ARTID;
+                    itemModel.type = "string";
+                    dbModels.Add(itemModel);
+                    // SonID
+                    itemModel = new DBModel();
+                    SonID = cbSon.SelectedValue.ToString();
+                    itemModel.text = "SonID";
+                    itemModel.value = SonID;
+                    itemModel.type = "string";
+                    dbModels.Add(itemModel);
+                    // DVT
+                    itemModel = new DBModel();
+                    DVT = txtDVT.Text;
+                    itemModel.text = "DVT";
+                    itemModel.value = DVT;
+                    itemModel.type = "string";
+                    dbModels.Add(itemModel);
+                    // Mieu ta
+                    itemModel = new DBModel();
+                    Mieuta = txtMieuta.Text;
+                    itemModel.text = "Mieuta";
+                    itemModel.value = Mieuta;
+                    itemModel.type = "string";
+                    dbModels.Add(itemModel);
+                    // MaSP
+                    itemModel = new DBModel();
+                    MaSP = txtMaSP.Text;
+                    itemModel.text = "MaSP";
+                    itemModel.value = MaSP;
+                    itemModel.type = "string";
+                    dbModels.Add(itemModel);
+                    // Created Date
+                    itemModel = new DBModel();
+                    createDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                    itemModel.text = "Ngaytao";
+                    itemModel.value = createDate;
+                    itemModel.type = "datetime";
+                    dbModels.Add(itemModel);
+                    // Modify Date
+                    itemModel = new DBModel();
+                    modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                    itemModel.text = "Ngaysua";
+                    itemModel.value = modifyDate;
+                    itemModel.type = "datetime";
 
+                    dbModels.Add(itemModel);
+                    if (barcode != "")
+                    {
+                        InsertItemQry += "INSERT INTO [Product] ([Barcode],[Kyhieu],[Dai],[Rong],[ArtID],[SonID],[DVT],[Mieuta],[MaSP],[Ngaytao],[Ngaysua])VALUES('" + barcode + "','" + ten + "','" + dai+ "','" +rong + "','" +ARTID+ "','" +SonID+ "','" +DVT+ "','" +Mieuta+ "','" +MaSP+ "','" + createDate + "','" + modifyDate + "');";                     
+                    }
+
+                    if (DBAccess.IsServerConnected())
+                    {
+                        bool isExisted = DBHelper.CheckItemExist("Product", "Barcode", barcode);
+
+                        if (!isExisted)
+                        {
+                            if (InsertItemQry.Length > 5)
+                            {
+                                bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                                if (isSuccess)
+                                {
+                                    dtMain = DBHelper.InsertDatatable(dtMain, dbModels);
+                                    currentPageNumber = 1;
+                                    countPageSize();
+                                    // Update datalist
+                                    PopulateData(currentPageNumber, rowPerPage);
+                                    MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Barcode da ton tai : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception " + ex);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            DBModel modelWhere = new DBModel();
+            string barcode = txtBarcode.Text;
 
+            if (!string.IsNullOrEmpty(barcode))
+            {
+                string query = "DELETE FROM Product WHERE Barcode ='" + barcode + "';";
+                if (DBAccess.IsServerConnected())
+                {
+                    // Barcode
+                    modelWhere.text = "Barcode";
+                    modelWhere.value = barcode;
+                    modelWhere.type = "string";
+
+                    if (query.Length > 5)
+                    {
+                        bool isExisted = DBHelper.CheckItemExist("Product", "Barcode", barcode);
+
+                        if (isExisted)
+                        {
+                            bool isSuccess = DBAccess.ExecuteQuery(query);
+                            if (isSuccess)
+                            {
+                                dtMain = DBHelper.DeleteDatatable(dtMain, modelWhere);
+                                currentPageNumber = 1;
+                                countPageSize();
+                                MessageBox.Show("Số sản phẩm đã nhập Thành công: ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            // Update datalist
+                            PopulateData(currentPageNumber, rowPerPage);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Barcode khong ton tai ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+
+            }
         }
         
-        string Lookup(string tablename, string columnName, string refColumnName, string value)
-        {
-            DataTable dt = new DataTable();
-            DataTable dtnew = new DataTable();
-            string query = "Select " + columnName + " FROM " + tablename +" WHERE "+ refColumnName + " = '" + value+"'";
-            string resultLookup = string.Empty;
-            dtnew = DBAccess.FillDataTable(query, dt);
-
-                    if (dtnew.Rows.Count > 0)
-                    {
-                        resultLookup = dtnew.Rows[0][0].ToString();
-                    }
-
-                    return resultLookup;
-        }
+        
 
         private void ProductManagement1_Load(object sender, EventArgs e)
         {
             if (DBAccess.IsServerConnected())
             {
-                //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+                GetAllData();
+                PopulateData(currentPageNumber, rowPerPage);
+                countPageSize();
+                // Init Color combobox
+                DataTable dtColor = DBHelper.GetAllColor();
+                if (dtColor.Rows.Count > 0)
+                {
+                    cbSon.DataSource = dtColor;
+                    cbSon.ValueMember = "SonID";
+                    cbSon.DisplayMember = "Ten";
+                    cbSon.SelectedIndex = 0;
+                }
+
+                // Init Art combobox
+                DataTable dtArt = DBHelper.GetAllArt();
+                if (dtArt.Rows.Count > 0)
+                {
+                    cbArt.DataSource = dtArt;
+                    cbArt.ValueMember = "ARTID";
+                    cbArt.DisplayMember = "Ten";
+                    cbArt.SelectedIndex = 0;
+                }
             }
         }
 
-        //private void PopulateData(int currentPageNumber, int rowPerPage, string orderbyItem)
-        //{
-        //    int skipRecord = currentPageNumber - 1;
-        //    if (skipRecord != 0) skipRecord = currentPageNumber * rowPerPage;
-        //    string query = "SELECT * FROM Product Order by " + orderbyItem + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
-        //    dt = new DataTable();
-        //    dtnew = new DataTable();
-        //    using (SqlCeConnection connection = new SqlCeConnection(conn))
-        //    {
-        //        using (SqlCeCommand command = new SqlCeCommand(query, connection))
-        //        {
-        //            SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
-        //            DataTable dt = new DataTable();
-        //            sda.Fill(dt);
-        //            dtnew.Merge(dt);
+        private void PopulateData(int currentPageNumber, int rowPerPage)
+        {
+            
+            int skipRecord = (currentPageNumber - 1) * rowPerPage;
 
-        //            dvgProduct.DataSource = dtnew;
-        //            lblTotalPage.Text = dtnew.Rows.Count.ToString();
-        //        }
-        //    }
-        //    //dtnew = DBAccess.FillDataTable(query, dt);
-
-        //    //dvgProduct.DataSource = dtnew;
-        //    int rowCount = dtnew.Rows.Count;
-        //    pageSize = rowCount / rowPerPage;
-        //    // if any row left after calculated pages, add one more page 
-        //    if (rowCount % rowPerPage > 0)
-        //        pageSize += 1;
-        //    lblTotalPage.Text = "Total rows:" + dtnew.Rows.Count.ToString();
-        //    DisablePagingButton(currentPageNumber, pageSize);
-        //}
+            dvgProduct.DataSource = dtMain.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+            
+        }
 
         void DisablePagingButton(int currentPageNumber, int pageSize)
         {
@@ -219,25 +372,32 @@ namespace iClothing
         private void pbFirst_Click(object sender, EventArgs e)
         {
             currentPageNumber = 1;
-            //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+            PopulateData(currentPageNumber, rowPerPage);
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void pbPrev_Click(object sender, EventArgs e)
         {
-            currentPageNumber -= 1;
-            //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+            if (currentPageNumber > 0)
+            {
+                currentPageNumber -= 1;
+                PopulateData(currentPageNumber, rowPerPage);
+            }
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void pbNext_Click(object sender, EventArgs e)
         {
             currentPageNumber += 1;
-            //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+            PopulateData(currentPageNumber, rowPerPage);
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void pbLast_Click(object sender, EventArgs e)
         {
             currentPageNumber = pageSize;
-            //PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+            PopulateData(currentPageNumber, rowPerPage);
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void dvgProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -251,10 +411,20 @@ namespace iClothing
             {
                 DataGridViewRow dgvRow = dvgProduct.Rows[e.RowIndex];
                 txtBarcode.Text = dgvRow.Cells[0].Value.ToString();
-                txtBarcode.Enabled = false;
                 txtTen.Text = dgvRow.Cells[1].Value.ToString();
-                txtMieuta.Text = dgvRow.Cells[2].Value.ToString();
-                btnSave.Enabled = false;
+                txtDai.Text = dgvRow.Cells[2].Value.ToString();
+                txtRong.Text = dgvRow.Cells[3].Value.ToString();
+                cbArt.Text = dgvRow.Cells[4].Value.ToString();
+                cbArt.SelectedValue = dgvRow.Cells[4].Value.ToString();
+                cbSon.Text = DBHelper.Lookup("Color", "Ten", "SonID", dgvRow.Cells[5].Value.ToString());
+                cbSon.SelectedValue = dgvRow.Cells[5].Value.ToString();
+                txtDVT.Text = dgvRow.Cells[6].Value.ToString();
+                txtMieuta.Text = dgvRow.Cells[7].Value.ToString();
+                txtMaSP.Text = dgvRow.Cells[10].Value.ToString();
+                txtBarcode.Enabled = false;
+
+                btnAdd.Visible = false;
+                btnUpdate.Visible = true;
             }
         }
 
@@ -301,6 +471,188 @@ namespace iClothing
                     lds = ListSortDirection.Descending;
                 }
                 dvgProduct.Sort(dvgProduct.Columns[columnorder[0].Replace('[', ' ').Trim()], lds);
+            }
+        }
+
+        private void GetAllData()
+        {
+            string query = "SELECT * FROM [Product] Order by " + currentOrderByItem + "; ";
+            dtMain = new DataTable();
+            using (SqlCeConnection connection = new SqlCeConnection(conn))
+            {
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    dtMain.Merge(dt);
+                }
+            }
+            lblTotalPage.Text = "Total rows:" + dtMain.Rows.Count.ToString();
+            
+        }
+
+        private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rowPerPage = Convert.ToInt32(cbPageSize.SelectedItem);
+            currentPageNumber = 1;
+            PopulateData(currentPageNumber, rowPerPage);
+            countPageSize();
+        }
+
+        private void countPageSize()
+        {
+            int rowCount = dtMain.Rows.Count;
+            pageSize = rowCount / rowPerPage;
+            // if any row left after calculated pages, add one more page 
+            if (rowCount % rowPerPage > 0)
+                pageSize += 1;
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dvgProduct.DataSource != null)
+                {
+                    List<DBModel> dbModelsUpdate = new List<DBModel>();
+                    DBModel itemModelUpdate = new DBModel();
+                    DBModel modelWhere = new DBModel();
+                    DataTable dtItem = (DataTable)(dvgProduct.DataSource);
+                    int dai, rong;
+                    string barcode, ten, ARTID, SonID, DVT, Mieuta, MaSP, createDate, modifyDate;
+                    string InsertItemQry = "";
+                    int count = 0;
+                    var csv = new StringBuilder();
+                    // Barcode
+                    barcode = txtBarcode.Text;
+                    modelWhere.text = "Barcode";
+                    modelWhere.value = barcode;
+                    modelWhere.type = "string";
+
+                    // Ten
+                    itemModelUpdate = new DBModel();
+                    ten = txtTen.Text;
+                    itemModelUpdate.text = "Kyhieu";
+                    itemModelUpdate.value = ten;
+                    itemModelUpdate.type = "string";
+                    dbModelsUpdate.Add(itemModelUpdate);
+                    // Dai
+                    itemModelUpdate = new DBModel();
+                    dai = Convert.ToInt32(txtDai.Text);
+                    itemModelUpdate.text = "Dai";
+                    itemModelUpdate.type = "int";
+                    itemModelUpdate.value = dai.ToString();
+                    dbModelsUpdate.Add(itemModelUpdate);
+                    // Rong
+                    itemModelUpdate = new DBModel();
+                    rong = Convert.ToInt32(txtRong.Text);
+                    itemModelUpdate.text = "Rong";
+                    itemModelUpdate.value = rong.ToString();
+                    itemModelUpdate.type = "int";
+                    dbModelsUpdate.Add(itemModelUpdate);
+                    // ARTID
+                    itemModelUpdate = new DBModel();
+                    ARTID = cbArt.SelectedValue.ToString();
+                    itemModelUpdate.text = "ArtID";
+                    itemModelUpdate.value = ARTID;
+                    itemModelUpdate.type = "string";
+                    dbModelsUpdate.Add(itemModelUpdate);
+                    // SonID
+                    itemModelUpdate = new DBModel();
+                    SonID = cbSon.SelectedValue.ToString();
+                    itemModelUpdate.text = "SonID";
+                    itemModelUpdate.value = SonID;
+                    itemModelUpdate.type = "string";
+                    dbModelsUpdate.Add(itemModelUpdate);
+                    // DVT
+                    itemModelUpdate = new DBModel();
+                    DVT = txtDVT.Text;
+                    itemModelUpdate.text = "DVT";
+                    itemModelUpdate.value = DVT;
+                    itemModelUpdate.type = "string";
+                    dbModelsUpdate.Add(itemModelUpdate);
+                    // Mieu ta
+                    itemModelUpdate = new DBModel();
+                    Mieuta = txtMieuta.Text;
+                    itemModelUpdate.text = "Mieuta";
+                    itemModelUpdate.value = Mieuta;
+                    itemModelUpdate.type = "string";
+                    dbModelsUpdate.Add(itemModelUpdate);
+                    // MaSP
+                    itemModelUpdate = new DBModel();
+                    MaSP = txtMaSP.Text;
+                    itemModelUpdate.text = "MaSP";
+                    itemModelUpdate.value = MaSP;
+                    itemModelUpdate.type = "string";
+                    dbModelsUpdate.Add(itemModelUpdate);
+                    // Modify Date
+                    itemModelUpdate = new DBModel();
+                    modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                    itemModelUpdate.text = "Ngaysua";
+                    itemModelUpdate.value = modifyDate;
+                    itemModelUpdate.type = "datetime";
+                    dbModelsUpdate.Add(itemModelUpdate);
+
+                    if (ten != "")
+                    {
+                        InsertItemQry += "UPDATE [Product] SET [Kyhieu] = '"+ten+"',[Dai] = "+dai+",[Rong] = "+rong+",[ArtID] = '"+ARTID+"',[SonID] = '"+SonID+"',[DVT] = '"+DVT+"',[Mieuta] = '"+Mieuta+"',[Ngaysua] = '"+ modifyDate+"',[MaSP] = '"+MaSP+"' WHERE Barcode ='" + barcode + "';";
+                    }
+
+                    if (DBAccess.IsServerConnected())
+                    {
+                        if (InsertItemQry.Length > 5)
+                        {
+                            bool isExisted = DBHelper.CheckItemExist("Product", "Barcode", barcode);
+
+                            if (isExisted)
+                            {
+                                bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                                if (isSuccess)
+                                {
+                                    dtMain = DBHelper.UpdateDatatable(dtMain, modelWhere, dbModelsUpdate);
+                                    currentPageNumber = 1;
+                                    countPageSize();
+                                    MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Barcode khong ton tai : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+
+                    // Update datalist
+                    PopulateData(currentPageNumber, rowPerPage);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception " + ex);
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            btnAdd.Visible = true;
+            txtBarcode.Enabled = true;
+        }
+
+        private void txtDai_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtRong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

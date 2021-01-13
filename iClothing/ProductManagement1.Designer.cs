@@ -29,32 +29,28 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductManagement1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pbLast = new System.Windows.Forms.PictureBox();
             this.pbNext = new System.Windows.Forms.PictureBox();
             this.pbFirst = new System.Windows.Forms.PictureBox();
-            this.cbLoai = new System.Windows.Forms.ComboBox();
-            this.cbSon = new System.Windows.Forms.ComboBox();
             this.cbArt = new System.Windows.Forms.ComboBox();
             this.txtRong = new System.Windows.Forms.TextBox();
             this.lblRong = new System.Windows.Forms.Label();
             this.txtDVT = new System.Windows.Forms.TextBox();
             this.lblDVT = new System.Windows.Forms.Label();
-            this.lblSon = new System.Windows.Forms.Label();
             this.lblARTID = new System.Windows.Forms.Label();
             this.lblMess = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.txtMieuta = new System.Windows.Forms.TextBox();
-            this.lblLoai = new System.Windows.Forms.Label();
             this.lblMieuta = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtPaging = new System.Windows.Forms.TextBox();
             this.btnImport = new System.Windows.Forms.Button();
             this.txtFile = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.txtDiaChi = new System.Windows.Forms.TextBox();
+            this.txtDai = new System.Windows.Forms.TextBox();
             this.lblDai = new System.Windows.Forms.Label();
             this.txtTen = new System.Windows.Forms.TextBox();
             this.lblKihieu = new System.Windows.Forms.Label();
@@ -63,6 +59,13 @@
             this.lblTotalPage = new System.Windows.Forms.Label();
             this.dvgProduct = new ADGV.AdvancedDataGridView();
             this.txtBarcode = new System.Windows.Forms.TextBox();
+            this.cbPageSize = new System.Windows.Forms.ComboBox();
+            this.cbSon = new System.Windows.Forms.ComboBox();
+            this.lblSon = new System.Windows.Forms.Label();
+            this.txtMaSP = new System.Windows.Forms.TextBox();
+            this.lblMaSP = new System.Windows.Forms.Label();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).BeginInit();
@@ -73,7 +76,7 @@
             // pbLast
             // 
             this.pbLast.Image = ((System.Drawing.Image)(resources.GetObject("pbLast.Image")));
-            this.pbLast.Location = new System.Drawing.Point(314, 686);
+            this.pbLast.Location = new System.Drawing.Point(396, 686);
             this.pbLast.Name = "pbLast";
             this.pbLast.Size = new System.Drawing.Size(38, 21);
             this.pbLast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -84,7 +87,7 @@
             // pbNext
             // 
             this.pbNext.Image = ((System.Drawing.Image)(resources.GetObject("pbNext.Image")));
-            this.pbNext.Location = new System.Drawing.Point(245, 686);
+            this.pbNext.Location = new System.Drawing.Point(327, 686);
             this.pbNext.Name = "pbNext";
             this.pbNext.Size = new System.Drawing.Size(39, 20);
             this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -103,26 +106,10 @@
             this.pbFirst.TabStop = false;
             this.pbFirst.Click += new System.EventHandler(this.pbFirst_Click);
             // 
-            // cbLoai
-            // 
-            this.cbLoai.FormattingEnabled = true;
-            this.cbLoai.Location = new System.Drawing.Point(544, 169);
-            this.cbLoai.Name = "cbLoai";
-            this.cbLoai.Size = new System.Drawing.Size(121, 21);
-            this.cbLoai.TabIndex = 124;
-            // 
-            // cbSon
-            // 
-            this.cbSon.FormattingEnabled = true;
-            this.cbSon.Location = new System.Drawing.Point(131, 240);
-            this.cbSon.Name = "cbSon";
-            this.cbSon.Size = new System.Drawing.Size(121, 21);
-            this.cbSon.TabIndex = 123;
-            // 
             // cbArt
             // 
             this.cbArt.FormattingEnabled = true;
-            this.cbArt.Location = new System.Drawing.Point(131, 194);
+            this.cbArt.Location = new System.Drawing.Point(131, 239);
             this.cbArt.Name = "cbArt";
             this.cbArt.Size = new System.Drawing.Size(121, 21);
             this.cbArt.TabIndex = 122;
@@ -132,17 +119,18 @@
             this.txtRong.BackColor = System.Drawing.Color.White;
             this.txtRong.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRong.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRong.Location = new System.Drawing.Point(318, 164);
+            this.txtRong.Location = new System.Drawing.Point(318, 204);
             this.txtRong.Name = "txtRong";
             this.txtRong.Size = new System.Drawing.Size(66, 24);
             this.txtRong.TabIndex = 121;
+            this.txtRong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRong_KeyPress);
             // 
             // lblRong
             // 
             this.lblRong.AutoSize = true;
             this.lblRong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRong.ForeColor = System.Drawing.Color.Orange;
-            this.lblRong.Location = new System.Drawing.Point(223, 164);
+            this.lblRong.Location = new System.Drawing.Point(227, 204);
             this.lblRong.Name = "lblRong";
             this.lblRong.Size = new System.Drawing.Size(45, 16);
             this.lblRong.TabIndex = 120;
@@ -153,7 +141,7 @@
             this.txtDVT.BackColor = System.Drawing.Color.White;
             this.txtDVT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDVT.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDVT.Location = new System.Drawing.Point(544, 200);
+            this.txtDVT.Location = new System.Drawing.Point(544, 204);
             this.txtDVT.Name = "txtDVT";
             this.txtDVT.Size = new System.Drawing.Size(251, 24);
             this.txtDVT.TabIndex = 119;
@@ -163,29 +151,18 @@
             this.lblDVT.AutoSize = true;
             this.lblDVT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDVT.ForeColor = System.Drawing.Color.Orange;
-            this.lblDVT.Location = new System.Drawing.Point(415, 200);
+            this.lblDVT.Location = new System.Drawing.Point(415, 204);
             this.lblDVT.Name = "lblDVT";
             this.lblDVT.Size = new System.Drawing.Size(38, 16);
             this.lblDVT.TabIndex = 118;
             this.lblDVT.Text = "ĐVT";
-            // 
-            // lblSon
-            // 
-            this.lblSon.AutoSize = true;
-            this.lblSon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSon.ForeColor = System.Drawing.Color.Orange;
-            this.lblSon.Location = new System.Drawing.Point(2, 245);
-            this.lblSon.Name = "lblSon";
-            this.lblSon.Size = new System.Drawing.Size(35, 16);
-            this.lblSon.TabIndex = 117;
-            this.lblSon.Text = "Sơn";
             // 
             // lblARTID
             // 
             this.lblARTID.AutoSize = true;
             this.lblARTID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblARTID.ForeColor = System.Drawing.Color.Orange;
-            this.lblARTID.Location = new System.Drawing.Point(2, 204);
+            this.lblARTID.Location = new System.Drawing.Point(2, 249);
             this.lblARTID.Name = "lblARTID";
             this.lblARTID.Size = new System.Drawing.Size(68, 16);
             this.lblARTID.TabIndex = 116;
@@ -199,20 +176,20 @@
             this.lblMess.Size = new System.Drawing.Size(0, 13);
             this.lblMess.TabIndex = 99;
             // 
-            // btnSave
+            // btnAdd
             // 
-            this.btnSave.AutoSize = true;
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(533, 253);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(129, 32);
-            this.btnSave.TabIndex = 98;
-            this.btnSave.Text = "Lưu";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnAdd.AutoSize = true;
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.Location = new System.Drawing.Point(533, 296);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(90, 32);
+            this.btnAdd.TabIndex = 98;
+            this.btnAdd.Text = "Lưu";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // pbPrev
             // 
@@ -230,41 +207,29 @@
             this.txtMieuta.BackColor = System.Drawing.Color.White;
             this.txtMieuta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMieuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMieuta.Location = new System.Drawing.Point(543, 78);
+            this.txtMieuta.Location = new System.Drawing.Point(543, 118);
             this.txtMieuta.Multiline = true;
             this.txtMieuta.Name = "txtMieuta";
-            this.txtMieuta.Size = new System.Drawing.Size(251, 80);
+            this.txtMieuta.Size = new System.Drawing.Size(251, 65);
             this.txtMieuta.TabIndex = 115;
-            // 
-            // lblLoai
-            // 
-            this.lblLoai.AutoSize = true;
-            this.lblLoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoai.ForeColor = System.Drawing.Color.Orange;
-            this.lblLoai.Location = new System.Drawing.Point(414, 164);
-            this.lblLoai.Name = "lblLoai";
-            this.lblLoai.Size = new System.Drawing.Size(38, 16);
-            this.lblLoai.TabIndex = 114;
-            this.lblLoai.Text = "Loại";
             // 
             // lblMieuta
             // 
             this.lblMieuta.AutoSize = true;
             this.lblMieuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMieuta.ForeColor = System.Drawing.Color.Orange;
-            this.lblMieuta.Location = new System.Drawing.Point(414, 78);
+            this.lblMieuta.Location = new System.Drawing.Point(414, 118);
             this.lblMieuta.Name = "lblMieuta";
             this.lblMieuta.Size = new System.Drawing.Size(64, 16);
             this.lblMieuta.TabIndex = 113;
             this.lblMieuta.Text = "Miêu Tả";
             // 
-            // textBox2
+            // txtPaging
             // 
-            this.textBox2.Location = new System.Drawing.Point(175, 713);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(93, 20);
-            this.textBox2.TabIndex = 112;
-            this.textBox2.Visible = false;
+            this.txtPaging.Location = new System.Drawing.Point(221, 687);
+            this.txtPaging.Name = "txtPaging";
+            this.txtPaging.Size = new System.Drawing.Size(93, 20);
+            this.txtPaging.TabIndex = 112;
             // 
             // btnImport
             // 
@@ -296,30 +261,31 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(668, 253);
+            this.btnDelete.Location = new System.Drawing.Point(632, 296);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(126, 32);
+            this.btnDelete.Size = new System.Drawing.Size(90, 32);
             this.btnDelete.TabIndex = 109;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // txtDiaChi
+            // txtDai
             // 
-            this.txtDiaChi.BackColor = System.Drawing.Color.White;
-            this.txtDiaChi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDiaChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDiaChi.Location = new System.Drawing.Point(133, 159);
-            this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(66, 24);
-            this.txtDiaChi.TabIndex = 108;
+            this.txtDai.BackColor = System.Drawing.Color.White;
+            this.txtDai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDai.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDai.Location = new System.Drawing.Point(133, 204);
+            this.txtDai.Name = "txtDai";
+            this.txtDai.Size = new System.Drawing.Size(66, 24);
+            this.txtDai.TabIndex = 108;
+            this.txtDai.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDai_KeyPress);
             // 
             // lblDai
             // 
             this.lblDai.AutoSize = true;
             this.lblDai.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDai.ForeColor = System.Drawing.Color.Orange;
-            this.lblDai.Location = new System.Drawing.Point(4, 159);
+            this.lblDai.Location = new System.Drawing.Point(4, 204);
             this.lblDai.Name = "lblDai";
             this.lblDai.Size = new System.Drawing.Size(32, 16);
             this.lblDai.TabIndex = 107;
@@ -383,36 +349,36 @@
             this.dvgProduct.BackgroundColor = System.Drawing.Color.White;
             this.dvgProduct.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dvgProduct.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dvgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvgProduct.DateWithTime = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dvgProduct.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dvgProduct.DefaultCellStyle = dataGridViewCellStyle11;
             this.dvgProduct.EnableHeadersVisualStyles = false;
             this.dvgProduct.GridColor = System.Drawing.Color.White;
             this.dvgProduct.Location = new System.Drawing.Point(3, 404);
             this.dvgProduct.Name = "dvgProduct";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dvgProduct.Size = new System.Drawing.Size(866, 260);
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.dvgProduct.Size = new System.Drawing.Size(826, 260);
             this.dvgProduct.TabIndex = 100;
             this.dvgProduct.TimeFilter = false;
             this.dvgProduct.SortStringChanged += new System.EventHandler(this.dvgProduct_SortStringChanged);
@@ -430,34 +396,123 @@
             this.txtBarcode.Size = new System.Drawing.Size(251, 24);
             this.txtBarcode.TabIndex = 105;
             // 
+            // cbPageSize
+            // 
+            this.cbPageSize.ForeColor = System.Drawing.Color.Orange;
+            this.cbPageSize.FormattingEnabled = true;
+            this.cbPageSize.Items.AddRange(new object[] {
+            "10",
+            "25",
+            "50",
+            "100",
+            "200"});
+            this.cbPageSize.Location = new System.Drawing.Point(533, 682);
+            this.cbPageSize.Name = "cbPageSize";
+            this.cbPageSize.Size = new System.Drawing.Size(45, 21);
+            this.cbPageSize.TabIndex = 129;
+            this.cbPageSize.SelectedIndexChanged += new System.EventHandler(this.cbPageSize_SelectedIndexChanged);
+            // 
+            // cbSon
+            // 
+            this.cbSon.FormattingEnabled = true;
+            this.cbSon.Location = new System.Drawing.Point(544, 73);
+            this.cbSon.Name = "cbSon";
+            this.cbSon.Size = new System.Drawing.Size(121, 21);
+            this.cbSon.TabIndex = 131;
+            // 
+            // lblSon
+            // 
+            this.lblSon.AutoSize = true;
+            this.lblSon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSon.ForeColor = System.Drawing.Color.Orange;
+            this.lblSon.Location = new System.Drawing.Point(415, 78);
+            this.lblSon.Name = "lblSon";
+            this.lblSon.Size = new System.Drawing.Size(35, 16);
+            this.lblSon.TabIndex = 130;
+            this.lblSon.Text = "Sơn";
+            // 
+            // txtMaSP
+            // 
+            this.txtMaSP.BackColor = System.Drawing.Color.White;
+            this.txtMaSP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMaSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaSP.Location = new System.Drawing.Point(133, 159);
+            this.txtMaSP.Name = "txtMaSP";
+            this.txtMaSP.Size = new System.Drawing.Size(251, 24);
+            this.txtMaSP.TabIndex = 133;
+            // 
+            // lblMaSP
+            // 
+            this.lblMaSP.AutoSize = true;
+            this.lblMaSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaSP.ForeColor = System.Drawing.Color.Orange;
+            this.lblMaSP.Location = new System.Drawing.Point(4, 159);
+            this.lblMaSP.Name = "lblMaSP";
+            this.lblMaSP.Size = new System.Drawing.Size(70, 16);
+            this.lblMaSP.TabIndex = 132;
+            this.lblMaSP.Text = "Mã Hàng";
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.AutoSize = true;
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
+            this.btnUpdate.Location = new System.Drawing.Point(533, 296);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(90, 32);
+            this.btnUpdate.TabIndex = 134;
+            this.btnUpdate.Text = "Lưu";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.AutoSize = true;
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(733, 296);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(90, 32);
+            this.btnClear.TabIndex = 135;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // ProductManagement1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.txtMaSP);
+            this.Controls.Add(this.lblMaSP);
+            this.Controls.Add(this.cbSon);
+            this.Controls.Add(this.lblSon);
+            this.Controls.Add(this.cbPageSize);
             this.Controls.Add(this.pbLast);
             this.Controls.Add(this.pbNext);
             this.Controls.Add(this.pbFirst);
-            this.Controls.Add(this.cbLoai);
-            this.Controls.Add(this.cbSon);
             this.Controls.Add(this.cbArt);
             this.Controls.Add(this.txtRong);
             this.Controls.Add(this.lblRong);
             this.Controls.Add(this.txtDVT);
             this.Controls.Add(this.lblDVT);
-            this.Controls.Add(this.lblSon);
             this.Controls.Add(this.lblARTID);
             this.Controls.Add(this.lblMess);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.pbPrev);
             this.Controls.Add(this.txtMieuta);
-            this.Controls.Add(this.lblLoai);
             this.Controls.Add(this.lblMieuta);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtPaging);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.txtFile);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.txtDiaChi);
+            this.Controls.Add(this.txtDai);
             this.Controls.Add(this.lblDai);
             this.Controls.Add(this.txtTen);
             this.Controls.Add(this.lblKihieu);
@@ -483,26 +538,22 @@
         private System.Windows.Forms.PictureBox pbLast;
         private System.Windows.Forms.PictureBox pbNext;
         private System.Windows.Forms.PictureBox pbFirst;
-        private System.Windows.Forms.ComboBox cbLoai;
-        private System.Windows.Forms.ComboBox cbSon;
         private System.Windows.Forms.ComboBox cbArt;
         private System.Windows.Forms.TextBox txtRong;
         private System.Windows.Forms.Label lblRong;
         private System.Windows.Forms.TextBox txtDVT;
         private System.Windows.Forms.Label lblDVT;
-        private System.Windows.Forms.Label lblSon;
         private System.Windows.Forms.Label lblARTID;
         private System.Windows.Forms.Label lblMess;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.PictureBox pbPrev;
         private System.Windows.Forms.TextBox txtMieuta;
-        private System.Windows.Forms.Label lblLoai;
         private System.Windows.Forms.Label lblMieuta;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtPaging;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.TextBox txtFile;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.TextBox txtDiaChi;
+        private System.Windows.Forms.TextBox txtDai;
         private System.Windows.Forms.Label lblDai;
         private System.Windows.Forms.TextBox txtTen;
         private System.Windows.Forms.Label lblKihieu;
@@ -511,5 +562,12 @@
         private System.Windows.Forms.Label lblTotalPage;
         private ADGV.AdvancedDataGridView dvgProduct;
         private System.Windows.Forms.TextBox txtBarcode;
+        private System.Windows.Forms.ComboBox cbPageSize;
+        private System.Windows.Forms.ComboBox cbSon;
+        private System.Windows.Forms.Label lblSon;
+        private System.Windows.Forms.TextBox txtMaSP;
+        private System.Windows.Forms.Label lblMaSP;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnClear;
     }
 }

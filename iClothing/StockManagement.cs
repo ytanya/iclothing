@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Data.SqlServerCe;
 using System.IO;
+using Microsoft.Office.Interop.Excel;
+using DataTable = System.Data.DataTable;
+using Action = System.Action;
 
 namespace iClothing
 {
@@ -20,16 +23,11 @@ namespace iClothing
         string conn = DBAccess.ConnectionString;
         DataTable dtMain = new DataTable();
         string pathCSV = System.AppDomain.CurrentDomain.BaseDirectory + "taphoaviet.csv";
+        DataTable dtStockNew = new DataTable();
         public StockManagement()
         {
             InitializeComponent();
 
-        }
-
-        private void txtBarcode_TextChanged(object sender, EventArgs e)
-        {
-            dtMain = new DataTable();
-            CalculateAfterStopTyping();
         }
 
         private void CalculateAfterStopTyping()
@@ -54,7 +52,7 @@ namespace iClothing
                     string id = txtBarcode.Text;
                     if (DBAccess.IsServerConnected())
                     {
-                        string query = "Select TonkhoID, Product.Kyhieu, Type.Ten, Stock.Mieuta, Soluongcon, Stock.Ngaytao  from Stock join Product on Stock.Barcode = Product.Barcode join Type on Type.LoaiID = Stock.LoaiID where Stock.Barcode = '" + id + "'; ";
+                        string query = "Select  DISTINCT(NewProduct.Kyhieu),NewProduct.MaSP,New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], Stock.Mieuta  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock GROUP BY Barcode) New on New.Barcode = Stock.Barcode; ";
 
                         using (SqlCeConnection connection = new SqlCeConnection(conn))
                         {
@@ -64,9 +62,15 @@ namespace iClothing
                                 DataTable dt = new DataTable();
                                 sda.Fill(dt);
                                 dtMain.Merge(dt);
-
+                                string barcode = txtBarcode.Text;
+                                if (barcode != string.Empty)
+                                {
+                                    string filterString = "[Barcode] IN ('" + barcode + "')";
+                                    dtMain = dtMain.Select(filterString).CopyToDataTable();
+                                }
                                 dvgStock.DataSource = dtMain;
                                 lblTotalPage.Text = dtMain.Rows.Count.ToString();
+                                
                             }
                         }
                     }
@@ -83,6 +87,35 @@ namespace iClothing
         private void StockManagement_Load(object sender, EventArgs e)
         {
             this.ActiveControl = txtBarcode;
+            btnExport.Visible = false;
+        }
+
+        public System.Data.DataTable ExportToExcel()
+        {
+            dtStockNew = new DataTable();
+            dtStockNew.Columns.Add("STT", typeof(int));
+            dtStockNew.Columns.Add("KÝ HIỆU", typeof(string));
+            dtStockNew.Columns.Add("MÃ HÀNG", typeof(string));
+            dtStockNew.Columns.Add("BTP Chưa in ", typeof(string));
+            dtStockNew.Columns.Add("BTP Đã in ", typeof(string));
+            dtStockNew.Columns.Add("Thành Phẩm ", typeof(string));
+            dtStockNew.Columns.Add("SP Lỗi ", typeof(string));
+            dtStockNew.Columns.Add("GHI CHÚ", typeof(string));
+
+            DataRow row;
+            string kyhieu, masp, btpchuain, btpdain, tp, sploi, ghichu;
+            for (int i = 0; i < dtMain.Rows.Count; i++)
+            {
+                kyhieu = dtMain.Rows[i][0].ToString();
+                masp = dtMain.Rows[i][1].ToString();
+                btpchuain = dtMain.Rows[i][2].ToString();
+                btpdain = dtMain.Rows[i][3].ToString();
+                tp = dtMain.Rows[i][4].ToString();
+                sploi = dtMain.Rows[i][5].ToString();
+                ghichu = dtMain.Rows[i][6].ToString();
+                dtStockNew.Rows.Add(i+1, kyhieu, masp, btpchuain, btpdain, tp, sploi, ghichu);
+            }
+            return dtStockNew;
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -101,6 +134,8 @@ namespace iClothing
             save.Title = "Select save location and input file name";
             //filtering to only show .xlsx files in the directory
             save.DefaultExt = "xlsx";
+            // Write Data to DataTable
+            ExportToExcel();
             //Write Data To Excel
             ToExcel(fileName);
         }
@@ -120,24 +155,33 @@ namespace iClothing
             worksheet = workbook.Sheets["Sheet1"];
             worksheet = workbook.ActiveSheet;
             // changing the name of active sheet  
-            worksheet.Name = "Exported from gridview";
+            worksheet.Name = "Sheet1";
             // storing header part in Excel  
-            for (int i = 1; i < dvgStock.Columns.Count + 1; i++)
+            var columnHeadingsRange = worksheet.Range[worksheet.Cells[1, 4], worksheet.Cells[1, 8]];
+            columnHeadingsRange.Interior.Color = XlRgbColor.rgbOrange;
+            for (int i = 0; i < dtStockNew.Columns.Count; i++)
             {
-                worksheet.Cells[1, i] = dvgStock.Columns[i - 1].HeaderText;
+                worksheet.Cells[1, i+1] = dtStockNew.Columns[i].ToString();
             }
             // storing Each row and column value to excel sheet  
-            for (int i = 0; i < dvgStock.Rows.Count - 1; i++)
+            for (int i = 0; i < dtStockNew.Rows.Count; i++)
             {
-                for (int j = 0; j < dvgStock.Columns.Count; j++)
+                for (int j = 0; j < dtStockNew.Columns.Count; j++)
                 {
-                    worksheet.Cells[i + 2, j + 1] = dvgStock.Rows[i].Cells[j].Value.ToString();
+                    worksheet.Cells[i + 2, j + 1] = dtStockNew.Rows[i][j].ToString();
                 }
             }
             // save the application  
             workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
             // Exit from the application  
             app.Quit();
+        }
+
+        private void pbSearch_Click(object sender, EventArgs e)
+        {
+            btnExport.Visible = true;
+            dtMain = new DataTable();
+            CalculateAfterStopTyping();
         }
     }
 }

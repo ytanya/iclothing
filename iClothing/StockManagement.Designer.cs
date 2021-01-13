@@ -43,11 +43,13 @@
             this.pbFirst = new System.Windows.Forms.PictureBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lblTotalPage = new System.Windows.Forms.Label();
+            this.pbSearch = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dvgStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSoluong
@@ -70,7 +72,6 @@
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(200, 24);
             this.txtBarcode.TabIndex = 43;
-            this.txtBarcode.TextChanged += new System.EventHandler(this.txtBarcode_TextChanged);
             // 
             // label1
             // 
@@ -195,11 +196,23 @@
             this.lblTotalPage.TabIndex = 95;
             this.lblTotalPage.Text = "Total rows: 0";
             // 
+            // pbSearch
+            // 
+            this.pbSearch.Image = ((System.Drawing.Image)(resources.GetObject("pbSearch.Image")));
+            this.pbSearch.Location = new System.Drawing.Point(473, 51);
+            this.pbSearch.Name = "pbSearch";
+            this.pbSearch.Size = new System.Drawing.Size(72, 24);
+            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSearch.TabIndex = 101;
+            this.pbSearch.TabStop = false;
+            this.pbSearch.Click += new System.EventHandler(this.pbSearch_Click);
+            // 
             // StockManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.pbSearch);
             this.Controls.Add(this.pbLast);
             this.Controls.Add(this.pbNext);
             this.Controls.Add(this.pbPrev);
@@ -219,6 +232,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,5 +251,6 @@
         private System.Windows.Forms.PictureBox pbFirst;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lblTotalPage;
+        private System.Windows.Forms.PictureBox pbSearch;
     }
 }

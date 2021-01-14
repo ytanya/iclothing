@@ -25,13 +25,10 @@ namespace iClothing
         private DataTable dtOrderNotDone = new DataTable();
         private DataTable dtTemp = new DataTable();
         private DataTable dtManageOrderNew = new DataTable();
-        private List<OrderStatus> orderStatusList = new List<OrderStatus>();
-        private OrderStatus orderStatus = new OrderStatus();
         private int currentPageNumber = 1;
-        private int pageSize = 1;
+        private int pageSize = 0;
         private int rowPerPage = 10;
         private string currentOrderByItem = "Ngaytao";
-        private int latestPanelBottom = 0;
         private Bitmap bmp;
         public static string conn = "Data Source=" + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         public OrderManagement()
@@ -151,8 +148,6 @@ namespace iClothing
         {
             try
             {
-                List<DBModel> dbModels = new List<DBModel>();
-                DBModel itemModel = new DBModel();
                 DataTable dtItem = (DataTable)(dgvOrder2.DataSource);
                 string IsCompleted = "false";
                 string DonhangID, barcode, BTPChuaIn, BTPDaIn, TP, SPLoi, KHID, modifyDate;
@@ -160,71 +155,40 @@ namespace iClothing
                 string InsertItemQry = "";
                 bool isSuccess = false;
                 int count = 0;
-                var csv = new StringBuilder();
+                DataRow rd = dtTab1Input.NewRow();
+
+                // Set value for number field
+                if (string.IsNullOrEmpty(txtChuaIn2.Text)) txtChuaIn2.Text = "0";
+                if (string.IsNullOrEmpty(txtDaIn2.Text)) txtDaIn2.Text = "0";
+                if (string.IsNullOrEmpty(txtTP2.Text)) txtTP2.Text = "0";
+                if (string.IsNullOrEmpty(txtSPLoi2.Text)) txtSPLoi2.Text = "0";
+
                 // DonhangID
                 DonhangID = CommonHelper.RandomString(8);
-                itemModel.text = "DonhangID";
-                itemModel.type = "string";
-                itemModel.value = DonhangID;
-                dbModels.Add(itemModel);
-                // Barcode
-                itemModel = new DBModel();
-                barcode = cbKihieu2.SelectedValue.ToString();
-                itemModel.text = "Kyhieu";
-                itemModel.value = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
-                itemModel.type = "string";
-                dbModels.Add(itemModel);
-                // BTPChuaIn
-                itemModel = new DBModel();
-                BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                itemModel.text = "BTP Chưa in";
-                itemModel.type = "int";
-                itemModel.value = txtChuaIn2.Text;
-                dbModels.Add(itemModel);
-                // BTPDaIn
-                itemModel = new DBModel();
-                BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                itemModel.text = "BTP Đã in";
-                itemModel.type = "int";
-                itemModel.value = txtDaIn2.Text;
-                dbModels.Add(itemModel);
-                // TP
-                itemModel = new DBModel();
-                TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                itemModel.text = "Thành Phẩm";
-                itemModel.type = "int";
-                itemModel.value = txtTP2.Text;
-                dbModels.Add(itemModel);
-                // SPLoi
-                itemModel = new DBModel();
-                SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-                itemModel.text = "Sản phẩm lỗi";
-                itemModel.type = "int";
-                itemModel.value = txtSPLoi2.Text;
-                dbModels.Add(itemModel);
-                // Xong
-                itemModel = new DBModel();
-                itemModel.text = "Xong";
-                itemModel.type = "bool";
-                itemModel.value = IsCompleted;
-                dbModels.Add(itemModel);
-
+                rd[0] = DonhangID;
                 // KHID
                 KHID = cbCustomer.SelectedValue.ToString();
-                itemModel = new DBModel();
-                itemModel.text = "HoTen";
-                itemModel.type = "string";
-                itemModel.value = DBHelper.Lookup("Customer", "HoTen", "KHID", KHID);
-                dbModels.Add(itemModel);
-
-
-                itemModel = new DBModel();
-                modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-                itemModel.text = "Ngaysua";
-                itemModel.value = modifyDate;
-                itemModel.type = "datetime";
-                dbModels.Add(itemModel);
+                rd[1] = DBHelper.Lookup("Customer", "HoTen", "KHID", KHID);
+                // Barcode
+                barcode = cbKihieu2.SelectedValue.ToString();
+                rd[2] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
+                // BTPChuaIn
+                BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
+                rd[3] = txtChuaIn2.Text;
+                // BTPDaIn
+                BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
+                rd[4] = txtDaIn2.Text;
+                // TP
+                TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
+                rd[5] = txtTP2.Text;
+                // SPLoi
+                SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
+                rd[6] = txtSPLoi2.Text;
                 // Modify Date
+                modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                rd[7] = modifyDate;
+                // Xong
+                rd[8] = IsCompleted;
 
                 string orderDetailID1 = CommonHelper.RandomString(7) + 1;
                 string orderDetailID2 = CommonHelper.RandomString(7) + 2;
@@ -263,14 +227,15 @@ namespace iClothing
                             SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtDaIn2.Text, "false", "false");
                             SaveOrderToTransactionDB(barcode, TP, "", txtTP2.Text, "false", "false");
                             SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi2.Text, "false", "false");
-                            dtTab1Input = DBHelper.InsertDatatable(dtTab1Input, dbModels);
-                            cbNhacc.SelectedIndex = 0;
+
+                            dtTab1Input.Rows.InsertAt(rd, 0);
+                            cbCustomer.SelectedIndex = 0;
                             currentPageNumber = 1;
                             countPageSize(dtTab1Input);
                             ClearText();
                             // Update datalist
                             PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Input);
-                            MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Thêm Mới Thành công !", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     //}
@@ -284,14 +249,13 @@ namespace iClothing
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception " + ex);
+                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DBModel modelWhere = new DBModel();
-            string orderID = txtOrderID1.Text;
+            string orderID = txtOrder2.Text;
             string query;
             bool isSuccess = false;
             List<string> DeleteItemQryList = new List<string>();
@@ -303,10 +267,7 @@ namespace iClothing
                 DeleteItemQryList.Add(query);
                 if (DBAccess.IsServerConnected())
                 {
-                    // Barcode
-                    modelWhere.text = "DonhangID";
-                    modelWhere.value = orderID;
-                    modelWhere.type = "string";
+                    DataRow row = dtTab1Input.Select("[Mã Đơn Hàng]=" + orderID, "[Mã Đơn Hàng]").FirstOrDefault();
 
                     if (query.Length > 5)
                     {
@@ -320,19 +281,21 @@ namespace iClothing
                             }
                             if (isSuccess)
                             {
-                                dtTab1Input = DBHelper.DeleteDatatable(dtTab1Input, modelWhere);
+                               
                                 currentPageNumber = 1;
+                                dtTab1Input.Rows.Remove(row);
                                 countPageSize(dtTab1Input);
                                 ClearText();
-                                
+                                // Update datalist
+                                PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Input);
+                                MessageBox.Show("Xóa Đơn Hàng Thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            // Update datalist
-                            PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Input);
-                            MessageBox.Show("Số sản phẩm đã nhập Thành công: ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            
+                            
                         }
                         else
                         {
-                            MessageBox.Show("Barcode khong ton tai ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Mã đơn hàng này không tồn tại ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
@@ -342,7 +305,7 @@ namespace iClothing
 
         private void GetAllDataOrderInput()
         {
-            string query = "Select New.DonhangID, Customer.HoTen, Product.Kyhieu, New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].Xong,[New].Ngaysua  from (SELECT DonhangID, Barcode, Ngaysua, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Customer on[Order].KHID = Customer.KHID where [Order].Xong = 0 order by New.Ngaysua;";
+            string query = "Select New.DonhangID [Mã Đơn Hàng], Customer.HoTen [Tên Khách Hàng], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [New].Ngaysua [Ngày], [Order].Xong  from (SELECT DonhangID, Barcode, Ngaysua, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Customer on[Order].KHID = Customer.KHID where [Order].Xong = 0 order by New.Ngaysua;";
             dtTab1Input = new DataTable();
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
@@ -372,7 +335,14 @@ namespace iClothing
                     if (dt.Rows.Count > 0)
                     {
                         dgvOrder2.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
-                        //dgvOrder2.Columns["Xong"].ReadOnly = true;
+                        dgvOrder2.Columns["Nhà Cung Cấp"].Width = 120;
+                        dgvOrder2.Columns["Ký Hiệu"].Width = 60;
+                        dgvOrder2.Columns["BTP Chưa in"].Width = 60;
+                        dgvOrder2.Columns["BTP Đã in"].Width = 60;
+                        dgvOrder2.Columns["Thành Phẩm"].Width = 60;
+                        dgvOrder2.Columns["Sản phẩm lỗi"].Width = 60;
+                        dgvOrder2.Columns["Xong"].Width = 50;
+                        dgvOrder2.Sort(dgvOrder2.Columns["Ngày"], ListSortDirection.Descending);
                     }
                     else
                     {
@@ -384,7 +354,13 @@ namespace iClothing
                     if (dt.Rows.Count > 0)
                     {
                         dgvOrder1.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
-                        dgvOrder1.DataSource = dt;
+                        dgvOrder1.Columns["Tên Khách Hàng"].Width = 120;
+                        dgvOrder1.Columns["Ký Hiệu"].Width = 60;
+                        dgvOrder1.Columns["BTP Chưa in"].Width = 60;
+                        dgvOrder1.Columns["BTP Đã in"].Width = 60;
+                        dgvOrder1.Columns["Thành Phẩm"].Width = 60;
+                        dgvOrder1.Columns["Sản phẩm lỗi"].Width = 60;
+                        dgvOrder1.Columns["Xong"].Width = 50;
                     }
                 }
             }
@@ -400,7 +376,7 @@ namespace iClothing
             if (e.RowIndex != -1)
             {
                 DataGridViewRow dgvRow = dgvOrder1.Rows[e.RowIndex];
-                txtOrderID1.Text = dgvRow.Cells[0].Value.ToString();
+                txtOrder2.Text = dgvRow.Cells[0].Value.ToString();
                 txtChuaIn2.Text = dgvRow.Cells[3].Value.ToString();
                 txtDaIn2.Text = dgvRow.Cells[4].Value.ToString();
                 txtTP2.Text = dgvRow.Cells[5].Value.ToString();
@@ -438,11 +414,6 @@ namespace iClothing
         {
             try
             {
-                List<DBModel> dbModelsUpdate = new List<DBModel>();
-                DBModel itemModelUpdate = new DBModel();
-                List<DBModel> dbModelsLookupList = new List<DBModel>();
-                DBModel itemModelLookup = new DBModel();
-                DBModel modelWhere = new DBModel();
                 List<string> UpdateItemQryList = new List<string>();
                 DataTable dtItem = (DataTable)(dgvOrder2.DataSource);
                 string DonhangID, barcode, BTPChuaIn, BTPDaIn, TP, SPLoi, createDate, modifyDate;
@@ -451,55 +422,32 @@ namespace iClothing
                 int count = 0;
                 var csv = new StringBuilder();
                 // DonhangID
-                DonhangID = txtOrderID1.Text;
-                modelWhere.text = "DonhangID";
-                modelWhere.type = "string";
-                modelWhere.value = DonhangID;
+                DonhangID = txtOrder2.Text;
+                DataRow row = dtTab1Input.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
 
+                // Set value for number field
+                if (string.IsNullOrEmpty(txtChuaIn2.Text)) txtChuaIn2.Text = "0";
+                if (string.IsNullOrEmpty(txtDaIn2.Text)) txtDaIn2.Text = "0";
+                if (string.IsNullOrEmpty(txtTP2.Text)) txtTP2.Text = "0";
+                if (string.IsNullOrEmpty(txtSPLoi2.Text)) txtSPLoi2.Text = "0";
                 // Barcode
-                barcode = cbKihieu1.SelectedValue.ToString();
-                itemModelUpdate.text = "Kyhieu";
-                itemModelUpdate.value = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
-                itemModelUpdate.type = "string";
-                dbModelsUpdate.Add(itemModelUpdate);
+                barcode = cbKihieu2.SelectedValue.ToString();
+                row[2] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
                 // BTPChuaIn
-                itemModelUpdate = new DBModel();
                 BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                itemModelUpdate.text = "BTP Chưa in";
-                itemModelUpdate.type = "int";
-                itemModelUpdate.value = txtChuaIn2.Text;
-                dbModelsUpdate.Add(itemModelUpdate);
+                row[3] = txtChuaIn2.Text;
                 // BTPDaIn
-                itemModelUpdate = new DBModel();
                 BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                itemModelUpdate.text = "BTP Đã in";
-                itemModelUpdate.type = "int";
-                itemModelUpdate.value = txtDaIn2.Text;
-                dbModelsUpdate.Add(itemModelUpdate);
+                row[4] = txtDaIn2.Text;
                 // TP
-                itemModelUpdate = new DBModel();
                 TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                itemModelUpdate.text = "Thành Phẩm";
-                itemModelUpdate.type = "int";
-                itemModelUpdate.value = txtTP2.Text;
-                dbModelsUpdate.Add(itemModelUpdate);
+                row[5] = txtTP2.Text;
                 // SPLoi
-                itemModelUpdate = new DBModel();
                 SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-                itemModelUpdate.text = "Sản phẩm lỗi";
-                itemModelUpdate.type = "int";
-                itemModelUpdate.value = txtSPLoi2.Text;
-                dbModelsUpdate.Add(itemModelUpdate);
-
+                row[6] = txtSPLoi2.Text;
                 // Modify Date
-                itemModelUpdate = new DBModel();
                 modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                itemModelUpdate.text = "Ngaysua";
-                itemModelUpdate.value = modifyDate;
-                itemModelUpdate.type = "datetime";
-
-                dbModelsUpdate.Add(itemModelUpdate);
-
+                row[7] = modifyDate;
 
                 if (barcode != "")
                 {
@@ -532,19 +480,19 @@ namespace iClothing
                                 SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtDaIn2.Text, "false", "false");
                                 SaveOrderToTransactionDB(barcode, TP, "", txtTP2.Text, "false", "false");
                                 SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi2.Text, "false", "false");
-                                dtTab1Input = DBHelper.UpdateDatatable(dtTab1Input, modelWhere, dbModelsUpdate);
+                                
                                 currentPageNumber = 1;
                                 countPageSize(dtTab1Input);
                                 ClearText();
                                 // Update datalist
                                 PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Input);
-                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Nhập Đơn Hàng Thành công!" + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Don hang nay da ton tai : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Đơn Hàng Này Chưa Tồn Tại!" + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 
@@ -552,19 +500,21 @@ namespace iClothing
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception " + ex);
+                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
             }
         }
 
         private void pbFirst_Click(object sender, EventArgs e)
         {
             currentPageNumber = 1;
+            dtCurrent = dtTab1Output;
             PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void pbPrev_Click(object sender, EventArgs e)
         {
+            dtCurrent = dtTab1Output;
             if (currentPageNumber > 1)
             {
                 currentPageNumber -= 1;
@@ -575,6 +525,7 @@ namespace iClothing
 
         private void pbNext_Click(object sender, EventArgs e)
         {
+            dtCurrent = dtTab1Output;
             if (currentPageNumber < pageSize)
             {
                 currentPageNumber += 1;
@@ -585,6 +536,7 @@ namespace iClothing
 
         private void pbLast_Click(object sender, EventArgs e)
         {
+            dtCurrent = dtTab1Input;
             if (currentPageNumber < pageSize)
             {
                 currentPageNumber = pageSize;
@@ -610,13 +562,6 @@ namespace iClothing
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             lblTotalPage.Text = "Tổng số:" + dt.Rows.Count.ToString();
         }
-
-        
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            //e.Graphics.DrawImage(bmp, 0, 0);
-        }
-
 
         private void ClearText()
         {
@@ -648,29 +593,14 @@ namespace iClothing
         {
             try
             {
-                List<DBModel> dbModelsUpdate = new List<DBModel>();
-                DBModel itemModelUpdate = new DBModel();
-                List<DBModel> dbModelsLookupList = new List<DBModel>();
-                DBModel itemModelLookup = new DBModel();
-                DBModel modelWhere = new DBModel();
-                List<DBModel> dbModels = new List<DBModel>();
-                DBModel itemModel = new DBModel();
                 List<string> UpdateItemQryList = new List<string>();
                 string UpdateItemQry = string.Empty;
                 bool isSuccess = false;
                 string DonhangID, Barcode, BTPChuaInID, BTPDaInID, TPID, SPLoiID,BTPChuaIn, BTPDaIn, TP, SPLoi;
                 DonhangID = Barcode = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaIn = BTPDaIn = TP = SPLoi = string.Empty;
-
+                DataRow row;
                 int count = 0;
                 var csv = new StringBuilder();
-                // DonhangID
-                DonhangID = txtOrderID1.Text;
-                modelWhere.text = "DonhangID";
-                modelWhere.type = "string";
-                modelWhere.value = DonhangID;
-
-                // Barcode
-                
 
                 // BTPChuaIn
                 BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
@@ -683,6 +613,8 @@ namespace iClothing
 
                 if (rbXuat.Checked)
                 {
+                    DonhangID = txtOrder2.Text;
+                    row = dtTab1Input.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
                     Barcode = cbKihieu2.SelectedValue.ToString();
                     // Convert soluong to negative
                     BTPChuaIn = "-" + txtChuaIn2.Text;
@@ -696,6 +628,8 @@ namespace iClothing
                 }
                 else
                 {
+                    DonhangID = txtOrderID1.Text;
+                    row = dtTab1Output.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
                     Barcode = cbKihieu1.SelectedValue.ToString();
                     BTPChuaIn = txtBTPChuaIn1.Text;
                     BTPDaIn = txtBTPDaIn1.Text;
@@ -725,6 +659,8 @@ namespace iClothing
                 UpdateItemQryList.Add(UpdateItemQry);
                 UpdateItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + Barcode + "','" + SPLoiID + "','" + SPLoi + "','" + modifyDate + "')";
                 UpdateItemQryList.Add(UpdateItemQry);
+
+                
                 if (DBAccess.IsServerConnected())
                 {
                     bool isExisted = DBHelper.CheckItemExist("[Order]", "DonhangID", DonhangID);
@@ -744,17 +680,19 @@ namespace iClothing
                             {
                                 if (rbXuat.Checked)
                                 {
-                                    dtTab1Output = DBHelper.DeleteDatatable(dtTab1Output, modelWhere);
                                     currentPageNumber = 1;
-                                    countPageSize(dtTab1Output);
-                                    PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Output);
+                                    dtTab1Input.Rows.Remove(row);
+                                    countPageSize(dtTab1Input);
+                                    PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Input);
+                                   
                                 }
                                 else
                                 {
-                                    dtTab1Input = DBHelper.DeleteDatatable(dtTab1Input, modelWhere);
                                     currentPageNumber = 1;
-                                    countPageSize(dtTab1Input);
-                                    PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Input);
+                                    dtTab1Output.Rows.Remove(row);
+                                    countPageSize(dtTab1Output);
+                                    PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Output);
+                                    
                                 }
                                 ClearText();
                                 // Update datalist
@@ -765,7 +703,7 @@ namespace iClothing
                     }
                     else
                     {
-                        MessageBox.Show("Don hang nay da ton tai : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Đơn hàng này chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 
@@ -773,14 +711,14 @@ namespace iClothing
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception " + ex);
+                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
             }
 
 
         }
         private void btnDelete1_Click(object sender, EventArgs e)
         {
-            DBModel modelWhere = new DBModel();
+            //DBModel modelWhere = new DBModel();
             string orderID = txtOrderID1.Text;
             string query;
             bool isSuccess = false;
@@ -794,10 +732,11 @@ namespace iClothing
                 if (DBAccess.IsServerConnected())
                 {
                     // Barcode
-                    modelWhere.text = "DonhangID";
-                    modelWhere.value = orderID;
-                    modelWhere.type = "string";
-
+                    // modelWhere.text = "DonhangID";
+                    //modelWhere.value = orderID;
+                    //modelWhere.type = "string";
+                    DataRow row = dtTab1Output.Select("[Mã Đơn Hàng]=" + orderID, "[Mã Đơn Hàng]").FirstOrDefault();
+                    
                     if (query.Length > 5)
                     {
                         bool isExisted = DBHelper.CheckItemExist("[Order]", "DonhangID", orderID);
@@ -810,18 +749,22 @@ namespace iClothing
                             }
                             if (isSuccess)
                             {
-                                dtTab1Output = DBHelper.DeleteDatatable(dtTab1Output, modelWhere);
+                                //dtTab1Output = DBHelper.DeleteDatatable(dtTab1Output, modelWhere);
                                 currentPageNumber = 1;
+                                dtTab1Output.Rows.Remove(row);
                                 countPageSize(dtTab1Output);
+                               
                                 ClearText();
+                                // Update datalist
+                                PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Output);
                                 MessageBox.Show("Số sản phẩm đã nhập Thành công: ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            // Update datalist
-                            PopulateDataOrder(currentPageNumber, rowPerPage,dtTab1Output);
+                            
+                            
                         }
                         else
                         {
-                            MessageBox.Show("Barcode khong ton tai ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Đơn hàng này chưa tồn tại.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
@@ -841,7 +784,6 @@ namespace iClothing
             try
             {
                 List<DBModel> dbModels = new List<DBModel>();
-                DBModel itemModel = new DBModel();
                 DataTable dtItem = (DataTable)(dgvOrder2.DataSource);
                 string IsCompleted = "false";
                 string DonhangID, barcode, BTPChuaIn, BTPDaIn, TP, SPLoi, NhaccID, modifyDate;
@@ -849,73 +791,44 @@ namespace iClothing
                 string InsertItemQry = "";
                 bool isSuccess = false;
                 int count = 0;
-                var csv = new StringBuilder();
+                DataRow rd = dtTab1Output.NewRow();
+                
+
+                // Set value for number field
+                if (string.IsNullOrEmpty(txtBTPChuaIn1.Text)) txtBTPChuaIn1.Text = "0";
+                if (string.IsNullOrEmpty(txtBTPDaIn1.Text)) txtBTPDaIn1.Text = "0";
+                if (string.IsNullOrEmpty(txtTP1.Text)) txtTP1.Text = "0";
+                if (string.IsNullOrEmpty(txtSPLoi1.Text)) txtSPLoi1.Text = "0";
+
                 // DonhangID
                 DonhangID = CommonHelper.RandomString(8);
-                itemModel.text = "DonhangID";
-                itemModel.type = "string";
-                itemModel.value = DonhangID;
-                dbModels.Add(itemModel);
-                // Barcode
-                itemModel = new DBModel();
-                barcode = cbKihieu2.SelectedValue.ToString();
-                itemModel.text = "Kyhieu";
-                itemModel.value = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
-                itemModel.type = "string";
-                dbModels.Add(itemModel);
-                // BTPChuaIn
-                itemModel = new DBModel();
-                BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                itemModel.text = "BTP Chưa in";
-                itemModel.type = "int";
-                itemModel.value = txtBTPChuaIn1.Text;
-                dbModels.Add(itemModel);
-                // BTPDaIn
-                itemModel = new DBModel();
-                BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                itemModel.text = "BTP Đã in";
-                itemModel.type = "int";
-                itemModel.value = txtBTPDaIn1.Text;
-                dbModels.Add(itemModel);
-                // TP
-                itemModel = new DBModel();
-                TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                itemModel.text = "Thành Phẩm";
-                itemModel.type = "int";
-                itemModel.value = txtTP1.Text;
-                dbModels.Add(itemModel);
-                // SPLoi
-                itemModel = new DBModel();
-                SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-                itemModel.text = "Sản phẩm lỗi";
-                itemModel.type = "int";
-                itemModel.value = txtSPLoi1.Text;
-                dbModels.Add(itemModel);
-                // Xong
-                itemModel = new DBModel();
-                itemModel.text = "Xong";
-                itemModel.type = "bool";
-                itemModel.value = IsCompleted;
-                dbModels.Add(itemModel);
-
+                rd[0] = DonhangID;
                 // NhaccID
                 NhaccID = cbNhacc.SelectedValue.ToString();
-                itemModel = new DBModel();
-                itemModel.text = "Ten";
-                itemModel.type = "string";
-                itemModel.value = DBHelper.Lookup("Supplier", "Ten", "NhaccID", NhaccID);
-                dbModels.Add(itemModel);
+                rd[1] = DBHelper.Lookup("Supplier", "Ten", "NhaccID", NhaccID);
 
-
+                // Barcode
+                barcode = cbKihieu2.SelectedValue.ToString();
+                rd[2] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
+                // BTPChuaIn
+                BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
+                rd[3] = txtBTPChuaIn1.Text;
+                // BTPDaIn
+                BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
+                rd[4] = txtBTPDaIn1.Text;
+                // TP
+                TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
+                rd[5] = txtTP1.Text;
+                // SPLoi
+                SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
+                rd[6] = txtSPLoi1.Text;
+                
                 // Created Date
-                itemModel = new DBModel();
                 modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-                itemModel.text = "Ngaysua";
-                itemModel.value = modifyDate;
-                itemModel.type = "datetime";
-                dbModels.Add(itemModel);
-                // Modify Date
-                //modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                rd[7] = modifyDate;
+                // Xong
+                rd[8] = IsCompleted;
+
 
                 string orderDetailID1 = CommonHelper.RandomString(7)+1;
                 string orderDetailID2 = CommonHelper.RandomString(7)+2;
@@ -954,14 +867,16 @@ namespace iClothing
                             SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtBTPDaIn1.Text, "true", "false");
                             SaveOrderToTransactionDB(barcode, TP, "", txtTP1.Text, "true", "false");
                             SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi1.Text, "true", "false");
-                            dtTab1Output = DBHelper.InsertDatatable(dtTab1Output, dbModels);
+
+                            dtTab1Output.Rows.InsertAt(rd, 0);
+                            //dtTab1Output = DBHelper.InsertDatatable(dtTab1Output, dbModels);
                                 cbNhacc.SelectedIndex = 0;
                             currentPageNumber = 1;
                                 countPageSize(dtTab1Output);
                                 ClearText();
                                 // Update datalist
                                 PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Output);
-                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Đơn hàng này đã thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     //}
@@ -975,7 +890,7 @@ namespace iClothing
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception " + ex);
+                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
             }
         }
 
@@ -985,72 +900,86 @@ namespace iClothing
         {
             try
             {
-                List<DBModel> dbModelsUpdate = new List<DBModel>();
-                DBModel itemModelUpdate = new DBModel();
-                List<DBModel> dbModelsLookupList = new List<DBModel>();
-                DBModel itemModelLookup = new DBModel();
-                DBModel modelWhere = new DBModel();
+                //List<DBModel> dbModelsUpdate = new List<DBModel>();
+                //DBModel itemModelUpdate = new DBModel();
+                //List<DBModel> dbModelsLookupList = new List<DBModel>();
+                //DBModel itemModelLookup = new DBModel();
+                //DBModel modelWhere = new DBModel();
                 List<string> UpdateItemQryList = new List<string>();
                 DataTable dtItem = (DataTable)(dgvOrder2.DataSource);
                 string DonhangID, barcode, BTPChuaIn, BTPDaIn, TP, SPLoi, createDate, modifyDate;
                 string UpdateItemQry = "";
                 bool isSuccess = false;
                 int count = 0;
-                var csv = new StringBuilder();
+
                 // DonhangID
                 DonhangID = txtOrderID1.Text;
-                modelWhere.text = "DonhangID";
-                modelWhere.type = "string";
-                modelWhere.value = DonhangID;
+                DataRow row = dtTab1Output.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
+                
+                // Set value for number field
+                if (string.IsNullOrEmpty(txtBTPChuaIn1.Text)) txtBTPChuaIn1.Text = "0";
+                if (string.IsNullOrEmpty(txtBTPDaIn1.Text)) txtBTPDaIn1.Text = "0";
+                if (string.IsNullOrEmpty(txtTP1.Text)) txtTP1.Text = "0";
+                if (string.IsNullOrEmpty(txtSPLoi1.Text)) txtSPLoi1.Text = "0";
+
+                
+                //modelWhere.text = "DonhangID";
+                //modelWhere.type = "string";
+                //modelWhere.value = DonhangID;
 
                 // Barcode
                 barcode = cbKihieu2.SelectedValue.ToString();
-                itemModelLookup.text = "DonhangID";
-                itemModelLookup.value = DonhangID;
-                dbModelsLookupList.Add(itemModelLookup);
-                itemModelUpdate.text = "Kyhieu";
-                itemModelUpdate.value = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
-                itemModelUpdate.type = "string";
-                dbModelsUpdate.Add(itemModelUpdate);
+                //itemModelLookup.text = "DonhangID";
+                //itemModelLookup.value = DonhangID;
+                //dbModelsLookupList.Add(itemModelLookup);
+                //itemModelUpdate.text = "Kyhieu";
+                //itemModelUpdate.value = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
+                //itemModelUpdate.type = "string";
+                //dbModelsUpdate.Add(itemModelUpdate);
+                row[2]= DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
                 // BTPChuaIn
-                itemModelUpdate = new DBModel();
+                //itemModelUpdate = new DBModel();
                 BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                itemModelUpdate.text = "BTP Chưa in";
-                itemModelUpdate.type = "int";
-                itemModelUpdate.value = txtBTPChuaIn1.Text;
-                dbModelsUpdate.Add(itemModelUpdate);
+                //itemModelUpdate.text = "BTP Chưa in";
+                //itemModelUpdate.type = "int";
+                //itemModelUpdate.value = txtBTPChuaIn1.Text;
+                //dbModelsUpdate.Add(itemModelUpdate);
+                row[3]= txtBTPChuaIn1.Text;
                 // BTPDaIn
-                itemModelUpdate = new DBModel();
+                //itemModelUpdate = new DBModel();
                 BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                itemModelUpdate.text = "BTP Đã in";
-                itemModelUpdate.type = "int";
-                itemModelUpdate.value = txtBTPDaIn1.Text;
-                dbModelsUpdate.Add(itemModelUpdate);
+                //itemModelUpdate.text = "BTP Đã in";
+                //itemModelUpdate.type = "int";
+                //itemModelUpdate.value = txtBTPDaIn1.Text;
+                //dbModelsUpdate.Add(itemModelUpdate);
+                row[4]= txtBTPDaIn1.Text;
                 // TP
-                itemModelUpdate = new DBModel();
+                //itemModelUpdate = new DBModel();
                 TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                itemModelUpdate.text = "Thành Phẩm";
-                itemModelUpdate.type = "int";
-                itemModelUpdate.value = txtTP1.Text;
-                dbModelsUpdate.Add(itemModelUpdate);
+                //itemModelUpdate.text = "Thành Phẩm";
+                //itemModelUpdate.type = "int";
+                //itemModelUpdate.value = txtTP1.Text;
+                //dbModelsUpdate.Add(itemModelUpdate);
+                row[5] = txtTP1.Text;
                 // SPLoi
-                itemModelUpdate = new DBModel();
+                //itemModelUpdate = new DBModel();
                 SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-                itemModelUpdate.text = "Sản phẩm lỗi";
-                itemModelUpdate.type = "int";
-                itemModelUpdate.value = txtSPLoi1.Text;
-                dbModelsUpdate.Add(itemModelUpdate);
-
+                //itemModelUpdate.text = "Sản phẩm lỗi";
+                //itemModelUpdate.type = "int";
+                //itemModelUpdate.value = txtSPLoi1.Text;
+                //dbModelsUpdate.Add(itemModelUpdate);
+                row[6] = txtSPLoi1.Text;
                 // Modify Date
-                itemModelUpdate = new DBModel();
+                //itemModelUpdate = new DBModel();
                 modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                itemModelUpdate.text = "Ngaysua";
-                itemModelUpdate.value = modifyDate;
-                itemModelUpdate.type = "datetime";
+                //itemModelUpdate.text = "Ngaysua";
+                //itemModelUpdate.value = modifyDate;
+                //itemModelUpdate.type = "datetime";
 
-                dbModelsUpdate.Add(itemModelUpdate);
+                //dbModelsUpdate.Add(itemModelUpdate);
+                row[7] = modifyDate;
 
-                
+
                 if (barcode != "")
                 {
                     UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtBTPChuaIn1.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='"+ BTPChuaIn + "';";
@@ -1078,23 +1007,26 @@ namespace iClothing
 
                             if (isSuccess)
                             {
+                                //dtTab1Output.Rows.InsertAt(row, 0);
                                 SaveOrderToTransactionDB(barcode, BTPChuaIn, "", txtBTPChuaIn1.Text, "true", "false");
                                 SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtBTPDaIn1.Text, "true", "false");
                                 SaveOrderToTransactionDB(barcode, TP, "", txtTP1.Text, "true", "false");
                                 SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi1.Text, "true", "false");
-                                dtTab1Output = DBHelper.UpdateDatatable(dtTab1Output, modelWhere, dbModelsUpdate);
+                                //dtTab1Output = DBHelper.UpdateDatatable(dtTab1Output, modelWhere, dbModelsUpdate);
                                 currentPageNumber = 1;
                                 countPageSize(dtTab1Output);
                                 ClearText();
+                                
                                 // Update datalist
                                 PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Output);
-                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                
+                                MessageBox.Show("Sửa đơn hàng này thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Don hang nay da ton tai : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Đơn hàng này chưa tồn tại!" + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 
@@ -1102,13 +1034,13 @@ namespace iClothing
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception " + ex);
+                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
             }
         }
 
         private void GetAllDataOrderOutput()
         {
-            string query = "Select New.DonhangID, Supplier.Ten, Product.Kyhieu, New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].Xong, New.Ngaysua  from (SELECT DonhangID, Barcode, Ngaysua, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID where[Order].Xong = 0 order by New.Ngaysua";
+            string query = "Select New.DonhangID [Mã Đơn Hàng], Supplier.Ten [Nhà Cung Cấp], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], New.Ngaysua [Ngày] ,[Order].Xong  from (SELECT DonhangID, Barcode, Ngaysua, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID where[Order].Xong = 0 order by New.Ngaysua";
             dtTab1Output = new DataTable();
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
@@ -1208,14 +1140,10 @@ namespace iClothing
         }
 
         /********************************End Panel 2******************************************/
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-            
-        }
 
         private void GetAllOrder()
         {
-            string query = "select * from (select[order].donhangid, barcode, SUM(CASE WHEN LoaiID = 0000001 AND[order].NhacciD is not null Then Soluong else 0 end)[Nhap BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap Thành Phẩm],SUM(CASE WHEN LoaiID = 000004 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap Sản phẩm lỗi],SUM(CASE WHEN LoaiID = 0000001 AND[order].KHID is not null Then Soluong else 0 end)[Xuat BTP Chưa in],SUM(CASE WHEN LoaiID = 0000002 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat Sản phẩm lỗi], [order].ngaysua from orderdetail join [order] on orderdetail.donhangid = [order].donhangid GROUP BY[order].donhangid, Barcode,[order].ngaysua) New order by New.ngaysua;";
+            string query = "select * from (select[order].donhangid [Mã Đơn Hàng], barcode [Barcode], SUM(CASE WHEN LoaiID = 0000001 AND[order].NhacciD is not null Then Soluong else 0 end)[Nhap BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap Thành Phẩm],SUM(CASE WHEN LoaiID = 000004 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap Sản phẩm lỗi],SUM(CASE WHEN LoaiID = 0000001 AND[order].KHID is not null Then Soluong else 0 end)[Xuat BTP Chưa in],SUM(CASE WHEN LoaiID = 0000002 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat Sản phẩm lỗi], [order].ngaysua from orderdetail join [order] on orderdetail.donhangid = [order].donhangid GROUP BY[order].donhangid, Barcode,[order].ngaysua) New order by New.ngaysua;";
             dtManageInOut = new DataTable();
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
@@ -1232,7 +1160,7 @@ namespace iClothing
             // if any row left after calculated pages, add one more page 
             if (rowCount % rowPerPage > 0)
                 pageSize += 1;
-            lblTotalPage1.Text = "Tổng số:" + dtTab1Output.Rows.Count.ToString();
+            lblTotalPage1.Text = "Tổng số:" + dtManageInOut.Rows.Count.ToString();
             txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
@@ -1243,7 +1171,6 @@ namespace iClothing
             if (dt.Rows.Count > 0)
             {
                 dvgManageInOut.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
-                //dgvOrder2.Columns["Xong"].ReadOnly = true;
             }
             else
             {
@@ -1255,7 +1182,7 @@ namespace iClothing
         private void pbFirst1_Click(object sender, EventArgs e)
         {
             currentPageNumber = 1;
-            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtCurrent);
+            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtManageInOut);
             txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
@@ -1264,23 +1191,29 @@ namespace iClothing
             if (currentPageNumber > 0)
             {
                 currentPageNumber -= 1;
-                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtCurrent);
+                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtManageInOut);
             }
             txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void pbNext1_Click(object sender, EventArgs e)
         {
-            currentPageNumber += 1;
-            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtCurrent);
-            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber += 1;
+                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtManageInOut);
+                txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
         }
 
         private void pbLast1_Click(object sender, EventArgs e)
         {
-            currentPageNumber = pageSize;
-            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtCurrent);
-            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber = pageSize;
+                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtManageInOut);
+                txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
         }
 
         private void tbNewOrder_SelectedIndexChanged(object sender, EventArgs e)
@@ -1296,14 +1229,10 @@ namespace iClothing
                         rowPerPage = 10;
                         GetAllOrder();
                         PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtManageInOut);
+                        cbPageSize1.SelectedItem = "10";
                     }
                     break;
             }
-        }
-
-        private void btnCompleted_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -1329,42 +1258,51 @@ namespace iClothing
         }
         private void ToExcel(string fileName)
         {
-            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), fileName + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".xlsx");
-            // creating Excel Application  
-            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-            // creating new WorkBook within Excel application  
-            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-            // creating new Excelsheet in workbook  
-            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-            // see the excel sheet behind the program  
-            app.Visible = true;
-            // get the reference of first sheet. By default its name is Sheet1.  
-            // store its reference to worksheet  
-            worksheet = workbook.Sheets["Sheet1"];
-            worksheet = workbook.ActiveSheet;
-            // changing the name of active sheet  
-            worksheet.Name = "CHI TIET XUAT NHAP";
-            // storing header part in Excel  
-            var columnHeadingsRangeIn = worksheet.Range[worksheet.Cells[1, 5], worksheet.Cells[1, 8]];
-            columnHeadingsRangeIn.Interior.Color = XlRgbColor.rgbPaleVioletRed;
-            var columnHeadingsRangeOut = worksheet.Range[worksheet.Cells[1, 9], worksheet.Cells[1, 12]];
-            columnHeadingsRangeOut.Interior.Color = XlRgbColor.rgbBlueViolet;
-            for (int i = 0; i < dtManageOrderNew.Columns.Count; i++)
+            try
             {
-                worksheet.Cells[1, i + 1] = dtManageOrderNew.Columns[i].ToString();
-            }
-            // storing Each row and column value to excel sheet  
-            for (int i = 0; i < dtManageOrderNew.Rows.Count; i++)
-            {
-                for (int j = 0; j < dtManageOrderNew.Columns.Count; j++)
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), fileName + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".xlsx");
+                // creating Excel Application  
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                // creating new WorkBook within Excel application  
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                // creating new Excelsheet in workbook  
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                // see the excel sheet behind the program  
+                app.Visible = true;
+                // get the reference of first sheet. By default its name is Sheet1.  
+                // store its reference to worksheet  
+                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.ActiveSheet;
+                // changing the name of active sheet  
+                worksheet.Name = "CHI TIẾT XUẤT NHẬP";
+                // storing header part in Excel  
+                var columnHeadingsRangeIn = worksheet.Range[worksheet.Cells[1, 5], worksheet.Cells[1, 8]];
+                columnHeadingsRangeIn.Interior.Color = XlRgbColor.rgbPaleVioletRed;
+                var columnHeadingsRangeOut = worksheet.Range[worksheet.Cells[1, 9], worksheet.Cells[1, 12]];
+                columnHeadingsRangeOut.Interior.Color = XlRgbColor.rgbBlueViolet;
+                for (int i = 0; i < dtManageOrderNew.Columns.Count; i++)
                 {
-                    worksheet.Cells[i + 2, j + 1] = dtManageOrderNew.Rows[i][j].ToString();
+                    worksheet.Cells[1, i + 1] = dtManageOrderNew.Columns[i].ToString();
                 }
+                // storing Each row and column value to excel sheet  
+                for (int i = 0; i < dtManageOrderNew.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dtManageOrderNew.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dtManageOrderNew.Rows[i][j].ToString();
+                    }
+                }
+                // save the application  
+                workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                // Exit from the application  
+                app.Quit();
             }
-            // save the application  
-            workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-            // Exit from the application  
-            app.Quit();
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
 
         public System.Data.DataTable ExportToExcel()
@@ -1485,12 +1423,30 @@ namespace iClothing
                         }
                         else
                         {
-                            MessageBox.Show("Barcode khong ton tai ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
 
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            (dgvOrder2.DataSource as DataTable).DefaultView.RowFilter = string.Format("[Ký Hiệu] like '{0}%' OR [Nhà Cung Cấp] like '{0}%'", txtSearch.Text);
+        }
+
+        private void txtSearch2_TextChanged(object sender, EventArgs e)
+        {
+            (dgvOrder1.DataSource as DataTable).DefaultView.RowFilter = string.Format("[Ký Hiệu] like '{0}%' OR [Tên Khách Hàng] like '{0}%'", txtSearch2.Text);
+        }
+
+        private void cbPageSize1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rowPerPage = Convert.ToInt32(cbPageSize1.SelectedItem);
+            currentPageNumber = 1;
+            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtManageInOut);
+            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
     }
 }

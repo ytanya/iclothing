@@ -24,9 +24,14 @@ namespace iClothing
         DataTable dtMain = new DataTable();
         string pathCSV = System.AppDomain.CurrentDomain.BaseDirectory + "taphoaviet.csv";
         DataTable dtStockNew = new DataTable();
+        private int currentPageNumber = 1;
+        private int pageSize = 0;
+        private int rowPerPage = 10;
+
         public StockManagement()
         {
             InitializeComponent();
+            cbPageSize.SelectedItem = "10";
 
         }
 
@@ -182,6 +187,58 @@ namespace iClothing
             btnExport.Visible = true;
             dtMain = new DataTable();
             CalculateAfterStopTyping();
+            PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
+        }
+
+        private void pbFirst_Click(object sender, EventArgs e)
+        {
+            currentPageNumber = 1;
+            PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void pbPrev_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber > 0)
+            {
+                currentPageNumber -= 1;
+                PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
+            }
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void PopulateDataStock(int currentPageNumber, int rowPerPage, DataTable dtMain)
+        {
+            int skipRecord = (currentPageNumber - 1) * rowPerPage;
+
+            if (dtMain.Rows.Count > 0)
+            {
+                dvgStock.DataSource = dtMain.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+            }
+            else
+            {
+                dvgStock.DataSource = dtMain;
+            }
+        }
+
+        private void pbNext_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber += 1;
+                PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void pbLast_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber = pageSize;
+                PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
         }
     }
 }

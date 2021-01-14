@@ -82,12 +82,12 @@ namespace iClothing
             }
             catch(SqlCeException Ceex)
             {
-
+                MessageBox.Show(Ceex.ToString());
             }
             catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.ToString());
             }
             
 

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlServerCe;
 using System.Configuration;
+using System.IO;
+using Microsoft.Office.Interop.Excel;
+using DataTable = System.Data.DataTable;
 
 namespace iClothing
 {
@@ -16,10 +19,12 @@ namespace iClothing
     {
         private DataTable dtTab1Input = new DataTable();
         private DataTable dtTab1Output = new DataTable();
+        private DataTable dtManageInOut = new DataTable();
         private DataTable dtCurrent = new DataTable();
         private DataTable OrignalADGVdt = null;
         private DataTable dtOrderNotDone = new DataTable();
         private DataTable dtTemp = new DataTable();
+        private DataTable dtManageOrderNew = new DataTable();
         private List<OrderStatus> orderStatusList = new List<OrderStatus>();
         private OrderStatus orderStatus = new OrderStatus();
         private int currentPageNumber = 1;
@@ -211,11 +216,15 @@ namespace iClothing
                 itemModel.type = "string";
                 itemModel.value = DBHelper.Lookup("Customer", "HoTen", "KHID", KHID);
                 dbModels.Add(itemModel);
-                
 
-                
-                // Modify Date
+
+                itemModel = new DBModel();
                 modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                itemModel.text = "Ngaysua";
+                itemModel.value = modifyDate;
+                itemModel.type = "datetime";
+                dbModels.Add(itemModel);
+                // Modify Date
 
                 string orderDetailID1 = CommonHelper.RandomString(7) + 1;
                 string orderDetailID2 = CommonHelper.RandomString(7) + 2;
@@ -250,6 +259,10 @@ namespace iClothing
 
                         if (isSuccess)
                         {
+                            SaveOrderToTransactionDB(barcode, BTPChuaIn, "", txtChuaIn2.Text, "false", "false");
+                            SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtDaIn2.Text, "false", "false");
+                            SaveOrderToTransactionDB(barcode, TP, "", txtTP2.Text, "false", "false");
+                            SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi2.Text, "false", "false");
                             dtTab1Input = DBHelper.InsertDatatable(dtTab1Input, dbModels);
                             cbNhacc.SelectedIndex = 0;
                             currentPageNumber = 1;
@@ -329,7 +342,7 @@ namespace iClothing
 
         private void GetAllDataOrderInput()
         {
-            string query = "Select New.DonhangID, Customer.HoTen, Product.Kyhieu, New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].Xong  from (SELECT DonhangID, Barcode, Ngaytao, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaytao) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Customer on[Order].KHID = Customer.KHID where [Order].Xong = 0 order by New.Ngaytao";
+            string query = "Select New.DonhangID, Customer.HoTen, Product.Kyhieu, New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].Xong,[New].Ngaysua  from (SELECT DonhangID, Barcode, Ngaysua, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Customer on[Order].KHID = Customer.KHID where [Order].Xong = 0 order by New.Ngaysua;";
             dtTab1Input = new DataTable();
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
@@ -346,7 +359,7 @@ namespace iClothing
             // if any row left after calculated pages, add one more page 
             if (rowCount % rowPerPage > 0)
                 pageSize += 1;
-            lblTotalPage.Text = "Total rows:" + dtTab1Input.Rows.Count.ToString();
+            lblTotalPage.Text = "Tổng số:" + dtTab1Input.Rows.Count.ToString();
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
         private void PopulateDataOrder(int currentPageNumber, int rowPerPage, DataTable dt)
@@ -377,7 +390,7 @@ namespace iClothing
             }
             else
             {
-                dvgChangeStatusOrder.DataSource = dtOrderNotDone.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+                dvgManageInOut.DataSource = dtOrderNotDone.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
                 
             }
             
@@ -515,6 +528,10 @@ namespace iClothing
 
                             if (isSuccess)
                             {
+                                SaveOrderToTransactionDB(barcode, BTPChuaIn, "", txtChuaIn2.Text, "false", "false");
+                                SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtDaIn2.Text, "false", "false");
+                                SaveOrderToTransactionDB(barcode, TP, "", txtTP2.Text, "false", "false");
+                                SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi2.Text, "false", "false");
                                 dtTab1Input = DBHelper.UpdateDatatable(dtTab1Input, modelWhere, dbModelsUpdate);
                                 currentPageNumber = 1;
                                 countPageSize(dtTab1Input);
@@ -548,7 +565,7 @@ namespace iClothing
 
         private void pbPrev_Click(object sender, EventArgs e)
         {
-            if (currentPageNumber > 0)
+            if (currentPageNumber > 1)
             {
                 currentPageNumber -= 1;
                 PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
@@ -558,16 +575,22 @@ namespace iClothing
 
         private void pbNext_Click(object sender, EventArgs e)
         {
-            currentPageNumber += 1;
-            PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber += 1;
+                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
         }
 
         private void pbLast_Click(object sender, EventArgs e)
         {
-            currentPageNumber = pageSize;
-            PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber = pageSize;
+                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
         }
         private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -585,7 +608,7 @@ namespace iClothing
             if (rowCount % rowPerPage > 0)
                 pageSize += 1;
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-            lblTotalPage.Text = "Total rows:" + dt.Rows.Count.ToString();
+            lblTotalPage.Text = "Tổng số:" + dt.Rows.Count.ToString();
         }
 
         
@@ -610,6 +633,10 @@ namespace iClothing
             txtBTPDaIn1.Text = string.Empty;
             txtTP1.Text = string.Empty;
             txtSPLoi1.Text = string.Empty;
+            txtChuaIn2.Text = string.Empty;
+            txtDaIn2.Text = string.Empty;
+            txtTP2.Text = string.Empty;
+            txtSPLoi2.Text = string.Empty;
             //txtQuantity.Text = string.Empty;
         }
         /******************************** End Panel 1 ******************************************/
@@ -643,23 +670,8 @@ namespace iClothing
                 modelWhere.value = DonhangID;
 
                 // Barcode
-                Barcode = cbKihieu2.SelectedValue.ToString();
+                
 
-                if (rbXuat.Checked)
-                {
-                    // Convert soluong to negative
-                    BTPChuaIn = "-" + txtChuaIn2.Text;
-                    BTPDaIn = "-" + txtDaIn2.Text;
-                    TP = "-" + txtTP2.Text;
-                    SPLoi = "-" + txtSPLoi2.Text;
-                }
-                else
-                {
-                    BTPChuaIn = txtBTPChuaIn1.Text;
-                    BTPDaIn = txtBTPDaIn1.Text;
-                    TP = txtTP1.Text;
-                    SPLoi = txtSPLoi1.Text;
-                }
                 // BTPChuaIn
                 BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
                 // BTPDaIn
@@ -668,6 +680,33 @@ namespace iClothing
                 TPID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
                 // SPLoi
                 SPLoiID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
+
+                if (rbXuat.Checked)
+                {
+                    Barcode = cbKihieu2.SelectedValue.ToString();
+                    // Convert soluong to negative
+                    BTPChuaIn = "-" + txtChuaIn2.Text;
+                    BTPDaIn = "-" + txtDaIn2.Text;
+                    TP = "-" + txtTP2.Text;
+                    SPLoi = "-" + txtSPLoi2.Text;
+                    SaveOrderToTransactionDB(Barcode, BTPChuaInID, "", txtChuaIn2.Text, "true", "false");
+                    SaveOrderToTransactionDB(Barcode, BTPDaIn, "", txtDaIn2.Text, "true", "false");
+                    SaveOrderToTransactionDB(Barcode, TPID, "", txtTP2.Text, "true", "false");
+                    SaveOrderToTransactionDB(Barcode, SPLoiID, "", txtSPLoi2.Text, "true", "false");
+                }
+                else
+                {
+                    Barcode = cbKihieu1.SelectedValue.ToString();
+                    BTPChuaIn = txtBTPChuaIn1.Text;
+                    BTPDaIn = txtBTPDaIn1.Text;
+                    TP = txtTP1.Text;
+                    SPLoi = txtSPLoi1.Text;
+                    SaveOrderToTransactionDB(Barcode, BTPChuaInID, "", txtBTPChuaIn1.Text, "true", "false");
+                    SaveOrderToTransactionDB(Barcode, BTPDaIn, "", txtBTPDaIn1.Text, "true", "false");
+                    SaveOrderToTransactionDB(Barcode, TPID, "", txtTP1.Text, "true", "false");
+                    SaveOrderToTransactionDB(Barcode, SPLoiID, "", txtSPLoi1.Text, "true", "false");
+                }
+                
 
                 string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
@@ -866,17 +905,17 @@ namespace iClothing
                 itemModel.type = "string";
                 itemModel.value = DBHelper.Lookup("Supplier", "Ten", "NhaccID", NhaccID);
                 dbModels.Add(itemModel);
-                
+
 
                 // Created Date
-                //itemModel = new DBModel();
-                //modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-                //itemModel.text = "Ngaysua";
-                //itemModel.value = modifyDate;
-                //itemModel.type = "datetime";
-                //dbModels.Add(itemModel);
-                // Modify Date
+                itemModel = new DBModel();
                 modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                itemModel.text = "Ngaysua";
+                itemModel.value = modifyDate;
+                itemModel.type = "datetime";
+                dbModels.Add(itemModel);
+                // Modify Date
+                //modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
                 string orderDetailID1 = CommonHelper.RandomString(7)+1;
                 string orderDetailID2 = CommonHelper.RandomString(7)+2;
@@ -911,7 +950,11 @@ namespace iClothing
                             
                             if (isSuccess)
                             {
-                                dtTab1Output = DBHelper.InsertDatatable(dtTab1Output, dbModels);
+                            SaveOrderToTransactionDB(barcode, BTPChuaIn, "", txtBTPChuaIn1.Text, "true", "false");
+                            SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtBTPDaIn1.Text, "true", "false");
+                            SaveOrderToTransactionDB(barcode, TP, "", txtTP1.Text, "true", "false");
+                            SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi1.Text, "true", "false");
+                            dtTab1Output = DBHelper.InsertDatatable(dtTab1Output, dbModels);
                                 cbNhacc.SelectedIndex = 0;
                             currentPageNumber = 1;
                                 countPageSize(dtTab1Output);
@@ -1035,6 +1078,10 @@ namespace iClothing
 
                             if (isSuccess)
                             {
+                                SaveOrderToTransactionDB(barcode, BTPChuaIn, "", txtBTPChuaIn1.Text, "true", "false");
+                                SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtBTPDaIn1.Text, "true", "false");
+                                SaveOrderToTransactionDB(barcode, TP, "", txtTP1.Text, "true", "false");
+                                SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi1.Text, "true", "false");
                                 dtTab1Output = DBHelper.UpdateDatatable(dtTab1Output, modelWhere, dbModelsUpdate);
                                 currentPageNumber = 1;
                                 countPageSize(dtTab1Output);
@@ -1061,7 +1108,7 @@ namespace iClothing
 
         private void GetAllDataOrderOutput()
         {
-            string query = "Select New.DonhangID, Supplier.Ten, Product.Kyhieu, New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].Xong  from (SELECT DonhangID, Barcode, Ngaytao, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaytao) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID where [Order].Xong = 0 order by New.Ngaytao";
+            string query = "Select New.DonhangID, Supplier.Ten, Product.Kyhieu, New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].Xong, New.Ngaysua  from (SELECT DonhangID, Barcode, Ngaysua, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID where[Order].Xong = 0 order by New.Ngaysua";
             dtTab1Output = new DataTable();
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
@@ -1078,7 +1125,7 @@ namespace iClothing
             // if any row left after calculated pages, add one more page 
             if (rowCount % rowPerPage > 0)
                 pageSize += 1;
-            lblTotalPage.Text = "Total rows:" + dtTab1Output.Rows.Count.ToString();
+            lblTotalPage.Text = "Tổng số:" + dtTab1Output.Rows.Count.ToString();
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
  
@@ -1163,29 +1210,77 @@ namespace iClothing
         /********************************End Panel 2******************************************/
         private void tabPage2_Click(object sender, EventArgs e)
         {
-
+            
         }
 
-        
+        private void GetAllOrder()
+        {
+            string query = "select * from (select[order].donhangid, barcode, SUM(CASE WHEN LoaiID = 0000001 AND[order].NhacciD is not null Then Soluong else 0 end)[Nhap BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap Thành Phẩm],SUM(CASE WHEN LoaiID = 000004 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhap Sản phẩm lỗi],SUM(CASE WHEN LoaiID = 0000001 AND[order].KHID is not null Then Soluong else 0 end)[Xuat BTP Chưa in],SUM(CASE WHEN LoaiID = 0000002 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuat Sản phẩm lỗi], [order].ngaysua from orderdetail join [order] on orderdetail.donhangid = [order].donhangid GROUP BY[order].donhangid, Barcode,[order].ngaysua) New order by New.ngaysua;";
+            dtManageInOut = new DataTable();
+            using (SqlCeConnection connection = new SqlCeConnection(conn))
+            {
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    dtManageInOut.Merge(dt);
+                }
+            }
+            int rowCount = dtManageInOut.Rows.Count;
+            pageSize = rowCount / rowPerPage;
+            // if any row left after calculated pages, add one more page 
+            if (rowCount % rowPerPage > 0)
+                pageSize += 1;
+            lblTotalPage1.Text = "Tổng số:" + dtTab1Output.Rows.Count.ToString();
+            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
 
+        private void PopulateDataOrderInOut(int currentPageNumber, int rowPerPage, DataTable dt)
+        {
+            int skipRecord = (currentPageNumber - 1) * rowPerPage;
+
+            if (dt.Rows.Count > 0)
+            {
+                dvgManageInOut.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+                //dgvOrder2.Columns["Xong"].ReadOnly = true;
+            }
+            else
+            {
+                dvgManageInOut.DataSource = dt;
+            }
+
+
+        }
         private void pbFirst1_Click(object sender, EventArgs e)
         {
-
+            currentPageNumber = 1;
+            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtCurrent);
+            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void pbPrev1_Click(object sender, EventArgs e)
         {
-
+            if (currentPageNumber > 0)
+            {
+                currentPageNumber -= 1;
+                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtCurrent);
+            }
+            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void pbNext1_Click(object sender, EventArgs e)
         {
-
+            currentPageNumber += 1;
+            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtCurrent);
+            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void pbLast1_Click(object sender, EventArgs e)
         {
-
+            currentPageNumber = pageSize;
+            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtCurrent);
+            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void tbNewOrder_SelectedIndexChanged(object sender, EventArgs e)
@@ -1196,7 +1291,12 @@ namespace iClothing
                     { GetAllDataTab1(); }
                     break;
                 case 1:
-                    {  }
+                    {
+                        currentPageNumber = 1;
+                        rowPerPage = 10;
+                        GetAllOrder();
+                        PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtManageInOut);
+                    }
                     break;
             }
         }
@@ -1204,6 +1304,193 @@ namespace iClothing
         private void btnCompleted_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            //Creating Save File Dialog
+            SaveFileDialog save = new SaveFileDialog();
+            //Showing the dialog
+            save.ShowDialog();
+            //Setting default directory
+            save.InitialDirectory = @"C:\";
+            save.RestoreDirectory = true;
+            string fileName = save.FileName;
+            save.AddExtension = true;
+            save.Filter = "Excel|*.xls|Excel 2010|*.xlsx";
+            //Setting title
+            save.Title = "Select save location and input file name";
+            //filtering to only show .xlsx files in the directory
+            save.DefaultExt = "xlsx";
+            // Write Data to DataTable
+            ExportToExcel();
+            //Write Data To Excel
+            ToExcel(fileName);
+        }
+        private void ToExcel(string fileName)
+        {
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), fileName + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".xlsx");
+            // creating Excel Application  
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = true;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            worksheet = workbook.Sheets["Sheet1"];
+            worksheet = workbook.ActiveSheet;
+            // changing the name of active sheet  
+            worksheet.Name = "CHI TIET XUAT NHAP";
+            // storing header part in Excel  
+            var columnHeadingsRangeIn = worksheet.Range[worksheet.Cells[1, 5], worksheet.Cells[1, 8]];
+            columnHeadingsRangeIn.Interior.Color = XlRgbColor.rgbPaleVioletRed;
+            var columnHeadingsRangeOut = worksheet.Range[worksheet.Cells[1, 9], worksheet.Cells[1, 12]];
+            columnHeadingsRangeOut.Interior.Color = XlRgbColor.rgbBlueViolet;
+            for (int i = 0; i < dtManageOrderNew.Columns.Count; i++)
+            {
+                worksheet.Cells[1, i + 1] = dtManageOrderNew.Columns[i].ToString();
+            }
+            // storing Each row and column value to excel sheet  
+            for (int i = 0; i < dtManageOrderNew.Rows.Count; i++)
+            {
+                for (int j = 0; j < dtManageOrderNew.Columns.Count; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1] = dtManageOrderNew.Rows[i][j].ToString();
+                }
+            }
+            // save the application  
+            workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            // Exit from the application  
+            app.Quit();
+        }
+
+        public System.Data.DataTable ExportToExcel()
+        {
+            dtManageOrderNew = new DataTable();
+            dtManageOrderNew.Columns.Add("STT", typeof(int));
+            dtManageOrderNew.Columns.Add("NGÀY", typeof(string));
+            dtManageOrderNew.Columns.Add("KÝ HIỆU", typeof(string));
+            dtManageOrderNew.Columns.Add("MÃ HÀNG", typeof(string));
+            dtManageOrderNew.Columns.Add("NHẬP BTP Chưa in ", typeof(string));
+            dtManageOrderNew.Columns.Add("NHẬP BTP Đã in ", typeof(string));
+            dtManageOrderNew.Columns.Add("NHẬP Thành Phẩm ", typeof(string));
+            dtManageOrderNew.Columns.Add("NHẬP SP Lỗi ", typeof(string));
+            dtManageOrderNew.Columns.Add("XUẤT BTP Chưa in ", typeof(string));
+            dtManageOrderNew.Columns.Add("XUẤT BTP Đã in ", typeof(string));
+            dtManageOrderNew.Columns.Add("XUẤT Thành Phẩm ", typeof(string));
+            dtManageOrderNew.Columns.Add("XUẤT SP Lỗi ", typeof(string));
+            dtManageOrderNew.Columns.Add("GHI CHÚ", typeof(string));
+
+            DataRow row;
+            string ngay, kyhieu, masp, nhapbtpchuain, nhapbtpdain, nhaptp, nhapsploi, xuatbtpchuain, xuatbtpdain, xuattp, xuatsploi,ghichu;
+            for (int i = 0; i < dtManageInOut.Rows.Count; i++)
+            {
+                ngay = DateTime.Parse(dtManageInOut.Rows[i][10].ToString()).ToString("dd/MM/yyy");
+                kyhieu = DBHelper.Lookup("Product","Kyhieu","Barcode",dtManageInOut.Rows[i][1].ToString());
+                masp = DBHelper.Lookup("Product", "MaSP", "Barcode", dtManageInOut.Rows[i][1].ToString());
+                nhapbtpchuain = dtManageInOut.Rows[i][2].ToString();
+                nhapbtpdain = dtManageInOut.Rows[i][3].ToString();
+                nhaptp = dtManageInOut.Rows[i][4].ToString();
+                nhapsploi = dtManageInOut.Rows[i][5].ToString();
+                xuatbtpchuain = dtManageInOut.Rows[i][6].ToString();
+                xuatbtpdain = dtManageInOut.Rows[i][7].ToString();
+                xuattp = dtManageInOut.Rows[i][8].ToString();
+                xuatsploi = dtManageInOut.Rows[i][9].ToString();
+                ghichu = "";
+                dtManageOrderNew.Rows.Add(i + 1, ngay, kyhieu, masp, nhapbtpchuain, nhapbtpdain, nhaptp, nhapsploi, xuatbtpchuain, xuatbtpdain, xuattp, xuatsploi, ghichu);
+            }
+            return dtManageOrderNew;
+        }
+
+        private void txtBTPChuaIn1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDaIn2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTP2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSPLoi2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtBTPDaIn1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtChuaIn2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTP1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void SaveOrderToTransactionDB(string barcode, string LoaiID, string Mota, string soluong, string Nhap, string Xong)
+        {
+            DBModel modelWhere = new DBModel();
+            bool isSuccess = false;
+            string InsertItemQry;
+            string TransID = CommonHelper.RandomString(8);
+            string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+            string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+            if (!string.IsNullOrEmpty(barcode))
+            {
+                InsertItemQry = "INSERT INTO [Transaction]([TransID],[Barcode],[LoaiID],[Mota],[Soluong],[Nhap],[Xong],[Ngaytao],[Ngaysua])VALUES('"+ TransID + "','" + barcode + "','"+LoaiID+"','"+Mota +"','" + soluong + "','" + Nhap + "','"+Xong+ "','" + createDate + "','" + modifyDate + "')";
+                if (DBAccess.IsServerConnected())
+                {
+
+                    if (InsertItemQry.Length > 5)
+                    {
+                        bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
+
+                        if (isExisted)
+                        {
+                                isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Barcode khong ton tai ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+
+            }
         }
     }
 }

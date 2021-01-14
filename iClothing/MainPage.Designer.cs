@@ -49,6 +49,7 @@
             this.pnStuff = new System.Windows.Forms.Panel();
             this.btnStuff = new System.Windows.Forms.Button();
             this.pnSystem = new System.Windows.Forms.Panel();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -69,6 +70,7 @@
             this.pnLeft.SuspendLayout();
             this.pnStuff.SuspendLayout();
             this.pnSystem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -90,18 +92,18 @@
             // lblCurrentUser
             // 
             this.lblCurrentUser.AutoSize = true;
-            this.lblCurrentUser.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentUser.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurrentUser.ForeColor = System.Drawing.Color.White;
             this.lblCurrentUser.Location = new System.Drawing.Point(930, 17);
             this.lblCurrentUser.Name = "lblCurrentUser";
-            this.lblCurrentUser.Size = new System.Drawing.Size(0, 18);
+            this.lblCurrentUser.Size = new System.Drawing.Size(0, 19);
             this.lblCurrentUser.TabIndex = 11;
             // 
             // btnClose
             // 
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -117,7 +119,7 @@
             // 
             this.btnSignout.FlatAppearance.BorderSize = 0;
             this.btnSignout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSignout.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSignout.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSignout.ForeColor = System.Drawing.Color.White;
             this.btnSignout.Image = ((System.Drawing.Image)(resources.GetObject("btnSignout.Image")));
             this.btnSignout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -132,11 +134,11 @@
             // lblVersion
             // 
             this.lblVersion.AutoSize = true;
-            this.lblVersion.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVersion.ForeColor = System.Drawing.Color.White;
             this.lblVersion.Location = new System.Drawing.Point(12, 749);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(48, 18);
+            this.lblVersion.Size = new System.Drawing.Size(53, 19);
             this.lblVersion.TabIndex = 8;
             this.lblVersion.Text = "v1.0.0";
             // 
@@ -198,6 +200,7 @@
             // btnCustomer
             // 
             this.btnCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
+            this.btnCustomer.Enabled = false;
             this.btnCustomer.FlatAppearance.BorderSize = 0;
             this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomer.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -216,6 +219,7 @@
             // btnArt
             // 
             this.btnArt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
+            this.btnArt.Enabled = false;
             this.btnArt.FlatAppearance.BorderSize = 0;
             this.btnArt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnArt.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -333,7 +337,7 @@
             this.pnLeft.Controls.Add(this.SidePanelLeft);
             this.pnLeft.Location = new System.Drawing.Point(0, 0);
             this.pnLeft.Name = "pnLeft";
-            this.pnLeft.Size = new System.Drawing.Size(238, 788);
+            this.pnLeft.Size = new System.Drawing.Size(238, 778);
             this.pnLeft.TabIndex = 2;
             // 
             // pnStuff
@@ -367,6 +371,7 @@
             // 
             // pnSystem
             // 
+            this.pnSystem.Controls.Add(this.pictureBox6);
             this.pnSystem.Controls.Add(this.pictureBox5);
             this.pnSystem.Controls.Add(this.pictureBox4);
             this.pnSystem.Controls.Add(this.pictureBox3);
@@ -385,6 +390,17 @@
             this.pnSystem.Name = "pnSystem";
             this.pnSystem.Size = new System.Drawing.Size(225, 494);
             this.pnSystem.TabIndex = 10;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(199, 165);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(26, 18);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 14;
+            this.pictureBox6.TabStop = false;
             // 
             // pictureBox5
             // 
@@ -530,7 +546,7 @@
             this.customerManagement11.BackColor = System.Drawing.Color.White;
             this.customerManagement11.Location = new System.Drawing.Point(238, 45);
             this.customerManagement11.Name = "customerManagement11";
-            this.customerManagement11.Size = new System.Drawing.Size(870, 750);
+            this.customerManagement11.Size = new System.Drawing.Size(870, 730);
             this.customerManagement11.TabIndex = 9;
             // 
             // MainPage
@@ -559,6 +575,7 @@
             this.pnLeft.PerformLayout();
             this.pnStuff.ResumeLayout(false);
             this.pnSystem.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -605,5 +622,6 @@
         private StockManagement stockManagement1;
         private TransactionManagement1 transactionManagement11;
         private CustomerManagement1 customerManagement11;
+        private System.Windows.Forms.PictureBox pictureBox6;
     }
 }

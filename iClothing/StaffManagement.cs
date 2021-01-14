@@ -122,8 +122,8 @@ namespace iClothing
                     matkhau = txtPassword.Text;
                     sodt= txtPhone.Text;
                     username = txtUsername.Text;
-                    createDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
-                    modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                    createDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
+                    modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                     if (id != "")
                     {
                         InsertItemQry += "INSERT INTO [Staff] (NhanVienID,Ten,Ho,Diachi, Sodt, Tentruycap,Matkhau, Ngaytao,Ngaysua)VALUES('" + id + "','" + ten + "','" + ho + "','" + diachi + "','" + sodt+"','" + username + "','" +matkhau+ "','" + createDate + "','" + modifyDate + "');";
@@ -223,7 +223,7 @@ namespace iClothing
             // if any row left after calculated pages, add one more page 
             if (rowCount % rowPerPage > 0)
                 pageSize += 1;
-            lblTotalPage.Text = "Total rows:" + dtnew.Rows.Count.ToString();
+            lblTotalPage.Text = "Tổng số:" + dtnew.Rows.Count.ToString();
             DisablePagingButton(currentPageNumber, pageSize);
         }
 
@@ -275,7 +275,7 @@ namespace iClothing
                 string ARTID = Convert.ToString(dvgStaff.Rows[e.RowIndex].Cells["ARTID"].Value);
                 string Ten = Convert.ToString(dvgStaff.Rows[e.RowIndex].Cells["Ten"].Value);
                 string Mieuta = Convert.ToString(dvgStaff.Rows[e.RowIndex].Cells["Mota"].Value);
-                string now = System.DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                string now = System.DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                 if (!string.IsNullOrEmpty(ARTID))
                 {
                     string query = "UPDATE ART SET Ten = '" + Ten + "',Mota = '" + Mieuta + "',Ngaytao = '" + now + "',Ngaysua = '" + now + "' WHERE NhanvienID= " + ARTID;

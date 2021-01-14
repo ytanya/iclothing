@@ -90,8 +90,8 @@ namespace iClothing
                                     SonID = DBHelper.Lookup("Color", "SonID", "Ten", Convert.ToString(dt.Rows[i][6]));
                                     DVT = Convert.ToString(dt.Rows[i][8]);
                                     Mieuta = string.Empty;
-                                    ngaytao = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
-                                    ngaysua = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                                    ngaytao = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
+                                    ngaysua = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                                     if (Kyhieu != "")
                                     {
                                         InsertItemQry = "Insert into Product([Barcode],[Kyhieu],[Dai],[Rong],[ArtID],[SonID],[DVT],[Mieuta],[Ngaytao],[Ngaysua],[MaSP]) Values ('" + Barcode + "','" + Kyhieu + "','" + Dai + "','" + Rong +"','" + ARTID + "','" + SonID + "','" +DVT + "','" +"" + "','" + ngaysua + "','"+ ngaytao + "','" + MaSP + "')";
@@ -109,6 +109,7 @@ namespace iClothing
                             }
                             if (isSuccess)
                             {
+                                
                                 MessageBox.Show("Thành công, Số sản phẩm đã nhập : ", "XH POS", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
@@ -206,14 +207,14 @@ namespace iClothing
                     dbModels.Add(itemModel);
                     // Created Date
                     itemModel = new DBModel();
-                    createDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                    createDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                     itemModel.text = "Ngaytao";
                     itemModel.value = createDate;
                     itemModel.type = "datetime";
                     dbModels.Add(itemModel);
                     // Modify Date
                     itemModel = new DBModel();
-                    modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                    modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                     itemModel.text = "Ngaysua";
                     itemModel.value = modifyDate;
                     itemModel.type = "datetime";
@@ -238,6 +239,7 @@ namespace iClothing
                                     dtMain = DBHelper.InsertDatatable(dtMain, dbModels);
                                     currentPageNumber = 1;
                                     countPageSize();
+                                    ClearTextBox();
                                     // Update datalist
                                     PopulateData(currentPageNumber, rowPerPage);
                                     MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -286,10 +288,12 @@ namespace iClothing
                                 dtMain = DBHelper.DeleteDatatable(dtMain, modelWhere);
                                 currentPageNumber = 1;
                                 countPageSize();
+                                ClearTextBox();
+                                // Update datalist
+                                PopulateData(currentPageNumber, rowPerPage);
                                 MessageBox.Show("Số sản phẩm đã nhập Thành công: ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            // Update datalist
-                            PopulateData(currentPageNumber, rowPerPage);
+                            
                         }
                         else
                         {
@@ -301,7 +305,19 @@ namespace iClothing
             }
         }
         
-        
+        private void ClearTextBox()
+        {
+            txtBarcode.Text = string.Empty;
+            txtBarcode.Enabled = true;
+            txtDai.Text = string.Empty;
+            txtRong.Text = string.Empty;
+            txtDVT.Text = string.Empty;
+            txtMaSP.Text = string.Empty;
+            txtMieuta.Text = string.Empty;
+            txtTen.Text = string.Empty;
+            btnAdd.Visible = true;
+            btnUpdate.Visible = false;
+        }
 
         private void ProductManagement1_Load(object sender, EventArgs e)
         {
@@ -378,7 +394,7 @@ namespace iClothing
 
         private void pbPrev_Click(object sender, EventArgs e)
         {
-            if (currentPageNumber > 0)
+            if (currentPageNumber > 1)
             {
                 currentPageNumber -= 1;
                 PopulateData(currentPageNumber, rowPerPage);
@@ -388,21 +404,22 @@ namespace iClothing
 
         private void pbNext_Click(object sender, EventArgs e)
         {
-            currentPageNumber += 1;
-            PopulateData(currentPageNumber, rowPerPage);
-            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber += 1;
+                PopulateData(currentPageNumber, rowPerPage);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
         }
 
         private void pbLast_Click(object sender, EventArgs e)
         {
-            currentPageNumber = pageSize;
-            PopulateData(currentPageNumber, rowPerPage);
-            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-        }
-
-        private void dvgProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber = pageSize;
+                PopulateData(currentPageNumber, rowPerPage);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
         }
 
         private void dvgProduct_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -488,7 +505,7 @@ namespace iClothing
                     dtMain.Merge(dt);
                 }
             }
-            lblTotalPage.Text = "Total rows:" + dtMain.Rows.Count.ToString();
+            lblTotalPage.Text = "Tổng số:" + dtMain.Rows.Count.ToString();
             
         }
 
@@ -589,7 +606,7 @@ namespace iClothing
                     dbModelsUpdate.Add(itemModelUpdate);
                     // Modify Date
                     itemModelUpdate = new DBModel();
-                    modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                    modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                     itemModelUpdate.text = "Ngaysua";
                     itemModelUpdate.value = modifyDate;
                     itemModelUpdate.type = "datetime";
@@ -614,6 +631,9 @@ namespace iClothing
                                     dtMain = DBHelper.UpdateDatatable(dtMain, modelWhere, dbModelsUpdate);
                                     currentPageNumber = 1;
                                     countPageSize();
+                                    ClearTextBox();
+                                    // Update datalist
+                                    PopulateData(currentPageNumber, rowPerPage);
                                     MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
@@ -624,20 +644,13 @@ namespace iClothing
                         }
                     }
 
-                    // Update datalist
-                    PopulateData(currentPageNumber, rowPerPage);
+                    
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Exception " + ex);
             }
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            btnAdd.Visible = true;
-            txtBarcode.Enabled = true;
         }
 
         private void txtDai_KeyPress(object sender, KeyPressEventArgs e)

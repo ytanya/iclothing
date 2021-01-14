@@ -68,8 +68,8 @@ namespace iClothing
 
                                     ARTID = CommonHelper.RandomString(8);
                                     ten = Convert.ToString(dt.Rows[i][5]);
-                                    ngaytao = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
-                                    ngaysua = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                                    ngaytao = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
+                                    ngaysua = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                                     if (ten != "")
                                     {
                                         InsertItemQry = "Insert into ART(ARTID,Ten,Mota, Ngaytao, NgaySua) Values ('" + ARTID + "','" + ten + "','" + "" + "','" + ngaysua + "','" + ngaytao + "')";

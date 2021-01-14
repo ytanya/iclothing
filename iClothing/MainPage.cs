@@ -10,7 +10,7 @@ namespace iClothing
         bool submenuHided1, submenuHided2;
         public MainPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
             PW1 = pnSystem.Height;
             PW2 = pnStuff.Height;
             submenuHided1 = false;
@@ -26,7 +26,7 @@ namespace iClothing
             ToolTip tt = new ToolTip();
             tt.SetToolTip(btnSignout, "Đăng xuất");
             tt.SetToolTip(btnClose, "Đóng");
-
+            this.AcceptButton = login2.btnLogin;
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -15,6 +15,9 @@ namespace iClothing
     {
         DataTable dtMain = new DataTable();
         string conn = DBAccess.ConnectionString;
+        private int currentPageNumber = 1;
+        private int pageSize = 1;
+        private int rowPerPage = 10;
         public TransactionManagement1()
         {
             InitializeComponent();
@@ -30,9 +33,53 @@ namespace iClothing
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string fromDate = dtpFrom.Value.ToString("MM/dd/yyyy hh:mm tt");
-            string toDate = dtpTo.Value.ToString("MM/dd/yyyy hh:mm tt");
-            string query = "SELECT * FROM Product WHERE Ngaysua BETWEEN '" + fromDate + "' AND '" + toDate +"' Order by Ngaysua ;";
+            GetAllTrans();
+            PopulateDataTransaction(currentPageNumber, rowPerPage, dtMain);
+        }
+
+        private void pbFirst_Click(object sender, EventArgs e)
+        {
+            currentPageNumber = 1;
+            PopulateDataTransaction(currentPageNumber, rowPerPage, dtMain);
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void pbPrev_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber > 1)
+            {
+                currentPageNumber -= 1;
+                PopulateDataTransaction(currentPageNumber, rowPerPage, dtMain);
+            }
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void pbNext_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber += 1;
+                PopulateDataTransaction(currentPageNumber, rowPerPage, dtMain);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void pbLast_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber = pageSize;
+                PopulateDataTransaction(currentPageNumber, rowPerPage, dtMain);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void GetAllTrans()
+        {
+
+            string fromDate = dtpFrom.Value.ToString("MM/dd/yyyy 00:00 ") + "AM";
+            string toDate = dtpTo.Value.AddDays(1).ToString("MM/dd/yyyy 00:00 ") + "AM";
+            string query = "SELECT [Barcode],[LoaiID],[Mota],[Soluong],[Xong],[Nhap],[Ngaytao],[Ngaysua] FROM [Transaction] WHERE Ngaysua BETWEEN '" + fromDate + "' AND '" + toDate + "' Order by Ngaysua ;";
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
@@ -42,10 +89,45 @@ namespace iClothing
                     sda.Fill(dt);
                     dtMain.Merge(dt);
 
-                    dvgTransaction.DataSource = dtMain;
-                    lblTotalPage.Text = dtMain.Rows.Count.ToString();
+                    //dvgTransaction.DataSource = dtMain;
+                    
+                    
                 }
             }
+
+            int rowCount = dtMain.Rows.Count;
+            pageSize = rowCount / rowPerPage;
+            // if any row left after calculated pages, add one more page 
+            if (rowCount % rowPerPage > 0)
+                pageSize += 1;
+            lblTotalPage.Text = "Tổng số:" + dtMain.Rows.Count.ToString();
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+        private void PopulateDataTransaction(int currentPageNumber, int rowPerPage, DataTable dt)
+        {
+            int skipRecord = (currentPageNumber - 1) * rowPerPage;
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        dvgTransaction.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+                dvgTransaction.Columns["Xong"].ReadOnly = true;
+                dvgTransaction.Columns["Nhap"].ReadOnly = true;
+            }
+                    else
+                    {
+                        dvgTransaction.DataSource = dt;
+                    }
+                
+           
+
+        }
+
+        private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rowPerPage = Convert.ToInt32(cbPageSize.SelectedItem);
+            currentPageNumber = 1;
+            PopulateDataTransaction(currentPageNumber, rowPerPage, dtMain);
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
     }
 }

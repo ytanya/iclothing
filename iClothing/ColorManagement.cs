@@ -46,7 +46,7 @@ namespace iClothing
                 string SonId = Convert.ToString(dvgColor.Rows[e.RowIndex].Cells["SonID"].Value);
                 string Ten = Convert.ToString(dvgColor.Rows[e.RowIndex].Cells["Ten"].Value);
                 string Mieuta = Convert.ToString(dvgColor.Rows[e.RowIndex].Cells["Mieuta"].Value);
-                string now = System.DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                string now = System.DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                 if (!string.IsNullOrEmpty(SonId))
                 {
                     string query = "UPDATE Color SET Ten = '" + Ten + "',Mieuta = '" + Mieuta + "',Ngaytao = '" + now + "',Ngaysua = '" + now + "' WHERE SonID= " + SonId;
@@ -91,7 +91,7 @@ namespace iClothing
             // if any row left after calculated pages, add one more page 
             if (rowCount % rowPerPage > 0)
                 pageSize += 1;
-            lblTotalPage.Text = "Total rows:" + dtnew.Rows.Count.ToString();
+            lblTotalPage.Text = "Tổng số:" + dtnew.Rows.Count.ToString();
             DisablePagingButton(currentPageNumber, pageSize);
         }
 
@@ -160,8 +160,8 @@ namespace iClothing
                     id = txtSonID.Text;
                     name = txtTen.Text;
                     desc = txtMieuta.Text;
-                    createDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
-                    modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+                    createDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
+                    modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                     if (id != "")
                     {
                         InsertItemQry += "INSERT INTO [Color] (SonID,Ten,Mieuta,Ngaytao,Ngaysua)VALUES('" + id + "','" + name + "','" + desc + "','" + createDate + "','" + modifyDate + "');";

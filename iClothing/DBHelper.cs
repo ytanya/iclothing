@@ -131,7 +131,11 @@ namespace iClothing
             dtnew = DBAccess.FillDataTable(query, dt);
             if (dtnew!=null)
             {
-                isExisted = true;
+                if (dtnew.Rows.Count > 0)
+                {
+                    isExisted = true;
+                }
+                
             }
             return isExisted;
         }

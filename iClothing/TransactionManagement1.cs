@@ -34,7 +34,7 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             GetAllTrans();
-            PopulateDataTransaction(currentPageNumber, rowPerPage, dtMain);
+            //PopulateDataTransaction(currentPageNumber, rowPerPage, dtMain);
         }
 
         private void pbFirst_Click(object sender, EventArgs e)
@@ -79,7 +79,8 @@ namespace iClothing
 
             string fromDate = dtpFrom.Value.ToString("MM/dd/yyyy 00:00 ") + "AM";
             string toDate = dtpTo.Value.AddDays(1).ToString("MM/dd/yyyy 00:00 ") + "AM";
-            string query = "SELECT [Barcode],[LoaiID],[Mota],[Soluong],[Xong],[Nhap],[Ngaytao],[Ngaysua] FROM [Transaction] WHERE Ngaysua BETWEEN '" + fromDate + "' AND '" + toDate + "' Order by Ngaysua ;";
+            string query = "SELECT [Barcode],Type.[Ten] [Loại],[Transaction].[Mota] [Mô Tả],[Soluong] [Số Lượng],[Xong],[Nhap] [Nhập/Xuất],[Ngaytao] [Ngày Tạo],[Ngaysua] [Ngày Sửa] FROM [Transaction] join Type on Transaction.LoaiID = Type.LoaiID" +
+                "WHERE Ngaysua BETWEEN '" + fromDate + "' AND '" + toDate + "' Order by Ngaysua ;";
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
@@ -89,7 +90,7 @@ namespace iClothing
                     sda.Fill(dt);
                     dtMain.Merge(dt);
 
-                    //dvgTransaction.DataSource = dtMain;
+                    dvgTransaction.DataSource = dtMain;
                     
                     
                 }

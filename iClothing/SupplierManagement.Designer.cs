@@ -29,22 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierManagement));
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotalPage = new System.Windows.Forms.Label();
             this.dvgSupplier = new ADGV.AdvancedDataGridView();
-            this.NhaccID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mieuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Diachi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sodt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngaytao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngaysua = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtSodt = new System.Windows.Forms.TextBox();
             this.lblEmail = new System.Windows.Forms.Label();
@@ -96,7 +87,7 @@
             this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
             this.lblTotalPage.Location = new System.Drawing.Point(624, 698);
             this.lblTotalPage.Name = "lblTotalPage";
-            this.lblTotalPage.Size = new System.Drawing.Size(81, 13);
+            this.lblTotalPage.Size = new System.Drawing.Size(65, 14);
             this.lblTotalPage.TabIndex = 55;
             this.lblTotalPage.Text = "Tổng số: 0";
             // 
@@ -116,101 +107,29 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dvgSupplier.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dvgSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgSupplier.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NhaccID,
-            this.Ten,
-            this.Mieuta,
-            this.Diachi,
-            this.Sodt,
-            this.Email,
-            this.Ngaytao,
-            this.Ngaysua});
             this.dvgSupplier.DateWithTime = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dvgSupplier.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dvgSupplier.DefaultCellStyle = dataGridViewCellStyle2;
             this.dvgSupplier.EnableHeadersVisualStyles = false;
             this.dvgSupplier.GridColor = System.Drawing.Color.White;
             this.dvgSupplier.Location = new System.Drawing.Point(22, 375);
             this.dvgSupplier.Name = "dvgSupplier";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgSupplier.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgSupplier.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dvgSupplier.Size = new System.Drawing.Size(813, 294);
             this.dvgSupplier.TabIndex = 54;
             this.dvgSupplier.TimeFilter = false;
-            // 
-            // NhaccID
-            // 
-            this.NhaccID.DataPropertyName = "NhaccID";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.NhaccID.DefaultCellStyle = dataGridViewCellStyle2;
-            this.NhaccID.HeaderText = "Nha cung cap";
-            this.NhaccID.MinimumWidth = 22;
-            this.NhaccID.Name = "NhaccID";
-            this.NhaccID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ten
-            // 
-            this.Ten.DataPropertyName = "Ten";
-            this.Ten.HeaderText = "Ten";
-            this.Ten.MinimumWidth = 22;
-            this.Ten.Name = "Ten";
-            this.Ten.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Mieuta
-            // 
-            this.Mieuta.DataPropertyName = "Mieuta";
-            this.Mieuta.HeaderText = "Mieu Ta";
-            this.Mieuta.MinimumWidth = 22;
-            this.Mieuta.Name = "Mieuta";
-            this.Mieuta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Diachi
-            // 
-            this.Diachi.HeaderText = "Dia Chi";
-            this.Diachi.MinimumWidth = 22;
-            this.Diachi.Name = "Diachi";
-            this.Diachi.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Sodt
-            // 
-            this.Sodt.HeaderText = "So dt";
-            this.Sodt.MinimumWidth = 22;
-            this.Sodt.Name = "Sodt";
-            this.Sodt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "Email";
-            this.Email.MinimumWidth = 22;
-            this.Email.Name = "Email";
-            this.Email.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ngaytao
-            // 
-            this.Ngaytao.DataPropertyName = "Ngaytao";
-            this.Ngaytao.HeaderText = "Ngay Tao";
-            this.Ngaytao.MinimumWidth = 22;
-            this.Ngaytao.Name = "Ngaytao";
-            this.Ngaytao.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ngaysua
-            // 
-            this.Ngaysua.DataPropertyName = "Ngaysua";
-            this.Ngaysua.HeaderText = "Ngay Sua";
-            this.Ngaysua.MinimumWidth = 22;
-            this.Ngaysua.Name = "Ngaysua";
-            this.Ngaysua.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // txtEmail
             // 
@@ -239,7 +158,7 @@
             this.lblEmail.ForeColor = System.Drawing.Color.Orange;
             this.lblEmail.Location = new System.Drawing.Point(420, 162);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(47, 16);
+            this.lblEmail.Size = new System.Drawing.Size(48, 16);
             this.lblEmail.TabIndex = 85;
             this.lblEmail.Text = "Email";
             // 
@@ -250,7 +169,7 @@
             this.lblSodt.ForeColor = System.Drawing.Color.Orange;
             this.lblSodt.Location = new System.Drawing.Point(420, 122);
             this.lblSodt.Name = "lblSodt";
-            this.lblSodt.Size = new System.Drawing.Size(44, 16);
+            this.lblSodt.Size = new System.Drawing.Size(45, 16);
             this.lblSodt.TabIndex = 84;
             this.lblSodt.Text = "Số đt";
             // 
@@ -300,7 +219,6 @@
             this.txtMieuta.Name = "txtMieuta";
             this.txtMieuta.Size = new System.Drawing.Size(251, 112);
             this.txtMieuta.TabIndex = 80;
-
             // 
             // lblMess
             // 
@@ -317,7 +235,7 @@
             this.lblMieuta.ForeColor = System.Drawing.Color.Orange;
             this.lblMieuta.Location = new System.Drawing.Point(10, 158);
             this.lblMieuta.Name = "lblMieuta";
-            this.lblMieuta.Size = new System.Drawing.Size(58, 16);
+            this.lblMieuta.Size = new System.Drawing.Size(61, 16);
             this.lblMieuta.TabIndex = 79;
             this.lblMieuta.Text = "Miêu tả";
             // 
@@ -348,7 +266,7 @@
             this.lblSon.ForeColor = System.Drawing.Color.Orange;
             this.lblSon.Location = new System.Drawing.Point(10, 117);
             this.lblSon.Name = "lblSon";
-            this.lblSon.Size = new System.Drawing.Size(35, 16);
+            this.lblSon.Size = new System.Drawing.Size(33, 16);
             this.lblSon.TabIndex = 76;
             this.lblSon.Text = "Tên";
             // 
@@ -359,7 +277,7 @@
             this.lblNhaccID.ForeColor = System.Drawing.Color.Orange;
             this.lblNhaccID.Location = new System.Drawing.Point(10, 77);
             this.lblNhaccID.Name = "lblNhaccID";
-            this.lblNhaccID.Size = new System.Drawing.Size(103, 16);
+            this.lblNhaccID.Size = new System.Drawing.Size(101, 16);
             this.lblNhaccID.TabIndex = 75;
             this.lblNhaccID.Text = "Nhà cung cấp";
             // 
@@ -394,7 +312,7 @@
             this.lblDiachi.ForeColor = System.Drawing.Color.Orange;
             this.lblDiachi.Location = new System.Drawing.Point(420, 77);
             this.lblDiachi.Name = "lblDiachi";
-            this.lblDiachi.Size = new System.Drawing.Size(57, 16);
+            this.lblDiachi.Size = new System.Drawing.Size(58, 16);
             this.lblDiachi.TabIndex = 88;
             this.lblDiachi.Text = "Địa Chỉ";
             // 
@@ -486,14 +404,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalPage;
         private ADGV.AdvancedDataGridView dvgSupplier;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NhaccID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ten;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mieuta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Diachi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sodt;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngaytao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngaysua;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtSodt;
         private System.Windows.Forms.Label lblEmail;

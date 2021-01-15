@@ -139,5 +139,23 @@ namespace iClothing
             }
             return isExisted;
         }
+
+        public static bool isXong(string DonhangID)
+        {
+            bool isExisted = false;
+            DataTable dt = new DataTable();
+            DataTable dtnew = new DataTable();
+            string query = "Select * FROM [Order] WHERE DonhangID ='" + DonhangID+"' AND Xong= 1;";
+            dtnew = DBAccess.FillDataTable(query, dt);
+            if (dtnew != null)
+            {
+                if (dtnew.Rows.Count > 0)
+                {
+                    isExisted = true;
+                }
+
+            }
+            return isExisted;
+        }
     }
 }

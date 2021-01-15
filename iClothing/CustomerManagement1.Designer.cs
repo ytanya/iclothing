@@ -40,13 +40,6 @@
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblSodt = new System.Windows.Forms.Label();
             this.lblMess = new System.Windows.Forms.Label();
-            this.Ngaysua = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngaytao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sodt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Diachi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SonID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnImport = new System.Windows.Forms.Button();
@@ -126,7 +119,7 @@
             this.lblEmail.ForeColor = System.Drawing.Color.Orange;
             this.lblEmail.Location = new System.Drawing.Point(413, 117);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(47, 16);
+            this.lblEmail.Size = new System.Drawing.Size(48, 16);
             this.lblEmail.TabIndex = 97;
             this.lblEmail.Text = "Email";
             // 
@@ -137,7 +130,7 @@
             this.lblSodt.ForeColor = System.Drawing.Color.Orange;
             this.lblSodt.Location = new System.Drawing.Point(413, 77);
             this.lblSodt.Name = "lblSodt";
-            this.lblSodt.Size = new System.Drawing.Size(44, 16);
+            this.lblSodt.Size = new System.Drawing.Size(45, 16);
             this.lblSodt.TabIndex = 96;
             this.lblSodt.Text = "Số đt";
             // 
@@ -148,60 +141,6 @@
             this.lblMess.Name = "lblMess";
             this.lblMess.Size = new System.Drawing.Size(0, 13);
             this.lblMess.TabIndex = 82;
-            // 
-            // Ngaysua
-            // 
-            this.Ngaysua.DataPropertyName = "Ngaysua";
-            this.Ngaysua.HeaderText = "Ngay Sua";
-            this.Ngaysua.MinimumWidth = 22;
-            this.Ngaysua.Name = "Ngaysua";
-            this.Ngaysua.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ngaytao
-            // 
-            this.Ngaytao.DataPropertyName = "Ngaytao";
-            this.Ngaytao.HeaderText = "Ngay Tao";
-            this.Ngaytao.MinimumWidth = 22;
-            this.Ngaytao.Name = "Ngaytao";
-            this.Ngaytao.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "Email";
-            this.Email.MinimumWidth = 22;
-            this.Email.Name = "Email";
-            this.Email.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Sodt
-            // 
-            this.Sodt.HeaderText = "Số đt";
-            this.Sodt.MinimumWidth = 22;
-            this.Sodt.Name = "Sodt";
-            this.Sodt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Diachi
-            // 
-            this.Diachi.DataPropertyName = "Diachi";
-            this.Diachi.HeaderText = "Dia Chi";
-            this.Diachi.MinimumWidth = 22;
-            this.Diachi.Name = "Diachi";
-            this.Diachi.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ten
-            // 
-            this.Ten.DataPropertyName = "Ten";
-            this.Ten.HeaderText = "Ten";
-            this.Ten.MinimumWidth = 22;
-            this.Ten.Name = "Ten";
-            this.Ten.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // SonID
-            // 
-            this.SonID.DataPropertyName = "KHID";
-            this.SonID.HeaderText = "Ma KH";
-            this.SonID.MinimumWidth = 22;
-            this.SonID.Name = "SonID";
-            this.SonID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // pbPrev
             // 
@@ -274,7 +213,7 @@
             this.lblDiachi.ForeColor = System.Drawing.Color.Orange;
             this.lblDiachi.Location = new System.Drawing.Point(3, 158);
             this.lblDiachi.Name = "lblDiachi";
-            this.lblDiachi.Size = new System.Drawing.Size(57, 16);
+            this.lblDiachi.Size = new System.Drawing.Size(58, 16);
             this.lblDiachi.TabIndex = 90;
             this.lblDiachi.Text = "Địa Chỉ";
             // 
@@ -305,7 +244,7 @@
             this.lblSon.ForeColor = System.Drawing.Color.Orange;
             this.lblSon.Location = new System.Drawing.Point(3, 117);
             this.lblSon.Name = "lblSon";
-            this.lblSon.Size = new System.Drawing.Size(35, 16);
+            this.lblSon.Size = new System.Drawing.Size(33, 16);
             this.lblSon.TabIndex = 87;
             this.lblSon.Text = "Tên";
             // 
@@ -316,7 +255,7 @@
             this.lblKHID.ForeColor = System.Drawing.Color.Orange;
             this.lblKHID.Location = new System.Drawing.Point(3, 77);
             this.lblKHID.Name = "lblKHID";
-            this.lblKHID.Size = new System.Drawing.Size(53, 16);
+            this.lblKHID.Size = new System.Drawing.Size(55, 16);
             this.lblKHID.TabIndex = 86;
             this.lblKHID.Text = "Mã KH";
             // 
@@ -335,7 +274,7 @@
             this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
             this.lblTotalPage.Location = new System.Drawing.Point(729, 684);
             this.lblTotalPage.Name = "lblTotalPage";
-            this.lblTotalPage.Size = new System.Drawing.Size(81, 13);
+            this.lblTotalPage.Size = new System.Drawing.Size(68, 14);
             this.lblTotalPage.TabIndex = 84;
             this.lblTotalPage.Text = "Tổng số:: 0";
             // 
@@ -355,14 +294,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dvgCustomer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dvgCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SonID,
-            this.Ten,
-            this.Diachi,
-            this.Sodt,
-            this.Email,
-            this.Ngaytao,
-            this.Ngaysua});
             this.dvgCustomer.DateWithTime = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
@@ -451,13 +382,6 @@
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblSodt;
         private System.Windows.Forms.Label lblMess;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngaysua;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngaytao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sodt;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Diachi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ten;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SonID;
         private System.Windows.Forms.PictureBox pbPrev;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btnImport;

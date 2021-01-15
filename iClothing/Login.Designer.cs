@@ -78,8 +78,9 @@
             this.txtPassword.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(779, 447);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(202, 24);
+            this.txtPassword.Size = new System.Drawing.Size(202, 23);
             this.txtPassword.TabIndex = 9;
+            this.txtPassword.Text = "123456";
             // 
             // txtUsername
             // 
@@ -88,8 +89,9 @@
             this.txtUsername.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsername.Location = new System.Drawing.Point(779, 385);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(202, 24);
+            this.txtUsername.Size = new System.Drawing.Size(202, 23);
             this.txtUsername.TabIndex = 8;
+            this.txtUsername.Text = "ly.truong";
             // 
             // lblPassword
             // 
@@ -97,7 +99,7 @@
             this.lblPassword.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassword.Location = new System.Drawing.Point(593, 447);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(91, 22);
+            this.lblPassword.Size = new System.Drawing.Size(93, 23);
             this.lblPassword.TabIndex = 6;
             this.lblPassword.Text = "Mật khẩu";
             // 
@@ -108,7 +110,7 @@
             this.lblMess.ForeColor = System.Drawing.Color.Red;
             this.lblMess.Location = new System.Drawing.Point(788, 592);
             this.lblMess.Name = "lblMess";
-            this.lblMess.Size = new System.Drawing.Size(0, 18);
+            this.lblMess.Size = new System.Drawing.Size(0, 19);
             this.lblMess.TabIndex = 36;
             // 
             // btnLogin

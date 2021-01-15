@@ -117,7 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblCurrentUser.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblCurrentUser.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 11.25pt, style=Bold</value>
+  </data>
+  <data name="lblCurrentUser.Location" type="System.Drawing.Point, System.Drawing">
+    <value>930, 17</value>
+  </data>
+  <data name="lblCurrentUser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 19</value>
+  </data>
+  <data name="lblCurrentUser.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;lblCurrentUser.Name" xml:space="preserve">
+    <value>lblCurrentUser</value>
+  </data>
+  <data name="&gt;&gt;lblCurrentUser.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCurrentUser.Parent" xml:space="preserve">
+    <value>pnMenu</value>
+  </data>
+  <data name="&gt;&gt;lblCurrentUser.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnClose.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 11.25pt</value>
+  </data>
   <data name="btnClose.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAdxJREFUSEvt
@@ -132,6 +167,39 @@
         AElFTkSuQmCC
 </value>
   </data>
+  <data name="btnClose.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1067, 7</value>
+  </data>
+  <data name="btnClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 35</value>
+  </data>
+  <data name="btnClose.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="btnClose.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
+    <value>btnClose</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
+    <value>pnMenu</value>
+  </data>
+  <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnSignout.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnSignout.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 11.25pt</value>
+  </data>
   <data name="btnSignout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAadJREFUSEvd
@@ -145,6 +213,93 @@
         lvWT0wAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnSignout.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnSignout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1018, 7</value>
+  </data>
+  <data name="btnSignout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 35</value>
+  </data>
+  <data name="btnSignout.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btnSignout.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnSignout.Name" xml:space="preserve">
+    <value>btnSignout</value>
+  </data>
+  <data name="&gt;&gt;btnSignout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSignout.Parent" xml:space="preserve">
+    <value>pnMenu</value>
+  </data>
+  <data name="&gt;&gt;btnSignout.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pnMenu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1111, 45</value>
+  </data>
+  <data name="pnMenu.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pnMenu.Name" xml:space="preserve">
+    <value>pnMenu</value>
+  </data>
+  <data name="&gt;&gt;pnMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnMenu.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnMenu.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblVersion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVersion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 11.25pt, style=Bold</value>
+  </data>
+  <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 749</value>
+  </data>
+  <data name="lblVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 19</value>
+  </data>
+  <data name="lblVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblVersion.Text" xml:space="preserve">
+    <value>v1.0.0</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.Name" xml:space="preserve">
+    <value>lblVersion</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.Parent" xml:space="preserve">
+    <value>pnLeft</value>
+  </data>
+  <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnStaff.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnStaff.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnStaff.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
+  </data>
   <data name="btnStaff.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAYNJREFUSEvt
@@ -156,6 +311,42 @@
         8mGUbX//8AQHQWOqeY+Rfwh7LkuV8nDk+vr+gbhoGPSZ+h/SvMecwQdk2UR1af13MKSiLai4JyHiVciy
         SbP+jbgodaFmuVjt9nf1H8rlPgEjpHgEbABUEAAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="btnStaff.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnStaff.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 435</value>
+  </data>
+  <data name="btnStaff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnStaff.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="btnStaff.Text" xml:space="preserve">
+    <value>       Nhân viên</value>
+  </data>
+  <data name="btnStaff.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnStaff.Name" xml:space="preserve">
+    <value>btnStaff</value>
+  </data>
+  <data name="&gt;&gt;btnStaff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnStaff.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnStaff.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="btnTransaction.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnTransaction.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
   </data>
   <data name="btnTransaction.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -171,6 +362,42 @@
         +C3It8dfFAdqp3sAuso34A9IepSv/N/K1ahQOAHs1HahaW/k1gAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnTransaction.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnTransaction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 111</value>
+  </data>
+  <data name="btnTransaction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnTransaction.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnTransaction.Text" xml:space="preserve">
+    <value>       Giao Dịch</value>
+  </data>
+  <data name="btnTransaction.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnTransaction.Name" xml:space="preserve">
+    <value>btnTransaction</value>
+  </data>
+  <data name="&gt;&gt;btnTransaction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTransaction.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnTransaction.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="btnStock.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnStock.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
+  </data>
   <data name="btnStock.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAVpJREFUSEu9
@@ -181,6 +408,45 @@
         HDqF8qh7NfuxVWEuqTlQmJM5tDz6R6EZKClXNXmsXrKul7ExV6pq8li/ZF0vY5grFZqBknJJzYHCXFJz
         oDCX1BwozCU1BwpzMlH179iEFPl1wk02UP07NnEbeBEbj/4PZdknGc/ut9XQd8sAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="btnStock.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnStock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 111</value>
+  </data>
+  <data name="btnStock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnStock.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="btnStock.Text" xml:space="preserve">
+    <value>       Tồn Kho</value>
+  </data>
+  <data name="btnStock.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnStock.Name" xml:space="preserve">
+    <value>btnStock</value>
+  </data>
+  <data name="&gt;&gt;btnStock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnStock.Parent" xml:space="preserve">
+    <value>pnStuff</value>
+  </data>
+  <data name="&gt;&gt;btnStock.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnCustomer.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnCustomer.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnCustomer.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
   </data>
   <data name="btnCustomer.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -194,6 +460,45 @@
         b+ixP6h7PFSUHwzYw0sMvLa5oG8B7W2LKwqHZltkTWUo9NoLcoEZz65MRGKxb0Yh/YpjoI56AAAAAElF
         TkSuQmCC
 </value>
+  </data>
+  <data name="btnCustomer.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnCustomer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 165</value>
+  </data>
+  <data name="btnCustomer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnCustomer.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnCustomer.Text" xml:space="preserve">
+    <value>       Khách Hàng</value>
+  </data>
+  <data name="btnCustomer.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnCustomer.Name" xml:space="preserve">
+    <value>btnCustomer</value>
+  </data>
+  <data name="&gt;&gt;btnCustomer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCustomer.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnCustomer.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="btnArt.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnArt.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnArt.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
   </data>
   <data name="btnArt.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -214,6 +519,45 @@
         rkJggg==
 </value>
   </data>
+  <data name="btnArt.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnArt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 327</value>
+  </data>
+  <data name="btnArt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnArt.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnArt.Text" xml:space="preserve">
+    <value>       Họa Tiết</value>
+  </data>
+  <data name="btnArt.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnArt.Name" xml:space="preserve">
+    <value>btnArt</value>
+  </data>
+  <data name="&gt;&gt;btnArt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnArt.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnArt.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="btnType.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnType.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
+  </data>
   <data name="btnType.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAUdJREFUSEvt
@@ -224,6 +568,45 @@
         ctjHfGvTMeq3c8PQE8j394xCHdfQm/uOmm05Rf34gL4K7QMUioPYhL5XeiF9hqyggr+/FHbAZ4j7mf6Q
         nh1yi9UU1J9qSIxFD7Fd8S8TBJ/kuyyP0jrcKwAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="btnType.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 273</value>
+  </data>
+  <data name="btnType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnType.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnType.Text" xml:space="preserve">
+    <value>       Loại Sản Phẩm</value>
+  </data>
+  <data name="btnType.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnType.Name" xml:space="preserve">
+    <value>btnType</value>
+  </data>
+  <data name="&gt;&gt;btnType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnType.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnType.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="btnSupplier.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnSupplier.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnSupplier.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
   </data>
   <data name="btnSupplier.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -238,6 +621,42 @@
         A/ny7SGmS6UUmlDoG7kA4G0xqmvgAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="btnSupplier.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnSupplier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 219</value>
+  </data>
+  <data name="btnSupplier.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnSupplier.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnSupplier.Text" xml:space="preserve">
+    <value>       Nhà Cung Ứng</value>
+  </data>
+  <data name="btnSupplier.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnSupplier.Name" xml:space="preserve">
+    <value>btnSupplier</value>
+  </data>
+  <data name="&gt;&gt;btnSupplier.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSupplier.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnSupplier.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="btnProduct.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnProduct.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
+  </data>
   <data name="btnProduct.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAMlJREFUSEtj
@@ -246,6 +665,45 @@
         UQ8ADQXFyUsg3gHE74AYFie6QOxBAmYDG4gNACXplrpo7hPaxwldANDltM8nQEPpkuPplrroUgojA7Al
         VAVAQ2lfM44C/ICBAQDLR74lfz6cRwAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="btnProduct.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnProduct.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 57</value>
+  </data>
+  <data name="btnProduct.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnProduct.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnProduct.Text" xml:space="preserve">
+    <value>       Sản Phẩm</value>
+  </data>
+  <data name="btnProduct.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnProduct.Name" xml:space="preserve">
+    <value>btnProduct</value>
+  </data>
+  <data name="&gt;&gt;btnProduct.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnProduct.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnProduct.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="btnPaint.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnPaint.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnPaint.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
   </data>
   <data name="btnPaint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -257,12 +715,84 @@
         FEV3oPFtoScl69kAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnPaint.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnPaint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 381</value>
+  </data>
+  <data name="btnPaint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnPaint.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnPaint.Text" xml:space="preserve">
+    <value>       Màu Sơn</value>
+  </data>
+  <data name="btnPaint.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnPaint.Name" xml:space="preserve">
+    <value>btnPaint</value>
+  </data>
+  <data name="&gt;&gt;btnPaint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnPaint.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnPaint.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="btnOrder.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnOrder.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
+  </data>
   <data name="btnOrder.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAFhJREFUSEtj
         oDv4T0UANRIT4JUkAYxAS4BMByBuIAE7QLUOMksoAaOWkAQGlyVAJix1gVMNlI0PU5SEaWcJJYBoS4DM
         0eAi3hIgczS4RpIl1AJQI+kFGBgAJGiPOTwsbsAAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="btnOrder.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 57</value>
+  </data>
+  <data name="btnOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnOrder.Text" xml:space="preserve">
+    <value>       Đơn Hàng</value>
+  </data>
+  <data name="btnOrder.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnOrder.Name" xml:space="preserve">
+    <value>btnOrder</value>
+  </data>
+  <data name="&gt;&gt;btnOrder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOrder.Parent" xml:space="preserve">
+    <value>pnStuff</value>
+  </data>
+  <data name="&gt;&gt;btnOrder.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnStuff.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnStuff.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
   </data>
   <data name="btnStuff.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -276,6 +806,57 @@
         Gc9Qj0WMWK0KdWfnuI0i5QeLhcEJvMcP3MByK6k2ivrCVdvEwl96GBrGH6ftF+TLw2olfkEs9gnjRWfo
         dJVHJgAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="btnStuff.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnStuff.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
+  </data>
+  <data name="btnStuff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 54</value>
+  </data>
+  <data name="btnStuff.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="btnStuff.Text" xml:space="preserve">
+    <value>Quản Lý Nghiệp Vụ</value>
+  </data>
+  <data name="btnStuff.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnStuff.Name" xml:space="preserve">
+    <value>btnStuff</value>
+  </data>
+  <data name="&gt;&gt;btnStuff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnStuff.Parent" xml:space="preserve">
+    <value>pnStuff</value>
+  </data>
+  <data name="&gt;&gt;btnStuff.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnStuff.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 60</value>
+  </data>
+  <data name="pnStuff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 165</value>
+  </data>
+  <data name="pnStuff.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;pnStuff.Name" xml:space="preserve">
+    <value>pnStuff</value>
+  </data>
+  <data name="&gt;&gt;pnStuff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnStuff.Parent" xml:space="preserve">
+    <value>pnLeft</value>
+  </data>
+  <data name="&gt;&gt;pnStuff.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="pictureBox6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -293,6 +874,30 @@
         cJpZmCW2aoea/gVKpT8jelWix+d+hwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="pictureBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 165</value>
+  </data>
+  <data name="pictureBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 18</value>
+  </data>
+  <data name="pictureBox6.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;pictureBox6.Name" xml:space="preserve">
+    <value>pictureBox6</value>
+  </data>
+  <data name="&gt;&gt;pictureBox6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox6.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;pictureBox6.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="pictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAm1JREFUSEvl
@@ -308,6 +913,30 @@
         Dqgjf92nn3HhhuTBwQ9rBYLvZQMhGbpwFSvcy4fHEoc/Rl3td+mv0OJgK07APqizToOOX8FxuS6fNBmG
         cJpZmCW2aoea/gVKpT8jelWix+d+hwAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="pictureBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 435</value>
+  </data>
+  <data name="pictureBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 18</value>
+  </data>
+  <data name="pictureBox5.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBox5.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;pictureBox5.Name" xml:space="preserve">
+    <value>pictureBox5</value>
+  </data>
+  <data name="&gt;&gt;pictureBox5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox5.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;pictureBox5.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -325,6 +954,30 @@
         cJpZmCW2aoea/gVKpT8jelWix+d+hwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="pictureBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 381</value>
+  </data>
+  <data name="pictureBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 18</value>
+  </data>
+  <data name="pictureBox4.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;pictureBox4.Name" xml:space="preserve">
+    <value>pictureBox4</value>
+  </data>
+  <data name="&gt;&gt;pictureBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox4.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;pictureBox4.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAm1JREFUSEvl
@@ -340,6 +993,30 @@
         Dqgjf92nn3HhhuTBwQ9rBYLvZQMhGbpwFSvcy4fHEoc/Rl3td+mv0OJgK07APqizToOOX8FxuS6fNBmG
         cJpZmCW2aoea/gVKpT8jelWix+d+hwAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="pictureBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 327</value>
+  </data>
+  <data name="pictureBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 18</value>
+  </data>
+  <data name="pictureBox3.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;pictureBox3.Name" xml:space="preserve">
+    <value>pictureBox3</value>
+  </data>
+  <data name="&gt;&gt;pictureBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox3.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;pictureBox3.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -357,6 +1034,30 @@
         cJpZmCW2aoea/gVKpT8jelWix+d+hwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 279</value>
+  </data>
+  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 18</value>
+  </data>
+  <data name="pictureBox2.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+    <value>pictureBox2</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAm1JREFUSEvl
@@ -373,6 +1074,36 @@
         cJpZmCW2aoea/gVKpT8jelWix+d+hwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 219</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 18</value>
+  </data>
+  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btnSystem.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnSystem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Century Schoolbook, 14.25pt</value>
+  </data>
   <data name="btnSystem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAcxJREFUSEvt
@@ -386,10 +1117,286 @@
         0d+hWQK1Dbrqg2iuePjXNSo0KUb9bof5+UP2Tx6IxT4A0A+pZbNeeaUAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnSystem.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnSystem.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="btnSystem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 54</value>
+  </data>
+  <data name="btnSystem.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btnSystem.Text" xml:space="preserve">
+    <value>Quản Lý Hệ Thống</value>
+  </data>
+  <data name="btnSystem.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;btnSystem.Name" xml:space="preserve">
+    <value>btnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnSystem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSystem.Parent" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;btnSystem.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="pnSystem.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 226</value>
+  </data>
+  <data name="pnSystem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 494</value>
+  </data>
+  <data name="pnSystem.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;pnSystem.Name" xml:space="preserve">
+    <value>pnSystem</value>
+  </data>
+  <data name="&gt;&gt;pnSystem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnSystem.Parent" xml:space="preserve">
+    <value>pnLeft</value>
+  </data>
+  <data name="&gt;&gt;pnSystem.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SidePanelLeft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 64</value>
+  </data>
+  <data name="SidePanelLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 54</value>
+  </data>
+  <data name="SidePanelLeft.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;SidePanelLeft.Name" xml:space="preserve">
+    <value>SidePanelLeft</value>
+  </data>
+  <data name="&gt;&gt;SidePanelLeft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SidePanelLeft.Parent" xml:space="preserve">
+    <value>pnLeft</value>
+  </data>
+  <data name="&gt;&gt;SidePanelLeft.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="pnLeft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 778</value>
+  </data>
+  <data name="pnLeft.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pnLeft.Name" xml:space="preserve">
+    <value>pnLeft</value>
+  </data>
+  <data name="&gt;&gt;pnLeft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnLeft.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnLeft.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="timer2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>104, 17</value>
   </metadata>
+  <data name="transactionManagement11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 43</value>
+  </data>
+  <data name="transactionManagement11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>870, 750</value>
+  </data>
+  <data name="transactionManagement11.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;transactionManagement11.Name" xml:space="preserve">
+    <value>transactionManagement11</value>
+  </data>
+  <data name="&gt;&gt;transactionManagement11.Type" xml:space="preserve">
+    <value>iClothing.TransactionManagement1, iClothing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;transactionManagement11.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;transactionManagement11.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="stockManagement1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 45</value>
+  </data>
+  <data name="stockManagement1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>870, 750</value>
+  </data>
+  <data name="stockManagement1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;stockManagement1.Name" xml:space="preserve">
+    <value>stockManagement1</value>
+  </data>
+  <data name="&gt;&gt;stockManagement1.Type" xml:space="preserve">
+    <value>iClothing.StockManagement, iClothing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;stockManagement1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;stockManagement1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="artManagement11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 45</value>
+  </data>
+  <data name="artManagement11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>870, 750</value>
+  </data>
+  <data name="artManagement11.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;artManagement11.Name" xml:space="preserve">
+    <value>artManagement11</value>
+  </data>
+  <data name="&gt;&gt;artManagement11.Type" xml:space="preserve">
+    <value>iClothing.ArtManagement1, iClothing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;artManagement11.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;artManagement11.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="productManagement11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 45</value>
+  </data>
+  <data name="productManagement11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>870, 750</value>
+  </data>
+  <data name="productManagement11.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;productManagement11.Name" xml:space="preserve">
+    <value>productManagement11</value>
+  </data>
+  <data name="&gt;&gt;productManagement11.Type" xml:space="preserve">
+    <value>iClothing.ProductManagement1, iClothing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;productManagement11.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;productManagement11.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="orderManagement1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 45</value>
+  </data>
+  <data name="orderManagement1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>870, 750</value>
+  </data>
+  <data name="orderManagement1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;orderManagement1.Name" xml:space="preserve">
+    <value>orderManagement1</value>
+  </data>
+  <data name="&gt;&gt;orderManagement1.Type" xml:space="preserve">
+    <value>iClothing.OrderManagement, iClothing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;orderManagement1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;orderManagement1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="login2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="login2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="login2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1111, 778</value>
+  </data>
+  <data name="login2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;login2.Name" xml:space="preserve">
+    <value>login2</value>
+  </data>
+  <data name="&gt;&gt;login2.Type" xml:space="preserve">
+    <value>iClothing.Login, iClothing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;login2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;login2.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="customerManagement11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 45</value>
+  </data>
+  <data name="customerManagement11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>870, 730</value>
+  </data>
+  <data name="customerManagement11.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;customerManagement11.Name" xml:space="preserve">
+    <value>customerManagement11</value>
+  </data>
+  <data name="&gt;&gt;customerManagement11.Type" xml:space="preserve">
+    <value>iClothing.CustomerManagement1, iClothing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;customerManagement11.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;customerManagement11.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1111, 778</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>MainPage</value>
+  </data>
+  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
+    <value>timer1</value>
+  </data>
+  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;timer2.Name" xml:space="preserve">
+    <value>timer2</value>
+  </data>
+  <data name="&gt;&gt;timer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainPage</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

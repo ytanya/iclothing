@@ -150,8 +150,8 @@
             // btnCustomer
             // 
             this.btnCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
-            resources.ApplyResources(this.btnCustomer, "btnCustomer");
             this.btnCustomer.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnCustomer, "btnCustomer");
             this.btnCustomer.ForeColor = System.Drawing.Color.White;
             this.btnCustomer.Name = "btnCustomer";
             this.btnCustomer.UseVisualStyleBackColor = false;
@@ -180,8 +180,8 @@
             // btnSupplier
             // 
             this.btnSupplier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
-            resources.ApplyResources(this.btnSupplier, "btnSupplier");
             this.btnSupplier.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnSupplier, "btnSupplier");
             this.btnSupplier.ForeColor = System.Drawing.Color.White;
             this.btnSupplier.Name = "btnSupplier";
             this.btnSupplier.UseVisualStyleBackColor = false;

@@ -79,8 +79,8 @@ namespace iClothing
 
             string fromDate = dtpFrom.Value.ToString("MM/dd/yyyy 00:00 ") + "AM";
             string toDate = dtpTo.Value.AddDays(1).ToString("MM/dd/yyyy 00:00 ") + "AM";
-            string query = "SELECT [Barcode],Type.[Ten] [Loại],[Transaction].[Mota] [Mô Tả],[Soluong] [Số Lượng],[Xong],[Nhap] [Nhập/Xuất],[Ngaytao] [Ngày Tạo],[Ngaysua] [Ngày Sửa] FROM [Transaction] join Type on Transaction.LoaiID = Type.LoaiID" +
-                "WHERE Ngaysua BETWEEN '" + fromDate + "' AND '" + toDate + "' Order by Ngaysua ;";
+            string query = "SELECT product.kyhieu [Ký Hiệu], product.MaSP [Mã Sản Phẩm],Type.[Ten] [Loại],[Transaction].[Mota] [Mô Tả],[Soluong] [Số Lượng],[Xong],[Nhap] [Nhập/Xuất] FROM [Transaction] join Type on [Transaction].LoaiID = Type.LoaiID join Product on [Transaction].barcode = product.barcode " +
+                "WHERE [Transaction].Ngaysua BETWEEN '" + fromDate + "' AND '" + toDate + "' Order by [Transaction].Ngaysua ;";
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))

@@ -202,7 +202,7 @@ namespace iClothing
         {
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = currentPageNumber * rowPerPage;
-            string query = "SELECT ARTID, Ten, Mota, Anh, Ngaytao, Ngaysua FROM Art Order by " + orderbyItem + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            string query = "SELECT NhaccID, Ten [Nhà Cung Ứng], Mota [Mô Tả], DiaChi [Địa Chỉ], Sodt [Số ĐT], Email FROM Supplier Order by [Nhà Cung Ứng] OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             dt = new DataTable();
             dtnew = new DataTable();
             dtnew = DBAccess.FillDataTable(query, dt);

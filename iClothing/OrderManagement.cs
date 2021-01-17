@@ -19,13 +19,16 @@ namespace iClothing
     {
         private DataTable dtTab1Nhap = new DataTable();
         private DataTable dtTab1Xuat = new DataTable();
-        
+
         private DataTable dtTab2NhapXuat = new DataTable();
         private DataTable dtCurrent = new DataTable();
         //private DataTable OrignalADGVdt = null;
         private string IsCompleted = "false";
         private bool ngayNhapFilterChanged = false;
         private bool ngayXongFilterChanged = false;
+        private bool ngayXuatFilterChanged = false;
+        private bool ngayXongXuatFilterChanged = false;
+        private bool ngayNhapXuatFilterChanged = false;
         System.Windows.Forms.CheckBox headerCheckBox = new System.Windows.Forms.CheckBox();
 
         private DataTable dtTemp = new DataTable();
@@ -33,23 +36,24 @@ namespace iClothing
         private int currentPageNumber = 1;
         private int pageSize = 0;
         private int rowPerPage = 10;
-        private string currentOrderByItem = "Ngaytao";
+        //private string currentOrderByItem = "Ngaytao";
         private Bitmap bmp;
         public static string conn = "Data Source=" + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         public OrderManagement()
         {
             InitializeComponent();
             rbNhap.Checked = true;
-            pnXuat.Visible = false;
+            //pnXuat.Visible = false;
             //txtBTPChuaIn1.Enabled = false;
             //txtOrderID1.Enabled = false;
-            dtTemp.Columns.Add("Donhang", typeof(string));
-            dtTemp.Columns.Add("Xong", typeof(int));
+            //dtTemp.Columns.Add("Donhang", typeof(string));
+            //dtTemp.Columns.Add("Xong", typeof(int));
             dtpNgaynhap.Format = DateTimePickerFormat.Custom;
             dtpNgaynhap.CustomFormat = "dd/MM/yyyy";
             //btnNewNhap.Enabled = false;
             //btnSaveNhap.Visible = true;
-            
+            pnNhap.Visible = true;
+            pnXuat.Visible = false;
         }
         /******************************** Start Common******************************************/
         private void rbNhap_CheckedChanged(object sender, EventArgs e)
@@ -61,14 +65,14 @@ namespace iClothing
                 {
                     pnNhap.Visible = true;
                     pnXuat.Visible = false;
-                    dgvOrderXuat.Visible = false;
+                    //dgvOrderXuat.Visible = false;
                     dgvOrderNhap.Visible = true;
                     currentPageNumber = 1;
                     rowPerPage = 10;
                     GetAllDataOrderNhap();
                     dtCurrent = dtTab1Nhap;
                     PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-                    //cbPageSizeNhap.SelectedIndex = 0;
+                    cbPageSizeNhap.SelectedIndex = 0;
                 }
             }
         }
@@ -82,15 +86,13 @@ namespace iClothing
                 {
                     pnXuat.Visible = true;
                     pnNhap.Visible = false;
-                    dgvOrderXuat.Visible = true;
-                    dgvOrderNhap.Visible = false;
                     currentPageNumber = 1;
                     rowPerPage = 10;
 
-                    GetAllDataOrderInput();
+                    GetAllDataOrderXuat();
                     dtCurrent = dtTab1Xuat;
                     PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-                    //cbPageSizeNhap.SelectedIndex = 0;
+                    cbPagingSizeXuat.SelectedIndex = 0;
                 }
             }
         }
@@ -98,40 +100,24 @@ namespace iClothing
         private void OrderManagement_Load(object sender, EventArgs e)
         {
             GetAllDataTab1();
-            
+
         }
         private void GetAllDataTab1()
         {
-            btnUpdate.Visible = false;
-
-            dgvOrderXuat.Visible = false;
-            // Input
-            GetAllDataOrderInput();
-            // Output
+            dtpNgayXuat.Format = DateTimePickerFormat.Custom;
+            dtpNgayXuat.CustomFormat = "dd/MM/yyyy";
             GetAllDataOrderNhap();
-
             dtCurrent = dtTab1Nhap;
             PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-
-
-            // Init Customer combobox
-            DataTable dtCustomer = DBHelper.GetAllCustomer();
-            if (dtCustomer.Rows.Count > 0)
-            {
-                cbCustomer.DataSource = dtCustomer;
-                cbCustomer.ValueMember = "KHID";
-                cbCustomer.DisplayMember = "HoTen";
-                cbCustomer.SelectedIndex = 0;
-            }
-
+            cbPageSizeNhap.SelectedIndex = 0;
             // Init Ki hieu combobox
             DataTable dtProduct = DBHelper.GetAllProduct();
             if (dtProduct.Rows.Count > 0)
             {
-                cbKihieu2.DataSource = dtProduct;
-                cbKihieu2.ValueMember = "Barcode";
-                cbKihieu2.DisplayMember = "Kyhieu";
-                cbKihieu2.SelectedIndex = 0;
+                cbKyHieuXuat.DataSource = dtProduct;
+                cbKyHieuXuat.ValueMember = "Barcode";
+                cbKyHieuXuat.DisplayMember = "Kyhieu";
+                cbKyHieuXuat.SelectedIndex = 0;
                 cbKihieuNhap.DataSource = dtProduct;
                 cbKihieuNhap.ValueMember = "Barcode";
                 cbKihieuNhap.DisplayMember = "Kyhieu";
@@ -147,114 +133,183 @@ namespace iClothing
                 cbNhacc.DisplayMember = "Ten";
                 cbNhacc.SelectedIndex = 0;
             }
-            //cbPageSizeNhap.SelectedIndex = 0;
+
+            DataTable dtCustomer = DBHelper.GetAllCustomer();
+            if (dtCustomer.Rows.Count > 0)
+            {
+                cbCustomer.DataSource = dtCustomer;
+                cbCustomer.ValueMember = "KHID";
+                cbCustomer.DisplayMember = "HoTen";
+                cbCustomer.SelectedIndex = 0;
+            }
+
         }
         private void PopulateDataOrder(int currentPageNumber, int rowPerPage, DataTable dt)
         {
             int skipRecord = (currentPageNumber - 1) * rowPerPage;
-            if (tbManageInOutOrder.SelectedIndex == 0)
-            {
-                if (rbNhap.Checked)
-                {
-                    if (dt.Rows.Count > 0)
-                    {
-                        //if(dgvOrderNhap!=null) dgvOrderNhap.Columns["Xong"].Frozen = false;
-                        dgvOrderNhap.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();                        
-                        dgvOrderNhap.Columns[0].Visible = false;
-                        dgvOrderNhap.Columns[1].Visible = false;
-                        dgvOrderNhap.Columns[3].Width = 130;
-                        dgvOrderNhap.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-                        dgvOrderNhap.Columns[4].Width = 130;
-                        dgvOrderNhap.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-                        dgvOrderNhap.Columns["Xong"].Width = 50;
-                        //dgvOrderNhap.Columns["Xong"].Frozen = true;
-                        dgvOrderNhap.Columns["Ký Hiệu"].Width = 60;
-                        dgvOrderNhap.Columns["BTP Chưa in"].Width = 120;
-                        this.dgvOrderNhap.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                        dgvOrderNhap.Columns["BTP Đã in"].Width = 100;
-                        this.dgvOrderNhap.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                        dgvOrderNhap.Columns["Thành Phẩm"].Width = 120;
-                        this.dgvOrderNhap.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                        dgvOrderNhap.Columns["Sản phẩm lỗi"].Width = 110;
-                        this.dgvOrderNhap.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                        dgvOrderNhap.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        dgvOrderNhap.Sort(dgvOrderNhap.Columns["Ngày Nhập"], ListSortDirection.Descending);
-                        AddCheckBoxHeader(2);
 
-                    }
-                    else
-                    {
-                        dgvOrderNhap.DataSource = dt;
-                        dgvOrderNhap.Columns[0].Visible = false;
-                        dgvOrderNhap.Columns[1].Visible = false;
-                    }
+            if (rbNhap.Checked)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    //if(dgvOrderNhap!=null) dgvOrderNhap.Columns["Xong"].Frozen = false;
+                    dgvOrderNhap.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+                    dgvOrderNhap.Columns[0].Visible = false;
+                    dgvOrderNhap.Columns[1].Visible = false;
+                    dgvOrderNhap.Columns[3].Width = 130;
+                    dgvOrderNhap.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrderNhap.Columns[4].Width = 130;
+                    dgvOrderNhap.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrderNhap.Columns["Xong"].Width = 50;
+                    //dgvOrderNhap.Columns["Xong"].ReadOnly = true;
+                    dgvOrderNhap.Columns["Ký Hiệu"].Width = 60;
+                    dgvOrderNhap.Columns["BTP Chưa in"].Width = 120;
+                    this.dgvOrderNhap.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderNhap.Columns["BTP Đã in"].Width = 100;
+                    this.dgvOrderNhap.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderNhap.Columns["Thành Phẩm"].Width = 120;
+                    this.dgvOrderNhap.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderNhap.Columns["Sản phẩm lỗi"].Width = 110;
+                    this.dgvOrderNhap.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderNhap.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dgvOrderNhap.Sort(dgvOrderNhap.Columns["Ngày Nhập"], ListSortDirection.Descending);
+                    dgvOrderNhap.ClearSelection();
+                    if (dgvOrderNhap.CurrentRow != null)
+                        dgvOrderNhap.CurrentRow.Selected = true;
+
+                    countPageSizeNhap(dt);
+
                 }
                 else
                 {
-                    if (dt.Rows.Count > 0)
-                    {
-                        dgvOrderXuat.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
-                        dgvOrderXuat.Columns["Tên Khách Hàng"].Width = 120;
-                        dgvOrderXuat.Columns["Ký Hiệu"].Width = 60;
-                        dgvOrderXuat.Columns["BTP Chưa in"].Width = 60;
-                        dgvOrderXuat.Columns["BTP Đã in"].Width = 60;
-                        dgvOrderXuat.Columns["Thành Phẩm"].Width = 60;
-                        dgvOrderXuat.Columns["Sản phẩm lỗi"].Width = 60;
-                        dgvOrderXuat.Columns["Xong"].Width = 50;
-                    }
+                    pbFirstNhap.Visible = false;
+                    pbPrevNhap.Visible = false;
+                    pbNextNhap.Visible = false;
+                    pbLastNhap.Visible = false;
+                    txtPagingNhap.Visible = false;
+                    cbPageSizeNhap.Visible = false;
                 }
             }
             else
             {
-                dvgManageInOut.DataSource = dtManageOrderNew.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+                if (dt.Rows.Count > 0)
+                {
+                    dgvOrderXuat.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+                    dgvOrderXuat.Columns[0].Visible = false;
+                    dgvOrderXuat.Columns[1].Visible = false;
+                    //dgvOrderNhap.Columns[3].Width = 130;
+                    //dgvOrderNhap.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    //dgvOrderNhap.Columns[4].Width = 130;
+                    //dgvOrderNhap.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrderXuat.Columns["Xong"].Width = 50;
+                    dgvOrderXuat.Columns["Tên Khách Hàng"].Width = 120;
+                    dgvOrderXuat.Columns["Ký Hiệu"].Width = 60;
+                    dgvOrderXuat.Columns["BTP Chưa in"].Width = 120;
+                    this.dgvOrderXuat.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderXuat.Columns["BTP Đã in"].Width = 120;
+                    this.dgvOrderXuat.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderXuat.Columns["Thành Phẩm"].Width = 120;
+                    this.dgvOrderXuat.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderXuat.Columns["Sản phẩm lỗi"].Width = 110;
+                    this.dgvOrderXuat.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderXuat.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dgvOrderXuat.Sort(dgvOrderXuat.Columns["Ngày Xuất"], ListSortDirection.Descending);
+                    dgvOrderXuat.ClearSelection();
+                    if (dgvOrderXuat.CurrentRow != null)
+                        dgvOrderXuat.CurrentRow.Selected = true;
+
+                    countPageSizeXuat(dt);
+                }
+                else
+                {
+                    pbFirstXuat.Visible = false;
+                    pbPrevXuat.Visible = false;
+                    pbNextXuat.Visible = false;
+                    pbLastXuat.Visible = false;
+                    txtPagingXuat.Visible = false;
+                    cbPagingSizeXuat.Visible = false;
+                }
+            }
+        }
+        //else
+        //{
+        //    dvgManageInOut.DataSource = dtManageOrderNew.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+
+
+        private void SaveOrderToTransactionDB(string barcode, string LoaiID, string Mota, string soluong, string Nhap, string Xong)
+        {
+            DBModel modelWhere = new DBModel();
+            bool isSuccess = false;
+            string InsertItemQry;
+            string TransID = CommonHelper.RandomString(8);
+            string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+            string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+            if (!string.IsNullOrEmpty(barcode))
+            {
+                InsertItemQry = "INSERT INTO [Transaction]([TransID],[Barcode],[LoaiID],[Mota],[Soluong],[Nhap],[Xong],[Ngaytao],[Ngaysua])VALUES('" + TransID + "','" + barcode + "','" + LoaiID + "','" + Mota + "','" + soluong + "','" + Nhap + "','" + Xong + "','" + createDate + "','" + modifyDate + "')";
+                if (DBAccess.IsServerConnected())
+                {
+
+                    if (InsertItemQry.Length > 5)
+                    {
+                        bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
+
+                        if (isExisted)
+                        {
+                            isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
 
             }
-
         }
+
         /******************************** Start Common******************************************/
         /******************************** Start Panel Nhap******************************************/
-        private void HeaderCBNhap_Clicked(object sender, EventArgs e)
+        private void tbNhap_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Necessary to end the edit mode of the Cell.
-            dgvOrderNhap.EndEdit();
-
-            //Loop and check and uncheck all row CheckBoxes based on Header Cell CheckBox.
-            foreach (DataGridViewRow row in dgvOrderNhap.Rows)
+            if (tbNhap.SelectedIndex == 1)
             {
-                DataGridViewCheckBoxCell checkBox = (row.Cells["cbSelectNhap"] as DataGridViewCheckBoxCell);
-                checkBox.Value = headerCheckBox.Checked;
+                dtpFilterNgayNhap.Format = DateTimePickerFormat.Custom;
+                dtpFilterNgayNhap.CustomFormat = "dd/MM/yyyy";
+                dtpFilterNgayXong.Format = DateTimePickerFormat.Custom;
+                dtpFilterNgayXong.CustomFormat = "dd/MM/yyyy";
+
+                // Init Ki hieu combobox
+                DataTable dtProduct = DBHelper.GetAllProduct();
+                // generate the data you want to insert
+                DataRow toInsert = dtProduct.NewRow();
+                toInsert[0] = "";
+                toInsert[1] = "";
+                // insert in the desired place
+                dtProduct.Rows.InsertAt(toInsert, 0);
+                if (dtProduct.Rows.Count > 0)
+                {
+                    cbKyhieuFilter.DataSource = dtProduct;
+                    cbKyhieuFilter.ValueMember = "Barcode";
+                    cbKyhieuFilter.DisplayMember = "Kyhieu";
+                    cbKyhieuFilter.SelectedIndex = 0;
+                    
+                }
+
+                // Init Supplier combobox
+                //DataTable dtSupplier = DBHelper.GetAllSupplier();
+                //if (dtSupplier.Rows.Count > 0)
+                //{
+                //    cbNhaccFilter.DataSource = dtSupplier;
+                //    cbNhaccFilter.ValueMember = "NhaccID";
+                //    cbNhaccFilter.DisplayMember = "Ten";
+                //    cbNhaccFilter.SelectedIndex = 0;
+                //}
             }
         }
-        private void AddCheckBoxHeader(int columnIndex)
-        {
-            //Add a CheckBox Column to the DataGridView Header Cell.
-
-            //Find the Location of Header Cell.
-            System.Drawing.Point headerCellLocation = this.dgvOrderNhap.GetCellDisplayRectangle(columnIndex, -1, true).Location;
-
-            //Place the Header CheckBox in the Location of the Header Cell.
-            headerCheckBox.Location = new System.Drawing.Point(headerCellLocation.X + 8, headerCellLocation.Y + 8);
-            headerCheckBox.BackColor = Color.Orange;
-            headerCheckBox.Size = new Size(18, 18);
-
-            //Assign Click event to the Header CheckBox.
-            headerCheckBox.Click += new EventHandler(HeaderCBNhap_Clicked);
-            dgvOrderNhap.Controls.Add(headerCheckBox);
-
-            //Add a CheckBox Column to the DataGridView at the first position.
-            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
-            checkBoxColumn.HeaderText = "";
-            checkBoxColumn.Width = 30;
-            checkBoxColumn.Name = "cbSelectNhap";
-            dgvOrderNhap.Columns.Insert(0, checkBoxColumn);
-
-            //Assign Click event to the DataGridView Cell.
-            dgvOrderNhap.CellContentClick += new DataGridViewCellEventHandler(dgvOrderNhap_CellClick);
-        }
-
         private void GetAllDataOrderNhap()
         {
-            string query = "Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong,[Order].Ngaynhap [Ngày nhập], [Order].Ngayxong [Ngày Xong], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID order by [Order].Ngaynhap";
+            string query = "Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong,[Order].Ngaynhap [Ngày Nhập], [Order].Ngayxong [Ngày Xong], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID order by [Order].Ngaynhap";
             dtTab1Nhap = new DataTable();
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
@@ -266,32 +321,26 @@ namespace iClothing
                     dtTab1Nhap.Merge(dt);
                 }
             }
-            int rowCount = dtTab1Nhap.Rows.Count;
-            pageSize = rowCount / rowPerPage;
-            // if any row left after calculated pages, add one more page 
-            if (rowCount % rowPerPage > 0)
-                pageSize += 1;
-            lblTotalPageNhap.Text = "Tổng số:" + dtTab1Nhap.Rows.Count.ToString();
-            txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            
         }
 
         private void btnNewNhap_Click(object sender, EventArgs e)
         {
-            cbNhacc.SelectedIndex = 1;
-            cbKihieuNhap.SelectedIndex = 1;
+            cbNhacc.SelectedIndex = 0;
+            cbKihieuNhap.SelectedIndex = 0;
             txtBTPChuaInNhap.Text = "0";
             txtBTPDaInNhap.Text = "0";
             txtTPNhap.Text = "0";
             txtSPLoiNhap.Text = "0";
+            dtpNgaynhap.Enabled = true;
+            dtpNgaynhap.Value = DateTime.Today;
+            IsCompleted = "false";
         }
 
         private void btnSaveNhap_Click(object sender, EventArgs e)
         {
             try
-            {
-                List<DBModel> dbModels = new List<DBModel>();
-                //DataTable dtItem = (DataTable)(dgvOrderNhap.DataSource);
-                
+            {                
                 List<string> ItemQryList = new List<string>();
 
                 bool isSuccess = false;
@@ -309,7 +358,6 @@ namespace iClothing
 
                 if (string.IsNullOrEmpty(txtOrderIDNhap.Text))
                 {
-                    isNhap = "true";
                     // DonhangID
                     DonhangID = CommonHelper.RandomString(8);
                     rd[0] = DonhangID;
@@ -319,10 +367,10 @@ namespace iClothing
                     // Xong
                     rd[2] = IsCompleted;
                     // Ngay nhap
-                    Ngay = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
-                    rd[3] = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    Ngay = dtpNgaynhap.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    rd[3] = Ngay;
                     // Barcode
-                    barcode = cbKihieu2.SelectedValue.ToString();
+                    barcode = cbKihieuNhap.SelectedValue.ToString();
                     rd[5] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
                     
                    
@@ -346,11 +394,10 @@ namespace iClothing
                     // Created Date
                     string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
                     
-                    ItemQryList = AddNewOrderNhap(Ngay, DonhangID, NhaccID, barcode, IsCompleted, createDate, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL,TPSL, SPLoiSL);
+                    ItemQryList = AddNewOrderNhap(Ngay, DonhangID, NhaccID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL,TPSL, SPLoiSL);
                 }
                 else
                 {
-                    isNhap = "false";
                     DonhangID = txtOrderIDNhap.Text;
                     DataRow row = dtTab1Nhap.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
 
@@ -373,7 +420,7 @@ namespace iClothing
                         row[4] = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
                     }
                     // Barcode
-                    barcode = cbKihieu2.SelectedValue.ToString();
+                    barcode = cbKihieuNhap.SelectedValue.ToString();
                     row[5] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
                     // BTPChuaIn
                     BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
@@ -411,16 +458,16 @@ namespace iClothing
 
                         if (isSuccess)
                         {
-                            SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, "false");
-                            SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, "false");
-                            SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, "false");
-                            SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, "false");
-                            if (isNhap == "true")
+                            SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
+                            SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
+                            SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
+                            SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
+                            if (string.IsNullOrEmpty(txtOrderIDNhap.Text))
                             {
                                 dtTab1Nhap.Rows.InsertAt(rd, 0);
                                 cbNhacc.SelectedIndex = 0;
                                 currentPageNumber = 1;
-                                countPageSize(dtTab1Nhap);
+                                countPageSizeNhap(dtTab1Nhap);
                                 ClearTextNhap();
                                 // Update datalist
                                 PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Nhap);
@@ -429,14 +476,11 @@ namespace iClothing
                             {
                                 cbNhacc.SelectedIndex = 0;
                                 currentPageNumber = 1;
-                                countPageSize(dtTab1Nhap);
+                                //countPageSizeNhap(dtTab1Nhap);
                                 ClearTextNhap();
                                 // Update datalist
                                 PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Nhap);
-                            }  
-                            
-
-                            
+                            }                             
                             MessageBox.Show("Đơn hàng này đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -446,8 +490,6 @@ namespace iClothing
                     //    MessageBox.Show("Barcode da ton tai : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //}
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -455,7 +497,7 @@ namespace iClothing
             }
         }
 
-        private List<string> AddNewOrderNhap(string Ngaynhap, string DonhangID, string NhaccID, string barcode, string IsCompleted, string createDate, string ngaynhap,
+        private List<string> AddNewOrderNhap(string Ngaynhap, string DonhangID, string NhaccID, string barcode, string IsCompleted, string createDate,
             string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
             string TPSL, string SPLoiSL)
         {
@@ -467,15 +509,15 @@ namespace iClothing
             string orderDetailID4 = CommonHelper.RandomString(7) + 4;
 
             // query insert
-            InsertItemQry = "INSERT INTO [Order] ([DonhangID],[NhaccID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap])VALUES('" + DonhangID + "','" + NhaccID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + ngaynhap + "')";
+            InsertItemQry = "INSERT INTO [Order] ([DonhangID],[NhaccID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap])VALUES('" + DonhangID + "','" + NhaccID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + Ngaynhap + "')";
             InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaysua])VALUES('" + orderDetailID1 + "','" + DonhangID + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "')";
+            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID1 + "','" + DonhangID + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaysua])VALUES('" + orderDetailID2 + "','" + DonhangID + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "')";
+            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID2 + "','" + DonhangID + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaysua])VALUES('" + orderDetailID3 + "','" + DonhangID + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "')";
+            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID3 + "','" + DonhangID + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaysua])VALUES('" + orderDetailID4 + "','" + DonhangID + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "')";
+            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID4 + "','" + DonhangID + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
             return InsertItemQryList;
         }
@@ -508,471 +550,7 @@ namespace iClothing
             return UpdateItemQryList;
         }
 
-
-
-        /******************************** End Panel Nhap******************************************/
-        private void btnUpdate1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //List<DBModel> dbModelsUpdate = new List<DBModel>();
-                //DBModel itemModelUpdate = new DBModel();
-                //List<DBModel> dbModelsLookupList = new List<DBModel>();
-                //DBModel itemModelLookup = new DBModel();
-                //DBModel modelWhere = new DBModel();
-                List<string> UpdateItemQryList = new List<string>();
-                DataTable dtItem = (DataTable)(dgvOrderNhap.DataSource);
-                string DonhangID, barcode, BTPChuaIn, BTPDaIn, TP, SPLoi, createDate, modifyDate;
-                string UpdateItemQry = "";
-                bool isSuccess = false;
-                int count = 0;
-
-                // DonhangID
-                DonhangID = txtOrderIDNhap.Text;
-                DataRow row = dtTab1Nhap.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
-
-                // Set value for number field
-                if (string.IsNullOrEmpty(txtBTPChuaInNhap.Text)) txtBTPChuaInNhap.Text = "0";
-                if (string.IsNullOrEmpty(txtBTPDaInNhap.Text)) txtBTPDaInNhap.Text = "0";
-                if (string.IsNullOrEmpty(txtTPNhap.Text)) txtTPNhap.Text = "0";
-                if (string.IsNullOrEmpty(txtSPLoiNhap.Text)) txtSPLoiNhap.Text = "0";
-
-
-                // Barcode
-                barcode = cbKihieu2.SelectedValue.ToString();
-                row[2] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
-                // BTPChuaIn
-                BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                row[3] = txtBTPChuaInNhap.Text;
-                // BTPDaIn
-                BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                row[4] = txtBTPDaInNhap.Text;
-                // TP
-                TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                row[5] = txtTPNhap.Text;
-                // SPLoi
-                SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-                row[6] = txtSPLoiNhap.Text;
-                // Modify Date
-                modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                row[7] = modifyDate;
-
-
-                if (barcode != "")
-                {
-                    UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtBTPChuaInNhap.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPChuaIn + "';";
-                    UpdateItemQryList.Add(UpdateItemQry);
-                    UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtBTPDaInNhap.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPDaIn + "';";
-                    UpdateItemQryList.Add(UpdateItemQry);
-                    UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtTPNhap.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + TP + "';";
-                    UpdateItemQryList.Add(UpdateItemQry);
-                    UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtSPLoiNhap.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + SPLoi + "';";
-                    UpdateItemQryList.Add(UpdateItemQry);
-                }
-
-                if (DBAccess.IsServerConnected())
-                {
-                    bool isExisted = DBHelper.CheckItemExist("[Order]", "DonhangID", DonhangID);
-
-                    if (isExisted)
-                    {
-                        if (UpdateItemQry.Length > 5)
-                        {
-                            foreach (var item in UpdateItemQryList)
-                            {
-                                isSuccess = DBAccess.ExecuteQuery(item);
-                            }
-
-                            if (isSuccess)
-                            {
-                                //dtTab1Output.Rows.InsertAt(row, 0);
-                                SaveOrderToTransactionDB(barcode, BTPChuaIn, "", txtBTPChuaInNhap.Text, "true", "false");
-                                SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtBTPDaInNhap.Text, "true", "false");
-                                SaveOrderToTransactionDB(barcode, TP, "", txtTPNhap.Text, "true", "false");
-                                SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoiNhap.Text, "true", "false");
-                                //dtTab1Output = DBHelper.UpdateDatatable(dtTab1Output, modelWhere, dbModelsUpdate);
-                                currentPageNumber = 1;
-                                countPageSize(dtTab1Nhap);
-                                ClearTextNhap();
-
-                                // Update datalist
-                                PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Nhap);
-
-                                MessageBox.Show("Sửa đơn hàng này thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đơn hàng này chưa tồn tại!" + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
-            }
-        }
-        /******************************** Start Panel 1******************************************/
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DataTable dtItem = (DataTable)(dgvOrderNhap.DataSource);
-                string DonhangID, barcode, BTPChuaIn, BTPDaIn, TP, SPLoi, KHID, modifyDate;
-                List<string> InsertItemQryList = new List<string>();
-                string InsertItemQry = "";
-                bool isSuccess = false;
-                int count = 0;
-                DataRow rd = dtTab1Xuat.NewRow();
-
-                // Set value for number field
-                if (string.IsNullOrEmpty(txtChuaIn2.Text)) txtChuaIn2.Text = "0";
-                if (string.IsNullOrEmpty(txtDaIn2.Text)) txtDaIn2.Text = "0";
-                if (string.IsNullOrEmpty(txtTP2.Text)) txtTP2.Text = "0";
-                if (string.IsNullOrEmpty(txtSPLoi2.Text)) txtSPLoi2.Text = "0";
-
-                // DonhangID
-                DonhangID = CommonHelper.RandomString(8);
-                rd[0] = DonhangID;
-                // KHID
-                KHID = cbCustomer.SelectedValue.ToString();
-                rd[1] = DBHelper.Lookup("Customer", "HoTen", "KHID", KHID);
-                // Barcode
-                barcode = cbKihieu2.SelectedValue.ToString();
-                rd[2] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
-                // BTPChuaIn
-                BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                rd[3] = txtChuaIn2.Text;
-                // BTPDaIn
-                BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                rd[4] = txtDaIn2.Text;
-                // TP
-                TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                rd[5] = txtTP2.Text;
-                // SPLoi
-                SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-                rd[6] = txtSPLoi2.Text;
-                // Modify Date
-                modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-                rd[7] = modifyDate;
-                // Xong
-                rd[8] = IsCompleted;
-
-                string orderDetailID1 = CommonHelper.RandomString(7) + 1;
-                string orderDetailID2 = CommonHelper.RandomString(7) + 2;
-                string orderDetailID3 = CommonHelper.RandomString(7) + 3;
-                string orderDetailID4 = CommonHelper.RandomString(7) + 4;
-                if (barcode != "")
-                {
-                    InsertItemQry = "INSERT INTO [Order] ([DonhangID],[KHID],[Xong],[Ngaytao],[Ngaysua])VALUES('" + DonhangID + "','" + KHID + "','" + IsCompleted + "','" + modifyDate + "','" + modifyDate + "')";
-                    InsertItemQryList.Add(InsertItemQry);
-                    InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaysua])VALUES('" + orderDetailID1 + "','" + DonhangID + "','" + barcode + "','" + BTPChuaIn + "','" + txtChuaIn2.Text + "','" + modifyDate + "')";
-                    InsertItemQryList.Add(InsertItemQry);
-                    InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaysua])VALUES('" + orderDetailID2 + "','" + DonhangID + "','" + barcode + "','" + BTPDaIn + "','" + txtDaIn2.Text + "','" + modifyDate + "')";
-                    InsertItemQryList.Add(InsertItemQry);
-                    InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaysua])VALUES('" + orderDetailID3 + "','" + DonhangID + "','" + barcode + "','" + TP + "','" + txtTP2.Text + "','" + modifyDate + "')";
-                    InsertItemQryList.Add(InsertItemQry);
-                    InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaysua])VALUES('" + orderDetailID4 + "','" + DonhangID + "','" + barcode + "','" + SPLoi + "','" + txtSPLoi2.Text + "','" + modifyDate + "')";
-                    InsertItemQryList.Add(InsertItemQry);
-                }
-
-                if (DBAccess.IsServerConnected())
-                {
-                    //bool isExisted = DBHelper.CheckItemExist("Order", "DonhangID", DonhangID);
-
-                    //if (!isExisted)
-                    //{
-                    if (InsertItemQryList.Count > 0)
-                    {
-                        foreach (var item in InsertItemQryList)
-                        {
-                            isSuccess = DBAccess.ExecuteQuery(item);
-                        }
-
-                        if (isSuccess)
-                        {
-                            SaveOrderToTransactionDB(barcode, BTPChuaIn, "", txtChuaIn2.Text, "false", "false");
-                            SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtDaIn2.Text, "false", "false");
-                            SaveOrderToTransactionDB(barcode, TP, "", txtTP2.Text, "false", "false");
-                            SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi2.Text, "false", "false");
-
-                            dtTab1Xuat.Rows.InsertAt(rd, 0);
-                            cbCustomer.SelectedIndex = 0;
-                            currentPageNumber = 1;
-                            countPageSize(dtTab1Xuat);
-                            ClearTextNhap();
-                            // Update datalist
-                            PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Xuat);
-                            MessageBox.Show("Thêm Mới Thành công !", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("Barcode da ton tai : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //}
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            string orderID = txtOrder2.Text;
-            string query;
-            bool isSuccess = false;
-            List<string> DeleteItemQryList = new List<string>();
-            if (!string.IsNullOrEmpty(orderID))
-            {
-                query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
-                DeleteItemQryList.Add(query);
-                query = "DELETE FROM [Order] WHERE DonhangID ='" + orderID + "';";
-                DeleteItemQryList.Add(query);
-                if (DBAccess.IsServerConnected())
-                {
-                    DataRow row = dtTab1Xuat.Select("[Mã Đơn Hàng]=" + orderID, "[Mã Đơn Hàng]").FirstOrDefault();
-
-                    if (query.Length > 5)
-                    {
-                        bool isExisted = DBHelper.CheckItemExist("[Order]", "DonhangID", orderID);
-
-                        if (isExisted)
-                        {
-                            foreach (var item in DeleteItemQryList)
-                            {
-                                isSuccess = DBAccess.ExecuteQuery(item);
-                            }
-                            if (isSuccess)
-                            {
-                               
-                                currentPageNumber = 1;
-                                dtTab1Xuat.Rows.Remove(row);
-                                countPageSize(dtTab1Xuat);
-                                ClearTextNhap();
-                                // Update datalist
-                                PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Xuat);
-                                MessageBox.Show("Xóa Đơn Hàng Thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            
-                            
-                        }
-                        else
-                        {
-                            MessageBox.Show("Mã đơn hàng này không tồn tại ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                }
-
-            }
-        }
-
-        private void GetAllDataOrderInput()
-        {
-            string query = "Select New.DonhangID [Mã Đơn Hàng], Customer.HoTen [Tên Khách Hàng], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [New].Ngaysua [Ngày], [Order].Xong  from (SELECT DonhangID, Barcode, Ngaysua, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Customer on[Order].KHID = Customer.KHID where [Order].Xong = 0 order by New.Ngaysua;";
-            dtTab1Xuat = new DataTable();
-            using (SqlCeConnection connection = new SqlCeConnection(conn))
-            {
-                using (SqlCeCommand command = new SqlCeCommand(query, connection))
-                {
-                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
-                    DataTable dt = new DataTable();
-                    sda.Fill(dt);
-                    dtTab1Xuat.Merge(dt);
-                }
-            }
-            int rowCount = dtTab1Xuat.Rows.Count;
-            pageSize = rowCount / rowPerPage;
-            // if any row left after calculated pages, add one more page 
-            if (rowCount % rowPerPage > 0)
-                pageSize += 1;
-            lblTotalPageNhap.Text = "Tổng số:" + dtTab1Xuat.Rows.Count.ToString();
-            txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-        }
-        
-
-        
-        private void dgvOrderXuat_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex != -1)
-            {
-                DataGridViewRow dgvRow = dgvOrderXuat.Rows[e.RowIndex];
-                txtOrder2.Text = dgvRow.Cells[0].Value.ToString();
-                txtChuaIn2.Text = dgvRow.Cells[3].Value.ToString();
-                txtDaIn2.Text = dgvRow.Cells[4].Value.ToString();
-                txtTP2.Text = dgvRow.Cells[5].Value.ToString();
-                txtSPLoi2.Text = dgvRow.Cells[6].Value.ToString();
-                cbCustomer.SelectedValue = DBHelper.Lookup("Customer", "KHID", "HoTen", dgvRow.Cells[1].Value.ToString());
-                cbCustomer.Text = dgvRow.Cells[1].Value.ToString();
-                cbCustomer.Enabled = false;
-
-                cbKihieuNhap.SelectedValue = DBHelper.Lookup("Product", "Barcode", "Kyhieu", dgvRow.Cells[2].Value.ToString());
-                cbKihieuNhap.Text = dgvRow.Cells[2].Value.ToString();
-
-
-                btnAdd1.Visible = false;
-                btnUpdate.Visible = true;
-                if(e.ColumnIndex != -1)
-                {
-                    if (dgvOrderXuat.Columns[e.ColumnIndex].Name == "Xong")
-                    {
-                        //btnXong.Enabled = true;
-                    }
-                }
-                
-            }
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                List<string> UpdateItemQryList = new List<string>();
-                DataTable dtItem = (DataTable)(dgvOrderNhap.DataSource);
-                string DonhangID, barcode, BTPChuaIn, BTPDaIn, TP, SPLoi, createDate, modifyDate;
-                string UpdateItemQry = "";
-                bool isSuccess = false;
-                int count = 0;
-                var csv = new StringBuilder();
-                // DonhangID
-                DonhangID = txtOrder2.Text;
-                DataRow row = dtTab1Xuat.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
-
-                // Set value for number field
-                if (string.IsNullOrEmpty(txtChuaIn2.Text)) txtChuaIn2.Text = "0";
-                if (string.IsNullOrEmpty(txtDaIn2.Text)) txtDaIn2.Text = "0";
-                if (string.IsNullOrEmpty(txtTP2.Text)) txtTP2.Text = "0";
-                if (string.IsNullOrEmpty(txtSPLoi2.Text)) txtSPLoi2.Text = "0";
-                // Barcode
-                barcode = cbKihieu2.SelectedValue.ToString();
-                row[2] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
-                // BTPChuaIn
-                BTPChuaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                row[3] = txtChuaIn2.Text;
-                // BTPDaIn
-                BTPDaIn = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                row[4] = txtDaIn2.Text;
-                // TP
-                TP = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                row[5] = txtTP2.Text;
-                // SPLoi
-                SPLoi = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-                row[6] = txtSPLoi2.Text;
-                // Modify Date
-                modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                row[7] = modifyDate;
-
-                if (barcode != "")
-                {
-                    UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtChuaIn2.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPChuaIn + "';";
-                    UpdateItemQryList.Add(UpdateItemQry);
-                    UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtDaIn2.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPDaIn + "';";
-                    UpdateItemQryList.Add(UpdateItemQry);
-                    UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtTP2.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + TP + "';";
-                    UpdateItemQryList.Add(UpdateItemQry);
-                    UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + txtSPLoi2.Text + "',[Ngaysua]= '" + modifyDate + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + SPLoi + "';";
-                    UpdateItemQryList.Add(UpdateItemQry);
-                }
-
-                if (DBAccess.IsServerConnected())
-                {
-                    bool isExisted = DBHelper.CheckItemExist("[Order]", "DonhangID", DonhangID);
-
-                    if (isExisted)
-                    {
-                        if (UpdateItemQry.Length > 5)
-                        {
-                            foreach (var item in UpdateItemQryList)
-                            {
-                                isSuccess = DBAccess.ExecuteQuery(item);
-                            }
-
-                            if (isSuccess)
-                            {
-                                SaveOrderToTransactionDB(barcode, BTPChuaIn, "", txtChuaIn2.Text, "false", "false");
-                                SaveOrderToTransactionDB(barcode, BTPDaIn, "", txtDaIn2.Text, "false", "false");
-                                SaveOrderToTransactionDB(barcode, TP, "", txtTP2.Text, "false", "false");
-                                SaveOrderToTransactionDB(barcode, SPLoi, "", txtSPLoi2.Text, "false", "false");
-                                
-                                currentPageNumber = 1;
-                                countPageSize(dtTab1Xuat);
-                                ClearTextNhap();
-                                // Update datalist
-                                PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Xuat);
-                                MessageBox.Show("Nhập Đơn Hàng Thành công!" + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đơn Hàng Này Chưa Tồn Tại!" + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
-            }
-        }
-
-        private void pbFirst_Click(object sender, EventArgs e)
-        {
-            currentPageNumber = 1;
-            dtCurrent = dtTab1Nhap;
-            PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-            txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-        }
-
-        private void pbPrev_Click(object sender, EventArgs e)
-        {
-            dtCurrent = dtTab1Nhap;
-            if (currentPageNumber > 1)
-            {
-                currentPageNumber -= 1;
-                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-            }
-            txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-        }
-
-        private void pbNext_Click(object sender, EventArgs e)
-        {
-            dtCurrent = dtTab1Nhap;
-            if (currentPageNumber < pageSize)
-            {
-                currentPageNumber += 1;
-                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-                txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-            }
-        }
-
-        private void pbLast_Click(object sender, EventArgs e)
-        {
-            dtCurrent = dtTab1Xuat;
-            if (currentPageNumber < pageSize)
-            {
-                currentPageNumber = pageSize;
-                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-                txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-            }
-        }
-        private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            rowPerPage = Convert.ToInt32(cbPageSizeNhap.SelectedItem);
-            currentPageNumber = 1;
-            PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
-            txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-        }
-
-        private void countPageSize(DataTable dt)
+        private void countPageSizeNhap(DataTable dt)
         {
             int rowCount = dt.Rows.Count;
             pageSize = rowCount / rowPerPage;
@@ -985,163 +563,22 @@ namespace iClothing
 
         private void ClearTextNhap()
         {
-            //btnAdd1.Visible = true;
-            //btnNewNhap.Visible = true;
-            //btnUpdate.Visible = false;
-            //btnSaveNhap.Visible = false;
             txtOrderIDNhap.Text = string.Empty;
-            //cbCustomer.SelectedIndex = 0;
-            //cbKihieu2.SelectedIndex = 0;
             cbNhacc.Enabled = true;
-            cbNhacc.SelectedIndex = 1;
-            //cbKihieu2.SelectedIndex = 1;
+            cbNhacc.SelectedIndex = 0;
+            cbKihieuNhap.SelectedIndex = 0;
             txtBTPChuaInNhap.Text = string.Empty;
             txtBTPDaInNhap.Text = string.Empty;
             txtTPNhap.Text = string.Empty;
             txtSPLoiNhap.Text = string.Empty;
-            //txtChuaIn2.Text = string.Empty;
-            //txtDaIn2.Text = string.Empty;
-            //txtTP2.Text = string.Empty;
-            //txtSPLoi2.Text = string.Empty;
-            //txtQuantity.Text = string.Empty;
+            dtpNgaynhap.Enabled = true;
+            IsCompleted = "false";
         }
-        /******************************** End Panel 1 ******************************************/
-
-
-
-        /******************************** Start Panel 2******************************************/
-        private void btnXong_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                List<string> UpdateItemQryList = new List<string>();
-                string UpdateItemQry = string.Empty;
-                bool isSuccess = false;
-                string DonhangID, Barcode, BTPChuaInID, BTPDaInID, TPID, SPLoiID,BTPChuaIn, BTPDaIn, TP, SPLoi;
-                DonhangID = Barcode = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaIn = BTPDaIn = TP = SPLoi = string.Empty;
-                DataRow row;
-                int count = 0;
-                var csv = new StringBuilder();
-
-                // BTPChuaIn
-                BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                // BTPDaIn
-                BTPDaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                // TP
-                TPID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                // SPLoi
-                SPLoiID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-
-                if (rbXuat.Checked)
-                {
-                    DonhangID = txtOrder2.Text;
-                    row = dtTab1Xuat.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
-                    Barcode = cbKihieu2.SelectedValue.ToString();
-                    // Convert soluong to negative
-                    BTPChuaIn = "-" + txtChuaIn2.Text;
-                    BTPDaIn = "-" + txtDaIn2.Text;
-                    TP = "-" + txtTP2.Text;
-                    SPLoi = "-" + txtSPLoi2.Text;
-                    SaveOrderToTransactionDB(Barcode, BTPChuaInID, "", txtChuaIn2.Text, "true", "false");
-                    SaveOrderToTransactionDB(Barcode, BTPDaIn, "", txtDaIn2.Text, "true", "false");
-                    SaveOrderToTransactionDB(Barcode, TPID, "", txtTP2.Text, "true", "false");
-                    SaveOrderToTransactionDB(Barcode, SPLoiID, "", txtSPLoi2.Text, "true", "false");
-                }
-                else
-                {
-                    DonhangID = txtOrderIDNhap.Text;
-                    row = dtTab1Nhap.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
-                    Barcode = cbKihieuNhap.SelectedValue.ToString();
-                    BTPChuaIn = txtBTPChuaInNhap.Text;
-                    BTPDaIn = txtBTPDaInNhap.Text;
-                    TP = txtTPNhap.Text;
-                    SPLoi = txtSPLoiNhap.Text;
-                    SaveOrderToTransactionDB(Barcode, BTPChuaInID, "", txtBTPChuaInNhap.Text, "true", "false");
-                    SaveOrderToTransactionDB(Barcode, BTPDaIn, "", txtBTPDaInNhap.Text, "true", "false");
-                    SaveOrderToTransactionDB(Barcode, TPID, "", txtTPNhap.Text, "true", "false");
-                    SaveOrderToTransactionDB(Barcode, SPLoiID, "", txtSPLoiNhap.Text, "true", "false");
-                }
-                
-
-                string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-
-                string TonkhoID1 = CommonHelper.RandomString(7) + 1;
-                string TonkhoID2 = CommonHelper.RandomString(7) + 2;
-                string TonkhoID3 = CommonHelper.RandomString(7) + 3;
-                string TonkhoID4 = CommonHelper.RandomString(7) + 4;
-
-                UpdateItemQry = "UPDATE[Order] SET [Xong] = 1";
-                UpdateItemQryList.Add(UpdateItemQry);
-                UpdateItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID1 + "','" + Barcode + "','" + BTPChuaInID + "','" + BTPChuaIn + "','" + modifyDate + "')";
-                UpdateItemQryList.Add(UpdateItemQry);
-                UpdateItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID2 + "','" + Barcode + "','" + BTPDaInID + "','" + BTPDaIn + "','" + modifyDate + "')";
-                UpdateItemQryList.Add(UpdateItemQry);
-                UpdateItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID3 + "','" + Barcode + "','" + TPID + "','" + TP + "','" + modifyDate + "')";
-                UpdateItemQryList.Add(UpdateItemQry);
-                UpdateItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + Barcode + "','" + SPLoiID + "','" + SPLoi + "','" + modifyDate + "')";
-                UpdateItemQryList.Add(UpdateItemQry);
-
-                
-                if (DBAccess.IsServerConnected())
-                {
-                    bool isExisted = DBHelper.CheckItemExist("[Order]", "DonhangID", DonhangID);
-
-                    if (isExisted)
-                    {
-                        if (UpdateItemQry.Length > 5)
-                        {
-                            foreach (var item in UpdateItemQryList)
-                            {
-                                isSuccess = DBAccess.ExecuteQuery(item);
-                            }
-                            
-
-
-                            if (isSuccess)
-                            {
-                                if (rbXuat.Checked)
-                                {
-                                    currentPageNumber = 1;
-                                    dtTab1Xuat.Rows.Remove(row);
-                                    countPageSize(dtTab1Xuat);
-                                    PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Xuat);
-                                   
-                                }
-                                else
-                                {
-                                    currentPageNumber = 1;
-                                    dtTab1Nhap.Rows.Remove(row);
-                                    countPageSize(dtTab1Nhap);
-                                    PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Nhap);
-                                    
-                                }
-                                ClearTextNhap();
-                                // Update datalist
-                                
-                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đơn hàng này chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
-            }
-
-
-        }
-        private void btnDelete1_Click(object sender, EventArgs e)
+        private void btnDeleteNhap_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dgvOrderNhap.SelectedRows)
             {
-                string orderID = row.Cells[1].Value.ToString();
+                string orderID = row.Cells[0].Value.ToString();
                 string query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
                 bool isSuccess = DBAccess.ExecuteQuery(query);
                 if (!isSuccess) return;
@@ -1150,111 +587,6 @@ namespace iClothing
                 if (!isSuccess) return;
                 dgvOrderNhap.Rows.Remove(row);
             }
-            //DBModel modelWhere = new DBModel();
-            //string orderID = txtOrderIDNhap.Text;
-            //string query;
-            //bool isSuccess = false;
-            //List<string> DeleteItemQryList = new List<string>();
-            //if (!string.IsNullOrEmpty(orderID))
-            //{
-            //    query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
-            //    DeleteItemQryList.Add(query);
-            //    query = "DELETE FROM [Order] WHERE DonhangID ='" + orderID + "';";
-            //    DeleteItemQryList.Add(query);
-            //    if (DBAccess.IsServerConnected())
-            //    {
-            //        // Barcode
-            //        // modelWhere.text = "DonhangID";
-            //        //modelWhere.value = orderID;
-            //        //modelWhere.type = "string";
-            //        DataRow row = dtTab1Nhap.Select("[Mã Đơn Hàng]=" + orderID, "[Mã Đơn Hàng]").FirstOrDefault();
-
-            //        if (query.Length > 5)
-            //        {
-            //            bool isExisted = DBHelper.CheckItemExist("[Order]", "DonhangID", orderID);
-
-            //            if (isExisted)
-            //            {
-            //                foreach (var item in DeleteItemQryList)
-            //                {
-            //                    isSuccess = DBAccess.ExecuteQuery(item);
-            //                }
-            //                if (isSuccess)
-            //                {
-            //                    //dtTab1Output = DBHelper.DeleteDatatable(dtTab1Output, modelWhere);
-            //                    currentPageNumber = 1;
-            //                    dtTab1Nhap.Rows.Remove(row);
-            //                    countPageSize(dtTab1Nhap);
-
-            //                    ClearTextNhap();
-            //                    // Update datalist
-            //                    PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Nhap);
-            //                    MessageBox.Show("Số sản phẩm đã nhập Thành công: ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //                }
-
-
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("Đơn hàng này chưa tồn tại.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            }
-            //        }
-            //    }
-
-            //}
-        }
-
-
-        
-
-        
-
-        
- 
-        private void dgvOrderNhap_FilterStringChanged(object sender, EventArgs e)
-        {
-            //ADGV.AdvancedDataGridView fdgv = dgvOrderNhap;
-            //DataTable dt = null;
-            //if (OrignalADGVdt == null)
-            //{
-            //    OrignalADGVdt = (DataTable)fdgv.DataSource;
-            //}
-            //else
-            //{
-            //    int row = OrignalADGVdt.Rows.Count;
-            //    fdgv.DataSource = OrignalADGVdt;
-            //}
-            //if (fdgv.FilterString.Length > 0)
-            //{
-            //    dt = (DataTable)fdgv.DataSource;
-            //}
-            //else//Clear Filter
-            //{
-            //    dt = OrignalADGVdt;
-            //}
-
-            //fdgv.DataSource = dt.Select(fdgv.FilterString).CopyToDataTable();
-        }
-
-        private void dgvOrderNhap_SortStringChanged(object sender, EventArgs e)
-        {
-            //ADGV.AdvancedDataGridView fdgv = dgvOrderNhap;
-            //if (fdgv.SortString.Length == 0)
-            //{
-            //    return;
-            //}
-            //string[] strtok = fdgv.SortString.Split(',');
-            //currentOrderByItem = String.Join(",", strtok);
-            //foreach (string str in strtok)
-            //{
-            //    string[] columnorder = str.Split(']');
-            //    ListSortDirection lds = ListSortDirection.Ascending;
-            //    if (columnorder[1].Trim().Equals("DESC"))
-            //    {
-            //        lds = ListSortDirection.Descending;
-            //    }
-            //    dgvOrderNhap.Sort(dgvOrderNhap.Columns[columnorder[0].Replace('[', ' ').Trim()], lds);
-            //}
         }
 
         private void dgvOrderNhap_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -1262,55 +594,701 @@ namespace iClothing
             if (e.RowIndex != -1)
             {
                 DataGridViewRow dgvRow = dgvOrderNhap.Rows[e.RowIndex];
-                txtOrderIDNhap.Text= dgvRow.Cells[1].Value.ToString();
-                cbNhacc.SelectedValue = DBHelper.Lookup("Supplier", "NhaccID", "Ten", dgvRow.Cells[2].Value.ToString());
-                cbNhacc.Text = dgvRow.Cells[2].Value.ToString();
-                if (Convert.ToBoolean(dgvRow.Cells["Xong"].EditedFormattedValue) == true) IsCompleted = "true"; else IsCompleted = "false";
-                dtpNgaynhap.Value = DateTime.Parse(dgvRow.Cells[4].Value.ToString());
-                cbKihieuNhap.SelectedValue = DBHelper.Lookup("Product", "Barcode", "Kyhieu", dgvRow.Cells[6].Value.ToString());
-                cbKihieuNhap.Text = dgvRow.Cells[6].Value.ToString();
-                txtBTPChuaInNhap.Text = dgvRow.Cells[7].Value.ToString();
-                txtBTPDaInNhap.Text = dgvRow.Cells[8].Value.ToString();
-                txtTPNhap.Text = dgvRow.Cells[9].Value.ToString();
-                txtSPLoiNhap.Text = dgvRow.Cells[10].Value.ToString();
-                
-
-                
-
-
-                //btnNewNhap.Visible = false;
-                //btnSaveNhap.Visible = true;
-                if (e.RowIndex >= 0 && e.ColumnIndex == 0)
+                txtOrderIDNhap.Text = dgvRow.Cells[0].Value.ToString();
+                cbNhacc.SelectedValue = DBHelper.Lookup("Supplier", "NhaccID", "Ten", dgvRow.Cells[1].Value.ToString());
+                cbNhacc.Text = dgvRow.Cells[1].Value.ToString();
+                if (Convert.ToBoolean(dgvOrderNhap.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true)
                 {
-                    //Loop to verify whether all row CheckBoxes are checked or not.
-                    bool isChecked = true;
-                    foreach (DataGridViewRow row in dgvOrderNhap.Rows)
-                    {
-                        if (Convert.ToBoolean(row.Cells["cbSelectNhap"].EditedFormattedValue) == false)
-                        {
-                            isChecked = false;
-                            break;
-                        }
-                    }
-                    headerCheckBox.Checked = isChecked;
+                    IsCompleted = "true";
+                    
                 }
-                    if (e.ColumnIndex != -1)
-                {
-                    if (dgvOrderNhap.Columns[e.ColumnIndex].Name == "Xong")
-                    {
-                        
-                    }
-                }
+                else IsCompleted = "false";
+                dtpNgaynhap.Value = DateTime.Parse(dgvRow.Cells[3].Value.ToString());
+                cbKihieuNhap.SelectedValue = DBHelper.Lookup("Product", "Barcode", "Kyhieu", dgvRow.Cells[5].Value.ToString());
+                cbKihieuNhap.Text = dgvRow.Cells[5].Value.ToString();
+                txtBTPChuaInNhap.Text = dgvRow.Cells[6].Value.ToString();
+                txtBTPDaInNhap.Text = dgvRow.Cells[7].Value.ToString();
+                txtTPNhap.Text = dgvRow.Cells[8].Value.ToString();
+                txtSPLoiNhap.Text = dgvRow.Cells[9].Value.ToString();
+                dtpNgaynhap.Enabled = false;
                 
+            }
+        }
+
+        private void dgvOrderNhap_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bool.Parse(IsCompleted))
+            {
+                if (e.ColumnIndex == dgvOrderNhap.Columns["Xong"].Index)
+                    if (Convert.ToBoolean(dgvOrderNhap.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true) IsCompleted = "true"; else IsCompleted = "false";
             }
             
         }
 
+        private void dgvOrderNhap_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (Convert.ToBoolean(dgvOrderNhap.Rows[e.RowIndex].Cells[2].EditedFormattedValue))
+            {
+                e.Cancel = true;
+            }
+        }
+        private void dtpFilterNgayNhap_ValueChanged(object sender, EventArgs e)
+        {
+            ngayNhapFilterChanged = true;
+        }
+
+        private void pbFirstNhap_Click(object sender, EventArgs e)
+        {           
+            if (currentPageNumber > 1)
+            {
+                currentPageNumber = 1;
+                dtCurrent = dtTab1Nhap;
+                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
+                //txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void pbPrevNhap_Click(object sender, EventArgs e)
+        {
+            dtCurrent = dtTab1Nhap;
+            if (currentPageNumber > 1)
+            {
+                currentPageNumber -= 1;
+                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
+            }
+            //txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void pbNextNhap_Click(object sender, EventArgs e)
+        {
+            dtCurrent = dtTab1Nhap;
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber += 1;
+                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
+                //txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void pbLastNhap_Click(object sender, EventArgs e)
+        {
+            dtCurrent = dtTab1Nhap;
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber = pageSize;
+                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
+                //txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void cbPageSizeNhap_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(rowPerPage != Convert.ToInt32(cbPageSizeNhap.SelectedItem))
+            {
+                rowPerPage = Convert.ToInt32(cbPageSizeNhap.SelectedItem);
+                currentPageNumber = 1;
+                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
+                //txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+            
+        }
+
+        private void dtpFilterNgayXong_ValueChanged(object sender, EventArgs e)
+        {
+            ngayXongFilterChanged = true;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string strSearch = string.Empty;
+            string ngayNhap = ngayNhapFilterChanged ? string.Format("[Ngày Nhập] > '{0}' AND [Ngày Nhập] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("dd/MM/yyyy HH:mm:ss"), dtpFilterNgayNhap.Value.AddDays(1).ToString("dd/MM/yyyy HH:mm:ss")) : string.Empty;
+            strSearch = ngayNhap;
+            string ngayXong = ngayXongFilterChanged ? string.Format("[Ngày Xong] >= '{0}' AND [Ngày Xong] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1), dtpFilterNgayXong.Value.AddDays(1)) : string.Empty;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ?"" : ngayXong): (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
+            
+            //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());
+            //string nhacc = string.IsNullOrEmpty(nhaccValue) ? string.Empty : " [Nhà Cung Cấp] like '% " + nhaccValue + "%'";
+            //strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(nhacc) ? "" : nhacc) : (string.IsNullOrEmpty(nhacc) ? strSearch : strSearch + " AND " + nhacc);
+            
+            string kihieuValue= DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyhieuFilter.SelectedValue.ToString());
+            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " [Ký Hiệu] like '" + kihieuValue + "'";
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(kyhieu) ? "" : kyhieu) : (string.IsNullOrEmpty(kyhieu) ? strSearch : strSearch + " AND " + kyhieu);
+
+            string btpchuainFilter, btpdainFilter, tpFilter, sploiFilter;
+            btpchuainFilter = string.IsNullOrEmpty(txtChuaInFilter.Text) ? string.Empty : " [BTP Chưa In] " + cbSignChuaIn.Text + " " + txtChuaInFilter.Text;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(btpchuainFilter) ? "" : btpchuainFilter) : (string.IsNullOrEmpty(btpchuainFilter) ? strSearch : strSearch + " AND " + btpchuainFilter);
+
+            btpdainFilter = string.IsNullOrEmpty(txtDaInFilter.Text) ? string.Empty : " [BTP Đã In] " + cbSignDaIn.Text + " " + txtDaInFilter.Text;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(btpdainFilter) ? "" : btpdainFilter) : (string.IsNullOrEmpty(btpdainFilter) ? strSearch : strSearch + " AND " + btpdainFilter);
+
+            tpFilter = string.IsNullOrEmpty(txtTPFilter.Text) ? string.Empty : " [Thành Phẩm] " + cbSignTP.Text + " " + txtTPFilter.Text;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(tpFilter) ? "" : tpFilter) : (string.IsNullOrEmpty(tpFilter) ? strSearch : strSearch + " AND " + tpFilter);
+
+            sploiFilter = string.IsNullOrEmpty(txtSPLoiFilter.Text) ? string.Empty : " [Sản Phẩm Lỗi] " + cbSignSPLoi.Text + " " + txtSPLoiFilter.Text;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(sploiFilter) ? "" : sploiFilter) : (string.IsNullOrEmpty(sploiFilter) ? strSearch : strSearch + " AND " + sploiFilter);
+            //string filterQuery = string.Format("[Ngày Nhập] like '%{0}%' AND [Ngày Xong] like '%{1}%' {2} {3} {4} {5} {6} {7}", "", "", nhacc, kyhieu, btpchuainFilter, btpdainFilter, tpFilter, sploiFilter);
+
+            (dgvOrderNhap.DataSource as DataTable).DefaultView.RowFilter = strSearch;
+
+        }
+        private void txtBTPChuaInNhap_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtBTPDaInNhap_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTPNhap_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSPLoiNhap_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnResetNhap_Click(object sender, EventArgs e)
+        {
+            dtpFilterNgayNhap.Value = DateTime.Today;
+            dtpFilterNgayXong.Value = DateTime.Today;
+            cbKyhieuFilter.SelectedIndex = 0;
+            txtChuaInFilter.Text = string.Empty;
+            txtDaInFilter.Text = string.Empty;
+            txtTPFilter.Text = string.Empty;
+            txtSPLoiFilter.Text = string.Empty;
+            cbSignChuaIn.SelectedIndex = -1;
+            cbSignDaIn.SelectedIndex = -1;
+            cbSignTP.SelectedIndex = -1;
+            cbSignSPLoi.SelectedIndex = -1;
+        }
+        /******************************** End Panel Nhap******************************************/
+        /******************************** Start Panel Xuat******************************************/
+        private void btnResetXuat_Click(object sender, EventArgs e)
+        {
+            dtpNgayXuatFilter.Value = DateTime.Today;
+            dtpNgayXongFilterXuat.Value = DateTime.Today;
+            cbKyHieuFilterXuat.SelectedIndex = 0;
+            txtBTPChuaInFilterXuat.Text = string.Empty;
+            txtDaInXuatFilter.Text = string.Empty;
+            txtTPFilterXuat.Text = string.Empty;
+            txtSPLoiFilterXuat.Text = string.Empty;
+            cbChuaInSignXuat.SelectedIndex = -1;
+            cbSignDaInFilterXuat.SelectedIndex = -1;
+            cbSignTPXuat.SelectedIndex = -1;
+            cbSignSPLoiXuat.SelectedIndex = -1;
+        }
+        private List<string> AddNewOrderXuat(string Ngaynhap, string DonhangID, string KHID, string barcode, string IsCompleted, string createDate,
+            string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
+            string TPSL, string SPLoiSL)
+        {
+            List<string> InsertItemQryList = new List<string>();
+            string InsertItemQry = "";
+            string orderDetailID1 = CommonHelper.RandomString(7) + 1;
+            string orderDetailID2 = CommonHelper.RandomString(7) + 2;
+            string orderDetailID3 = CommonHelper.RandomString(7) + 3;
+            string orderDetailID4 = CommonHelper.RandomString(7) + 4;
+
+            // query insert
+            InsertItemQry = "INSERT INTO [Order] ([DonhangID],[KHID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap])VALUES('" + DonhangID + "','" + KHID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + Ngaynhap + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID1 + "','" + DonhangID + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID2 + "','" + DonhangID + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID3 + "','" + DonhangID + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID4 + "','" + DonhangID + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            return InsertItemQryList;
+        }
+
+        private List<string> UpdateOrderXuat(string DonhangID, string barcode, string KHID, string ngayxong, string ngaysua, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
+            string TPSL, string SPLoiSL, string xong)
+        {
+            List<string> UpdateItemQryList = new List<string>();
+            string UpdateItemQry = "";
+            string orderDetailID1 = CommonHelper.RandomString(7) + 1;
+            string orderDetailID2 = CommonHelper.RandomString(7) + 2;
+            string orderDetailID3 = CommonHelper.RandomString(7) + 3;
+            string orderDetailID4 = CommonHelper.RandomString(7) + 4;
+
+            if (!string.IsNullOrEmpty(ngayxong))
+            {
+                ngayxong = "',[Ngayxong]= '" + ngayxong;
+            }
+            // query update
+            UpdateItemQry = "UPDATE [Order] SET[KHID] ='" + KHID + ngayxong + "',[Ngaysua]= '" + ngaysua + "',[Xong]= '" + xong + "' WHERE DonhangID ='" + DonhangID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+            UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + BTPChuaInSL + "',[Ngaysua]= '" + ngaysua + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPChuaInID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+            UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + BTPDaInSL + "',[Ngaysua]= '" + ngaysua + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPDaInID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+            UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + TPSL + "',[Ngaysua]= '" + ngaysua + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + TPID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+            UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + SPLoiSL + "',[Ngaysua]= '" + ngaysua + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + SPLoiID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+            return UpdateItemQryList;
+        }
+        private void ClearTextXuat()
+        {
+            txtOrderXuat.Text = string.Empty;
+            cbCustomer.Enabled = true;
+            cbCustomer.SelectedIndex = 0;
+            cbKyHieuXuat.SelectedIndex = 0;
+            txtBTPChuaInXuat.Text = string.Empty;
+            txtBTPDaInXuat.Text = string.Empty;
+            txtTPXuat.Text = string.Empty;
+            txtSPLoiXuat.Text = string.Empty;
+            dtpNgayXuat.Enabled = true;
+            IsCompleted = "false";
+        }
+        private void countPageSizeXuat(DataTable dt)
+        {
+            int rowCount = dt.Rows.Count;
+            pageSize = rowCount / rowPerPage;
+            // if any row left after calculated pages, add one more page 
+            if (rowCount % rowPerPage > 0)
+                pageSize += 1;
+            txtPagingXuat.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            lblTotalPageXuat.Text = "Tổng số:" + dt.Rows.Count.ToString();
+        }
+        private void GetAllDataOrderXuat()
+        {
+            string query = "Select New.DonhangID [Mã Đơn Hàng], Customer.HoTen [Tên Khách Hàng],[Order].Xong,[Order].Ngaynhap [Ngày Xuất], [Order].Ngayxong [Ngày Xong], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Customer on[Order].KHID = Customer.KHID order by [Order].Ngaynhap";
+            dtTab1Xuat = new DataTable();
+            using (SqlCeConnection connection = new SqlCeConnection(conn))
+            {
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    dtTab1Xuat.Merge(dt);
+                }
+            }
+        }
+
+        private void btnSearchXuat_Click(object sender, EventArgs e)
+        {
+            string strSearch = string.Empty;
+            string ngayXuat = ngayXuatFilterChanged ? string.Format("[Ngày Xuất] > '{0}' AND [Ngày Xuất] < '{1}'", dtpNgayXuatFilter.Value.AddDays(-1).ToString("dd/MM/yyyy HH:mm:ss"), dtpNgayXuatFilter.Value.AddDays(1).ToString("dd/MM/yyyy HH:mm:ss")) : string.Empty;
+            strSearch = ngayXuat;
+            string ngayXong = ngayXongXuatFilterChanged ? string.Format("[Ngày Xong] >= '{0}' AND [Ngày Xong] < '{1}'", dtpNgayXongFilterXuat.Value.AddDays(-1), dtpNgayXongFilterXuat.Value.AddDays(1)) : string.Empty;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
+
+            //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());
+            //string nhacc = string.IsNullOrEmpty(nhaccValue) ? string.Empty : " [Nhà Cung Cấp] like '% " + nhaccValue + "%'";
+            //strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(nhacc) ? "" : nhacc) : (string.IsNullOrEmpty(nhacc) ? strSearch : strSearch + " AND " + nhacc);
+
+            string kihieuValue = DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyHieuFilterXuat.SelectedValue.ToString());
+            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " [Ký Hiệu] like '" + kihieuValue + "'";
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(kyhieu) ? "" : kyhieu) : (string.IsNullOrEmpty(kyhieu) ? strSearch : strSearch + " AND " + kyhieu);
+
+            string btpchuainFilter, btpdainFilter, tpFilter, sploiFilter;
+            btpchuainFilter = string.IsNullOrEmpty(txtBTPChuaInFilterXuat.Text) ? string.Empty : " [BTP Chưa In] " + cbChuaInSignXuat.Text + " " + txtBTPChuaInFilterXuat.Text;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(btpchuainFilter) ? "" : btpchuainFilter) : (string.IsNullOrEmpty(btpchuainFilter) ? strSearch : strSearch + " AND " + btpchuainFilter);
+
+            btpdainFilter = string.IsNullOrEmpty(txtDaInXuatFilter.Text) ? string.Empty : " [BTP Đã In] " + cbSignDaInFilterXuat.Text + " " + txtDaInXuatFilter.Text;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(btpdainFilter) ? "" : btpdainFilter) : (string.IsNullOrEmpty(btpdainFilter) ? strSearch : strSearch + " AND " + btpdainFilter);
+
+            tpFilter = string.IsNullOrEmpty(txtTPFilterXuat.Text) ? string.Empty : " [Thành Phẩm] " + cbSignTPXuat.Text + " " + txtTPFilterXuat.Text;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(tpFilter) ? "" : tpFilter) : (string.IsNullOrEmpty(tpFilter) ? strSearch : strSearch + " AND " + tpFilter);
+
+            sploiFilter = string.IsNullOrEmpty(txtSPLoiXuat.Text) ? string.Empty : " [Sản Phẩm Lỗi] " + cbSignSPLoiXuat.Text + " " + txtSPLoiXuat.Text;
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(sploiFilter) ? "" : sploiFilter) : (string.IsNullOrEmpty(sploiFilter) ? strSearch : strSearch + " AND " + sploiFilter);
+            //string filterQuery = string.Format("[Ngày Nhập] like '%{0}%' AND [Ngày Xong] like '%{1}%' {2} {3} {4} {5} {6} {7}", "", "", nhacc, kyhieu, btpchuainFilter, btpdainFilter, tpFilter, sploiFilter);
+
+            (dgvOrderXuat.DataSource as DataTable).DefaultView.RowFilter = strSearch;
+        }
+
+        private void btnNewXuat_Click(object sender, EventArgs e)
+        {
+            cbCustomer.SelectedIndex = 0;
+            cbKyHieuXuat.SelectedIndex = 0;
+            txtBTPChuaInXuat.Text = "0";
+            txtBTPDaInXuat.Text = "0";
+            txtTPXuat.Text = "0";
+            txtSPLoiXuat.Text = "0";
+            dtpNgayXuat.Enabled = true;
+            dtpNgayXuat.Value = DateTime.Today;
+            IsCompleted = "false";
+        }
+
+        private void btnSaveXuat_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<string> ItemQryList = new List<string>();
+
+                bool isSuccess = false;
+                string isNhap = "false";
+                DataRow rd = dtTab1Xuat.NewRow();
+
+                string Ngay, DonhangID, barcode, KHID, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL;
+                Ngay = DonhangID = barcode = KHID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = string.Empty;
+                // Set value for number field
+                if (string.IsNullOrEmpty(txtBTPChuaInXuat.Text)) txtBTPChuaInXuat.Text = "0";
+                if (string.IsNullOrEmpty(txtBTPDaInXuat.Text)) txtBTPDaInXuat.Text = "0";
+                if (string.IsNullOrEmpty(txtTPXuat.Text)) txtTPXuat.Text = "0";
+                if (string.IsNullOrEmpty(txtSPLoiXuat.Text)) txtSPLoiXuat.Text = "0";
+
+
+                if (string.IsNullOrEmpty(txtOrderXuat.Text))
+                {
+                    // DonhangID
+                    DonhangID = CommonHelper.RandomString(8);
+                    rd[0] = DonhangID;
+                    // Customer
+                    KHID = cbCustomer.SelectedValue.ToString();
+                    rd[1] = DBHelper.Lookup("Customer", "HoTen", "KHID", KHID);
+                    // Xong
+                    rd[2] = IsCompleted;
+                    // Ngay nhap
+                    Ngay = dtpNgaynhap.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    rd[3] = Ngay;
+                    // Barcode
+                    barcode = cbKyHieuXuat.SelectedValue.ToString();
+                    rd[5] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
+                    // BTPChuaIn
+                    BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
+                    BTPChuaInSL = txtBTPChuaInXuat.Text;
+                    rd[6] = BTPChuaInSL;
+                    // BTPDaIn
+                    BTPDaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
+                    BTPDaInSL = txtBTPDaInXuat.Text;
+                    rd[7] = BTPDaInSL;
+                    // TP
+                    TPID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
+                    TPSL = txtTPXuat.Text;
+                    rd[8] = TPSL;
+                    // SPLoi
+                    SPLoiID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
+                    SPLoiSL = txtSPLoiXuat.Text;
+                    rd[9] = SPLoiSL;
+
+                    // Created Date
+                    string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+
+                    ItemQryList = AddNewOrderXuat(Ngay, DonhangID, KHID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                }
+                else
+                {
+                    DonhangID = txtOrderXuat.Text;
+                    DataRow row = dtTab1Xuat.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
+
+                    string ngayxong = string.Empty;
+                    string ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+
+                    // NhaccID
+                    KHID = cbKyHieuXuat.SelectedValue.ToString();
+                    row[1] = DBHelper.Lookup("Customer", "HoTen", "KHID", KHID);
+                    // Xong                   
+                    row[2] = IsCompleted;
+
+                    // Ngay nhap
+                    ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    //rd[3] = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    // Ngay xong
+                    if (!DBHelper.isXong(DonhangID) && bool.Parse(IsCompleted))
+                    {
+                        ngayxong = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                        row[4] = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    }
+                    // Barcode
+                    barcode = cbKyHieuXuat.SelectedValue.ToString();
+                    row[5] = DBHelper.Lookup("Product", "Kyhieu", "Barcode", barcode);
+                    // BTPChuaIn
+                    BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
+                    BTPChuaInSL = txtBTPChuaInXuat.Text;
+                    row[6] = BTPChuaInSL;
+                    // BTPDaIn
+                    BTPDaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
+                    BTPDaInSL = txtBTPDaInXuat.Text;
+                    row[7] = BTPDaInSL;
+                    // TP
+                    TPID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
+                    TPSL = txtTPXuat.Text;
+                    row[8] = TPSL;
+                    // SPLoi
+                    SPLoiID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
+                    SPLoiSL = txtSPLoiXuat.Text;
+                    row[9] = SPLoiSL;
+
+                    ItemQryList = UpdateOrderXuat(DonhangID, barcode, KHID, ngayxong, ngaysua, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, IsCompleted);
+
+                }
+
+                if (DBAccess.IsServerConnected())
+                {
+                    //bool isExisted = DBHelper.CheckItemExist("Order", "DonhangID", DonhangID);
+
+                    //if (!isExisted)
+                    //{
+                    if (ItemQryList.Count > 0)
+                    {
+                        foreach (var item in ItemQryList)
+                        {
+                            isSuccess = DBAccess.ExecuteQuery(item);
+                        }
+
+                        if (isSuccess)
+                        {
+                            SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
+                            SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
+                            SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
+                            SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
+                            if (string.IsNullOrEmpty(txtOrderXuat.Text))
+                            {
+                                dtTab1Xuat.Rows.InsertAt(rd, 0);
+                                cbCustomer.SelectedIndex = 0;
+                                currentPageNumber = 1;
+                                countPageSizeXuat(dtTab1Xuat);
+                                ClearTextXuat();
+                                // Update datalist
+                                PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Xuat);
+                            }
+                            else
+                            {
+                                cbCustomer.SelectedIndex = 0;
+                                currentPageNumber = 1;
+                                //countPageSizeNhap(dtTab1Nhap);
+                                ClearTextXuat();
+                                // Update datalist
+                                PopulateDataOrder(currentPageNumber, rowPerPage, dtTab1Xuat);
+                            }
+                            MessageBox.Show("Đơn hàng này đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("Barcode da ton tai : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
+            }
+        }
+
+        private void btnXoaXuat_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvOrderXuat.SelectedRows)
+            {
+                string orderID = row.Cells[0].Value.ToString();
+                string query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
+                bool isSuccess = DBAccess.ExecuteQuery(query);
+                if (!isSuccess) return;
+                query = "DELETE FROM [Order] WHERE DonhangID ='" + orderID + "';";
+                isSuccess = DBAccess.ExecuteQuery(query);
+                if (!isSuccess) return;
+                dgvOrderXuat.Rows.Remove(row);
+            }
+        }
+
+        private void pbFirstXuat_Click(object sender, EventArgs e)
+        {
+            currentPageNumber = 1;
+            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab1Xuat);
+            txtPagingXuat.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void pbPrevXuat_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber > 0)
+            {
+                currentPageNumber -= 1;
+                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab1Xuat);
+            }
+            txtPagingXuat.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void pbNextXuat_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber += 1;
+                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab1Xuat);
+                txtPagingXuat.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void pbLastXuat_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber = pageSize;
+                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab1Xuat);
+                txtPagingXuat.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void cbPagingSizeXuat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rowPerPage != Convert.ToInt32(cbPagingSizeXuat.SelectedItem))
+            {
+                rowPerPage = Convert.ToInt32(cbPagingSizeXuat.SelectedItem);
+                currentPageNumber = 1;
+                PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
+                //txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void txtBTPChuaInXuat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtBTPDaInXuat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTPXuat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSPLoiXuat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void dgvOrderXuat_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (Convert.ToBoolean(dgvOrderXuat.Rows[e.RowIndex].Cells[2].EditedFormattedValue))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void dgvOrderXuat_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!bool.Parse(IsCompleted))
+            {
+                if (e.ColumnIndex == dgvOrderXuat.Columns["Xong"].Index)
+                    if (Convert.ToBoolean(dgvOrderXuat.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true) IsCompleted = "true"; else IsCompleted = "false";
+            }
+        }
+
+        private void dgvOrderXuat_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                DataGridViewRow dgvRow = dgvOrderXuat.Rows[e.RowIndex];
+                txtOrderXuat.Text = dgvRow.Cells[0].Value.ToString();
+                cbCustomer.SelectedValue = DBHelper.Lookup("Customer", "KHID", "HoTen", dgvRow.Cells[1].Value.ToString());
+                cbCustomer.Text = dgvRow.Cells[1].Value.ToString();
+                if (Convert.ToBoolean(dgvOrderXuat.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true)
+                {
+                    IsCompleted = "true";
+
+                }
+                dtpNgayXuat.Value = DateTime.Parse(dgvRow.Cells[3].Value.ToString());
+                cbKyHieuXuat.SelectedValue = DBHelper.Lookup("Product", "Barcode", "Kyhieu", dgvRow.Cells[5].Value.ToString());
+                cbKyHieuXuat.Text = dgvRow.Cells[5].Value.ToString();
+                txtBTPChuaInXuat.Text = dgvRow.Cells[6].Value.ToString();
+                txtBTPDaInXuat.Text = dgvRow.Cells[7].Value.ToString();
+                txtTPXuat.Text = dgvRow.Cells[8].Value.ToString();
+                txtSPLoiXuat.Text = dgvRow.Cells[9].Value.ToString();
+
+                dtpNgayXuat.Enabled = false;
+
+            }
+        }
+        private void tbXuat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tbXuat.SelectedIndex == 1)
+            {
+                dtpNgayXuatFilter.Format = DateTimePickerFormat.Custom;
+                dtpNgayXuatFilter.CustomFormat = "dd/MM/yyyy";
+                dtpNgayXongFilterXuat.Format = DateTimePickerFormat.Custom;
+                dtpNgayXongFilterXuat.CustomFormat = "dd/MM/yyyy";
+
+                // Init Ki hieu combobox
+                DataTable dtProduct = DBHelper.GetAllProduct();
+                // generate the data you want to insert
+                DataRow toInsert = dtProduct.NewRow();
+                toInsert[0] = "";
+                toInsert[1] = "";
+                // insert in the desired place
+                dtProduct.Rows.InsertAt(toInsert, 0);
+                if (dtProduct.Rows.Count > 0)
+                {
+                    cbKyHieuFilterXuat.DataSource = dtProduct;
+                    cbKyHieuFilterXuat.ValueMember = "Barcode";
+                    cbKyHieuFilterXuat.DisplayMember = "Kyhieu";
+                    cbKyHieuFilterXuat.SelectedIndex = 0;
+
+                }
+
+                // Init Supplier combobox
+                //DataTable dtSupplier = DBHelper.GetAllSupplier();
+                //if (dtSupplier.Rows.Count > 0)
+                //{
+                //    cbNhaccFilter.DataSource = dtSupplier;
+                //    cbNhaccFilter.ValueMember = "NhaccID";
+                //    cbNhaccFilter.DisplayMember = "Ten";
+                //    cbNhaccFilter.SelectedIndex = 0;
+                //}
+            }
+        }
+
+        private void dtpNgayXuatFilter_ValueChanged(object sender, EventArgs e)
+        {
+            ngayXuatFilterChanged = true;
+        }
+
+        private void dtpNgayXongFilterXuat_ValueChanged(object sender, EventArgs e)
+        {
+            ngayXongXuatFilterChanged = true;
+        }
         /********************************End Panel 2******************************************/
 
         private void GetAllOrder()
         {
-            string query = "select * from (select[order].donhangid [Mã Đơn Hàng], barcode [Barcode], SUM(CASE WHEN LoaiID = 0000001 AND[order].NhacciD is not null Then Soluong else 0 end)[Nhập BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Thành Phẩm],SUM(CASE WHEN LoaiID = 000004 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Sản phẩm lỗi],SUM(CASE WHEN LoaiID = 0000001 AND[order].KHID is not null Then Soluong else 0 end)[Xuất BTP Chưa in],SUM(CASE WHEN LoaiID = 0000002 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất Sản phẩm lỗi], [order].ngaysua from orderdetail join [order] on orderdetail.donhangid = [order].donhangid GROUP BY[order].donhangid, Barcode,[order].ngaysua) New order by New.ngaysua;";
+            string query = "select * from (select [order].ngayxong [Ngày Nhập/ Xuất], product.kyhieu [Ký Hiệu], product.masp [Mã Sản Phẩm],"
++ "SUM(CASE WHEN LoaiID = 0000001 AND[order].NhacciD is not null Then Soluong else 0 end)[Nhập BTP Chưa in], "
++ "SUM(CASE WHEN LoaiID = 0000002 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập BTP Đã in], "
++ "SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Thành Phẩm],"
++ "SUM(CASE WHEN LoaiID = 000004 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Sản phẩm lỗi],"
++ "SUM(CASE WHEN LoaiID = 0000001 AND[order].KHID is not null Then Soluong else 0 end)[Xuất BTP Chưa in],"
++ "SUM(CASE WHEN LoaiID = 0000002 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất BTP Đã in], "
++ "SUM(CASE WHEN LoaiID = 0000003 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất Thành Phẩm], "
++ "SUM(CASE WHEN LoaiID = 000004 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất Sản phẩm lỗi] "
++ "from orderdetail "
++ "join [order] on orderdetail.donhangid = [order].donhangid "
++ "join product on orderdetail.barcode = product.barcode "
++ "where [order].xong = 1 "
++ "GROUP BY[order].donhangid, product.kyhieu,product.masp, [order].ngayxong) New order by New.[Ngày Nhập/ Xuất]; "; 
             dtTab2NhapXuat = new DataTable();
             using (SqlCeConnection connection = new SqlCeConnection(conn))
             {
@@ -1338,6 +1316,28 @@ namespace iClothing
             if (dt.Rows.Count > 0)
             {
                 dvgManageInOut.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
+                dvgManageInOut.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                dvgManageInOut.Columns[1].Width = 130;
+                //dgvOrderNhap.Columns["Xong"].ReadOnly = true;
+                dvgManageInOut.Columns["Ký Hiệu"].Width = 60;
+                dvgManageInOut.Columns["Nhập BTP Chưa in"].Width = 120;
+                this.dvgManageInOut.Columns["Nhập BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dvgManageInOut.Columns["Nhập BTP Đã in"].Width = 100;
+                this.dvgManageInOut.Columns["Nhập BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dvgManageInOut.Columns["Nhập Thành Phẩm"].Width = 120;
+                this.dvgManageInOut.Columns["Nhập Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dvgManageInOut.Columns["Nhập Sản phẩm lỗi"].Width = 110;
+                this.dvgManageInOut.Columns["Nhập Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dvgManageInOut.Columns["Xuất BTP Chưa in"].Width = 120;
+                this.dvgManageInOut.Columns["Xuất BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dvgManageInOut.Columns["Xuất BTP Đã in"].Width = 100;
+                this.dvgManageInOut.Columns["Xuất BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dvgManageInOut.Columns["Xuất Thành Phẩm"].Width = 120;
+                this.dvgManageInOut.Columns["Xuất Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dvgManageInOut.Columns["Xuất Sản phẩm lỗi"].Width = 110;
+                this.dvgManageInOut.Columns["Xuất Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dvgManageInOut.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dvgManageInOut.Sort(dvgManageInOut.Columns["Ngày Nhập/ Xuất"], ListSortDirection.Descending);
             }
             else
             {
@@ -1346,42 +1346,7 @@ namespace iClothing
 
 
         }
-        private void pbFirst1_Click(object sender, EventArgs e)
-        {
-            currentPageNumber = 1;
-            PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab2NhapXuat);
-            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-        }
-
-        private void pbPrev1_Click(object sender, EventArgs e)
-        {
-            if (currentPageNumber > 0)
-            {
-                currentPageNumber -= 1;
-                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab2NhapXuat);
-            }
-            txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-        }
-
-        private void pbNext1_Click(object sender, EventArgs e)
-        {
-            if (currentPageNumber < pageSize)
-            {
-                currentPageNumber += 1;
-                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab2NhapXuat);
-                txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-            }
-        }
-
-        private void pbLast1_Click(object sender, EventArgs e)
-        {
-            if (currentPageNumber < pageSize)
-            {
-                currentPageNumber = pageSize;
-                PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab2NhapXuat);
-                txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-            }
-        }
+        
 
         private void tbNewOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1392,11 +1357,25 @@ namespace iClothing
                     break;
                 case 1:
                     {
+                        dtpNhapXuatFilter.Format = DateTimePickerFormat.Custom;
+                        dtpNhapXuatFilter.CustomFormat = "dd/MM/yyyy";
+
+                        DataTable dtProduct = DBHelper.GetAllProduct();
+                        if (dtProduct.Rows.Count > 0)
+                        {
+                            cbKyHieuNhapXuatFilter.DataSource = dtProduct;
+                            cbKyHieuNhapXuatFilter.ValueMember = "Barcode";
+                            cbKyHieuNhapXuatFilter.DisplayMember = "Kyhieu";
+                            cbKyHieuNhapXuatFilter.SelectedIndex = 0;
+
+                        }
                         currentPageNumber = 1;
                         rowPerPage = 10;
                         GetAllOrder();
                         PopulateDataOrderInOut(currentPageNumber, rowPerPage, dtTab2NhapXuat);
-                        cbPageSize1.SelectedItem = "10";
+                        cbPageSize1.SelectedIndex = 0;
+
+
                     }
                     break;
             }
@@ -1467,9 +1446,9 @@ namespace iClothing
             catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show("Microsoft Office Excel bị lỗi!");
             }
-            
+
         }
 
         public System.Data.DataTable ExportToExcel()
@@ -1490,123 +1469,26 @@ namespace iClothing
             dtManageOrderNew.Columns.Add("GHI CHÚ", typeof(string));
 
             DataRow row;
-            string ngay, kyhieu, masp, nhapbtpchuain, nhapbtpdain, nhaptp, nhapsploi, xuatbtpchuain, xuatbtpdain, xuattp, xuatsploi,ghichu;
+            string ngay, kyhieu, masp, nhapbtpchuain, nhapbtpdain, nhaptp, nhapsploi, xuatbtpchuain, xuatbtpdain, xuattp, xuatsploi, ghichu;
             for (int i = 0; i < dtTab2NhapXuat.Rows.Count; i++)
             {
-                ngay = DateTime.Parse(dtTab2NhapXuat.Rows[i][10].ToString()).ToString("dd/MM/yyy");
-                kyhieu = DBHelper.Lookup("Product","Kyhieu","Barcode",dtTab2NhapXuat.Rows[i][1].ToString());
-                masp = DBHelper.Lookup("Product", "MaSP", "Barcode", dtTab2NhapXuat.Rows[i][1].ToString());
-                nhapbtpchuain = dtTab2NhapXuat.Rows[i][2].ToString();
-                nhapbtpdain = dtTab2NhapXuat.Rows[i][3].ToString();
-                nhaptp = dtTab2NhapXuat.Rows[i][4].ToString();
-                nhapsploi = dtTab2NhapXuat.Rows[i][5].ToString();
-                xuatbtpchuain = dtTab2NhapXuat.Rows[i][6].ToString();
-                xuatbtpdain = dtTab2NhapXuat.Rows[i][7].ToString();
-                xuattp = dtTab2NhapXuat.Rows[i][8].ToString();
-                xuatsploi = dtTab2NhapXuat.Rows[i][9].ToString();
+                ngay = DateTime.Parse(dtTab2NhapXuat.Rows[i][0].ToString()).ToString("dd/MM/yyy");
+                kyhieu = dtTab2NhapXuat.Rows[i][1].ToString();
+                masp = dtTab2NhapXuat.Rows[i][2].ToString();
+                nhapbtpchuain = dtTab2NhapXuat.Rows[i][3].ToString();
+                nhapbtpdain = dtTab2NhapXuat.Rows[i][4].ToString();
+                nhaptp = dtTab2NhapXuat.Rows[i][5].ToString();
+                nhapsploi = dtTab2NhapXuat.Rows[i][6].ToString();
+                xuatbtpchuain = dtTab2NhapXuat.Rows[i][7].ToString();
+                xuatbtpdain = dtTab2NhapXuat.Rows[i][8].ToString();
+                xuattp = dtTab2NhapXuat.Rows[i][9].ToString();
+                xuatsploi = dtTab2NhapXuat.Rows[i][10].ToString();
                 ghichu = "";
                 dtManageOrderNew.Rows.Add(i + 1, ngay, kyhieu, masp, nhapbtpchuain, nhapbtpdain, nhaptp, nhapsploi, xuatbtpchuain, xuatbtpdain, xuattp, xuatsploi, ghichu);
             }
             return dtManageOrderNew;
         }
-
-        private void txtBTPChuaIn1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtDaIn2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtTP2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtSPLoi2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtBTPDaIn1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtChuaIn2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtTP1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void SaveOrderToTransactionDB(string barcode, string LoaiID, string Mota, string soluong, string Nhap, string Xong)
-        {
-            DBModel modelWhere = new DBModel();
-            bool isSuccess = false;
-            string InsertItemQry;
-            string TransID = CommonHelper.RandomString(8);
-            string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-            string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-            if (!string.IsNullOrEmpty(barcode))
-            {
-                InsertItemQry = "INSERT INTO [Transaction]([TransID],[Barcode],[LoaiID],[Mota],[Soluong],[Nhap],[Xong],[Ngaytao],[Ngaysua])VALUES('"+ TransID + "','" + barcode + "','"+LoaiID+"','"+Mota +"','" + soluong + "','" + Nhap + "','"+Xong+ "','" + createDate + "','" + modifyDate + "')";
-                if (DBAccess.IsServerConnected())
-                {
-
-                    if (InsertItemQry.Length > 5)
-                    {
-                        bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
-
-                        if (isExisted)
-                        {
-                                isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                }
-
-            }
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            //(dgvOrderNhap.DataSource as DataTable).DefaultView.RowFilter = string.Format("[Ký Hiệu] like '{0}%' OR [Nhà Cung Cấp] like '{0}%'", txtSearch.Text);
-        }
-
-        private void txtSearch2_TextChanged(object sender, EventArgs e)
-        {
-            (dgvOrderXuat.DataSource as DataTable).DefaultView.RowFilter = string.Format("[Ký Hiệu] like '{0}%' OR [Tên Khách Hàng] like '{0}%'", txtSearch2.Text);
-        }
+        
 
         private void cbPageSize1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1616,32 +1498,30 @@ namespace iClothing
             txtPaging1.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
-        private void dtpFilterNgayXong_ValueChanged(object sender, EventArgs e)
+        private void btnNhapXuatReset_Click(object sender, EventArgs e)
         {
-            ngayXongFilterChanged = true;
+            dtpNhapXuatFilter.Value = DateTime.Today;
+
+            cbKyHieuNhapXuatFilter.SelectedIndex = 0;
+
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnNhapXuatSearch_Click(object sender, EventArgs e)
         {
-            //string ngayNhap = ngayNhapFilterChanged ? string.Format("Data > '{0}' AND Data < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("dd/MM/yyyy HH:mm:ss"), dtpFilterNgayNhap.Value.AddDays(1).ToString("dd/MM/yyyy HH:mm:ss")):string.Empty;            
-            //string ngayXong = ngayXongFilterChanged ? string.Format("Data > '{0}' AND Data < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("dd/MM/yyyy HH:mm:ss"), dtpFilterNgayXong.Value.AddDays(1).ToString("dd/MM/yyyy HH:mm:ss")) : string.Empty;
-            //ngayXong = string.IsNullOrEmpty(ngayNhap) ? (string.IsNullOrEmpty(ngayXong)? : " AND " + ngayXong;
-            //string nhacc = string.IsNullOrEmpty(cbNhaccFilter.SelectedText) ? string.Empty : " AND [Nhà Cung Cấp] like '% " + cbNhaccFilter.SelectedText + "%'"; 
-            //nhacc 
-            //string kyhieu = string.IsNullOrEmpty(cbKyhieuFilter.SelectedText) ? string.Empty : " AND [Ký Hiệu] like '%" + cbSignChuaIn.Text + "%'";
-            //string btpchuainFilter, btpdainFilter, tpFilter, sploiFilter;
-            //btpchuainFilter = string.IsNullOrEmpty(txtChuaInFilter.Text) ? string.Empty : " AND [BTP Chưa In] " + cbSignChuaIn.Text + " " + txtChuaInFilter.Text;
-            //btpdainFilter = string.IsNullOrEmpty(txtDaInFilter.Text) ? string.Empty : " AND [BTP Đã In] " + cbSignDaIn.Text + " " + txtDaInFilter.Text;
-            //tpFilter = string.IsNullOrEmpty(txtTPFilter.Text) ? string.Empty : " AND [Thành Phẩm] " + cbSignTP.Text + " " + txtTPFilter.Text;
-            //sploiFilter = string.IsNullOrEmpty(txtSPLoiFilter.Text) ? string.Empty : " AND[Sản Phẩm Lỗi] " + cbSignSPLoi.Text + " " + txtSPLoiFilter.Text;
-            //string filterQuery = string.Format("[Ngày Nhập] like '%{0}%' AND [Ngày Xong] like '%{1}%' {2} {3} {4} {5} {6} {7}", "", "", nhacc, kyhieu, btpchuainFilter, btpdainFilter, tpFilter, sploiFilter);
+            string strSearch = string.Empty;
+            string ngayNhapXuat = ngayNhapXuatFilterChanged ? string.Format("[Ngày Nhập] > '{0}' AND [Ngày Nhập] < '{1}'", dtpNhapXuatFilter.Value.AddDays(-1).ToString("dd/MM/yyyy HH:mm:ss"), dtpNhapXuatFilter.Value.AddDays(1).ToString("dd/MM/yyyy HH:mm:ss")) : string.Empty;
+            strSearch = ngayNhapXuat;
+            
+            string kihieuValue = DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyHieuNhapXuatFilter.SelectedValue.ToString());
+            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " [Ký Hiệu] like '" + kihieuValue + "'";
+            strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(kyhieu) ? "" : kyhieu) : (string.IsNullOrEmpty(kyhieu) ? strSearch : strSearch + " AND " + kyhieu);            
 
-            //(dgvOrderNhap.DataSource as DataTable).DefaultView.RowFilter = filterQuery;
+            (dvgManageInOut.DataSource as DataTable).DefaultView.RowFilter = strSearch;
         }
 
-        private void dtpFilterNgayNhap_ValueChanged(object sender, EventArgs e)
+        private void dtpNhapXuatFilter_ValueChanged(object sender, EventArgs e)
         {
-            ngayNhapFilterChanged = true;
+            ngayNhapXuatFilterChanged = true;
         }
     }
 }

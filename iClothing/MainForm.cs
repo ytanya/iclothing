@@ -43,5 +43,10 @@ namespace iClothing
             //closeForm();
             //showFrm(new OrderForm());
         }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

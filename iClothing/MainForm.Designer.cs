@@ -206,6 +206,7 @@
             this.btnStock.Text = "       Tồn Kho";
             this.btnStock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnStock.UseVisualStyleBackColor = false;
+            this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
             // 
             // pnSystem
             // 

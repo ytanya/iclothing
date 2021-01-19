@@ -69,21 +69,22 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label1.Location = new System.Drawing.Point(2, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(826, 3);
+            this.label1.Size = new System.Drawing.Size(680, 3);
             this.label1.TabIndex = 57;
             // 
             // quanLyNhap1
             // 
-            this.quanLyNhap1.Location = new System.Drawing.Point(1, 51);
+            this.quanLyNhap1.AutoScroll = true;
+            this.quanLyNhap1.Location = new System.Drawing.Point(0, 51);
             this.quanLyNhap1.Name = "quanLyNhap1";
-            this.quanLyNhap1.Size = new System.Drawing.Size(815, 537);
+            this.quanLyNhap1.Size = new System.Drawing.Size(815, 520);
             this.quanLyNhap1.TabIndex = 58;
             // 
             // quanLyXuat1
             // 
-            this.quanLyXuat1.Location = new System.Drawing.Point(4, 53);
+            this.quanLyXuat1.Location = new System.Drawing.Point(0, 51);
             this.quanLyXuat1.Name = "quanLyXuat1";
-            this.quanLyXuat1.Size = new System.Drawing.Size(815, 539);
+            this.quanLyXuat1.Size = new System.Drawing.Size(815, 520);
             this.quanLyXuat1.TabIndex = 59;
             // 
             // QuanLyNhapXuat
@@ -97,7 +98,8 @@
             this.Controls.Add(this.rbNhap);
             this.Controls.Add(this.label1);
             this.Name = "QuanLyNhapXuat";
-            this.Size = new System.Drawing.Size(815, 595);
+            this.Size = new System.Drawing.Size(815, 570);
+            this.Load += new System.EventHandler(this.QuanLyNhapXuat_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

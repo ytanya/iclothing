@@ -28,68 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyXuat));
             this.pnXuat = new System.Windows.Forms.Panel();
-            this.cbPagingSizeXuat = new System.Windows.Forms.ComboBox();
-            this.dgvOrderXuat = new System.Windows.Forms.DataGridView();
-            this.lblTotalPageXuat = new System.Windows.Forms.Label();
-            this.txtPagingXuat = new System.Windows.Forms.TextBox();
-            this.pbLastXuat = new System.Windows.Forms.PictureBox();
-            this.pbPrevXuat = new System.Windows.Forms.PictureBox();
-            this.pbFirstXuat = new System.Windows.Forms.PictureBox();
-            this.pbNextXuat = new System.Windows.Forms.PictureBox();
+            this.cbPagingSize = new System.Windows.Forms.ComboBox();
+            this.dgvOrder = new System.Windows.Forms.DataGridView();
+            this.lblTotalPage = new System.Windows.Forms.Label();
+            this.txtPaging = new System.Windows.Forms.TextBox();
+            this.pbLast = new System.Windows.Forms.PictureBox();
+            this.pbPrev = new System.Windows.Forms.PictureBox();
+            this.pbFirst = new System.Windows.Forms.PictureBox();
+            this.pbNext = new System.Windows.Forms.PictureBox();
             this.tbXuat = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dtpNgayXuat = new System.Windows.Forms.DateTimePicker();
-            this.txtOrderXuat = new System.Windows.Forms.TextBox();
+            this.txtOrder = new System.Windows.Forms.TextBox();
             this.lblNgayXuat = new System.Windows.Forms.Label();
             this.lblTPXuat = new System.Windows.Forms.Label();
-            this.btnNewXuat = new System.Windows.Forms.Button();
-            this.txtSPLoiXuat = new System.Windows.Forms.TextBox();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.txtSPLoi = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.cbKyHieuXuat = new System.Windows.Forms.ComboBox();
+            this.cbKyHieu = new System.Windows.Forms.ComboBox();
             this.lblSPLoiXuat = new System.Windows.Forms.Label();
-            this.txtTPXuat = new System.Windows.Forms.TextBox();
-            this.btnXoaXuat = new System.Windows.Forms.Button();
+            this.txtTP = new System.Windows.Forms.TextBox();
+            this.btnXoa = new System.Windows.Forms.Button();
             this.lblBTPDaInXuat = new System.Windows.Forms.Label();
             this.lblKH = new System.Windows.Forms.Label();
-            this.btnSaveXuat = new System.Windows.Forms.Button();
-            this.txtBTPDaInXuat = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.txtBTPDaIn = new System.Windows.Forms.TextBox();
             this.cbCustomer = new System.Windows.Forms.ComboBox();
-            this.txtBTPChuaInXuat = new System.Windows.Forms.TextBox();
+            this.txtBTPChuaIn = new System.Windows.Forms.TextBox();
             this.lblBTPChuaInXuat = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnResetXuat = new System.Windows.Forms.Button();
-            this.btnSearchXuat = new System.Windows.Forms.Button();
-            this.cbSignSPLoiXuat = new System.Windows.Forms.ComboBox();
-            this.txtSPLoiFilterXuat = new System.Windows.Forms.TextBox();
-            this.cbSignTPXuat = new System.Windows.Forms.ComboBox();
-            this.txtTPFilterXuat = new System.Windows.Forms.TextBox();
-            this.cbSignDaInFilterXuat = new System.Windows.Forms.ComboBox();
-            this.txtDaInXuatFilter = new System.Windows.Forms.TextBox();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.cbSignSPLoi = new System.Windows.Forms.ComboBox();
+            this.txtSPLoiFilter = new System.Windows.Forms.TextBox();
+            this.cbSignTP = new System.Windows.Forms.ComboBox();
+            this.txtTPFilter = new System.Windows.Forms.TextBox();
+            this.cbSignDaInFilter = new System.Windows.Forms.ComboBox();
+            this.txtDaInFilter = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.lblSPLoiNhapFilter = new System.Windows.Forms.Label();
             this.lblDaInNhapFilter = new System.Windows.Forms.Label();
-            this.cbChuaInSignXuat = new System.Windows.Forms.ComboBox();
-            this.txtBTPChuaInFilterXuat = new System.Windows.Forms.TextBox();
+            this.cbChuaInSign = new System.Windows.Forms.ComboBox();
+            this.txtBTPChuaInFilter = new System.Windows.Forms.TextBox();
             this.lblChuaInNhapFilter = new System.Windows.Forms.Label();
             this.lblKyhieuNhapFilter = new System.Windows.Forms.Label();
-            this.cbKyHieuFilterXuat = new System.Windows.Forms.ComboBox();
-            this.dtpNgayXongFilterXuat = new System.Windows.Forms.DateTimePicker();
+            this.cbKyHieuFilter = new System.Windows.Forms.ComboBox();
+            this.dtpNgayXongFilter = new System.Windows.Forms.DateTimePicker();
             this.lblNgayXongNhapFilter = new System.Windows.Forms.Label();
             this.dtpNgayXuatFilter = new System.Windows.Forms.DateTimePicker();
             this.lblNgayXuatFilter = new System.Windows.Forms.Label();
             this.pnXuat.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderXuat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLastXuat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPrevXuat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFirstXuat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNextXuat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             this.tbXuat.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -98,132 +98,140 @@
             // pnXuat
             // 
             this.pnXuat.BackColor = System.Drawing.Color.White;
-            this.pnXuat.Controls.Add(this.cbPagingSizeXuat);
-            this.pnXuat.Controls.Add(this.dgvOrderXuat);
-            this.pnXuat.Controls.Add(this.lblTotalPageXuat);
-            this.pnXuat.Controls.Add(this.txtPagingXuat);
-            this.pnXuat.Controls.Add(this.pbLastXuat);
-            this.pnXuat.Controls.Add(this.pbPrevXuat);
-            this.pnXuat.Controls.Add(this.pbFirstXuat);
-            this.pnXuat.Controls.Add(this.pbNextXuat);
+            this.pnXuat.Controls.Add(this.cbPagingSize);
+            this.pnXuat.Controls.Add(this.dgvOrder);
+            this.pnXuat.Controls.Add(this.lblTotalPage);
+            this.pnXuat.Controls.Add(this.txtPaging);
+            this.pnXuat.Controls.Add(this.pbLast);
+            this.pnXuat.Controls.Add(this.pbPrev);
+            this.pnXuat.Controls.Add(this.pbFirst);
+            this.pnXuat.Controls.Add(this.pbNext);
             this.pnXuat.Controls.Add(this.tbXuat);
             this.pnXuat.Location = new System.Drawing.Point(0, 0);
             this.pnXuat.Name = "pnXuat";
-            this.pnXuat.Size = new System.Drawing.Size(815, 550);
+            this.pnXuat.Size = new System.Drawing.Size(815, 518);
             this.pnXuat.TabIndex = 56;
             // 
-            // cbPagingSizeXuat
+            // cbPagingSize
             // 
-            this.cbPagingSizeXuat.ForeColor = System.Drawing.Color.Orange;
-            this.cbPagingSizeXuat.FormattingEnabled = true;
-            this.cbPagingSizeXuat.Items.AddRange(new object[] {
+            this.cbPagingSize.ForeColor = System.Drawing.Color.Orange;
+            this.cbPagingSize.FormattingEnabled = true;
+            this.cbPagingSize.Items.AddRange(new object[] {
             "10",
             "25",
             "50",
             "100",
             "200"});
-            this.cbPagingSizeXuat.Location = new System.Drawing.Point(513, 499);
-            this.cbPagingSizeXuat.Name = "cbPagingSizeXuat";
-            this.cbPagingSizeXuat.Size = new System.Drawing.Size(45, 21);
-            this.cbPagingSizeXuat.TabIndex = 164;
+            this.cbPagingSize.Location = new System.Drawing.Point(513, 490);
+            this.cbPagingSize.Name = "cbPagingSize";
+            this.cbPagingSize.Size = new System.Drawing.Size(45, 21);
+            this.cbPagingSize.TabIndex = 164;
+            this.cbPagingSize.SelectedIndexChanged += new System.EventHandler(this.cbPagingSize_SelectedIndexChanged);
             // 
-            // dgvOrderXuat
+            // dgvOrder
             // 
-            this.dgvOrderXuat.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
-            this.dgvOrderXuat.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvOrderXuat.BackgroundColor = System.Drawing.Color.White;
-            this.dgvOrderXuat.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvOrderXuat.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderXuat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvOrderXuat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrderXuat.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvOrderXuat.EnableHeadersVisualStyles = false;
-            this.dgvOrderXuat.GridColor = System.Drawing.Color.White;
-            this.dgvOrderXuat.Location = new System.Drawing.Point(3, 197);
-            this.dgvOrderXuat.Name = "dgvOrderXuat";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderXuat.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvOrderXuat.RowTemplate.Height = 35;
-            this.dgvOrderXuat.Size = new System.Drawing.Size(806, 246);
-            this.dgvOrderXuat.TabIndex = 67;
+            this.dgvOrder.AllowUserToAddRows = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Orange;
+            this.dgvOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvOrder.BackgroundColor = System.Drawing.Color.White;
+            this.dgvOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvOrder.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrder.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvOrder.EnableHeadersVisualStyles = false;
+            this.dgvOrder.GridColor = System.Drawing.Color.White;
+            this.dgvOrder.Location = new System.Drawing.Point(3, 197);
+            this.dgvOrder.Name = "dgvOrder";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrder.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvOrder.RowTemplate.Height = 35;
+            this.dgvOrder.Size = new System.Drawing.Size(806, 272);
+            this.dgvOrder.TabIndex = 67;
+            this.dgvOrder.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvOrder_CellBeginEdit);
+            this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
+            this.dgvOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellContentClick);
             // 
-            // lblTotalPageXuat
+            // lblTotalPage
             // 
-            this.lblTotalPageXuat.AutoSize = true;
-            this.lblTotalPageXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalPageXuat.ForeColor = System.Drawing.Color.Orange;
-            this.lblTotalPageXuat.Location = new System.Drawing.Point(637, 504);
-            this.lblTotalPageXuat.Name = "lblTotalPageXuat";
-            this.lblTotalPageXuat.Size = new System.Drawing.Size(68, 13);
-            this.lblTotalPageXuat.TabIndex = 158;
-            this.lblTotalPageXuat.Text = "Tổng số: 0";
+            this.lblTotalPage.AutoSize = true;
+            this.lblTotalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
+            this.lblTotalPage.Location = new System.Drawing.Point(637, 495);
+            this.lblTotalPage.Name = "lblTotalPage";
+            this.lblTotalPage.Size = new System.Drawing.Size(68, 13);
+            this.lblTotalPage.TabIndex = 158;
+            this.lblTotalPage.Text = "Tổng số: 0";
             // 
-            // txtPagingXuat
+            // txtPaging
             // 
-            this.txtPagingXuat.Location = new System.Drawing.Point(201, 504);
-            this.txtPagingXuat.Name = "txtPagingXuat";
-            this.txtPagingXuat.Size = new System.Drawing.Size(93, 20);
-            this.txtPagingXuat.TabIndex = 159;
+            this.txtPaging.Location = new System.Drawing.Point(201, 495);
+            this.txtPaging.Name = "txtPaging";
+            this.txtPaging.Size = new System.Drawing.Size(93, 20);
+            this.txtPaging.TabIndex = 159;
             // 
-            // pbLastXuat
+            // pbLast
             // 
-            this.pbLastXuat.Image = ((System.Drawing.Image)(resources.GetObject("pbLastXuat.Image")));
-            this.pbLastXuat.Location = new System.Drawing.Point(376, 503);
-            this.pbLastXuat.Name = "pbLastXuat";
-            this.pbLastXuat.Size = new System.Drawing.Size(38, 21);
-            this.pbLastXuat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLastXuat.TabIndex = 163;
-            this.pbLastXuat.TabStop = false;
+            this.pbLast.Image = ((System.Drawing.Image)(resources.GetObject("pbLast.Image")));
+            this.pbLast.Location = new System.Drawing.Point(376, 494);
+            this.pbLast.Name = "pbLast";
+            this.pbLast.Size = new System.Drawing.Size(38, 21);
+            this.pbLast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLast.TabIndex = 163;
+            this.pbLast.TabStop = false;
+            this.pbLast.Click += new System.EventHandler(this.pbLast_Click);
             // 
-            // pbPrevXuat
+            // pbPrev
             // 
-            this.pbPrevXuat.Image = ((System.Drawing.Image)(resources.GetObject("pbPrevXuat.Image")));
-            this.pbPrevXuat.Location = new System.Drawing.Point(141, 503);
-            this.pbPrevXuat.Name = "pbPrevXuat";
-            this.pbPrevXuat.Size = new System.Drawing.Size(47, 21);
-            this.pbPrevXuat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPrevXuat.TabIndex = 161;
-            this.pbPrevXuat.TabStop = false;
+            this.pbPrev.Image = ((System.Drawing.Image)(resources.GetObject("pbPrev.Image")));
+            this.pbPrev.Location = new System.Drawing.Point(141, 494);
+            this.pbPrev.Name = "pbPrev";
+            this.pbPrev.Size = new System.Drawing.Size(47, 21);
+            this.pbPrev.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPrev.TabIndex = 161;
+            this.pbPrev.TabStop = false;
+            this.pbPrev.Click += new System.EventHandler(this.pbPrev_Click);
             // 
-            // pbFirstXuat
+            // pbFirst
             // 
-            this.pbFirstXuat.Image = ((System.Drawing.Image)(resources.GetObject("pbFirstXuat.Image")));
-            this.pbFirstXuat.Location = new System.Drawing.Point(59, 503);
-            this.pbFirstXuat.Name = "pbFirstXuat";
-            this.pbFirstXuat.Size = new System.Drawing.Size(48, 20);
-            this.pbFirstXuat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbFirstXuat.TabIndex = 160;
-            this.pbFirstXuat.TabStop = false;
+            this.pbFirst.Image = ((System.Drawing.Image)(resources.GetObject("pbFirst.Image")));
+            this.pbFirst.Location = new System.Drawing.Point(59, 494);
+            this.pbFirst.Name = "pbFirst";
+            this.pbFirst.Size = new System.Drawing.Size(48, 20);
+            this.pbFirst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbFirst.TabIndex = 160;
+            this.pbFirst.TabStop = false;
+            this.pbFirst.Click += new System.EventHandler(this.pbFirst_Click);
             // 
-            // pbNextXuat
+            // pbNext
             // 
-            this.pbNextXuat.Image = ((System.Drawing.Image)(resources.GetObject("pbNextXuat.Image")));
-            this.pbNextXuat.Location = new System.Drawing.Point(307, 503);
-            this.pbNextXuat.Name = "pbNextXuat";
-            this.pbNextXuat.Size = new System.Drawing.Size(39, 20);
-            this.pbNextXuat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbNextXuat.TabIndex = 162;
-            this.pbNextXuat.TabStop = false;
+            this.pbNext.Image = ((System.Drawing.Image)(resources.GetObject("pbNext.Image")));
+            this.pbNext.Location = new System.Drawing.Point(307, 494);
+            this.pbNext.Name = "pbNext";
+            this.pbNext.Size = new System.Drawing.Size(39, 20);
+            this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbNext.TabIndex = 162;
+            this.pbNext.TabStop = false;
+            this.pbNext.Click += new System.EventHandler(this.pbNext_Click);
             // 
             // tbXuat
             // 
@@ -238,23 +246,23 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dtpNgayXuat);
-            this.tabPage1.Controls.Add(this.txtOrderXuat);
+            this.tabPage1.Controls.Add(this.txtOrder);
             this.tabPage1.Controls.Add(this.lblNgayXuat);
             this.tabPage1.Controls.Add(this.lblTPXuat);
-            this.tabPage1.Controls.Add(this.btnNewXuat);
-            this.tabPage1.Controls.Add(this.txtSPLoiXuat);
+            this.tabPage1.Controls.Add(this.btnNew);
+            this.tabPage1.Controls.Add(this.txtSPLoi);
             this.tabPage1.Controls.Add(this.label20);
             this.tabPage1.Controls.Add(this.label21);
-            this.tabPage1.Controls.Add(this.cbKyHieuXuat);
+            this.tabPage1.Controls.Add(this.cbKyHieu);
             this.tabPage1.Controls.Add(this.lblSPLoiXuat);
-            this.tabPage1.Controls.Add(this.txtTPXuat);
-            this.tabPage1.Controls.Add(this.btnXoaXuat);
+            this.tabPage1.Controls.Add(this.txtTP);
+            this.tabPage1.Controls.Add(this.btnXoa);
             this.tabPage1.Controls.Add(this.lblBTPDaInXuat);
             this.tabPage1.Controls.Add(this.lblKH);
-            this.tabPage1.Controls.Add(this.btnSaveXuat);
-            this.tabPage1.Controls.Add(this.txtBTPDaInXuat);
+            this.tabPage1.Controls.Add(this.btnSave);
+            this.tabPage1.Controls.Add(this.txtBTPDaIn);
             this.tabPage1.Controls.Add(this.cbCustomer);
-            this.tabPage1.Controls.Add(this.txtBTPChuaInXuat);
+            this.tabPage1.Controls.Add(this.txtBTPChuaIn);
             this.tabPage1.Controls.Add(this.lblBTPChuaInXuat);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -271,16 +279,16 @@
             this.dtpNgayXuat.Size = new System.Drawing.Size(107, 20);
             this.dtpNgayXuat.TabIndex = 154;
             // 
-            // txtOrderXuat
+            // txtOrder
             // 
-            this.txtOrderXuat.BackColor = System.Drawing.Color.White;
-            this.txtOrderXuat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtOrderXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderXuat.Location = new System.Drawing.Point(767, 13);
-            this.txtOrderXuat.Name = "txtOrderXuat";
-            this.txtOrderXuat.Size = new System.Drawing.Size(10, 24);
-            this.txtOrderXuat.TabIndex = 143;
-            this.txtOrderXuat.Visible = false;
+            this.txtOrder.BackColor = System.Drawing.Color.White;
+            this.txtOrder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrder.Location = new System.Drawing.Point(707, 15);
+            this.txtOrder.Name = "txtOrder";
+            this.txtOrder.Size = new System.Drawing.Size(10, 24);
+            this.txtOrder.TabIndex = 143;
+            this.txtOrder.Visible = false;
             // 
             // lblNgayXuat
             // 
@@ -298,36 +306,38 @@
             this.lblTPXuat.AutoSize = true;
             this.lblTPXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTPXuat.ForeColor = System.Drawing.Color.Orange;
-            this.lblTPXuat.Location = new System.Drawing.Point(370, 79);
+            this.lblTPXuat.Location = new System.Drawing.Point(300, 79);
             this.lblTPXuat.Name = "lblTPXuat";
             this.lblTPXuat.Size = new System.Drawing.Size(88, 15);
             this.lblTPXuat.TabIndex = 142;
             this.lblTPXuat.Text = "Thành Phẩm";
             // 
-            // btnNewXuat
+            // btnNew
             // 
-            this.btnNewXuat.AutoSize = true;
-            this.btnNewXuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnNewXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewXuat.ForeColor = System.Drawing.Color.White;
-            this.btnNewXuat.Location = new System.Drawing.Point(586, 105);
-            this.btnNewXuat.Name = "btnNewXuat";
-            this.btnNewXuat.Size = new System.Drawing.Size(75, 30);
-            this.btnNewXuat.TabIndex = 44;
-            this.btnNewXuat.Text = "Tạo Mới";
-            this.btnNewXuat.UseVisualStyleBackColor = false;
+            this.btnNew.AutoSize = true;
+            this.btnNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNew.ForeColor = System.Drawing.Color.White;
+            this.btnNew.Location = new System.Drawing.Point(490, 104);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 30);
+            this.btnNew.TabIndex = 44;
+            this.btnNew.Text = "Tạo Mới";
+            this.btnNew.UseVisualStyleBackColor = false;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // txtSPLoiXuat
+            // txtSPLoi
             // 
-            this.txtSPLoiXuat.BackColor = System.Drawing.Color.White;
-            this.txtSPLoiXuat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSPLoiXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSPLoiXuat.Location = new System.Drawing.Point(480, 109);
-            this.txtSPLoiXuat.Name = "txtSPLoiXuat";
-            this.txtSPLoiXuat.Size = new System.Drawing.Size(89, 24);
-            this.txtSPLoiXuat.TabIndex = 37;
-            this.txtSPLoiXuat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtSPLoi.BackColor = System.Drawing.Color.White;
+            this.txtSPLoi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSPLoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSPLoi.Location = new System.Drawing.Point(395, 109);
+            this.txtSPLoi.Name = "txtSPLoi";
+            this.txtSPLoi.Size = new System.Drawing.Size(89, 24);
+            this.txtSPLoi.TabIndex = 37;
+            this.txtSPLoi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtSPLoi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSPLoi_KeyPress);
             // 
             // label20
             // 
@@ -343,62 +353,64 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.Orange;
-            this.label21.Location = new System.Drawing.Point(46, 79);
+            this.label21.Location = new System.Drawing.Point(29, 78);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(56, 15);
             this.label21.TabIndex = 37;
             this.label21.Text = "Ký Hiệu";
             // 
-            // cbKyHieuXuat
+            // cbKyHieu
             // 
-            this.cbKyHieuXuat.FormattingEnabled = true;
-            this.cbKyHieuXuat.Location = new System.Drawing.Point(17, 109);
-            this.cbKyHieuXuat.Name = "cbKyHieuXuat";
-            this.cbKyHieuXuat.Size = new System.Drawing.Size(105, 21);
-            this.cbKyHieuXuat.TabIndex = 39;
+            this.cbKyHieu.FormattingEnabled = true;
+            this.cbKyHieu.Location = new System.Drawing.Point(15, 112);
+            this.cbKyHieu.Name = "cbKyHieu";
+            this.cbKyHieu.Size = new System.Drawing.Size(85, 21);
+            this.cbKyHieu.TabIndex = 39;
             // 
             // lblSPLoiXuat
             // 
             this.lblSPLoiXuat.AutoSize = true;
             this.lblSPLoiXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSPLoiXuat.ForeColor = System.Drawing.Color.Orange;
-            this.lblSPLoiXuat.Location = new System.Drawing.Point(502, 78);
+            this.lblSPLoiXuat.Location = new System.Drawing.Point(417, 78);
             this.lblSPLoiXuat.Name = "lblSPLoiXuat";
             this.lblSPLoiXuat.Size = new System.Drawing.Size(49, 15);
             this.lblSPLoiXuat.TabIndex = 42;
             this.lblSPLoiXuat.Text = "SP Lỗi";
             // 
-            // txtTPXuat
+            // txtTP
             // 
-            this.txtTPXuat.BackColor = System.Drawing.Color.White;
-            this.txtTPXuat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTPXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTPXuat.Location = new System.Drawing.Point(370, 109);
-            this.txtTPXuat.Name = "txtTPXuat";
-            this.txtTPXuat.Size = new System.Drawing.Size(89, 24);
-            this.txtTPXuat.TabIndex = 141;
-            this.txtTPXuat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTP.BackColor = System.Drawing.Color.White;
+            this.txtTP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTP.Location = new System.Drawing.Point(300, 109);
+            this.txtTP.Name = "txtTP";
+            this.txtTP.Size = new System.Drawing.Size(80, 24);
+            this.txtTP.TabIndex = 141;
+            this.txtTP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTP_KeyPress);
             // 
-            // btnXoaXuat
+            // btnXoa
             // 
-            this.btnXoaXuat.AutoSize = true;
-            this.btnXoaXuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnXoaXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXoaXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoaXuat.ForeColor = System.Drawing.Color.White;
-            this.btnXoaXuat.Location = new System.Drawing.Point(729, 105);
-            this.btnXoaXuat.Name = "btnXoaXuat";
-            this.btnXoaXuat.Size = new System.Drawing.Size(47, 30);
-            this.btnXoaXuat.TabIndex = 44;
-            this.btnXoaXuat.Text = "Xóa";
-            this.btnXoaXuat.UseVisualStyleBackColor = false;
+            this.btnXoa.AutoSize = true;
+            this.btnXoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.ForeColor = System.Drawing.Color.White;
+            this.btnXoa.Location = new System.Drawing.Point(633, 104);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(47, 30);
+            this.btnXoa.TabIndex = 44;
+            this.btnXoa.Text = "Xóa";
+            this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // lblBTPDaInXuat
             // 
             this.lblBTPDaInXuat.AutoSize = true;
             this.lblBTPDaInXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBTPDaInXuat.ForeColor = System.Drawing.Color.Orange;
-            this.lblBTPDaInXuat.Location = new System.Drawing.Point(272, 79);
+            this.lblBTPDaInXuat.Location = new System.Drawing.Point(219, 79);
             this.lblBTPDaInXuat.Name = "lblBTPDaInXuat";
             this.lblBTPDaInXuat.Size = new System.Drawing.Size(71, 15);
             this.lblBTPDaInXuat.TabIndex = 140;
@@ -409,62 +421,65 @@
             this.lblKH.AutoSize = true;
             this.lblKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKH.ForeColor = System.Drawing.Color.Orange;
-            this.lblKH.Location = new System.Drawing.Point(413, 15);
+            this.lblKH.Location = new System.Drawing.Point(353, 17);
             this.lblKH.Name = "lblKH";
             this.lblKH.Size = new System.Drawing.Size(91, 16);
             this.lblKH.TabIndex = 35;
             this.lblKH.Text = "Khách Hàng";
             // 
-            // btnSaveXuat
+            // btnSave
             // 
-            this.btnSaveXuat.AutoSize = true;
-            this.btnSaveXuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnSaveXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveXuat.ForeColor = System.Drawing.Color.White;
-            this.btnSaveXuat.Location = new System.Drawing.Point(662, 105);
-            this.btnSaveXuat.Name = "btnSaveXuat";
-            this.btnSaveXuat.Size = new System.Drawing.Size(66, 30);
-            this.btnSaveXuat.TabIndex = 136;
-            this.btnSaveXuat.Text = "Lưu";
-            this.btnSaveXuat.UseVisualStyleBackColor = false;
+            this.btnSave.AutoSize = true;
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(566, 104);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(66, 30);
+            this.btnSave.TabIndex = 136;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // txtBTPDaInXuat
+            // txtBTPDaIn
             // 
-            this.txtBTPDaInXuat.BackColor = System.Drawing.Color.White;
-            this.txtBTPDaInXuat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBTPDaInXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBTPDaInXuat.Location = new System.Drawing.Point(260, 109);
-            this.txtBTPDaInXuat.Name = "txtBTPDaInXuat";
-            this.txtBTPDaInXuat.Size = new System.Drawing.Size(89, 24);
-            this.txtBTPDaInXuat.TabIndex = 139;
-            this.txtBTPDaInXuat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBTPDaIn.BackColor = System.Drawing.Color.White;
+            this.txtBTPDaIn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBTPDaIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBTPDaIn.Location = new System.Drawing.Point(207, 109);
+            this.txtBTPDaIn.Name = "txtBTPDaIn";
+            this.txtBTPDaIn.Size = new System.Drawing.Size(80, 24);
+            this.txtBTPDaIn.TabIndex = 139;
+            this.txtBTPDaIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBTPDaIn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBTPDaIn_KeyPress);
             // 
             // cbCustomer
             // 
             this.cbCustomer.FormattingEnabled = true;
-            this.cbCustomer.Location = new System.Drawing.Point(537, 13);
+            this.cbCustomer.Location = new System.Drawing.Point(477, 15);
             this.cbCustomer.Name = "cbCustomer";
             this.cbCustomer.Size = new System.Drawing.Size(203, 21);
             this.cbCustomer.TabIndex = 38;
             // 
-            // txtBTPChuaInXuat
+            // txtBTPChuaIn
             // 
-            this.txtBTPChuaInXuat.BackColor = System.Drawing.Color.White;
-            this.txtBTPChuaInXuat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBTPChuaInXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBTPChuaInXuat.Location = new System.Drawing.Point(140, 109);
-            this.txtBTPChuaInXuat.Name = "txtBTPChuaInXuat";
-            this.txtBTPChuaInXuat.Size = new System.Drawing.Size(89, 24);
-            this.txtBTPChuaInXuat.TabIndex = 137;
-            this.txtBTPChuaInXuat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBTPChuaIn.BackColor = System.Drawing.Color.White;
+            this.txtBTPChuaIn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBTPChuaIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBTPChuaIn.Location = new System.Drawing.Point(114, 109);
+            this.txtBTPChuaIn.Name = "txtBTPChuaIn";
+            this.txtBTPChuaIn.Size = new System.Drawing.Size(80, 24);
+            this.txtBTPChuaIn.TabIndex = 137;
+            this.txtBTPChuaIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBTPChuaIn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBTPChuaIn_KeyPress);
             // 
             // lblBTPChuaInXuat
             // 
             this.lblBTPChuaInXuat.AutoSize = true;
             this.lblBTPChuaInXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBTPChuaInXuat.ForeColor = System.Drawing.Color.Orange;
-            this.lblBTPChuaInXuat.Location = new System.Drawing.Point(140, 79);
+            this.lblBTPChuaInXuat.Location = new System.Drawing.Point(114, 79);
             this.lblBTPChuaInXuat.Name = "lblBTPChuaInXuat";
             this.lblBTPChuaInXuat.Size = new System.Drawing.Size(86, 15);
             this.lblBTPChuaInXuat.TabIndex = 138;
@@ -472,23 +487,23 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.btnResetXuat);
-            this.tabPage3.Controls.Add(this.btnSearchXuat);
-            this.tabPage3.Controls.Add(this.cbSignSPLoiXuat);
-            this.tabPage3.Controls.Add(this.txtSPLoiFilterXuat);
-            this.tabPage3.Controls.Add(this.cbSignTPXuat);
-            this.tabPage3.Controls.Add(this.txtTPFilterXuat);
-            this.tabPage3.Controls.Add(this.cbSignDaInFilterXuat);
-            this.tabPage3.Controls.Add(this.txtDaInXuatFilter);
+            this.tabPage3.Controls.Add(this.btnReset);
+            this.tabPage3.Controls.Add(this.btnSearch);
+            this.tabPage3.Controls.Add(this.cbSignSPLoi);
+            this.tabPage3.Controls.Add(this.txtSPLoiFilter);
+            this.tabPage3.Controls.Add(this.cbSignTP);
+            this.tabPage3.Controls.Add(this.txtTPFilter);
+            this.tabPage3.Controls.Add(this.cbSignDaInFilter);
+            this.tabPage3.Controls.Add(this.txtDaInFilter);
             this.tabPage3.Controls.Add(this.label25);
             this.tabPage3.Controls.Add(this.lblSPLoiNhapFilter);
             this.tabPage3.Controls.Add(this.lblDaInNhapFilter);
-            this.tabPage3.Controls.Add(this.cbChuaInSignXuat);
-            this.tabPage3.Controls.Add(this.txtBTPChuaInFilterXuat);
+            this.tabPage3.Controls.Add(this.cbChuaInSign);
+            this.tabPage3.Controls.Add(this.txtBTPChuaInFilter);
             this.tabPage3.Controls.Add(this.lblChuaInNhapFilter);
             this.tabPage3.Controls.Add(this.lblKyhieuNhapFilter);
-            this.tabPage3.Controls.Add(this.cbKyHieuFilterXuat);
-            this.tabPage3.Controls.Add(this.dtpNgayXongFilterXuat);
+            this.tabPage3.Controls.Add(this.cbKyHieuFilter);
+            this.tabPage3.Controls.Add(this.dtpNgayXongFilter);
             this.tabPage3.Controls.Add(this.lblNgayXongNhapFilter);
             this.tabPage3.Controls.Add(this.dtpNgayXuatFilter);
             this.tabPage3.Controls.Add(this.lblNgayXuatFilter);
@@ -501,102 +516,107 @@
             this.tabPage3.Text = "Tìm Kiếm";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // btnResetXuat
+            // btnReset
             // 
-            this.btnResetXuat.AutoSize = true;
-            this.btnResetXuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnResetXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnResetXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnResetXuat.ForeColor = System.Drawing.Color.White;
-            this.btnResetXuat.Location = new System.Drawing.Point(685, 24);
-            this.btnResetXuat.Name = "btnResetXuat";
-            this.btnResetXuat.Size = new System.Drawing.Size(113, 30);
-            this.btnResetXuat.TabIndex = 177;
-            this.btnResetXuat.Text = "Hủy Tìm Kiếm";
-            this.btnResetXuat.UseVisualStyleBackColor = false;
+            this.btnReset.AutoSize = true;
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(685, 24);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(113, 30);
+            this.btnReset.TabIndex = 177;
+            this.btnReset.Text = "Hủy Tìm Kiếm";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // btnSearchXuat
+            // btnSearch
             // 
-            this.btnSearchXuat.AutoSize = true;
-            this.btnSearchXuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnSearchXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchXuat.ForeColor = System.Drawing.Color.White;
-            this.btnSearchXuat.Location = new System.Drawing.Point(715, 79);
-            this.btnSearchXuat.Name = "btnSearchXuat";
-            this.btnSearchXuat.Size = new System.Drawing.Size(83, 30);
-            this.btnSearchXuat.TabIndex = 176;
-            this.btnSearchXuat.Text = "Tìm Kiếm";
-            this.btnSearchXuat.UseVisualStyleBackColor = false;
+            this.btnSearch.AutoSize = true;
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(715, 79);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(83, 30);
+            this.btnSearch.TabIndex = 176;
+            this.btnSearch.Text = "Tìm Kiếm";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // cbSignSPLoiXuat
+            // cbSignSPLoi
             // 
-            this.cbSignSPLoiXuat.FormattingEnabled = true;
-            this.cbSignSPLoiXuat.Items.AddRange(new object[] {
+            this.cbSignSPLoi.FormattingEnabled = true;
+            this.cbSignSPLoi.Items.AddRange(new object[] {
             ">=",
             "<=",
             "="});
-            this.cbSignSPLoiXuat.Location = new System.Drawing.Point(554, 117);
-            this.cbSignSPLoiXuat.Name = "cbSignSPLoiXuat";
-            this.cbSignSPLoiXuat.Size = new System.Drawing.Size(41, 24);
-            this.cbSignSPLoiXuat.TabIndex = 175;
+            this.cbSignSPLoi.Location = new System.Drawing.Point(554, 117);
+            this.cbSignSPLoi.Name = "cbSignSPLoi";
+            this.cbSignSPLoi.Size = new System.Drawing.Size(41, 24);
+            this.cbSignSPLoi.TabIndex = 175;
             // 
-            // txtSPLoiFilterXuat
+            // txtSPLoiFilter
             // 
-            this.txtSPLoiFilterXuat.BackColor = System.Drawing.Color.White;
-            this.txtSPLoiFilterXuat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSPLoiFilterXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSPLoiFilterXuat.Location = new System.Drawing.Point(601, 117);
-            this.txtSPLoiFilterXuat.Name = "txtSPLoiFilterXuat";
-            this.txtSPLoiFilterXuat.Size = new System.Drawing.Size(60, 24);
-            this.txtSPLoiFilterXuat.TabIndex = 174;
-            this.txtSPLoiFilterXuat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtSPLoiFilter.BackColor = System.Drawing.Color.White;
+            this.txtSPLoiFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSPLoiFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSPLoiFilter.Location = new System.Drawing.Point(601, 117);
+            this.txtSPLoiFilter.Name = "txtSPLoiFilter";
+            this.txtSPLoiFilter.Size = new System.Drawing.Size(60, 24);
+            this.txtSPLoiFilter.TabIndex = 174;
+            this.txtSPLoiFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtSPLoiFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSPLoiFilter_KeyPress);
             // 
-            // cbSignTPXuat
+            // cbSignTP
             // 
-            this.cbSignTPXuat.FormattingEnabled = true;
-            this.cbSignTPXuat.Items.AddRange(new object[] {
+            this.cbSignTP.FormattingEnabled = true;
+            this.cbSignTP.Items.AddRange(new object[] {
             ">=",
             "<=",
             "="});
-            this.cbSignTPXuat.Location = new System.Drawing.Point(554, 86);
-            this.cbSignTPXuat.Name = "cbSignTPXuat";
-            this.cbSignTPXuat.Size = new System.Drawing.Size(41, 24);
-            this.cbSignTPXuat.TabIndex = 173;
+            this.cbSignTP.Location = new System.Drawing.Point(554, 86);
+            this.cbSignTP.Name = "cbSignTP";
+            this.cbSignTP.Size = new System.Drawing.Size(41, 24);
+            this.cbSignTP.TabIndex = 173;
             // 
-            // txtTPFilterXuat
+            // txtTPFilter
             // 
-            this.txtTPFilterXuat.BackColor = System.Drawing.Color.White;
-            this.txtTPFilterXuat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTPFilterXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTPFilterXuat.Location = new System.Drawing.Point(601, 86);
-            this.txtTPFilterXuat.Name = "txtTPFilterXuat";
-            this.txtTPFilterXuat.Size = new System.Drawing.Size(60, 24);
-            this.txtTPFilterXuat.TabIndex = 172;
-            this.txtTPFilterXuat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTPFilter.BackColor = System.Drawing.Color.White;
+            this.txtTPFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTPFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTPFilter.Location = new System.Drawing.Point(601, 86);
+            this.txtTPFilter.Name = "txtTPFilter";
+            this.txtTPFilter.Size = new System.Drawing.Size(60, 24);
+            this.txtTPFilter.TabIndex = 172;
+            this.txtTPFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTPFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTPFilter_KeyPress);
             // 
-            // cbSignDaInFilterXuat
+            // cbSignDaInFilter
             // 
-            this.cbSignDaInFilterXuat.FormattingEnabled = true;
-            this.cbSignDaInFilterXuat.Items.AddRange(new object[] {
+            this.cbSignDaInFilter.FormattingEnabled = true;
+            this.cbSignDaInFilter.Items.AddRange(new object[] {
             ">=",
             "<=",
             "="});
-            this.cbSignDaInFilterXuat.Location = new System.Drawing.Point(140, 116);
-            this.cbSignDaInFilterXuat.Name = "cbSignDaInFilterXuat";
-            this.cbSignDaInFilterXuat.Size = new System.Drawing.Size(41, 24);
-            this.cbSignDaInFilterXuat.TabIndex = 171;
+            this.cbSignDaInFilter.Location = new System.Drawing.Point(140, 116);
+            this.cbSignDaInFilter.Name = "cbSignDaInFilter";
+            this.cbSignDaInFilter.Size = new System.Drawing.Size(41, 24);
+            this.cbSignDaInFilter.TabIndex = 171;
             // 
-            // txtDaInXuatFilter
+            // txtDaInFilter
             // 
-            this.txtDaInXuatFilter.BackColor = System.Drawing.Color.White;
-            this.txtDaInXuatFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDaInXuatFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDaInXuatFilter.Location = new System.Drawing.Point(187, 116);
-            this.txtDaInXuatFilter.Name = "txtDaInXuatFilter";
-            this.txtDaInXuatFilter.Size = new System.Drawing.Size(60, 24);
-            this.txtDaInXuatFilter.TabIndex = 170;
-            this.txtDaInXuatFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDaInFilter.BackColor = System.Drawing.Color.White;
+            this.txtDaInFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDaInFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDaInFilter.Location = new System.Drawing.Point(187, 116);
+            this.txtDaInFilter.Name = "txtDaInFilter";
+            this.txtDaInFilter.Size = new System.Drawing.Size(60, 24);
+            this.txtDaInFilter.TabIndex = 170;
+            this.txtDaInFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDaInFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDaInFilter_KeyPress);
             // 
             // label25
             // 
@@ -631,28 +651,29 @@
             this.lblDaInNhapFilter.TabIndex = 168;
             this.lblDaInNhapFilter.Text = "BTP Đã in";
             // 
-            // cbChuaInSignXuat
+            // cbChuaInSign
             // 
-            this.cbChuaInSignXuat.FormattingEnabled = true;
-            this.cbChuaInSignXuat.Items.AddRange(new object[] {
+            this.cbChuaInSign.FormattingEnabled = true;
+            this.cbChuaInSign.Items.AddRange(new object[] {
             ">=",
             "<=",
             "="});
-            this.cbChuaInSignXuat.Location = new System.Drawing.Point(140, 85);
-            this.cbChuaInSignXuat.Name = "cbChuaInSignXuat";
-            this.cbChuaInSignXuat.Size = new System.Drawing.Size(41, 24);
-            this.cbChuaInSignXuat.TabIndex = 166;
+            this.cbChuaInSign.Location = new System.Drawing.Point(140, 85);
+            this.cbChuaInSign.Name = "cbChuaInSign";
+            this.cbChuaInSign.Size = new System.Drawing.Size(41, 24);
+            this.cbChuaInSign.TabIndex = 166;
             // 
-            // txtBTPChuaInFilterXuat
+            // txtBTPChuaInFilter
             // 
-            this.txtBTPChuaInFilterXuat.BackColor = System.Drawing.Color.White;
-            this.txtBTPChuaInFilterXuat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBTPChuaInFilterXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBTPChuaInFilterXuat.Location = new System.Drawing.Point(187, 85);
-            this.txtBTPChuaInFilterXuat.Name = "txtBTPChuaInFilterXuat";
-            this.txtBTPChuaInFilterXuat.Size = new System.Drawing.Size(60, 24);
-            this.txtBTPChuaInFilterXuat.TabIndex = 164;
-            this.txtBTPChuaInFilterXuat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBTPChuaInFilter.BackColor = System.Drawing.Color.White;
+            this.txtBTPChuaInFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBTPChuaInFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBTPChuaInFilter.Location = new System.Drawing.Point(187, 85);
+            this.txtBTPChuaInFilter.Name = "txtBTPChuaInFilter";
+            this.txtBTPChuaInFilter.Size = new System.Drawing.Size(60, 24);
+            this.txtBTPChuaInFilter.TabIndex = 164;
+            this.txtBTPChuaInFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBTPChuaInFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBTPChuaInFilter_KeyPress);
             // 
             // lblChuaInNhapFilter
             // 
@@ -676,21 +697,22 @@
             this.lblKyhieuNhapFilter.TabIndex = 162;
             this.lblKyhieuNhapFilter.Text = "Ký Hiệu";
             // 
-            // cbKyHieuFilterXuat
+            // cbKyHieuFilter
             // 
-            this.cbKyHieuFilterXuat.FormattingEnabled = true;
-            this.cbKyHieuFilterXuat.Location = new System.Drawing.Point(140, 51);
-            this.cbKyHieuFilterXuat.Name = "cbKyHieuFilterXuat";
-            this.cbKyHieuFilterXuat.Size = new System.Drawing.Size(107, 24);
-            this.cbKyHieuFilterXuat.TabIndex = 163;
+            this.cbKyHieuFilter.FormattingEnabled = true;
+            this.cbKyHieuFilter.Location = new System.Drawing.Point(140, 51);
+            this.cbKyHieuFilter.Name = "cbKyHieuFilter";
+            this.cbKyHieuFilter.Size = new System.Drawing.Size(107, 24);
+            this.cbKyHieuFilter.TabIndex = 163;
             // 
-            // dtpNgayXongFilterXuat
+            // dtpNgayXongFilter
             // 
-            this.dtpNgayXongFilterXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpNgayXongFilterXuat.Location = new System.Drawing.Point(552, 24);
-            this.dtpNgayXongFilterXuat.Name = "dtpNgayXongFilterXuat";
-            this.dtpNgayXongFilterXuat.Size = new System.Drawing.Size(107, 22);
-            this.dtpNgayXongFilterXuat.TabIndex = 158;
+            this.dtpNgayXongFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpNgayXongFilter.Location = new System.Drawing.Point(552, 24);
+            this.dtpNgayXongFilter.Name = "dtpNgayXongFilter";
+            this.dtpNgayXongFilter.Size = new System.Drawing.Size(107, 22);
+            this.dtpNgayXongFilter.TabIndex = 158;
+            this.dtpNgayXongFilter.ValueChanged += new System.EventHandler(this.dtpNgayXongFilter_ValueChanged);
             // 
             // lblNgayXongNhapFilter
             // 
@@ -710,6 +732,7 @@
             this.dtpNgayXuatFilter.Name = "dtpNgayXuatFilter";
             this.dtpNgayXuatFilter.Size = new System.Drawing.Size(107, 22);
             this.dtpNgayXuatFilter.TabIndex = 156;
+            this.dtpNgayXuatFilter.ValueChanged += new System.EventHandler(this.dtpNgayXuatFilter_ValueChanged);
             // 
             // lblNgayXuatFilter
             // 
@@ -728,14 +751,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnXuat);
             this.Name = "QuanLyXuat";
-            this.Size = new System.Drawing.Size(815, 550);
+            this.Size = new System.Drawing.Size(815, 518);
+            this.Load += new System.EventHandler(this.QuanLyXuat_Load);
             this.pnXuat.ResumeLayout(false);
             this.pnXuat.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderXuat)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLastXuat)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPrevXuat)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFirstXuat)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNextXuat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             this.tbXuat.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -748,53 +772,53 @@
         #endregion
 
         private System.Windows.Forms.Panel pnXuat;
-        private System.Windows.Forms.ComboBox cbPagingSizeXuat;
-        private System.Windows.Forms.DataGridView dgvOrderXuat;
-        private System.Windows.Forms.Label lblTotalPageXuat;
-        private System.Windows.Forms.TextBox txtPagingXuat;
-        private System.Windows.Forms.PictureBox pbLastXuat;
-        private System.Windows.Forms.PictureBox pbPrevXuat;
-        private System.Windows.Forms.PictureBox pbFirstXuat;
-        private System.Windows.Forms.PictureBox pbNextXuat;
+        private System.Windows.Forms.ComboBox cbPagingSize;
+        private System.Windows.Forms.DataGridView dgvOrder;
+        private System.Windows.Forms.Label lblTotalPage;
+        private System.Windows.Forms.TextBox txtPaging;
+        private System.Windows.Forms.PictureBox pbLast;
+        private System.Windows.Forms.PictureBox pbPrev;
+        private System.Windows.Forms.PictureBox pbFirst;
+        private System.Windows.Forms.PictureBox pbNext;
         private System.Windows.Forms.TabControl tbXuat;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DateTimePicker dtpNgayXuat;
-        private System.Windows.Forms.TextBox txtOrderXuat;
+        private System.Windows.Forms.TextBox txtOrder;
         private System.Windows.Forms.Label lblNgayXuat;
         private System.Windows.Forms.Label lblTPXuat;
-        private System.Windows.Forms.Button btnNewXuat;
-        private System.Windows.Forms.TextBox txtSPLoiXuat;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.TextBox txtSPLoi;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox cbKyHieuXuat;
+        private System.Windows.Forms.ComboBox cbKyHieu;
         private System.Windows.Forms.Label lblSPLoiXuat;
-        private System.Windows.Forms.TextBox txtTPXuat;
-        private System.Windows.Forms.Button btnXoaXuat;
+        private System.Windows.Forms.TextBox txtTP;
+        private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Label lblBTPDaInXuat;
         private System.Windows.Forms.Label lblKH;
-        private System.Windows.Forms.Button btnSaveXuat;
-        private System.Windows.Forms.TextBox txtBTPDaInXuat;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txtBTPDaIn;
         private System.Windows.Forms.ComboBox cbCustomer;
-        private System.Windows.Forms.TextBox txtBTPChuaInXuat;
+        private System.Windows.Forms.TextBox txtBTPChuaIn;
         private System.Windows.Forms.Label lblBTPChuaInXuat;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button btnResetXuat;
-        private System.Windows.Forms.Button btnSearchXuat;
-        private System.Windows.Forms.ComboBox cbSignSPLoiXuat;
-        private System.Windows.Forms.TextBox txtSPLoiFilterXuat;
-        private System.Windows.Forms.ComboBox cbSignTPXuat;
-        private System.Windows.Forms.TextBox txtTPFilterXuat;
-        private System.Windows.Forms.ComboBox cbSignDaInFilterXuat;
-        private System.Windows.Forms.TextBox txtDaInXuatFilter;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.ComboBox cbSignSPLoi;
+        private System.Windows.Forms.TextBox txtSPLoiFilter;
+        private System.Windows.Forms.ComboBox cbSignTP;
+        private System.Windows.Forms.TextBox txtTPFilter;
+        private System.Windows.Forms.ComboBox cbSignDaInFilter;
+        private System.Windows.Forms.TextBox txtDaInFilter;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lblSPLoiNhapFilter;
         private System.Windows.Forms.Label lblDaInNhapFilter;
-        private System.Windows.Forms.ComboBox cbChuaInSignXuat;
-        private System.Windows.Forms.TextBox txtBTPChuaInFilterXuat;
+        private System.Windows.Forms.ComboBox cbChuaInSign;
+        private System.Windows.Forms.TextBox txtBTPChuaInFilter;
         private System.Windows.Forms.Label lblChuaInNhapFilter;
         private System.Windows.Forms.Label lblKyhieuNhapFilter;
-        private System.Windows.Forms.ComboBox cbKyHieuFilterXuat;
-        private System.Windows.Forms.DateTimePicker dtpNgayXongFilterXuat;
+        private System.Windows.Forms.ComboBox cbKyHieuFilter;
+        private System.Windows.Forms.DateTimePicker dtpNgayXongFilter;
         private System.Windows.Forms.Label lblNgayXongNhapFilter;
         private System.Windows.Forms.DateTimePicker dtpNgayXuatFilter;
         private System.Windows.Forms.Label lblNgayXuatFilter;

@@ -19,9 +19,48 @@ namespace iClothing
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Form2 orderfrm = new Form2() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            OrderForm orderfrm = new OrderForm() { TopLevel = false, AutoScaleMode=AutoScaleMode.None };
+            orderfrm.FormBorderStyle = FormBorderStyle.None;
+            orderfrm.AutoScroll = true;
             this.panel1.Controls.Add(orderfrm);
+            //orderfrm.Location = new Point(-20, 0);
             orderfrm.Show();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Bạn muốn tắt chương trình ? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        private void btnSignout_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            Stock stockfrm = new Stock() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            //stockfrm.AutoScroll = true;
+            this.panel1.Controls.Add(stockfrm);
+            //orderfrm.Location = new Point(-20, 0);
+            stockfrm.Show();
+            this.panel1.AutoScroll = true;
         }
     }
 }

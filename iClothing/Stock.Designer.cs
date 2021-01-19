@@ -1,6 +1,7 @@
-﻿namespace iClothing
+﻿
+namespace iClothing
 {
-    partial class Form2
+    partial class Stock
     {
         /// <summary>
         /// Required designer variable.
@@ -28,32 +29,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.quanLyNhapXuat1 = new iClothing.QuanLyNhapXuat();
+            this.stockManagement1 = new iClothing.StockManagement();
             this.SuspendLayout();
             // 
-            // quanLyNhapXuat1
+            // stockManagement1
             // 
-            this.quanLyNhapXuat1.BackColor = System.Drawing.Color.White;
-            this.quanLyNhapXuat1.Location = new System.Drawing.Point(0, 0);
-            this.quanLyNhapXuat1.Name = "quanLyNhapXuat1";
-            this.quanLyNhapXuat1.Size = new System.Drawing.Size(837, 705);
-            this.quanLyNhapXuat1.TabIndex = 0;
+            this.stockManagement1.BackColor = System.Drawing.Color.White;
+            this.stockManagement1.Location = new System.Drawing.Point(39, 28);
+            this.stockManagement1.Name = "stockManagement1";
+            this.stockManagement1.Size = new System.Drawing.Size(870, 750);
+            this.stockManagement1.TabIndex = 0;
             // 
-            // Form2
+            // Stock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 705);
-            this.Controls.Add(this.quanLyNhapXuat1);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1126, 772);
+            this.Controls.Add(this.stockManagement1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "Stock";
+            this.Text = "Stock";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private QuanLyNhapXuat quanLyNhapXuat1;
+        private StockManagement stockManagement1;
     }
 }

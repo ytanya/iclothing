@@ -38,7 +38,8 @@ namespace iClothing
         private int rowPerPage = 10;
         //private string currentOrderByItem = "Ngaytao";
         private Bitmap bmp;
-        public static string conn = "Data Source=" + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
+        public static string conn = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         public OrderManagement()
         {
             InitializeComponent();
@@ -63,6 +64,7 @@ namespace iClothing
             {
                 if (rb.Checked)
                 {
+                    IsCompleted = "false";
                     pnNhap.Visible = true;
                     pnXuat.Visible = false;
                     //dgvOrderXuat.Visible = false;
@@ -84,6 +86,7 @@ namespace iClothing
             {
                 if (rb.Checked)
                 {
+                    IsCompleted = "false";
                     pnXuat.Visible = true;
                     pnNhap.Visible = false;
                     currentPageNumber = 1;
@@ -106,6 +109,7 @@ namespace iClothing
         {
             dtpNgayXuat.Format = DateTimePickerFormat.Custom;
             dtpNgayXuat.CustomFormat = "dd/MM/yyyy";
+            rbNhap.Checked = true;
             GetAllDataOrderNhap();
             dtCurrent = dtTab1Nhap;
             PopulateDataOrder(currentPageNumber, rowPerPage, dtCurrent);
@@ -161,6 +165,7 @@ namespace iClothing
                     dgvOrderNhap.Columns[4].Width = 130;
                     dgvOrderNhap.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                     dgvOrderNhap.Columns["Xong"].Width = 50;
+
                     //dgvOrderNhap.Columns["Xong"].ReadOnly = true;
                     dgvOrderNhap.Columns["Ký Hiệu"].Width = 60;
                     dgvOrderNhap.Columns["BTP Chưa in"].Width = 120;
@@ -182,18 +187,20 @@ namespace iClothing
                 }
                 else
                 {
-                    pbFirstNhap.Visible = false;
-                    pbPrevNhap.Visible = false;
-                    pbNextNhap.Visible = false;
-                    pbLastNhap.Visible = false;
-                    txtPagingNhap.Visible = false;
-                    cbPageSizeNhap.Visible = false;
+                    currentPageNumber = 0;
+                    //pbFirstNhap.Visible = false;
+                    //pbPrevNhap.Visible = false;
+                    //pbNextNhap.Visible = false;
+                    //pbLastNhap.Visible = false;
+                    //txtPagingNhap.Visible = false;
+                    //cbPageSizeNhap.Visible = false;
                 }
             }
             else
             {
                 if (dt.Rows.Count > 0)
                 {
+                    
                     dgvOrderXuat.DataSource = dt.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
                     dgvOrderXuat.Columns[0].Visible = false;
                     dgvOrderXuat.Columns[1].Visible = false;
@@ -222,12 +229,13 @@ namespace iClothing
                 }
                 else
                 {
-                    pbFirstXuat.Visible = false;
-                    pbPrevXuat.Visible = false;
-                    pbNextXuat.Visible = false;
-                    pbLastXuat.Visible = false;
-                    txtPagingXuat.Visible = false;
-                    cbPagingSizeXuat.Visible = false;
+                    currentPageNumber = 0;
+                    //pbFirstXuat.Visible = false;
+                    //pbPrevXuat.Visible = false;
+                    //pbNextXuat.Visible = false;
+                    //pbLastXuat.Visible = false;
+                    //txtPagingXuat.Visible = false;
+                    //cbPagingSizeXuat.Visible = false;
                 }
             }
         }
@@ -270,6 +278,37 @@ namespace iClothing
 
         /******************************** Start Common******************************************/
         /******************************** Start Panel Nhap******************************************/
+        private void txtChuaInFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDaInFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTPFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSPLoiFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
         private void tbNhap_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tbNhap.SelectedIndex == 1)
@@ -346,7 +385,7 @@ namespace iClothing
                 bool isSuccess = false;
                 string isNhap = "true";
                 DataRow rd = dtTab1Nhap.NewRow();
-
+                string ngayxong = string.Empty;
                 string Ngay, DonhangID, barcode, NhaccID, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL;
                 Ngay = DonhangID = barcode = NhaccID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = string.Empty;
                 // Set value for number field
@@ -365,7 +404,7 @@ namespace iClothing
                     NhaccID = cbNhacc.SelectedValue.ToString();
                     rd[1] = DBHelper.Lookup("Supplier", "Ten", "NhaccID", NhaccID);
                     // Xong
-                    rd[2] = IsCompleted;
+                    rd[2] = "false";
                     // Ngay nhap
                     Ngay = dtpNgaynhap.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
                     rd[3] = Ngay;
@@ -401,7 +440,7 @@ namespace iClothing
                     DonhangID = txtOrderIDNhap.Text;
                     DataRow row = dtTab1Nhap.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
 
-                    string ngayxong = string.Empty;
+                    
                     string ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
                     // NhaccID
@@ -462,6 +501,11 @@ namespace iClothing
                             SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
                             SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
                             SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
+                            
+                            if (IsCompleted.ToLower() == "true")
+                            {
+                                AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                            }
                             if (string.IsNullOrEmpty(txtOrderIDNhap.Text))
                             {
                                 dtTab1Nhap.Rows.InsertAt(rd, 0);
@@ -497,6 +541,48 @@ namespace iClothing
             }
         }
 
+        private void AddIntoStock(string barcode, string createDate, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
+            string TPSL, string SPLoiSL)
+        {
+            List<string> InsertItemQryList = new List<string>();
+            string InsertItemQry = "";
+            bool isSuccess = false;
+            string TonkhoID1 = CommonHelper.RandomString(7) + 1;
+            string TonkhoID2 = CommonHelper.RandomString(7) + 2;
+            string TonkhoID3 = CommonHelper.RandomString(7) + 3;
+            string TonkhoID4 = CommonHelper.RandomString(7) + 4;
+
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID1 + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID2 + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID3 + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+
+            if (DBAccess.IsServerConnected())
+            {
+
+                if (InsertItemQry.Length > 5)
+                {
+                    bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
+
+                    if (isExisted)
+                    {
+                        foreach (var item in InsertItemQryList)
+                        {
+                            isSuccess = DBAccess.ExecuteQuery(item);
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
         private List<string> AddNewOrderNhap(string Ngaynhap, string DonhangID, string NhaccID, string barcode, string IsCompleted, string createDate,
             string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
             string TPSL, string SPLoiSL)
@@ -577,21 +663,31 @@ namespace iClothing
         private void btnDeleteNhap_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dgvOrderNhap.SelectedRows)
-            {
-                string orderID = row.Cells[0].Value.ToString();
-                string query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
-                bool isSuccess = DBAccess.ExecuteQuery(query);
-                if (!isSuccess) return;
-                query = "DELETE FROM [Order] WHERE DonhangID ='" + orderID + "';";
-                isSuccess = DBAccess.ExecuteQuery(query);
-                if (!isSuccess) return;
-                dgvOrderNhap.Rows.Remove(row);
+            {               
+                if (Convert.ToBoolean(row.Cells[2].Value.ToString()) == false)
+                {
+                    string orderID = row.Cells[0].Value.ToString();
+                    string query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
+                    bool isSuccess = DBAccess.ExecuteQuery(query);
+                    if (!isSuccess) return;
+                    query = "DELETE FROM [Order] WHERE DonhangID ='" + orderID + "';";
+                    isSuccess = DBAccess.ExecuteQuery(query);
+                    if (!isSuccess) return;
+                    dgvOrderNhap.Rows.Remove(row);
+                    int rowCount = dgvOrderNhap.Rows.Count;
+                    pageSize = rowCount / rowPerPage;
+                    // if any row left after calculated pages, add one more page 
+                    if (rowCount % rowPerPage > 0)
+                        pageSize += 1;
+                    txtPagingNhap.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+                    lblTotalPageNhap.Text = "Tổng số:" + dgvOrderNhap.Rows.Count.ToString();
+                }
             }
         }
 
         private void dgvOrderNhap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            if (e.RowIndex != -1 && Convert.ToBoolean(dgvOrderNhap.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == false)
             {
                 DataGridViewRow dgvRow = dgvOrderNhap.Rows[e.RowIndex];
                 txtOrderIDNhap.Text = dgvRow.Cells[0].Value.ToString();
@@ -766,7 +862,9 @@ namespace iClothing
         private void btnResetNhap_Click(object sender, EventArgs e)
         {
             dtpFilterNgayNhap.Value = DateTime.Today;
+            ngayNhapFilterChanged = false;
             dtpFilterNgayXong.Value = DateTime.Today;
+            ngayXongFilterChanged = false;
             cbKyhieuFilter.SelectedIndex = 0;
             txtChuaInFilter.Text = string.Empty;
             txtDaInFilter.Text = string.Empty;
@@ -776,6 +874,10 @@ namespace iClothing
             cbSignDaIn.SelectedIndex = -1;
             cbSignTP.SelectedIndex = -1;
             cbSignSPLoi.SelectedIndex = -1;
+            if (dgvOrderNhap.DataSource != null)
+            {
+                (dgvOrderNhap.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
         }
         /******************************** End Panel Nhap******************************************/
         /******************************** Start Panel Xuat******************************************/
@@ -792,6 +894,11 @@ namespace iClothing
             cbSignDaInFilterXuat.SelectedIndex = -1;
             cbSignTPXuat.SelectedIndex = -1;
             cbSignSPLoiXuat.SelectedIndex = -1;
+            if (dgvOrderXuat.DataSource != null)
+            {
+                (dgvOrderXuat.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
+
         }
         private List<string> AddNewOrderXuat(string Ngaynhap, string DonhangID, string KHID, string barcode, string IsCompleted, string createDate,
             string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
@@ -823,10 +930,6 @@ namespace iClothing
         {
             List<string> UpdateItemQryList = new List<string>();
             string UpdateItemQry = "";
-            string orderDetailID1 = CommonHelper.RandomString(7) + 1;
-            string orderDetailID2 = CommonHelper.RandomString(7) + 2;
-            string orderDetailID3 = CommonHelper.RandomString(7) + 3;
-            string orderDetailID4 = CommonHelper.RandomString(7) + 4;
 
             if (!string.IsNullOrEmpty(ngayxong))
             {
@@ -935,7 +1038,7 @@ namespace iClothing
             try
             {
                 List<string> ItemQryList = new List<string>();
-
+                string ngayxong = string.Empty;
                 bool isSuccess = false;
                 string isNhap = "false";
                 DataRow rd = dtTab1Xuat.NewRow();
@@ -992,11 +1095,11 @@ namespace iClothing
                     DonhangID = txtOrderXuat.Text;
                     DataRow row = dtTab1Xuat.Select("[Mã Đơn Hàng]=" + DonhangID, "[Mã Đơn Hàng]").FirstOrDefault();
 
-                    string ngayxong = string.Empty;
+                    
                     string ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
                     // NhaccID
-                    KHID = cbKyHieuXuat.SelectedValue.ToString();
+                    KHID = cbCustomer.SelectedValue.ToString();
                     row[1] = DBHelper.Lookup("Customer", "HoTen", "KHID", KHID);
                     // Xong                   
                     row[2] = IsCompleted;
@@ -1053,6 +1156,10 @@ namespace iClothing
                             SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
                             SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
                             SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
+                            if (IsCompleted.ToLower() == "true")
+                            {
+                                AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" +BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
+                            }
                             if (string.IsNullOrEmpty(txtOrderXuat.Text))
                             {
                                 dtTab1Xuat.Rows.InsertAt(rd, 0);
@@ -1100,6 +1207,13 @@ namespace iClothing
                 isSuccess = DBAccess.ExecuteQuery(query);
                 if (!isSuccess) return;
                 dgvOrderXuat.Rows.Remove(row);
+                int rowCount = dgvOrderXuat.Rows.Count;
+                pageSize = rowCount / rowPerPage;
+                // if any row left after calculated pages, add one more page 
+                if (rowCount % rowPerPage > 0)
+                    pageSize += 1;
+                txtPagingXuat.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+                lblTotalPageXuat.Text = "Tổng số:" + dgvOrderXuat.Rows.Count.ToString();
             }
         }
 
@@ -1201,7 +1315,7 @@ namespace iClothing
 
         private void dgvOrderXuat_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            if (e.RowIndex != -1 && Convert.ToBoolean(dgvOrderXuat.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == false)
             {
                 DataGridViewRow dgvRow = dgvOrderXuat.Rows[e.RowIndex];
                 txtOrderXuat.Text = dgvRow.Cells[0].Value.ToString();
@@ -1270,6 +1384,37 @@ namespace iClothing
         private void dtpNgayXongFilterXuat_ValueChanged(object sender, EventArgs e)
         {
             ngayXongXuatFilterChanged = true;
+        }
+        private void txtBTPChuaInFilterXuat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDaInXuatFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTPFilterXuat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSPLoiFilterXuat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
         /********************************End Panel 2******************************************/
 
@@ -1503,7 +1648,10 @@ namespace iClothing
             dtpNhapXuatFilter.Value = DateTime.Today;
 
             cbKyHieuNhapXuatFilter.SelectedIndex = 0;
-
+            if (dvgManageInOut.DataSource != null)
+            {
+                (dvgManageInOut.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
         }
 
         private void btnNhapXuatSearch_Click(object sender, EventArgs e)
@@ -1523,5 +1671,7 @@ namespace iClothing
         {
             ngayNhapXuatFilterChanged = true;
         }
+
+        
     }
 }

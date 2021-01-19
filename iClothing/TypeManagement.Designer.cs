@@ -45,7 +45,7 @@
             this.lblLoaiID = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotalPage = new System.Windows.Forms.Label();
-            this.dvgType = new ADGV.AdvancedDataGridView();
+            this.dvgType = new System.Windows.Forms.DataGridView();
             this.LoaiID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mieuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,7 +77,7 @@
             this.btnImport.AutoSize = true;
             this.btnImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImport.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImport.ForeColor = System.Drawing.Color.White;
             this.btnImport.Location = new System.Drawing.Point(373, 45);
             this.btnImport.Name = "btnImport";
@@ -99,7 +99,7 @@
             this.btnDelete.AutoSize = true;
             this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
             this.btnDelete.Location = new System.Drawing.Point(662, 247);
             this.btnDelete.Name = "btnDelete";
@@ -112,7 +112,7 @@
             // 
             this.txtMieuta.BackColor = System.Drawing.Color.White;
             this.txtMieuta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMieuta.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMieuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMieuta.Location = new System.Drawing.Point(179, 165);
             this.txtMieuta.Multiline = true;
             this.txtMieuta.Name = "txtMieuta";
@@ -122,7 +122,7 @@
             // lblMieuta
             // 
             this.lblMieuta.AutoSize = true;
-            this.lblMieuta.Font = new System.Drawing.Font("Century Schoolbook", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMieuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMieuta.ForeColor = System.Drawing.Color.Orange;
             this.lblMieuta.Location = new System.Drawing.Point(50, 165);
             this.lblMieuta.Name = "lblMieuta";
@@ -134,7 +134,7 @@
             // 
             this.txtTen.BackColor = System.Drawing.Color.White;
             this.txtTen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTen.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTen.Location = new System.Drawing.Point(179, 124);
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(323, 26);
@@ -144,7 +144,7 @@
             // 
             this.txtTypeID.BackColor = System.Drawing.Color.White;
             this.txtTypeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTypeID.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTypeID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTypeID.Location = new System.Drawing.Point(179, 84);
             this.txtTypeID.Name = "txtTypeID";
             this.txtTypeID.Size = new System.Drawing.Size(323, 26);
@@ -153,7 +153,7 @@
             // lblSon
             // 
             this.lblSon.AutoSize = true;
-            this.lblSon.Font = new System.Drawing.Font("Century Schoolbook", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSon.ForeColor = System.Drawing.Color.Orange;
             this.lblSon.Location = new System.Drawing.Point(50, 124);
             this.lblSon.Name = "lblSon";
@@ -164,7 +164,7 @@
             // lblLoaiID
             // 
             this.lblLoaiID.AutoSize = true;
-            this.lblLoaiID.Font = new System.Drawing.Font("Century Schoolbook", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoaiID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoaiID.ForeColor = System.Drawing.Color.Orange;
             this.lblLoaiID.Location = new System.Drawing.Point(50, 84);
             this.lblLoaiID.Name = "lblLoaiID";
@@ -183,7 +183,7 @@
             // lblTotalPage
             // 
             this.lblTotalPage.AutoSize = true;
-            this.lblTotalPage.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
             this.lblTotalPage.Location = new System.Drawing.Point(651, 676);
             this.lblTotalPage.Name = "lblTotalPage";
@@ -194,13 +194,12 @@
             // dvgType
             // 
             this.dvgType.AllowUserToAddRows = false;
-            this.dvgType.AutoGenerateContextFilters = true;
             this.dvgType.BackgroundColor = System.Drawing.Color.White;
             this.dvgType.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dvgType.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -213,10 +212,9 @@
             this.Mieuta,
             this.Ngaytao,
             this.Ngaysua});
-            this.dvgType.DateWithTime = false;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Orange;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -227,7 +225,7 @@
             this.dvgType.Location = new System.Drawing.Point(49, 353);
             this.dvgType.Name = "dvgType";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -235,7 +233,6 @@
             this.dvgType.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dvgType.Size = new System.Drawing.Size(813, 294);
             this.dvgType.TabIndex = 55;
-            this.dvgType.TimeFilter = false;
             // 
             // LoaiID
             // 
@@ -292,7 +289,7 @@
             this.btnSave.AutoSize = true;
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Century Schoolbook", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Location = new System.Drawing.Point(513, 247);
             this.btnSave.Name = "btnSave";
@@ -395,7 +392,7 @@
         private System.Windows.Forms.Label lblLoaiID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalPage;
-        private ADGV.AdvancedDataGridView dvgType;
+        private System.Windows.Forms.DataGridView dvgType;
         private System.Windows.Forms.Label lblMess;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridViewTextBoxColumn LoaiID;

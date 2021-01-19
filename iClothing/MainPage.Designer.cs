@@ -49,7 +49,6 @@
             this.pnStuff = new System.Windows.Forms.Panel();
             this.btnStuff = new System.Windows.Forms.Button();
             this.pnSystem = new System.Windows.Forms.Panel();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -70,7 +69,6 @@
             this.pnLeft.SuspendLayout();
             this.pnStuff.SuspendLayout();
             this.pnSystem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -130,8 +128,8 @@
             // btnTransaction
             // 
             this.btnTransaction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
-            this.btnTransaction.FlatAppearance.BorderSize = 0;
             resources.ApplyResources(this.btnTransaction, "btnTransaction");
+            this.btnTransaction.FlatAppearance.BorderSize = 0;
             this.btnTransaction.ForeColor = System.Drawing.Color.White;
             this.btnTransaction.Name = "btnTransaction";
             this.btnTransaction.UseVisualStyleBackColor = false;
@@ -248,7 +246,6 @@
             // 
             // pnSystem
             // 
-            this.pnSystem.Controls.Add(this.pictureBox6);
             this.pnSystem.Controls.Add(this.pictureBox5);
             this.pnSystem.Controls.Add(this.pictureBox4);
             this.pnSystem.Controls.Add(this.pictureBox3);
@@ -265,13 +262,6 @@
             this.pnSystem.Controls.Add(this.btnArt);
             resources.ApplyResources(this.pnSystem, "pnSystem");
             this.pnSystem.Name = "pnSystem";
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
-            resources.ApplyResources(this.pictureBox6, "pictureBox6");
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.TabStop = false;
             // 
             // pictureBox5
             // 
@@ -398,7 +388,6 @@
             this.pnLeft.PerformLayout();
             this.pnStuff.ResumeLayout(false);
             this.pnSystem.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -445,6 +434,5 @@
         private StockManagement stockManagement1;
         private TransactionManagement1 transactionManagement11;
         private CustomerManagement1 customerManagement11;
-        private System.Windows.Forms.PictureBox pictureBox6;
     }
 }

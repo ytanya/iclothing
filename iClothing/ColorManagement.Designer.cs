@@ -34,7 +34,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorManagement));
             this.btnSave = new System.Windows.Forms.Button();
             this.lblMess = new System.Windows.Forms.Label();
-            this.dvgColor = new ADGV.AdvancedDataGridView();
+            this.dvgColor = new System.Windows.Forms.DataGridView();
             this.SonID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mieuta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,7 +91,6 @@
             // dvgColor
             // 
             this.dvgColor.AllowUserToAddRows = false;
-            this.dvgColor.AutoGenerateContextFilters = true;
             this.dvgColor.BackgroundColor = System.Drawing.Color.White;
             this.dvgColor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dvgColor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -110,7 +109,6 @@
             this.Mieuta,
             this.Ngaytao,
             this.Ngaysua});
-            this.dvgColor.DateWithTime = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -132,9 +130,6 @@
             this.dvgColor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dvgColor.Size = new System.Drawing.Size(568, 180);
             this.dvgColor.TabIndex = 9;
-            this.dvgColor.TimeFilter = false;
-            this.dvgColor.SortStringChanged += new System.EventHandler(this.dvgColor_SortStringChanged);
-            this.dvgColor.FilterStringChanged += new System.EventHandler(this.dvgColor_FilterStringChanged);
             this.dvgColor.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgColor_CellContentClick);
             // 
             // SonID
@@ -419,7 +414,7 @@
         #endregion
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblMess;
-        private ADGV.AdvancedDataGridView dvgColor;
+        private System.Windows.Forms.DataGridView dvgColor;
         private System.Windows.Forms.Label lblTotalPage;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTen;

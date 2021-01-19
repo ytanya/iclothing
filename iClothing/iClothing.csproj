@@ -37,6 +37,9 @@
     <Reference Include="AdvancedDataGridView, Version=0.1.0.10, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ADGV.0.1.0.10\lib\net40\AdvancedDataGridView.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Dashboard.v20.2.Core, Version=20.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v20.2, Version=20.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v20.2, Version=20.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
     </Reference>
@@ -86,6 +89,12 @@
     <Compile Include="ArtManagement1.Designer.cs">
       <DependentUpon>ArtManagement1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChiTietNhapXuat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChiTietNhapXuat.Designer.cs">
+      <DependentUpon>ChiTietNhapXuat.cs</DependentUpon>
+    </Compile>
     <Compile Include="ColorManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,17 +112,41 @@
     <Compile Include="DBAccess.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="DBModel.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainPage.Designer.cs">
       <DependentUpon>MainPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderForm.Designer.cs">
+      <DependentUpon>OrderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OrderManagement.cs">
       <SubType>UserControl</SubType>
@@ -129,6 +162,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanLyNhap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyNhap.Designer.cs">
+      <DependentUpon>QuanLyNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyNhapXuat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyNhapXuat.Designer.cs">
+      <DependentUpon>QuanLyNhapXuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyXuat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyXuat.Designer.cs">
+      <DependentUpon>QuanLyXuat.cs</DependentUpon>
+    </Compile>
     <Compile Include="StaffManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,6 +214,9 @@
       <DependentUpon>ArtManagement1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChiTietNhapXuat.resx">
+      <DependentUpon>ChiTietNhapXuat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ColorManagement.resx">
       <DependentUpon>ColorManagement.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -170,11 +224,23 @@
     <EmbeddedResource Include="CustomerManagement1.resx">
       <DependentUpon>CustomerManagement1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderForm.resx">
+      <DependentUpon>OrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderManagement.resx">
       <DependentUpon>OrderManagement.cs</DependentUpon>
@@ -182,6 +248,7 @@
     <EmbeddedResource Include="ProductManagement1.resx">
       <DependentUpon>ProductManagement1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -192,6 +259,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="QuanLyNhap.resx">
+      <DependentUpon>QuanLyNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyNhapXuat.resx">
+      <DependentUpon>QuanLyNhapXuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyXuat.resx">
+      <DependentUpon>QuanLyXuat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StaffManagement.resx">
       <DependentUpon>StaffManagement.cs</DependentUpon>
     </EmbeddedResource>

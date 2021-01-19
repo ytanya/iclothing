@@ -44,7 +44,7 @@
             this.txtPaging = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.PictureBox();
             this.lblTotalPage = new System.Windows.Forms.Label();
-            this.dvgTransaction = new ADGV.AdvancedDataGridView();
+            this.dvgTransaction = new System.Windows.Forms.DataGridView();
             this.cbPageSize = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
@@ -99,7 +99,7 @@
             // lblTo
             // 
             this.lblTo.AutoSize = true;
-            this.lblTo.Font = new System.Drawing.Font("Century Schoolbook", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTo.ForeColor = System.Drawing.Color.Orange;
             this.lblTo.Location = new System.Drawing.Point(260, 84);
             this.lblTo.Name = "lblTo";
@@ -110,7 +110,7 @@
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Font = new System.Drawing.Font("Century Schoolbook", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFrom.ForeColor = System.Drawing.Color.Orange;
             this.lblFrom.Location = new System.Drawing.Point(1, 80);
             this.lblFrom.Name = "lblFrom";
@@ -164,7 +164,7 @@
             // lblTotalPage
             // 
             this.lblTotalPage.AutoSize = true;
-            this.lblTotalPage.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
             this.lblTotalPage.Location = new System.Drawing.Point(722, 628);
             this.lblTotalPage.Name = "lblTotalPage";
@@ -175,23 +175,21 @@
             // dvgTransaction
             // 
             this.dvgTransaction.AllowUserToAddRows = false;
-            this.dvgTransaction.AutoGenerateContextFilters = true;
             this.dvgTransaction.BackgroundColor = System.Drawing.Color.White;
             this.dvgTransaction.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dvgTransaction.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dvgTransaction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dvgTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgTransaction.DateWithTime = false;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Orange;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -202,7 +200,7 @@
             this.dvgTransaction.Location = new System.Drawing.Point(4, 130);
             this.dvgTransaction.Name = "dvgTransaction";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Century Schoolbook", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -210,7 +208,6 @@
             this.dvgTransaction.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dvgTransaction.Size = new System.Drawing.Size(866, 485);
             this.dvgTransaction.TabIndex = 96;
-            this.dvgTransaction.TimeFilter = false;
             // 
             // cbPageSize
             // 
@@ -275,7 +272,7 @@
         private System.Windows.Forms.TextBox txtPaging;
         private System.Windows.Forms.PictureBox btnSearch;
         private System.Windows.Forms.Label lblTotalPage;
-        private ADGV.AdvancedDataGridView dvgTransaction;
+        private System.Windows.Forms.DataGridView dvgTransaction;
         private System.Windows.Forms.ComboBox cbPageSize;
     }
 }

@@ -35,7 +35,7 @@
             this.lblSoluong = new System.Windows.Forms.Label();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dvgStock = new ADGV.AdvancedDataGridView();
+            this.dvgStock = new System.Windows.Forms.DataGridView();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblTotalPage = new System.Windows.Forms.Label();
             this.pbSearch = new System.Windows.Forms.PictureBox();
@@ -56,11 +56,11 @@
             // lblSoluong
             // 
             this.lblSoluong.AutoSize = true;
-            this.lblSoluong.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSoluong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSoluong.ForeColor = System.Drawing.Color.Orange;
             this.lblSoluong.Location = new System.Drawing.Point(52, 55);
             this.lblSoluong.Name = "lblSoluong";
-            this.lblSoluong.Size = new System.Drawing.Size(60, 16);
+            this.lblSoluong.Size = new System.Drawing.Size(60, 15);
             this.lblSoluong.TabIndex = 44;
             this.lblSoluong.Text = "Barcode";
             // 
@@ -86,23 +86,21 @@
             // dvgStock
             // 
             this.dvgStock.AllowUserToAddRows = false;
-            this.dvgStock.AutoGenerateContextFilters = true;
             this.dvgStock.BackgroundColor = System.Drawing.Color.White;
             this.dvgStock.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dvgStock.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dvgStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dvgStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgStock.DateWithTime = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Orange;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -113,7 +111,7 @@
             this.dvgStock.Location = new System.Drawing.Point(55, 124);
             this.dvgStock.Name = "dvgStock";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -121,7 +119,6 @@
             this.dvgStock.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dvgStock.Size = new System.Drawing.Size(771, 361);
             this.dvgStock.TabIndex = 56;
-            this.dvgStock.TimeFilter = false;
             // 
             // btnExport
             // 
@@ -174,7 +171,6 @@
             this.cbPageSize.Name = "cbPageSize";
             this.cbPageSize.Size = new System.Drawing.Size(45, 21);
             this.cbPageSize.TabIndex = 141;
-            this.cbPageSize.Visible = false;
             // 
             // pbLast
             // 
@@ -185,7 +181,6 @@
             this.pbLast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLast.TabIndex = 140;
             this.pbLast.TabStop = false;
-            this.pbLast.Visible = false;
             this.pbLast.Click += new System.EventHandler(this.pbLast_Click);
             // 
             // pbNext
@@ -197,7 +192,6 @@
             this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbNext.TabIndex = 139;
             this.pbNext.TabStop = false;
-            this.pbNext.Visible = false;
             this.pbNext.Click += new System.EventHandler(this.pbNext_Click);
             // 
             // pbFirst
@@ -209,7 +203,6 @@
             this.pbFirst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbFirst.TabIndex = 137;
             this.pbFirst.TabStop = false;
-            this.pbFirst.Visible = false;
             this.pbFirst.Click += new System.EventHandler(this.pbFirst_Click);
             // 
             // pbPrev
@@ -221,7 +214,6 @@
             this.pbPrev.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPrev.TabIndex = 138;
             this.pbPrev.TabStop = false;
-            this.pbPrev.Visible = false;
             this.pbPrev.Click += new System.EventHandler(this.pbPrev_Click);
             // 
             // txtPaging
@@ -230,7 +222,6 @@
             this.txtPaging.Name = "txtPaging";
             this.txtPaging.Size = new System.Drawing.Size(93, 20);
             this.txtPaging.TabIndex = 136;
-            this.txtPaging.Visible = false;
             // 
             // StockManagement
             // 
@@ -269,7 +260,7 @@
         private System.Windows.Forms.Label lblSoluong;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label label1;
-        private ADGV.AdvancedDataGridView dvgStock;
+        private System.Windows.Forms.DataGridView dvgStock;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label lblTotalPage;
         private System.Windows.Forms.PictureBox pbSearch;

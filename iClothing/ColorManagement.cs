@@ -21,7 +21,8 @@ namespace iClothing
         private int pageSize = 1;
         private int rowPerPage=10;
         private string currentOrderByItem = "SonID";
-        public static string ConnectionString = "Data Source=" + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
+        public static string ConnectionString = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         public ColorManagement()
         {
             InitializeComponent();
@@ -93,55 +94,6 @@ namespace iClothing
                 pageSize += 1;
             lblTotalPage.Text = "Tổng số:" + dtnew.Rows.Count.ToString();
             DisablePagingButton(currentPageNumber, pageSize);
-        }
-
-        private void dvgColor_SortStringChanged(object sender, EventArgs e)
-        {
-            ADGV.AdvancedDataGridView fdgv = dvgColor;
-            if (fdgv.SortString.Length == 0)
-            {
-                return;
-            }
-            string[] strtok = fdgv.SortString.Split(',');            
-            currentOrderByItem = String.Join(",", strtok);
-            foreach (string str in strtok)
-            {
-                string[] columnorder = str.Split(']');
-                ListSortDirection lds = ListSortDirection.Ascending;
-                if (columnorder[1].Trim().Equals("DESC"))
-                {
-                    lds = ListSortDirection.Descending;
-                }
-                dvgColor.Sort(dvgColor.Columns[columnorder[0].Replace('[', ' ').Trim()], lds);
-            }
-
-        }
-
-        private void dvgColor_FilterStringChanged(object sender, EventArgs e)
-        {
-            ADGV.AdvancedDataGridView fdgv = dvgColor;
-            DataTable dt = null;
-            if (OrignalADGVdt == null)
-            {
-                OrignalADGVdt = (DataTable)fdgv.DataSource;
-            }
-            else
-            {
-                int row = OrignalADGVdt.Rows.Count;
-                fdgv.DataSource = OrignalADGVdt;
-            }
-            if (fdgv.FilterString.Length > 0)
-            {
-                dt = (DataTable)fdgv.DataSource;
-            }
-            else//Clear Filter
-            {
-                dt = OrignalADGVdt;
-            }
-
-            fdgv.DataSource = dt.Select(fdgv.FilterString).CopyToDataTable();
-            //BindingSource filter = (BindingSource)this.dvgColor.DataSource;
-            //filter.Filter = this.dvgColor.FilterString;
         }
 
         private void btnSave_Click(object sender, EventArgs e)

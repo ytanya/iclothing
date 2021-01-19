@@ -27,6 +27,7 @@ namespace iClothing
             tt.SetToolTip(btnSignout, "Đăng xuất");
             tt.SetToolTip(btnClose, "Đóng");
             this.AcceptButton = login2.btnLogin;
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)

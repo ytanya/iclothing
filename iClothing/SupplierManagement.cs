@@ -7,18 +7,257 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlServerCe;
 
 namespace iClothing
 {
     public partial class SupplierManagement : UserControl
     {
-        private DataTable dt = new DataTable();
-        private DataTable dtnew = new DataTable();
-        private DataTable OrignalADGVdt = null;
-        private int currentPageNumber = 1;
-        private int pageSize = 1;
-        private int rowPerPage = 10;
-        private string currentOrderByItem = "NhaccID";
+        public string ConnectionString = DBAccess.ConnectionString;
+        private int currentPageNumber, rowPerPage, pageSize, rowCount;
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string query = "";
+
+                bool isSuccess = false;
+                string NhaccID, Name, Mota, Address, Sodt, Email;
+                NhaccID = Name = Mota= Address = Sodt = Email = string.Empty;
+
+
+                if (string.IsNullOrEmpty(txtNhaccID.Text))
+                {
+                    // NhaccID
+                    NhaccID = CommonHelper.RandomString(8);
+                    // Nha cung ung
+                    Name = txtName.Text;
+                    // Mota
+                    Mota = txtMota.Text;
+                    // Address
+                    Address = txtAddress.Text;
+                    // Sodt
+                    Sodt = txtSodt.Text;
+                    // Email
+                    Email = txtEmail.Text;
+
+                    // Created Date
+                    string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+
+                    query = "INSERT INTO [Supplier] ([NhaccID],[Ten],[Mota],[Diachi],[Sodt],[Email],[Ngaytao],[Ngaysua])VALUES('" + NhaccID + "','" + Name + "','" +Mota + "','" + Address + "','" + Sodt + "','" + Email + "','" + createDate + "','" + createDate + "')";
+                }
+                else
+                {
+                    NhaccID = txtNhaccID.Text;
+                    string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                    // Ten khach hang
+                    Name = txtName.Text;
+                    // Mota
+                    Mota = txtMota.Text;
+                    // Address
+                    Address = txtAddress.Text;
+                    // Sodt
+                    Sodt = txtSodt.Text;
+                    // Email
+                    Email = txtEmail.Text;
+
+                    query = "UPDATE [Supplier] SET[Ten] ='" + Name + "',[Mota]= '" + Mota + "',[Diachi]= '" + Address + "',[Sodt]= '" + Sodt + "',[Email]= '" + Email + "',[Ngaysua]= '" + modifyDate + "' WHERE NhaccID ='" + NhaccID + "';";
+
+                }
+
+                if (DBAccess.IsServerConnected())
+                {
+
+                    isSuccess = DBAccess.ExecuteQuery(query);
+
+                    if (isSuccess)
+                    {
+                        if (string.IsNullOrEmpty(txtNhaccID.Text))
+                        {
+                            currentPageNumber = 1;
+                            ClearText();
+                            // Update datalist
+                            GetTotalRow();
+                            GetAllData(currentPageNumber, rowPerPage);
+                        }
+                        else
+                        {
+                            currentPageNumber = 1;
+                            ClearText();
+                            // Update datalist
+                            GetAllData(currentPageNumber, rowPerPage);
+                        }
+                        MessageBox.Show("Cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            bool isSuccess = false;
+            try
+            {
+                if (dgvSupplier.SelectedRows.Count > 0)
+                {
+                    foreach (DataGridViewRow row in dgvSupplier.SelectedRows)
+                    {
+
+                        string NhaccID = row.Cells[0].Value.ToString();
+                        string query = "DELETE FROM[Supplier] WHERE NhaccID = '" + NhaccID + "'";
+                        isSuccess = DBAccess.ExecuteQuery(query);
+                        if (!isSuccess) return;
+                        dgvSupplier.Rows.Remove(row);
+
+                    }
+                    GetTotalRow();
+                    GetAllData(1, rowPerPage);
+                    ClearText();
+                }
+                else
+                {
+                    MessageBox.Show("Mời chọn dòng muốn xóa!");
+                }
+                if (isSuccess)
+                {
+                    MessageBox.Show("Đã xóa thành công!");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Mời chọn dòng muốn xóa!");
+            }
+        }
+
+        private void pbFirst_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber > 1)
+            {
+                currentPageNumber = 1;
+                GetAllData(currentPageNumber, rowPerPage);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void pbPrev_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber > 1)
+            {
+                currentPageNumber -= 1;
+                GetAllData(currentPageNumber, rowPerPage);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void pbNext_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber += 1;
+                GetAllData(currentPageNumber, rowPerPage);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void pbLast_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumber < pageSize)
+            {
+                currentPageNumber = pageSize;
+                GetAllData(currentPageNumber, rowPerPage);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
+        }
+
+        private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rowPerPage = Convert.ToInt32(cbPageSize.SelectedItem.ToString());
+            currentPageNumber = 1;
+            GetAllData(currentPageNumber, rowPerPage);
+            pageSize = rowCount / rowPerPage;
+            // if any row left after calculated pages, add one more page 
+            if (rowCount % rowPerPage > 0)
+                pageSize += 1;
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+        }
+
+        private void pbFirstFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbPrevFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbNextFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbLastFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbPageSizeFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSodtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void dgvSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                DataGridViewRow dgvRow = dgvSupplier.Rows[e.RowIndex];
+                txtNhaccID.Text = dgvRow.Cells[0].Value.ToString();
+                txtName.Text = dgvRow.Cells[1].Value.ToString();
+                txtAddress.Text = dgvRow.Cells[2].Value.ToString();
+                txtSodt.Text = dgvRow.Cells[3].Value.ToString();
+                txtEmail.Text = dgvRow.Cells[4].Value.ToString();
+            }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            ClearText();
+        }
+
+        private void ClearText()
+        {
+            txtNhaccID.Text = string.Empty;
+            txtName.Text = string.Empty;
+            txtAddress.Text = string.Empty;
+            txtSodt.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+
+        }
         public SupplierManagement()
         {
             InitializeComponent();
@@ -26,273 +265,59 @@ namespace iClothing
 
         private void SupplierManagement_Load(object sender, EventArgs e)
         {
-            if (DBAccess.IsServerConnected())
-            {
-                PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-            }
-            else
-            {
-                //string query = "Select `NhaccID,`Ten`.`MieuTa`,`NgayTao`,`NgaySua` from `Color`";
-            }
-        }
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            txtNhacc.Enabled = false;
-            txtTen.Enabled = false;
-            txtMieuta.Enabled = false;
-            btnSave.Enabled = false;
-
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.ShowDialog();
-                int ImportedRecord = 0, inValidItem = 0;
-                string SourceURl = "";
-
-                if (dialog.FileName != "")
-                {
-                    if (dialog.FileName.EndsWith(".xlsx"))
-                    {
-                        DataTable dtNew = new DataTable();
-                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
-                        if (Convert.ToString(dtNew.Columns[0]).ToLower() != "ART")
-                        {
-                            MessageBox.Show("File bị lỗi!");
-                            btnSave.Enabled = false;
-                            return;
-                        }
-                        txtFile.Text = dialog.SafeFileName;
-                        SourceURl = dialog.FileName;
-                        if (dtNew.Rows != null && dtNew.Rows.ToString() != String.Empty)
-                        {
-                            dvgSupplier.DataSource = dtNew;
-                        }
-                        foreach (DataGridViewRow row in dvgSupplier.Rows)
-                        {
-                            if (Convert.ToString(row.Cells["ART"].Value) == "")
-                            {
-                                row.DefaultCellStyle.BackColor = Color.Red;
-                                inValidItem += 1;
-                            }
-                            else
-                            {
-                                ImportedRecord += 1;
-                            }
-                        }
-                        if (dvgSupplier.Rows.Count == 0)
-                        {
-                            btnSave.Enabled = false;
-                            MessageBox.Show("Không đọc được dữ liệu trong file", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng chọn file excel.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception " + ex);
-            }
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dvgSupplier.DataSource != null)
-                {
-                    DataTable dtItem = (DataTable)(dvgSupplier.DataSource);
-                    string id, name, desc, createDate, modifyDate;
-                    string InsertItemQry = "";
-                    int count = 0;
-                    var csv = new StringBuilder();
-                    //foreach (DataRow dr in dtItem.Rows)
-                    //{
-                    id = txtNhacc.Text;
-                    name = txtTen.Text;
-                    desc = txtMieuta.Text;
-                    createDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                    modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                    if (id != "")
-                    {
-                        InsertItemQry += "INSERT INTO [ART] (ARTID,Ten,Mota,Anh, Ngaytao,Ngaysua)VALUES('" + id + "','" + name + "','" + desc + "','" + null + "','" + createDate + "','" + modifyDate + "');";
-                        //var newLine = $"{id},{name},{desc},{createDate},{modifyDate}";
-                        //csv.AppendLine(newLine);
-                        //count++;
-                    }
-                    //
-                    if (DBAccess.IsServerConnected())
-                    {
-                        if (InsertItemQry.Length > 5)
-                        {
-                            bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
-                            if (isSuccess)
-                            {
-                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-                    //else
-                    //{
-                    //    File.AppendAllText(pathCSV, csv.ToString());
-                    //    MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //}
-                    // Update datalist
-                    PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception " + ex);
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            string id = txtNhacc.Text;
-            if (!string.IsNullOrEmpty(id))
-            {
-                string query = "DELETE FROM Art WHERE ARTID ='" + id + "';";
-                if (DBAccess.IsServerConnected())
-                {
-                    if (query.Length > 5)
-                    {
-                        bool isSuccess = DBAccess.ExecuteQuery(query);
-                        if (isSuccess)
-                        {
-                            MessageBox.Show("Số sản phẩm đã nhập Thành công: ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        // Update datalist
-                        PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-                    }
-                }
-
-            }
-        }
-
-        private void pbFirst_Click(object sender, EventArgs e)
-        {
             currentPageNumber = 1;
-            PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+            rowPerPage = 10;
+            GetTotalRow();
+            GetAllData(currentPageNumber, rowPerPage);
+            cbPageSize.SelectedIndex = 0;
         }
 
-        private void pbPrev_Click(object sender, EventArgs e)
+        private void GetTotalRow()
         {
-            currentPageNumber -= 1;
-            PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
+            string queryAll = "SELECT COUNT(*) AS Total FROM [Supplier]";
+            using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
+            {
+                using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
+                {
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+
+                    rowCount = Convert.ToInt32(dt.Rows[0][0].ToString());
+                    pageSize = rowCount / rowPerPage;
+                    // if any row left after calculated pages, add one more page 
+                    if (rowCount % rowPerPage > 0)
+                        pageSize += 1;
+                    txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+                    lblTotalPage.Text = "Tổng số:" + rowCount.ToString();
+                }
+            }
         }
-
-        private void pbNext_Click(object sender, EventArgs e)
+        private void GetAllData(int currentPageNumber, int rowPerPage)
         {
-            currentPageNumber += 1;
-            PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-        }
-
-        private void pbLast_Click(object sender, EventArgs e)
-        {
-            currentPageNumber = pageSize;
-            PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-        }
-
-
-
-        private void PopulateData(int currentPageNumber, int rowPerPage, string orderbyItem)
-        {
+            DataTable dtMain = new DataTable();
             int skipRecord = currentPageNumber - 1;
-            if (skipRecord != 0) skipRecord = currentPageNumber * rowPerPage;
-            string query = "SELECT NhaccID, Ten [Nhà Cung Ứng], Mota [Mô Tả], DiaChi [Địa Chỉ], Sodt [Số ĐT], Email FROM Supplier Order by [Nhà Cung Ứng] OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
-            dt = new DataTable();
-            dtnew = new DataTable();
-            dtnew = DBAccess.FillDataTable(query, dt);
+            if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
-            dvgSupplier.AutoGenerateColumns = false;
-            dvgSupplier.DataSource = dtnew;
-            int rowCount = dtnew.Rows.Count;
-            pageSize = rowCount / rowPerPage;
-            // if any row left after calculated pages, add one more page 
-            if (rowCount % rowPerPage > 0)
-                pageSize += 1;
-            lblTotalPage.Text = "Tổng số:" + dtnew.Rows.Count.ToString();
-            DisablePagingButton(currentPageNumber, pageSize);
-        }
-
-        void DisablePagingButton(int currentPageNumber, int pageSize)
-        {
-            // Show all paging button
-            ShowAllPagingButton();
-
-            // Disable First and Previous button if it's the first page
-            if (currentPageNumber == 1)
+            string query = "Select NhaccID, Ten [Nhà Cung Ứng], Diachi [Địa Chỉ], Sodt [Số ĐT], Email from Supplier order by Ngaysua DESC" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
-                pbFirst.Enabled = false;
-                pbPrev.Enabled = false;
-            }
-            // Disable Last and Next button if it's the last page
-            if (currentPageNumber == pageSize)
-            {
-                pbLast.Enabled = false;
-                pbNext.Enabled = false;
-            }
-
-        }
-
-        void ShowAllPagingButton()
-        {
-            pbFirst.Enabled = true;
-            pbPrev.Enabled = true;
-            pbLast.Enabled = true;
-            pbNext.Enabled = true;
-        }
-
-        private void dvgSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex != -1)
-            {
-                DataGridViewRow dgvRow = dvgSupplier.Rows[e.RowIndex];
-                txtNhacc.Text = dgvRow.Cells[0].Value.ToString();
-                txtNhacc.Enabled = false;
-                txtTen.Text = dgvRow.Cells[1].Value.ToString();
-                txtMieuta.Text = dgvRow.Cells[2].Value.ToString();
-                btnSave.Enabled = false;
-            }
-        }
-
-        private void dvgSupplier_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 5)
-            {
-                string ARTID = Convert.ToString(dvgSupplier.Rows[e.RowIndex].Cells["ARTID"].Value);
-                string Ten = Convert.ToString(dvgSupplier.Rows[e.RowIndex].Cells["Ten"].Value);
-                string Mieuta = Convert.ToString(dvgSupplier.Rows[e.RowIndex].Cells["Mota"].Value);
-                string now = System.DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                if (!string.IsNullOrEmpty(ARTID))
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
-                    string query = "UPDATE ART SET Ten = '" + Ten + "',Mota = '" + Mieuta + "',Ngaytao = '" + now + "',Ngaysua = '" + now + "' WHERE NhaccID= " + ARTID;
-                    bool isSuccess = DBAccess.ExecuteQuery(query);
-                    if (isSuccess)
-                    {
-                        PopulateData(currentPageNumber, rowPerPage, currentOrderByItem);
-                        lblMess.Text = " Ban da sua thanh cong ARTID: " + ARTID;
-                    }
-                }
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    dtMain.Merge(dt);
+                    dgvSupplier.DataSource = dtMain;
+                    dgvSupplier.Columns[0].Visible = false;
 
-            }
-            if (e.ColumnIndex == 6)
-            {
-                string ARTID = Convert.ToString(dvgSupplier.Rows[e.RowIndex].Cells["ARTID"].Value);
-                if (!string.IsNullOrEmpty(ARTID))
-                {
-                    string query = "DELETE FROM ART WHERE ARTID= " + ARTID;
-                    bool isSuccess = DBAccess.ExecuteQuery(query);
-                    if (isSuccess)
-                    {
-                        PopulateData(currentPageNumber, pageSize, currentOrderByItem);
-                        lblMess.Text = " Ban da xoa thanh cong ARTID: " + ARTID;
-                    }
                 }
             }
+
         }
     }
-}
+        
+
+        
+    }
+

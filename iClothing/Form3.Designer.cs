@@ -34,8 +34,8 @@ namespace iClothing
             this.rbXuat = new System.Windows.Forms.RadioButton();
             this.rbNhap = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnExport = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnExport = new System.Windows.Forms.Button();
             this.tbManageInOutOrder.SuspendLayout();
             this.tabInputNhap.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -102,6 +102,17 @@ namespace iClothing
             this.label1.Size = new System.Drawing.Size(826, 3);
             this.label1.TabIndex = 54;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btnExport);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(818, 689);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Chi Tiết Nhập Xuất";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // btnExport
             // 
             this.btnExport.AutoSize = true;
@@ -115,17 +126,6 @@ namespace iClothing
             this.btnExport.TabIndex = 143;
             this.btnExport.Text = "Truy Xuất File";
             this.btnExport.UseVisualStyleBackColor = false;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.btnExport);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(818, 689);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Chi Tiết Nhập Xuất";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Form3
             // 

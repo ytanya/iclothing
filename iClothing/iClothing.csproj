@@ -55,8 +55,7 @@
       <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SqlServerCe">
-      <HintPath>E:\help\System.Data.SqlServerCe.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
@@ -72,14 +71,20 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="zxing, Version=0.16.6.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZXing.Net.0.16.6\lib\net461\zxing.dll</HintPath>
-    </Reference>
-    <Reference Include="zxing.presentation, Version=0.16.6.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZXing.Net.0.16.6\lib\net461\zxing.presentation.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArtForm.Designer.cs">
+      <DependentUpon>ArtForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArtManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ArtManagement.Designer.cs">
+      <DependentUpon>ArtManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="ArtManagement1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,6 +105,12 @@
     </Compile>
     <Compile Include="CommonHelper.cs" />
     <Compile Include="CSVHelper.cs" />
+    <Compile Include="CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomerManagement1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -157,6 +168,24 @@
     <Compile Include="OrderManagement.Designer.cs">
       <DependentUpon>OrderManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="PaintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaintForm.Designer.cs">
+      <DependentUpon>PaintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaintManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PaintManagement.Designer.cs">
+      <DependentUpon>PaintManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductForm.Designer.cs">
+      <DependentUpon>ProductForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductManagement1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,6 +212,12 @@
     <Compile Include="QuanLyXuat.Designer.cs">
       <DependentUpon>QuanLyXuat.cs</DependentUpon>
     </Compile>
+    <Compile Include="StaffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffForm.Designer.cs">
+      <DependentUpon>StaffForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StaffManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,11 +236,23 @@
     <Compile Include="StockManagement.Designer.cs">
       <DependentUpon>StockManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="SupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplierForm.Designer.cs">
+      <DependentUpon>SupplierForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SupplierManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SupplierManagement.Designer.cs">
       <DependentUpon>SupplierManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransactionForm.Designer.cs">
+      <DependentUpon>TransactionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TransactionManagement1.cs">
       <SubType>UserControl</SubType>
@@ -213,12 +260,24 @@
     <Compile Include="TransactionManagement1.Designer.cs">
       <DependentUpon>TransactionManagement1.cs</DependentUpon>
     </Compile>
+    <Compile Include="TypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TypeForm.Designer.cs">
+      <DependentUpon>TypeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TypeManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TypeManagement.Designer.cs">
       <DependentUpon>TypeManagement.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ArtForm.resx">
+      <DependentUpon>ArtForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArtManagement.resx">
+      <DependentUpon>ArtManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ArtManagement1.resx">
       <DependentUpon>ArtManagement1.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -229,6 +288,9 @@
     <EmbeddedResource Include="ColorManagement.resx">
       <DependentUpon>ColorManagement.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerManagement1.resx">
       <DependentUpon>CustomerManagement1.cs</DependentUpon>
@@ -257,6 +319,15 @@
     <EmbeddedResource Include="OrderManagement.resx">
       <DependentUpon>OrderManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PaintForm.resx">
+      <DependentUpon>PaintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaintManagement.resx">
+      <DependentUpon>PaintManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForm.resx">
+      <DependentUpon>ProductForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductManagement1.resx">
       <DependentUpon>ProductManagement1.cs</DependentUpon>
     </EmbeddedResource>
@@ -279,6 +350,9 @@
     <EmbeddedResource Include="QuanLyXuat.resx">
       <DependentUpon>QuanLyXuat.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StaffForm.resx">
+      <DependentUpon>StaffForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StaffManagement.resx">
       <DependentUpon>StaffManagement.cs</DependentUpon>
     </EmbeddedResource>
@@ -288,11 +362,20 @@
     <EmbeddedResource Include="StockManagement.resx">
       <DependentUpon>StockManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SupplierForm.resx">
+      <DependentUpon>SupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SupplierManagement.resx">
       <DependentUpon>SupplierManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TransactionForm.resx">
+      <DependentUpon>TransactionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TransactionManagement1.resx">
       <DependentUpon>TransactionManagement1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TypeForm.resx">
+      <DependentUpon>TypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TypeManagement.resx">
       <DependentUpon>TypeManagement.cs</DependentUpon>

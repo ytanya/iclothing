@@ -21,8 +21,7 @@ namespace iClothing
         private int pageSize = 1;
         private int rowPerPage=10;
         private string currentOrderByItem = "SonID";
-        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
-        public static string ConnectionString = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public string ConnectionString = DBAccess.ConnectionString;
         public ColorManagement()
         {
             InitializeComponent();
@@ -44,9 +43,9 @@ namespace iClothing
         {
             if (e.ColumnIndex == 5)
             {
-                string SonId = Convert.ToString(dvgColor.Rows[e.RowIndex].Cells["SonID"].Value);
-                string Ten = Convert.ToString(dvgColor.Rows[e.RowIndex].Cells["Ten"].Value);
-                string Mieuta = Convert.ToString(dvgColor.Rows[e.RowIndex].Cells["Mieuta"].Value);
+                string SonId = Convert.ToString(dgvColor.Rows[e.RowIndex].Cells["SonID"].Value);
+                string Ten = Convert.ToString(dgvColor.Rows[e.RowIndex].Cells["Ten"].Value);
+                string Mieuta = Convert.ToString(dgvColor.Rows[e.RowIndex].Cells["Mieuta"].Value);
                 string now = System.DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                 if (!string.IsNullOrEmpty(SonId))
                 {
@@ -62,7 +61,7 @@ namespace iClothing
             }
             if (e.ColumnIndex == 6)
             {
-                string SonId = Convert.ToString(dvgColor.Rows[e.RowIndex].Cells["SonID"].Value);
+                string SonId = Convert.ToString(dgvColor.Rows[e.RowIndex].Cells["SonID"].Value);
                 if (!string.IsNullOrEmpty(SonId))
                 {
                     string query = "DELETE FROM Color WHERE SonID= " + SonId;
@@ -85,8 +84,8 @@ namespace iClothing
             dtnew = new DataTable();
             //dtnew = DBAccess.FillDataTable(query, dt);
 
-            dvgColor.AutoGenerateColumns = false;
-            dvgColor.DataSource = dtnew;
+            dgvColor.AutoGenerateColumns = false;
+            dgvColor.DataSource = dtnew;
             int rowCount = dtnew.Rows.Count;
             pageSize = rowCount / rowPerPage;
             // if any row left after calculated pages, add one more page 
@@ -100,9 +99,9 @@ namespace iClothing
         {
             try
             {
-                if (dvgColor.DataSource != null)
+                if (dgvColor.DataSource != null)
                 {
-                    DataTable dtItem = (DataTable)(dvgColor.DataSource);
+                    DataTable dtItem = (DataTable)(dgvColor.DataSource);
                     string id, name, desc, createDate, modifyDate;
                     string InsertItemQry = "";
                     int count = 0;
@@ -110,8 +109,8 @@ namespace iClothing
                     //foreach (DataRow dr in dtItem.Rows)
                     //{
                     id = txtSonID.Text;
-                    name = txtTen.Text;
-                    desc = txtMieuta.Text;
+                    name = txtName.Text;
+                    desc = txtMota.Text;
                     createDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                     modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                     if (id != "")
@@ -175,76 +174,16 @@ namespace iClothing
         {
             if (e.RowIndex != -1)
             {
-                DataGridViewRow dgvRow = dvgColor.Rows[e.RowIndex];
+                DataGridViewRow dgvRow = dgvColor.Rows[e.RowIndex];
                 txtSonID.Text = dgvRow.Cells[0].Value.ToString();
                 txtSonID.Enabled = false;
-                txtTen.Text = dgvRow.Cells[1].Value.ToString();
-                txtMieuta.Text = dgvRow.Cells[2].Value.ToString();
+                txtName.Text = dgvRow.Cells[1].Value.ToString();
+                txtMota.Text = dgvRow.Cells[2].Value.ToString();
                 btnSave.Enabled = false;
             }
         }
 
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            txtSonID.Enabled = false;
-            txtTen.Enabled = false;
-            txtMieuta.Enabled = false;
-            btnSave.Enabled = false;
-
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.ShowDialog();
-                int ImportedRecord = 0, inValidItem = 0;
-                string SourceURl = "";
-
-                if (dialog.FileName != "")
-                {
-                    if (dialog.FileName.EndsWith(".xlsx"))
-                    {
-                        DataTable dtNew = new DataTable();
-                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
-                        if (Convert.ToString(dtNew.Columns[0]).ToLower() != "MaSon")
-                        {
-                            MessageBox.Show("File bị lỗi!");
-                            btnSave.Enabled = false;
-                            return;
-                        }
-                        txtFile.Text = dialog.SafeFileName;
-                        SourceURl = dialog.FileName;
-                        if (dtNew.Rows != null && dtNew.Rows.ToString() != String.Empty)
-                        {
-                            dvgColor.DataSource = dtNew;
-                        }
-                        foreach (DataGridViewRow row in dvgColor.Rows)
-                        {
-                            if (Convert.ToString(row.Cells["MaSon"].Value) == "" || row.Cells["Ten"].Value == null)
-                            {
-                                row.DefaultCellStyle.BackColor = Color.Red;
-                                inValidItem += 1;
-                            }
-                            else
-                            {
-                                ImportedRecord += 1;
-                            }
-                        }
-                        if (dvgColor.Rows.Count == 0)
-                        {
-                            btnSave.Enabled = false;
-                            MessageBox.Show("Không đọc được dữ liệu trong file", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng chọn file excel.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception " + ex);
-            }
-        }
+        
 
         private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -303,6 +242,21 @@ namespace iClothing
             pbPrev.Enabled = true;
             pbLast.Enabled = true;
             pbNext.Enabled = true;
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

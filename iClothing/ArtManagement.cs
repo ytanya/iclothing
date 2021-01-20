@@ -115,49 +115,50 @@ namespace iClothing
                     }
 
                     OpenFileDialog dialog = new OpenFileDialog();
-                dialog.ShowDialog();
-                int ImportedRecord = 0, inValidItem = 0;
-                string SourceURl = "";
+                    dialog.ShowDialog();
+                    int ImportedRecord = 0, inValidItem = 0;
+                    string SourceURl = "";
 
-                if (dialog.FileName != "")
-                {
-                    if (dialog.FileName.EndsWith(".xlsx"))
+                    if (dialog.FileName != "")
                     {
-                        
-                        dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
-                        if (Convert.ToString(dtNew.Columns[0]).ToLower() != "ART")
+                        if (dialog.FileName.EndsWith(".xlsx"))
                         {
-                            MessageBox.Show("File bị lỗi!");
-                            btnSave.Enabled = false;
-                            return;
-                        }
-                        txtFile.Text = dialog.SafeFileName;
-                        SourceURl = dialog.FileName;
-                        if (dtNew.Rows != null && dtNew.Rows.ToString() != String.Empty)
-                        {
-                            dvgArt.DataSource = dtNew;
-                        }
-                        foreach (DataGridViewRow row in dvgArt.Rows)
-                        {
-                            if (Convert.ToString(row.Cells["ART"].Value) == "")
+
+                            //dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
+                            //if (Convert.ToString(dtNew.Columns[0]).ToLower() != "ART")
+                            //{
+                            //    MessageBox.Show("File bị lỗi!");
+                            //    btnSave.Enabled = false;
+                            //    return;
+                            //}
+                            //txtFile.Text = dialog.SafeFileName;
+                            //SourceURl = dialog.FileName;
+                            //if (dtNew.Rows != null && dtNew.Rows.ToString() != String.Empty)
+                            //{
+                            //    dvgArt.DataSource = dtNew;
+                            //}
+                            foreach (DataGridViewRow row in dvgArt.Rows)
                             {
-                                row.DefaultCellStyle.BackColor = Color.Red;
-                                inValidItem += 1;
+                                if (Convert.ToString(row.Cells["ART"].Value) == "")
+                                {
+                                    row.DefaultCellStyle.BackColor = Color.Red;
+                                    inValidItem += 1;
+                                }
+                                else
+                                {
+                                    ImportedRecord += 1;
+                                }
                             }
-                            else
+                            if (dvgArt.Rows.Count == 0)
                             {
-                                ImportedRecord += 1;
+                                btnSave.Enabled = false;
+                                MessageBox.Show("Không đọc được dữ liệu trong file", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
-                        if (dvgArt.Rows.Count == 0)
+                        else
                         {
-                            btnSave.Enabled = false;
-                            MessageBox.Show("Không đọc được dữ liệu trong file", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Vui lòng chọn file excel.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng chọn file excel.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -173,7 +174,7 @@ namespace iClothing
             {
                 if (dvgArt.DataSource != null)
                 {
-                    DataTable dtItem = (DataTable)(dvgArt.DataSource);
+                    //DataTable dtItem = (DataTable)(dvgArt.DataSource);
                     string id, name, desc, createDate, modifyDate;
                     string InsertItemQry = "";
                     int count = 0;
@@ -273,8 +274,8 @@ namespace iClothing
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = currentPageNumber * rowPerPage;
             string query = "SELECT ARTID, Ten, Mota, Anh, Ngaytao, Ngaysua FROM Art Order by " + orderbyItem + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
-            dt = new DataTable();
-            dtnew = new DataTable();
+            //dt = new DataTable();
+            //dtnew = new DataTable();
             dtnew = DBAccess.FillDataTable(query, dt);
 
             dvgArt.AutoGenerateColumns = false;

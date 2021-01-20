@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ZXing;
 using System.IO;
 using ExcelDataReader;
 using System.Data.SqlServerCe;
@@ -25,8 +24,7 @@ namespace iClothing
         private int rowPerPage = 10;
         private string currentOrderByItem = "Kyhieu";
         bool isSuccess = true;
-        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
-        public static string conn = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public string ConnectionString = DBAccess.ConnectionString;
         public ProductManagement1()
         {
             InitializeComponent();
@@ -63,13 +61,6 @@ namespace iClothing
                             });
                             foreach (System.Data.DataTable dt in ds.Tables)
                             {
-                                //if (Convert.ToString(dt.Columns[5]).ToUpper() != "ART")
-                                //{
-                                //    MessageBox.Show("Invalid Items File");
-                                //    btnSave.Enabled = false;
-                                //    return;
-                                //}
-
                                 string Barcode, Kyhieu, MaSP, Dai, Rong,ARTID,SonID,DVT, Mieuta, ngaytao, ngaysua;
                                 string InsertItemQry = "";
                                 int count = 0;
@@ -211,6 +202,87 @@ namespace iClothing
 
                     
                 }
+
+                //Update
+                if (dvgProduct.DataSource != null)
+                {
+                    DataTable dtItem = (DataTable)(dvgProduct.DataSource);
+                    int dai, rong;
+                    string barcode, ten, ARTID, SonID, DVT, Mieuta, MaSP, createDate, modifyDate;
+                    string InsertItemQry = "";
+                    int count = 0;
+                    var csv = new StringBuilder();
+                    // Barcode
+                    barcode = txtBarcode.Text;
+                    DataRow row = dtMain.Select("[Barcode]=" + barcode, "[Barcode]").FirstOrDefault();
+
+                    // Set value for number field
+                    if (string.IsNullOrEmpty(txtDai.Text)) txtDai.Text = "0";
+                    if (string.IsNullOrEmpty(txtRong.Text)) txtRong.Text = "0";
+
+                    // Ten
+                    ten = txtTen.Text;
+                    row[1] = ten;
+                    // MaSP
+                    MaSP = txtMaSP.Text;
+                    row[2] = MaSP;
+                    // Dai
+                    dai = Convert.ToInt32(txtDai.Text);
+                    row[3] = dai.ToString();
+                    // Rong
+                    rong = Convert.ToInt32(txtRong.Text);
+                    row[4] = rong.ToString();
+                    // ARTID
+                    ARTID = cbArt.SelectedValue.ToString();
+                    row[5] = DBHelper.Lookup("ART", "Ten", "ArtID", ARTID);
+                    // SonID
+                    SonID = cbSon.SelectedValue.ToString();
+                    row[6] = DBHelper.Lookup("Color", "Ten", "SonID", SonID);
+                    // DVT
+                    DVT = txtDVT.Text;
+                    row[7] = DVT;
+                    // Mieu ta
+                    Mieuta = txtMieuta.Text;
+                    row[8] = Mieuta;
+
+                    // Modify Date
+                    modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
+                    row[9] = modifyDate;
+
+                    if (ten != "")
+                    {
+                        InsertItemQry += "UPDATE [Product] SET [Kyhieu] = '" + ten + "',[Dai] = " + dai + ",[Rong] = " + rong + ",[ArtID] = '" + ARTID + "',[SonID] = '" + SonID + "',[DVT] = '" + DVT + "',[Mieuta] = '" + Mieuta + "',[Ngaysua] = '" + modifyDate + "',[MaSP] = '" + MaSP + "' WHERE Barcode ='" + barcode + "';";
+                    }
+
+                    if (DBAccess.IsServerConnected())
+                    {
+                        if (InsertItemQry.Length > 5)
+                        {
+                            bool isExisted = DBHelper.CheckItemExist("Product", "Barcode", barcode);
+
+                            if (isExisted)
+                            {
+                                bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                                if (isSuccess)
+                                {
+
+                                    currentPageNumber = 1;
+                                    countPageSize();
+                                    ClearTextBox();
+                                    // Update datalist
+                                    PopulateData(currentPageNumber, rowPerPage);
+                                    MessageBox.Show("Sửa sản phẩm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Barcode không tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+
+
+                }
             }
             catch (Exception ex)
             {
@@ -247,49 +319,7 @@ namespace iClothing
                 }
             }
 
-            //if (!string.IsNullOrEmpty(barcode))
-            //{
-                
-            //    if (DBAccess.IsServerConnected())
-            //    {
-            //        DataRow row = dtMain.Select("[Barcode]=" + barcode, "[Barcode]").FirstOrDefault();
-
-            //        if (query.Length > 5)
-            //        {
-            //            bool isExisted = DBHelper.CheckItemExist("Product", "Barcode", barcode);
-
-            //            if (isExisted)
-            //            {
-            //                bool isStockExisted = DBHelper.CheckItemExist("Stock", "Barcode", barcode);
-            //                if (!isStockExisted)
-            //                {
-            //                    bool isSuccess = DBAccess.ExecuteQuery(query);
-            //                    if (isSuccess)
-            //                    {
-            //                        dtMain.Rows.Remove(row);
-            //                        currentPageNumber = 1;
-            //                        countPageSize();
-            //                        ClearTextBox();
-            //                        // Update datalist
-            //                        PopulateData(currentPageNumber, rowPerPage);
-            //                        MessageBox.Show("Xóa sản phẩm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    MessageBox.Show("Không thể xóa, sản phẩm này còn trong kho!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //                }
-                            
-                            
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("Barcode không tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            }
-            //        }
-            //    }
-
-            //}
+           
         }
         
         private void ClearTextBox()
@@ -435,7 +465,7 @@ namespace iClothing
         {
             string query = "SELECT Barcode, Kyhieu [Ký Hiệu], MASP [Mã Sản Phẩm], Dai [Dài], Rong [Rộng], ART.Ten [ART], Color.Ten [Sơn], DVT, Product.Mieuta [Miêu tả], Product.Ngaysua [Ngày] FROM [Product] Join ART on ART.ArtID = Product.ArtID join Color on Color.SonID = Product.SonID Order by Product.Ngaysua; ";
             dtMain = new DataTable();
-            using (SqlCeConnection connection = new SqlCeConnection(conn))
+            using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
@@ -473,95 +503,7 @@ namespace iClothing
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dvgProduct.DataSource != null)
-                {
-                    DataTable dtItem = (DataTable)(dvgProduct.DataSource);
-                    int dai, rong;
-                    string barcode, ten, ARTID, SonID, DVT, Mieuta, MaSP, createDate, modifyDate;
-                    string InsertItemQry = "";
-                    int count = 0;
-                    var csv = new StringBuilder();
-                    // Barcode
-                    barcode = txtBarcode.Text;
-                    DataRow row = dtMain.Select("[Barcode]=" + barcode, "[Barcode]").FirstOrDefault();
-
-                    // Set value for number field
-                    if (string.IsNullOrEmpty(txtDai.Text)) txtDai.Text = "0";
-                    if (string.IsNullOrEmpty(txtRong.Text)) txtRong.Text = "0";
-
-                    // Ten
-                    ten = txtTen.Text;
-                    row[1] = ten;
-                    // MaSP
-                    MaSP = txtMaSP.Text;
-                    row[2] = MaSP;
-                    // Dai
-                    dai = Convert.ToInt32(txtDai.Text);
-                    row[3] = dai.ToString();
-                    // Rong
-                    rong = Convert.ToInt32(txtRong.Text);
-                    row[4] = rong.ToString();
-                    // ARTID
-                    ARTID = cbArt.SelectedValue.ToString();
-                    row[5] = DBHelper.Lookup("ART", "Ten", "ArtID", ARTID);
-                    // SonID
-                    SonID = cbSon.SelectedValue.ToString();
-                    row[6] = DBHelper.Lookup("Color", "Ten", "SonID", SonID);
-                    // DVT
-                    DVT = txtDVT.Text;
-                    row[7] = DVT;
-                    // Mieu ta
-                    Mieuta = txtMieuta.Text;
-                    row[8] = Mieuta;
-                    
-                    // Modify Date
-                    modifyDate = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                    row[9] = modifyDate;
-
-                    if (ten != "")
-                    {
-                        InsertItemQry += "UPDATE [Product] SET [Kyhieu] = '"+ten+"',[Dai] = "+dai+",[Rong] = "+rong+",[ArtID] = '"+ARTID+"',[SonID] = '"+SonID+"',[DVT] = '"+DVT+"',[Mieuta] = '"+Mieuta+"',[Ngaysua] = '"+ modifyDate+"',[MaSP] = '"+MaSP+"' WHERE Barcode ='" + barcode + "';";
-                    }
-
-                    if (DBAccess.IsServerConnected())
-                    {
-                        if (InsertItemQry.Length > 5)
-                        {
-                            bool isExisted = DBHelper.CheckItemExist("Product", "Barcode", barcode);
-
-                            if (isExisted)
-                            {
-                                bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
-                                if (isSuccess)
-                                {
-                                    
-                                    currentPageNumber = 1;
-                                    countPageSize();
-                                    ClearTextBox();
-                                    // Update datalist
-                                    PopulateData(currentPageNumber, rowPerPage);
-                                    MessageBox.Show("Sửa sản phẩm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Barcode không tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-
-                    
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
-            }
-        }
+        
 
         private void txtDai_KeyPress(object sender, KeyPressEventArgs e)
         {

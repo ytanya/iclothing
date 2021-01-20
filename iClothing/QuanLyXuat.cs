@@ -14,8 +14,7 @@ namespace iClothing
 {
     public partial class QuanLyXuat : UserControl
     {
-        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
-        public static string ConnectionString = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
         private string IsCompleted = "false";
         private bool ngayXuatFilterChanged = false, ngayXongFilterChanged = false;
@@ -26,6 +25,7 @@ namespace iClothing
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            txtOrder.Text = string.Empty;
             cbCustomer.SelectedIndex = 0;
             cbKyHieu.SelectedIndex = 0;
             txtBTPChuaIn.Text = "0";
@@ -118,55 +118,46 @@ namespace iClothing
 
                 //if (DBAccess.IsServerConnected())
                 //{
-                    if (ItemQryList.Count > 0)
-                    {
-                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                        {
-                            foreach (var item in ItemQryList)
-                        {
-                            
-                                using (SqlCeCommand cmd = new SqlCeCommand(item, connection))
-                                {
-                                    connection.Open();
-                                    cmd.ExecuteNonQuery();
-                                    connection.Close();
-                                    isSuccess= true;
-                                }
-                            }
-                            // = DBAccess.ExecuteQuery(item);
-                        }
+                if (ItemQryList.Count > 0)
+                {
 
-                        if (isSuccess)
-                        {
-                            SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
-                            SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
-                            SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
-                            SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
-                            if (IsCompleted.ToLower() == "true")
-                            {
-                                AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
-                            }
-                            if (string.IsNullOrEmpty(txtOrder.Text))
-                            {
-                                cbCustomer.SelectedIndex = 0;
-                                currentPageNumber = 1;
-                                ClearText();
-                                // Update datalist
-                                GetTotalRow();
-                                GetAllDataOrder(currentPageNumber, rowPerPage);
-                            }
-                            else
-                            {
-                                cbCustomer.SelectedIndex = 0;
-                                currentPageNumber = 1;
-                                ClearText();
-                                // Update datalist
-                                GetAllDataOrder(currentPageNumber, rowPerPage);
-                            }
-                            MessageBox.Show("Đơn hàng này đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                    foreach (var item in ItemQryList)
+                    {
+                        isSuccess = DBAccess.ExecuteQuery(item);
                     }
-               // }
+
+
+                    if (isSuccess)
+                    {
+                        SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
+                        SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
+                        SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
+                        SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
+                        if (IsCompleted.ToLower() == "true")
+                        {
+                            AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
+                        }
+                        if (string.IsNullOrEmpty(txtOrder.Text))
+                        {
+                            cbCustomer.SelectedIndex = 0;
+                            currentPageNumber = 1;
+                            ClearText();
+                            // Update datalist
+                            GetTotalRow();
+                            GetAllDataOrder(currentPageNumber, rowPerPage);
+                        }
+                        else
+                        {
+                            cbCustomer.SelectedIndex = 0;
+                            currentPageNumber = 1;
+                            ClearText();
+                            // Update datalist
+                            GetAllDataOrder(currentPageNumber, rowPerPage);
+                        }
+                        MessageBox.Show("Đơn hàng này đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                // }
             }
             catch (Exception ex)
             {
@@ -210,7 +201,7 @@ namespace iClothing
                 ngayxong = "',[Ngayxong]= '" + ngayxong;
             }
             // query update
-            UpdateItemQry = "UPDATE [Order] SET[KHID] ='" + KHID + ngayxong + "',[Ngaysua]= '" + ngaysua + "',[Xong]= '" + xong + "' WHERE DonhangID ='" + DonhangID + "';";
+            UpdateItemQry = "UPDATE [Order] SET[KHID] ='" + KHID + "',[Ngayxong]= '" + ngayxong + "',[Ngaysua]= '" + ngaysua + "',[Xong]= '" + xong + "' WHERE DonhangID ='" + DonhangID + "';";
             UpdateItemQryList.Add(UpdateItemQry);
             UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + BTPChuaInSL + "',[Ngaysua]= '" + ngaysua + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPChuaInID + "';";
             UpdateItemQryList.Add(UpdateItemQry);
@@ -245,35 +236,25 @@ namespace iClothing
             //if (DBAccess.IsServerConnected())
             //{
 
-                if (InsertItemQry.Length > 5)
+            if (InsertItemQry.Length > 5)
+            {
+                bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
+
+                if (isExisted)
                 {
-                    bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
 
-                    if (isExisted)
+                    foreach (var item in InsertItemQryList)
                     {
-                    using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                    {
-                        foreach (var item in InsertItemQryList)
-                        {
-                            using (SqlCeCommand cmd = new SqlCeCommand(item, connection))
-                        {
-                            connection.Open();
-                            cmd.ExecuteNonQuery();
-                            connection.Close();
-                                isSuccess= true;
-                        }
+                        isSuccess = DBAccess.ExecuteQuery(item);
                     }
-                   
-                            //isSuccess = DBAccess.ExecuteQuery(item);
-                        }
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                 }
-           // }
+                else
+                {
+                    MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            // }
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -287,38 +268,19 @@ namespace iClothing
                     {
                         string orderID = row.Cells[0].Value.ToString();
                         string query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
-                        //bool isSuccess = DBAccess.ExecuteQuery(query);
-                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                        {
-                            using (SqlCeCommand cmd = new SqlCeCommand(query, connection))
-                            {
-                                connection.Open();
-                                cmd.ExecuteNonQuery();
-                                connection.Close();
-                                isSuccess= true;
-                            }
-                        }
+                        isSuccess = DBAccess.ExecuteQuery(query);
                         if (!isSuccess) return;
                         query = "DELETE FROM [Order] WHERE DonhangID ='" + orderID + "';";
-                        //isSuccess = DBAccess.ExecuteQuery(query);
-                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                        {
-                            using (SqlCeCommand cmd = new SqlCeCommand(query, connection))
-                            {
-                                connection.Open();
-                                cmd.ExecuteNonQuery();
-                                connection.Close();
-                                isSuccess= true;
-                            }
-                        }
+                        isSuccess = DBAccess.ExecuteQuery(query);
+                        
                         if (!isSuccess) return;
                         dgvOrder.Rows.Remove(row);
-                        GetTotalRow();
-                        GetAllDataOrder(1, 10);
-                        ClearText();
+                        
                     }
                 }
-
+                GetTotalRow();
+                GetAllDataOrder(1, 10);
+                ClearText();
             }
             else
             {
@@ -340,30 +302,20 @@ namespace iClothing
                 //if (DBAccess.IsServerConnected())
                 //{
 
-                    if (InsertItemQry.Length > 5)
-                    {
-                        bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
+                if (InsertItemQry.Length > 5)
+                {
+                    bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
 
-                        if (isExisted)
-                        {
-                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                        {
-                            using (SqlCeCommand cmd = new SqlCeCommand(InsertItemQry, connection))
-                            {
-                                connection.Open();
-                                cmd.ExecuteNonQuery();
-                                connection.Close();
-                                isSuccess= true;
-                            }
-                        }
-                        //isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                    if (isExisted)
+                    {
+                        isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
                     }
-               // }
+                    else
+                    {
+                        MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                // }
 
             }
         }

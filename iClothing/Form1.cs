@@ -12,24 +12,22 @@ namespace iClothing
 {
     public partial class Form1 : Form
     {
-        int PW1, PW2, PW3;
-        bool submenuHided1, submenuHided2, verticalMenuHided;
+        int PW1, PW2;
+        bool submenuHided1, submenuHided2;
         public Form1()
         {
             InitializeComponent();
             PW1 = pnSystem.Height;
             PW2 = pnStuff.Height;
-            PW3 = pnLeft.Width-5;
             submenuHided1 = false;
             submenuHided2 = false;
-            verticalMenuHided = false;
             pnSystem.Height = 54;
             pnStuff.Height = 54;
-            pnSystem.Top = pnStuff.Height + 54;
+            pnSystem.Top = pnStuff.Height;
             SidePanelLeft.Visible = false;
             btnSignout.Visible = false;
-            btnStaff.Visible = false;
-            btnMini.Visible = false;
+            //btnStaff.Visible = false;
+            this.CenterToScreen();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,14 +37,11 @@ namespace iClothing
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            btnMini.Visible = true;
-            verticalMenuHided = true;
-            timer3.Start();
-            panel1.Controls.Clear();
+            pnRight.Controls.Clear();
             OrderForm orderfrm = new OrderForm() { TopLevel = false, AutoScaleMode=AutoScaleMode.None };
             orderfrm.FormBorderStyle = FormBorderStyle.None;
             orderfrm.AutoScroll = true;
-            this.panel1.Controls.Add(orderfrm);
+            this.pnRight.Controls.Add(orderfrm);
             //orderfrm.Location = new Point(250, 0);
             orderfrm.Show();
 
@@ -68,13 +63,13 @@ namespace iClothing
 
         private void btnStock_Click(object sender, EventArgs e)
         {
-            panel1.Controls.Clear();
+            pnRight.Controls.Clear();
             Stock stockfrm = new Stock() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
             //stockfrm.AutoScroll = true;
-            this.panel1.Controls.Add(stockfrm);
+            this.pnRight.Controls.Add(stockfrm);
             //orderfrm.Location = new Point(-20, 0);
             stockfrm.Show();
-            this.panel1.AutoScroll = true;
+            this.pnRight.AutoScroll = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -102,13 +97,6 @@ namespace iClothing
             }
         }
 
-        private void btnMini_Click(object sender, EventArgs e)
-        {
-            btnMini.Visible = false;
-            verticalMenuHided = false;
-            timer3.Start();
-        }
-
         private void timer2_Tick(object sender, EventArgs e)
         {
             if (submenuHided2)
@@ -124,7 +112,7 @@ namespace iClothing
             else
             {
                 pnStuff.Height = pnStuff.Height - 120;
-                if (pnStuff.Height < 90)
+                if (pnStuff.Height < 60)
                 {
                     timer2.Stop();
                     submenuHided2 = false;
@@ -135,29 +123,68 @@ namespace iClothing
             }
         }
 
-        private void timer3_Tick(object sender, EventArgs e)
+        private void btnProduct_Click(object sender, EventArgs e)
         {
-            if (!verticalMenuHided)
-            {
-                pnLeft.Width = pnLeft.Width + 20;
-                if (pnLeft.Width >= PW3)
-                {
-                    timer3.Stop();
-                    verticalMenuHided = true;
-                    this.Refresh();
-                }
-            }
-            else
-            {
-                pnLeft.Width = pnLeft.Width - 20;
-                if (pnLeft.Width < 60)
-                {
-                    timer3.Stop();
-                    verticalMenuHided = false;
-                    this.Refresh();
-                }
+            pnRight.Controls.Clear();
+            ProductForm productfrm = new ProductForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(productfrm);
+            productfrm.Show();
+        }
 
-            }
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            pnRight.Controls.Clear();
+            CustomerForm customerfrm = new CustomerForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(customerfrm);
+            customerfrm.Show();
+        }
+
+        private void btnSupplier_Click(object sender, EventArgs e)
+        {
+            pnRight.Controls.Clear();
+            SupplierForm supplierfrm = new SupplierForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(supplierfrm);
+            supplierfrm.Show();
+        }
+
+        private void btnTransaction_Click(object sender, EventArgs e)
+        {
+            pnRight.Controls.Clear();
+            TransactionForm transfrm = new TransactionForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(transfrm);
+            transfrm.Show();
+        }
+
+        private void btnType_Click(object sender, EventArgs e)
+        {
+            pnRight.Controls.Clear();
+            TypeForm typefrm = new TypeForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(typefrm);
+            typefrm.Show();
+        }
+
+        private void btnArt_Click(object sender, EventArgs e)
+        {
+            pnRight.Controls.Clear();
+            ArtForm artfrm = new ArtForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(artfrm);
+            artfrm.Show();
+        }
+
+        private void btnPaint_Click(object sender, EventArgs e)
+        {
+            pnRight.Controls.Clear();
+            PaintForm paintfrm = new PaintForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(paintfrm);
+            paintfrm.Show();
+        }
+
+        private void btnStaff_Click(object sender, EventArgs e)
+        {
+            pnRight.Controls.Clear();
+            StaffForm stafffrm = new StaffForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(stafffrm);
+            stafffrm.Show();
         }
 
         private void btnSystem_Click(object sender, EventArgs e)
@@ -174,8 +201,8 @@ namespace iClothing
             SidePanelLeft.Height = btnStuff.Height;
             SidePanelLeft.Top = pnStuff.Top + btnStuff.Top;
             submenuHided2 = !(submenuHided2);
-            if (submenuHided2) pnSystem.Top = PW2 + 54;
-            else pnSystem.Top = 54 + 54;
+            if (submenuHided2) pnSystem.Top = PW2 ;
+            else pnSystem.Top = 54;
             timer2.Start();
             
         }

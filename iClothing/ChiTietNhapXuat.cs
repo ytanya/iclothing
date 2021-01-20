@@ -14,8 +14,7 @@ namespace iClothing
 {
     public partial class ChiTietNhapXuat : UserControl
     {
-        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
-        public static string ConnectionString = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public string ConnectionString = DBAccess.ConnectionString;
         private bool ngayNhapXuatFilterChanged = false;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
         public ChiTietNhapXuat()

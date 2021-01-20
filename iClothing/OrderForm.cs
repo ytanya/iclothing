@@ -14,8 +14,7 @@ namespace iClothing
 
     public partial class OrderForm : Form
     {
-        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
-        public static string ConnectionString = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public string ConnectionString = DBAccess.ConnectionString;
         public OrderForm()
         {
             InitializeComponent();

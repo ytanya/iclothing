@@ -14,8 +14,7 @@ namespace iClothing
 {
     public partial class QuanLyNhap : UserControl
     {
-        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
-        public static string ConnectionString = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
         private string IsCompleted = "false";
         private bool ngayNhapFilterChanged = false, ngayXongFilterChanged = false;
@@ -26,6 +25,7 @@ namespace iClothing
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            txtOrderIDNhap.Text = string.Empty;
             cbNhacc.SelectedIndex = 0;
             cbKihieu.SelectedIndex = 0;
             txtBTPChuaIn.Text = "0";
@@ -117,26 +117,17 @@ namespace iClothing
 
                 }
 
-                //if (DBAccess.IsServerConnected())
-                //{
+                if (DBAccess.IsServerConnected())
+                {
 
                     if (ItemQryList.Count > 0)
                     {
-                        
-                            using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                            {
-                            foreach (var item in ItemQryList)
-                            {
-                                using (SqlCeCommand cmd = new SqlCeCommand(item, connection))
-                                {
-                                    connection.Open();
-                                    cmd.ExecuteNonQuery();
-                                    connection.Close();
-                                    isSuccess= true;
-                                }
-                            }
-                            //isSuccess = DBAccess.ExecuteQuery(item);
+
+                        foreach (var item in ItemQryList)
+                        {
+                            isSuccess = DBAccess.ExecuteQuery(item);
                         }
+
 
                         if (isSuccess)
                         {
@@ -170,7 +161,7 @@ namespace iClothing
                         }
                     }
 
-               // }
+                }
             }
             catch (Exception ex)
             {
@@ -195,46 +186,27 @@ namespace iClothing
         private void btnDelete_Click(object sender, EventArgs e)
         {
             bool isSuccess = false;
-            if (dgvOrder.SelectedRows.Count > 0)
+            if (dgvOrderFilter.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow row in dgvOrder.SelectedRows)
+                foreach (DataGridViewRow row in dgvOrderFilter.SelectedRows)
                 {
 
                     if (Convert.ToBoolean(row.Cells[2].Value.ToString()) == false)
                     {
                         string orderID = row.Cells[0].Value.ToString();
                         string query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
-                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                        {
-                            using (SqlCeCommand cmd = new SqlCeCommand(query, connection))
-                            {
-                                connection.Open();
-                                cmd.ExecuteNonQuery();
-                                connection.Close();
-                                isSuccess = true;
-                            }
-                        }
+                        isSuccess = DBAccess.ExecuteQuery(query);
                         if (!isSuccess) return;
                         query = "DELETE FROM [Order] WHERE DonhangID ='" + orderID + "';";
-                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                        {
-                            using (SqlCeCommand cmd = new SqlCeCommand(query, connection))
-                            {
-                                connection.Open();
-                                cmd.ExecuteNonQuery();
-                                connection.Close();
-                                isSuccess= true;
-                            }
-                        }
-                        //isSuccess = DBAccess.ExecuteQuery(query);
+                        isSuccess = DBAccess.ExecuteQuery(query);
                         if (!isSuccess) return;
-                        dgvOrder.Rows.Remove(row);
-                        GetTotalRow();
-                        GetAllDataOrder(1, 10);
-                        ClearText();
+                        dgvOrderFilter.Rows.Remove(row);
+                        
                     }
                 }
-
+                GetTotalRow();
+                GetAllDataOrder(1, 10);
+                ClearText();
             }
             else
             {
@@ -425,24 +397,24 @@ namespace iClothing
                     DataTable dt = new DataTable();
                     sda.Fill(dt);
                     dtMain.Merge(dt);
-                    dgvOrder.DataSource = dtMain;
-                    dgvOrder.Columns[0].Visible = false;
-                    dgvOrder.Columns[1].Visible = false;
-                    dgvOrder.Columns[3].Width = 130;
-                    dgvOrder.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-                    dgvOrder.Columns[4].Width = 130;
-                    dgvOrder.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-                    dgvOrder.Columns["Xong"].Width = 50;
-                    dgvOrder.Columns["Ký Hiệu"].Width = 60;
-                    dgvOrder.Columns["BTP Chưa in"].Width = 120;
-                    this.dgvOrder.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dgvOrder.Columns["BTP Đã in"].Width = 100;
-                    this.dgvOrder.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dgvOrder.Columns["Thành Phẩm"].Width = 120;
-                    this.dgvOrder.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dgvOrder.Columns["Sản phẩm lỗi"].Width = 110;
-                    this.dgvOrder.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dgvOrder.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dgvOrderFilter.DataSource = dtMain;
+                    dgvOrderFilter.Columns[0].Visible = false;
+                    dgvOrderFilter.Columns[1].Visible = false;
+                    dgvOrderFilter.Columns[3].Width = 130;
+                    dgvOrderFilter.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrderFilter.Columns[4].Width = 130;
+                    dgvOrderFilter.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrderFilter.Columns["Xong"].Width = 50;
+                    dgvOrderFilter.Columns["Ký Hiệu"].Width = 60;
+                    dgvOrderFilter.Columns["BTP Chưa in"].Width = 120;
+                    this.dgvOrderFilter.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderFilter.Columns["BTP Đã in"].Width = 100;
+                    this.dgvOrderFilter.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderFilter.Columns["Thành Phẩm"].Width = 120;
+                    this.dgvOrderFilter.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderFilter.Columns["Sản phẩm lỗi"].Width = 110;
+                    this.dgvOrderFilter.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderFilter.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
             }
 
@@ -471,8 +443,8 @@ namespace iClothing
             if (!string.IsNullOrEmpty(barcode))
             {
                 InsertItemQry = "INSERT INTO [Transaction]([TransID],[Barcode],[LoaiID],[Mota],[Soluong],[Nhap],[Xong],[Ngaytao],[Ngaysua])VALUES('" + TransID + "','" + barcode + "','" + LoaiID + "','" + Mota + "','" + soluong + "','" + Nhap + "','" + Xong + "','" + createDate + "','" + modifyDate + "')";
-                //if (DBAccess.IsServerConnected())
-                //{
+                if (DBAccess.IsServerConnected())
+                {
 
                     if (InsertItemQry.Length > 5)
                     {
@@ -480,24 +452,14 @@ namespace iClothing
 
                         if (isExisted)
                         {
-                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                        {
-                            using (SqlCeCommand cmd = new SqlCeCommand(InsertItemQry, connection))
-                            {
-                                connection.Open();
-                                cmd.ExecuteNonQuery();
-                                connection.Close();
-                                isSuccess= true;
-                            }
-                        }
-                        //isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                            isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
                         }
                         else
                         {
                             MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-               // }
+                }
 
             }
         }
@@ -542,7 +504,7 @@ namespace iClothing
                 ngayxong = "',[Ngayxong]= '" + ngayxong;
             }
             // query update
-            UpdateItemQry = "UPDATE [Order] SET[NhaccID] ='" + NhaccID + ngayxong + "',[Ngaysua]= '" + ngaysua + "',[Xong]= '" + xong + "' WHERE DonhangID ='" + DonhangID + "';";
+            UpdateItemQry = "UPDATE [Order] SET[NhaccID] ='" + NhaccID + "',[Ngayxong]= '" + ngayxong + "',[Ngaysua]= '" + ngaysua + "',[Xong]= '" + xong + "' WHERE DonhangID ='" + DonhangID + "';";
             UpdateItemQryList.Add(UpdateItemQry);
             UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + BTPChuaInSL + "',[Ngaysua]= '" + ngaysua + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPChuaInID + "';";
             UpdateItemQryList.Add(UpdateItemQry);
@@ -557,13 +519,13 @@ namespace iClothing
 
         private void dgvOrder_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1 && Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == false)
+            if (e.RowIndex != -1 && Convert.ToBoolean(dgvOrderFilter.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == false)
             {
-                DataGridViewRow dgvRow = dgvOrder.Rows[e.RowIndex];
+                DataGridViewRow dgvRow = dgvOrderFilter.Rows[e.RowIndex];
                 txtOrderIDNhap.Text = dgvRow.Cells[0].Value.ToString();
                 cbNhacc.SelectedValue = DBHelper.Lookup("Supplier", "NhaccID", "Ten", dgvRow.Cells[1].Value.ToString());
                 cbNhacc.Text = dgvRow.Cells[1].Value.ToString();
-                if (Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true)
+                if (Convert.ToBoolean(dgvOrderFilter.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true)
                 {
                     IsCompleted = "true";
 
@@ -585,8 +547,8 @@ namespace iClothing
         {
             if (!bool.Parse(IsCompleted))
             {
-                if (e.ColumnIndex == dgvOrder.Columns["Xong"].Index)
-                    if (Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true) IsCompleted = "true"; else IsCompleted = "false";
+                if (e.ColumnIndex == dgvOrderFilter.Columns["Xong"].Index)
+                    if (Convert.ToBoolean(dgvOrderFilter.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true) IsCompleted = "true"; else IsCompleted = "false";
             }
         }
 
@@ -620,7 +582,7 @@ namespace iClothing
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(sploiFilter) ? "" : sploiFilter) : (string.IsNullOrEmpty(sploiFilter) ? strSearch : strSearch + " AND " + sploiFilter);
             //string filterQuery = string.Format("[Ngày Nhập] like '%{0}%' AND [Ngày Xong] like '%{1}%' {2} {3} {4} {5} {6} {7}", "", "", nhacc, kyhieu, btpchuainFilter, btpdainFilter, tpFilter, sploiFilter);
 
-            (dgvOrder.DataSource as DataTable).DefaultView.RowFilter = strSearch;
+            (dgvOrderFilter.DataSource as DataTable).DefaultView.RowFilter = strSearch;
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -643,14 +605,46 @@ namespace iClothing
             cbSignDaIn.SelectedIndex = -1;
             cbSignTP.SelectedIndex = -1;
             cbSignSPLoi.SelectedIndex = -1;
-            if (dgvOrder.DataSource != null)
+            if (dgvOrderFilter.DataSource != null)
             {
-                (dgvOrder.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+                (dgvOrderFilter.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
             }
         }
         private void dtpFilterNgayNhap_ValueChanged(object sender, EventArgs e)
         {
             ngayNhapFilterChanged = true;
+        }
+
+        private void pbFirstFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbPrevFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbNextFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbLastFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbPageSizeFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rowPerPage = Convert.ToInt32(cbPageSizeFilter.SelectedItem.ToString());
+            currentPageNumber = 1;
+            GetAllDataOrder(currentPageNumber, rowPerPage);
+            pageSize = rowCount / rowPerPage;
+            // if any row left after calculated pages, add one more page 
+            if (rowCount % rowPerPage > 0)
+                pageSize += 1;
+            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void tbNhap_SelectedIndexChanged(object sender, EventArgs e)
@@ -682,7 +676,7 @@ namespace iClothing
 
         private void dgvOrder_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if (Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue))
+            if (Convert.ToBoolean(dgvOrderFilter.Rows[e.RowIndex].Cells[2].EditedFormattedValue))
             {
                 e.Cancel = true;
             }
@@ -711,34 +705,23 @@ namespace iClothing
             //if (DBAccess.IsServerConnected())
             //{
 
-                if (InsertItemQry.Length > 5)
+            if (InsertItemQry.Length > 5)
+            {
+                bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
+
+                if (isExisted)
                 {
-                    bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
-
-                    if (isExisted)
+                    foreach (var item in InsertItemQryList)
                     {
-                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
-                        {
-                            foreach (var item in InsertItemQryList)
-                            {
-                                using (SqlCeCommand cmd = new SqlCeCommand(item, connection))
-                            {
-                                connection.Open();
-                                cmd.ExecuteNonQuery();
-                                connection.Close();
-                                isSuccess= true;
-                            }
-                        }
-                        
-                            //isSuccess = DBAccess.ExecuteQuery(item);
-                        }
+                        isSuccess = DBAccess.ExecuteQuery(item);
+                    }
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-              //  }
+                }
+                else
+                {
+                    MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                //  }
             }
         }
     }

@@ -36,14 +36,14 @@
             this.quanLyNhapXuat1.BackColor = System.Drawing.Color.White;
             this.quanLyNhapXuat1.Location = new System.Drawing.Point(0, 0);
             this.quanLyNhapXuat1.Name = "quanLyNhapXuat1";
-            this.quanLyNhapXuat1.Size = new System.Drawing.Size(837, 705);
+            this.quanLyNhapXuat1.Size = new System.Drawing.Size(900, 540);
             this.quanLyNhapXuat1.TabIndex = 0;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 705);
+            this.ClientSize = new System.Drawing.Size(900, 540);
             this.Controls.Add(this.quanLyNhapXuat1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form2";

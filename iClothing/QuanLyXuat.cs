@@ -116,13 +116,24 @@ namespace iClothing
 
                 }
 
-                if (DBAccess.IsServerConnected())
-                {
+                //if (DBAccess.IsServerConnected())
+                //{
                     if (ItemQryList.Count > 0)
                     {
-                        foreach (var item in ItemQryList)
+                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
                         {
-                            isSuccess = DBAccess.ExecuteQuery(item);
+                            foreach (var item in ItemQryList)
+                        {
+                            
+                                using (SqlCeCommand cmd = new SqlCeCommand(item, connection))
+                                {
+                                    connection.Open();
+                                    cmd.ExecuteNonQuery();
+                                    connection.Close();
+                                    isSuccess= true;
+                                }
+                            }
+                            // = DBAccess.ExecuteQuery(item);
                         }
 
                         if (isSuccess)
@@ -155,7 +166,7 @@ namespace iClothing
                             MessageBox.Show("Đơn hàng này đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-                }
+               // }
             }
             catch (Exception ex)
             {
@@ -231,8 +242,8 @@ namespace iClothing
             InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
 
-            if (DBAccess.IsServerConnected())
-            {
+            //if (DBAccess.IsServerConnected())
+            //{
 
                 if (InsertItemQry.Length > 5)
                 {
@@ -240,9 +251,20 @@ namespace iClothing
 
                     if (isExisted)
                     {
+                    using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
+                    {
                         foreach (var item in InsertItemQryList)
                         {
-                            isSuccess = DBAccess.ExecuteQuery(item);
+                            using (SqlCeCommand cmd = new SqlCeCommand(item, connection))
+                        {
+                            connection.Open();
+                            cmd.ExecuteNonQuery();
+                            connection.Close();
+                                isSuccess= true;
+                        }
+                    }
+                   
+                            //isSuccess = DBAccess.ExecuteQuery(item);
                         }
 
                     }
@@ -251,10 +273,11 @@ namespace iClothing
                         MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-            }
+           // }
         }
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            bool isSuccess = false;
             if (dgvOrder.SelectedRows.Count > 0)
             {
                 foreach (DataGridViewRow row in dgvOrder.SelectedRows)
@@ -264,10 +287,30 @@ namespace iClothing
                     {
                         string orderID = row.Cells[0].Value.ToString();
                         string query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
-                        bool isSuccess = DBAccess.ExecuteQuery(query);
+                        //bool isSuccess = DBAccess.ExecuteQuery(query);
+                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
+                        {
+                            using (SqlCeCommand cmd = new SqlCeCommand(query, connection))
+                            {
+                                connection.Open();
+                                cmd.ExecuteNonQuery();
+                                connection.Close();
+                                isSuccess= true;
+                            }
+                        }
                         if (!isSuccess) return;
                         query = "DELETE FROM [Order] WHERE DonhangID ='" + orderID + "';";
-                        isSuccess = DBAccess.ExecuteQuery(query);
+                        //isSuccess = DBAccess.ExecuteQuery(query);
+                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
+                        {
+                            using (SqlCeCommand cmd = new SqlCeCommand(query, connection))
+                            {
+                                connection.Open();
+                                cmd.ExecuteNonQuery();
+                                connection.Close();
+                                isSuccess= true;
+                            }
+                        }
                         if (!isSuccess) return;
                         dgvOrder.Rows.Remove(row);
                         GetTotalRow();
@@ -294,8 +337,8 @@ namespace iClothing
             if (!string.IsNullOrEmpty(barcode))
             {
                 InsertItemQry = "INSERT INTO [Transaction]([TransID],[Barcode],[LoaiID],[Mota],[Soluong],[Nhap],[Xong],[Ngaytao],[Ngaysua])VALUES('" + TransID + "','" + barcode + "','" + LoaiID + "','" + Mota + "','" + soluong + "','" + Nhap + "','" + Xong + "','" + createDate + "','" + modifyDate + "')";
-                if (DBAccess.IsServerConnected())
-                {
+                //if (DBAccess.IsServerConnected())
+                //{
 
                     if (InsertItemQry.Length > 5)
                     {
@@ -303,14 +346,24 @@ namespace iClothing
 
                         if (isExisted)
                         {
-                            isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                        using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
+                        {
+                            using (SqlCeCommand cmd = new SqlCeCommand(InsertItemQry, connection))
+                            {
+                                connection.Open();
+                                cmd.ExecuteNonQuery();
+                                connection.Close();
+                                isSuccess= true;
+                            }
+                        }
+                        //isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
                         }
                         else
                         {
                             MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-                }
+               // }
 
             }
         }
@@ -578,7 +631,7 @@ namespace iClothing
                 cbKyHieuFilter.DataSource = dtProduct;
                 cbKyHieuFilter.ValueMember = "Barcode";
                 cbKyHieuFilter.DisplayMember = "Kyhieu";
-                cbKyHieuFilter.SelectedIndex = 0;
+                cbKyHieuFilter.SelectedIndex = -1;
             }
 
             // Init Supplier combobox

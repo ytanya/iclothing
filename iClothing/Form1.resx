@@ -121,12 +121,16 @@
   <data name="panel1.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 45</value>
+    <value>0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>930, 725</value>
+    <value>1165, 670</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -143,7 +147,6 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -293,11 +296,14 @@
   <data name="&gt;&gt;lblCurrentUser.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="pnMenu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="pnMenu.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="pnMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1155, 45</value>
+    <value>1165, 45</value>
   </data>
   <data name="pnMenu.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -314,6 +320,40 @@
   <data name="&gt;&gt;pnMenu.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btnMini.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnMini.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAGYktHRAD/AP8A/6C9p5MAAAA2SURBVEhLY2AYBSMnBP5TGWCEHJXN/z9yomYI+ZTmkUxzC4ZQ
+        YA9bp9I8kmluwbCNmlGPMQAAgfreMCoSI9cAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnMini.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnMini.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 7</value>
+  </data>
+  <data name="btnMini.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 23</value>
+  </data>
+  <data name="btnMini.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;btnMini.Name" xml:space="preserve">
+    <value>btnMini</value>
+  </data>
+  <data name="&gt;&gt;btnMini.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMini.Parent" xml:space="preserve">
+    <value>pnLeft</value>
+  </data>
+  <data name="&gt;&gt;btnMini.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="btnStuff.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -322,15 +362,9 @@
   </data>
   <data name="btnStuff.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAZtJREFUSEvt
-        lM8rRFEUx8eMkCys/FowqUlWU6zYWWiUrJRorGchRVlYaciPP0EWVpKFlMLWioWUspKys6NEIr8Wz+fU
-        eXXc3pj3XlmZW5/ur3PO951z372JRKX97wp4npeFNWX8T6pB8EWwbdgVYnPAX2PcDN2xPgbHBviEdRuA
-        eV6/YIG+Ba7gFuocux7WOsuKY3QK145zNWt7KnRP/wY5xyaj+8UwIitq3OYEadfgsr0dUM4p9esLIzKo
-        xhPmDFolO3jXTMVkyfmIfdYeIBVGpB7DD9gwIkPMX2AEauAAzv0zoZdyPklJywqYoEHn0mT2RajRzPs1
-        +0IUkcBzKRUAgaKKdEQRyanTHH1vCM6wuQktIIY4yLncqVDYbjmSiAqliS6/pdyPQy1Jgd5nmvEuHMGs
-        HH4ckSocT0waz4zT5rCPzZ78eZk4IpKJNHlKsjqe0SzlaZG2Cl06no8jIu/YK1xoWSTWqIrUMpbMLmFH
-        RfKRRTTYJAEe4Qs2IWnKNcZcbrjsbUH5m/7LHUgR4Mdra4SSpfZiZVVx+gbjRWfoBjfbnQAAAABJRU5E
-        rkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAGYktHRAD/AP8A/6C9p5MAAAA2SURBVEhLY2AYBSMnBP5TGWCEHJXN/z9yomYI+ZTmkUxzC4ZQ
+        YA9bp9I8kmluwbCNmlGPMQAAgfreMCoSI9cAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnStuff.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
@@ -482,7 +516,7 @@
     <value>pnLeft</value>
   </data>
   <data name="&gt;&gt;pnStuff.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="pictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1196,7 +1230,7 @@
     <value>pnLeft</value>
   </data>
   <data name="&gt;&gt;pnSystem.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblVersion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1229,7 +1263,7 @@
     <value>pnLeft</value>
   </data>
   <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="SidePanelLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 64</value>
@@ -1250,13 +1284,16 @@
     <value>pnLeft</value>
   </data>
   <data name="&gt;&gt;SidePanelLeft.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="pnLeft.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="pnLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 45</value>
   </data>
   <data name="pnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 705</value>
+    <value>238, 625</value>
   </data>
   <data name="pnLeft.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1273,17 +1310,41 @@
   <data name="&gt;&gt;pnLeft.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="timer2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>104, 17</value>
+  </metadata>
+  <metadata name="timer3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>191, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1165, 750</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>1165, 670</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Form1</value>
+  </data>
+  <data name="&gt;&gt;timer1.Name" xml:space="preserve">
+    <value>timer1</value>
+  </data>
+  <data name="&gt;&gt;timer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;timer2.Name" xml:space="preserve">
+    <value>timer2</value>
+  </data>
+  <data name="&gt;&gt;timer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;timer3.Name" xml:space="preserve">
+    <value>timer3</value>
+  </data>
+  <data name="&gt;&gt;timer3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Form1</value>

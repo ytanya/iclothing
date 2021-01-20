@@ -128,7 +128,8 @@ namespace iClothing
             DataTable dt = new DataTable();
             DataTable dtnew = new DataTable();
             string query = "Select * FROM "+tableName+" WHERE "+whereItem+"='"+whereValue+"';";
-            dtnew = DBAccess.FillDataTable(query, dt);
+
+            //dtnew = DBAccess.FillDataTable(query, dt);
             if (dtnew!=null)
             {
                 if (dtnew.Rows.Count > 0)

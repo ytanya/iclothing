@@ -84,7 +84,7 @@ namespace iClothing
 
         private void GetTotalRow(string query)
         {
-            string queryAll = "SELECT COUNT(*) AS Total FROM [Stock] " + query;
+            string queryAll = "SELECT COUNT(*) AS Total FROM (Select  DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], NewProduct.MaSP [Mã Sản Phẩm],New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock " + query + " GROUP BY Barcode) New on New.Barcode = Stock.Barcode) newtotal";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
@@ -127,7 +127,7 @@ namespace iClothing
             currentPageNumber = 1;
             rowPerPage = 10;
             cbPageSize.SelectedIndex = 0;
-            strFilter = "Where ngaytao >'" + dtpTuNgay.Value.AddDays(-1).ToString("yyyy-MM-dd") + "' AND ngaytao <'" + dtpDenNgay.Value.AddDays(1).ToString("yyyy-MM-dd") +"'";
+            strFilter = "Where  ngaytao <'" + dtpDenNgay.Value.AddDays(1).ToString("yyyy-MM-dd") +"'";
             GetTotalRow(strFilter);
             GetAllData(currentPageNumber, rowPerPage, strFilter);
         }
@@ -270,12 +270,12 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             strFilter = string.Empty;
-            string Ngay =  string.Format("ngaytao > '{0}'", dtpTuNgay.Value.AddDays(-1).ToString("yyyy-MM-dd")) + " AND " + string.Format("ngaytao < '{0}'", dtpDenNgay.Value.AddDays(1).ToString("yyyy-MM-dd"));
+            string Ngay =  string.Format("ngaytao < '{0}'", dtpDenNgay.Value.AddDays(1).ToString("yyyy-MM-dd"));
             strFilter = Ngay;
             string barcode = string.IsNullOrEmpty(txtBarcode.Text) ? string.Empty : txtBarcode.Text;
             strFilter = string.IsNullOrEmpty(strFilter) ? (string.IsNullOrEmpty(barcode) ? "" : barcode) : (string.IsNullOrEmpty(barcode) ? strFilter : strFilter + " AND " + barcode);
-            string kihieuValue = cbKyHieu.SelectedIndex == -1 ? string.Empty : DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyHieu.SelectedValue.ToString());
-            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " [Ký Hiệu] like '" + kihieuValue + "'";
+            string kihieuValue = cbKyHieu.SelectedIndex == -1 ? string.Empty :  cbKyHieu.SelectedValue.ToString();
+            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " Barcode like '" + kihieuValue + "'";
             strFilter = string.IsNullOrEmpty(strFilter) ? (string.IsNullOrEmpty(kyhieu) ? "" : kyhieu) : (string.IsNullOrEmpty(kyhieu) ? strFilter : strFilter + " AND " + kyhieu);
             if (!string.IsNullOrEmpty(strFilter))
             {
@@ -293,7 +293,7 @@ namespace iClothing
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
             
-            string query = "Select  DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], ngaytao [Ngày], NewProduct.MaSP [Mã Sản Phẩm],New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock GROUP BY Barcode) New on New.Barcode = Stock.Barcode " + strSearch + " order by ngaytao OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            string query = "Select  DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], NewProduct.MaSP [Mã Sản Phẩm],New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock "+ strSearch + " GROUP BY Barcode) New on New.Barcode = Stock.Barcode  order by [Ký Hiệu] OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))

@@ -47,6 +47,7 @@
             this.pbNext = new System.Windows.Forms.PictureBox();
             this.tbXuat = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvOrder = new System.Windows.Forms.DataGridView();
             this.dtpNgayXuat = new System.Windows.Forms.DateTimePicker();
             this.txtOrder = new System.Windows.Forms.TextBox();
             this.lblNgayXuat = new System.Windows.Forms.Label();
@@ -67,6 +68,7 @@
             this.txtBTPChuaIn = new System.Windows.Forms.TextBox();
             this.lblBTPChuaInXuat = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dgvOrderFilter = new System.Windows.Forms.DataGridView();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.cbSignSPLoi = new System.Windows.Forms.ComboBox();
@@ -87,8 +89,6 @@
             this.lblNgayXongNhapFilter = new System.Windows.Forms.Label();
             this.dtpNgayXuatFilter = new System.Windows.Forms.DateTimePicker();
             this.lblNgayXuatFilter = new System.Windows.Forms.Label();
-            this.dgvOrder = new System.Windows.Forms.DataGridView();
-            this.dgvOrderFilter = new System.Windows.Forms.DataGridView();
             this.pnXuat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
@@ -96,8 +96,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             this.tbXuat.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderFilter)).BeginInit();
             this.SuspendLayout();
             // 
@@ -234,6 +234,49 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tạo Mới";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvOrder
+            // 
+            this.dgvOrder.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
+            this.dgvOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvOrder.BackgroundColor = System.Drawing.Color.White;
+            this.dgvOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvOrder.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrder.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvOrder.EnableHeadersVisualStyles = false;
+            this.dgvOrder.GridColor = System.Drawing.Color.White;
+            this.dgvOrder.Location = new System.Drawing.Point(-1, 140);
+            this.dgvOrder.Name = "dgvOrder";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrder.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvOrder.RowTemplate.Height = 35;
+            this.dgvOrder.Size = new System.Drawing.Size(806, 272);
+            this.dgvOrder.TabIndex = 156;
+            this.dgvOrder.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvOrder_CellBeginEdit);
+            this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
+            this.dgvOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellContentClick);
             // 
             // dtpNgayXuat
             // 
@@ -480,6 +523,46 @@
             this.tabPage3.Text = "Tìm Kiếm";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // dgvOrderFilter
+            // 
+            this.dgvOrderFilter.AllowUserToAddRows = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Orange;
+            this.dgvOrderFilter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvOrderFilter.BackgroundColor = System.Drawing.Color.White;
+            this.dgvOrderFilter.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvOrderFilter.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderFilter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvOrderFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrderFilter.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvOrderFilter.EnableHeadersVisualStyles = false;
+            this.dgvOrderFilter.GridColor = System.Drawing.Color.White;
+            this.dgvOrderFilter.Location = new System.Drawing.Point(-7, 163);
+            this.dgvOrderFilter.Name = "dgvOrderFilter";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderFilter.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvOrderFilter.RowTemplate.Height = 35;
+            this.dgvOrderFilter.Size = new System.Drawing.Size(806, 272);
+            this.dgvOrderFilter.TabIndex = 178;
+            // 
             // btnReset
             // 
             this.btnReset.AutoSize = true;
@@ -709,86 +792,6 @@
             this.lblNgayXuatFilter.TabIndex = 157;
             this.lblNgayXuatFilter.Text = "Ngày Xuất";
             // 
-            // dgvOrder
-            // 
-            this.dgvOrder.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
-            this.dgvOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvOrder.BackgroundColor = System.Drawing.Color.White;
-            this.dgvOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvOrder.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrder.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvOrder.EnableHeadersVisualStyles = false;
-            this.dgvOrder.GridColor = System.Drawing.Color.White;
-            this.dgvOrder.Location = new System.Drawing.Point(-1, 140);
-            this.dgvOrder.Name = "dgvOrder";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrder.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvOrder.RowTemplate.Height = 35;
-            this.dgvOrder.Size = new System.Drawing.Size(806, 272);
-            this.dgvOrder.TabIndex = 156;
-            // 
-            // dgvOrderFilter
-            // 
-            this.dgvOrderFilter.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Orange;
-            this.dgvOrderFilter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvOrderFilter.BackgroundColor = System.Drawing.Color.White;
-            this.dgvOrderFilter.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvOrderFilter.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderFilter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvOrderFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrderFilter.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvOrderFilter.EnableHeadersVisualStyles = false;
-            this.dgvOrderFilter.GridColor = System.Drawing.Color.White;
-            this.dgvOrderFilter.Location = new System.Drawing.Point(-7, 163);
-            this.dgvOrderFilter.Name = "dgvOrderFilter";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderFilter.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvOrderFilter.RowTemplate.Height = 35;
-            this.dgvOrderFilter.Size = new System.Drawing.Size(806, 272);
-            this.dgvOrderFilter.TabIndex = 178;
-            // 
             // QuanLyXuat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -806,9 +809,9 @@
             this.tbXuat.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderFilter)).EndInit();
             this.ResumeLayout(false);
 

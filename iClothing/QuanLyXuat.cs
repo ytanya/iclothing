@@ -595,6 +595,7 @@ namespace iClothing
             ngayXongFilterChanged = true;
         }
 
+
         private void QuanLyXuat_Load(object sender, EventArgs e)
         {
             GetAllInitData();

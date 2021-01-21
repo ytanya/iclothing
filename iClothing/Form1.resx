@@ -613,7 +613,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnStaff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 435</value>
+    <value>3, 381</value>
   </data>
   <data name="btnStaff.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 54</value>
@@ -768,7 +768,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 273</value>
+    <value>3, 435</value>
   </data>
   <data name="btnType.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 54</value>
@@ -781,6 +781,9 @@
   </data>
   <data name="btnType.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
+  </data>
+  <data name="btnType.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;btnType.Name" xml:space="preserve">
     <value>btnType</value>
@@ -817,7 +820,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnPaint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 381</value>
+    <value>3, 327</value>
   </data>
   <data name="btnPaint.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 54</value>
@@ -875,7 +878,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnArt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 327</value>
+    <value>3, 273</value>
   </data>
   <data name="btnArt.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 54</value>

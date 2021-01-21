@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlServerCe;
 
 namespace iClothing
 {
@@ -26,6 +27,15 @@ namespace iClothing
             GetTotalRow();
             GetAllData(currentPageNumber, rowPerPage);
             cbPageSize.SelectedIndex = 0;
+            // Init Role combobox
+            DataTable dtRole = DBHelper.GetAllRole();
+            if (dtRole.Rows.Count > 0)
+            {
+                cbRole.DataSource = dtRole;
+                cbRole.ValueMember = "RoleID";
+                cbRole.DisplayMember = "Ten";
+                cbRole.SelectedIndex = 0;
+            }
         }
 
         
@@ -37,46 +47,57 @@ namespace iClothing
                 string query = "";
 
                 bool isSuccess = false;
-                string NhaccID, Name, Mota, Address, Sodt, Email;
-                NhaccID = Name = Mota = Address = Sodt = Email = string.Empty;
+                string NhanvienID, Ho, Ten, Address, Sodt, Email, Username, Password, Role;
+                NhanvienID = Ho = Ten = Address = Sodt = Email = Username = Password = Role = string.Empty;
 
 
                 if (string.IsNullOrEmpty(txtNhanvienID.Text))
                 {
-                    // NhaccID
-                    NhaccID = CommonHelper.RandomString(8);
-                    // Nha cung ung
-                    Name = txtName.Text;
-                    // Mota
-                    Mota = txtMota.Text;
+                    // NhanvienID
+                    NhanvienID = CommonHelper.RandomString(8);
+                    // Ho
+                    Ho = txtHo.Text;
+                    // Ten
+                    Ten = txtTen.Text;
                     // Address
                     Address = txtAddress.Text;
                     // Sodt
                     Sodt = txtSodt.Text;
                     // Email
                     Email = txtEmail.Text;
-
+                    // Username
+                    Username = txtUsername.Text;
+                    // Password
+                    Password = txtPassword.Text;
+                    // Role
+                    Role = cbRole.SelectedValue.ToString();
                     // Created Date
                     string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
-                    query = "INSERT INTO [Supplier] ([NhaccID],[Ten],[Mota],[Diachi],[Sodt],[Email],[Ngaytao],[Ngaysua])VALUES('" + NhaccID + "','" + Name + "','" + Mota + "','" + Address + "','" + Sodt + "','" + Email + "','" + createDate + "','" + createDate + "')";
+                    query = "INSERT INTO [Staff] ([NhanvienID],[Ho],[Ten],[Diachi],[Sodt],[Email],[Tendangnhap],[Matkhau],[RoleID],[Ngaytao],[Ngaysua])VALUES('" + NhanvienID + "','" + Ho + "','" + Ten + "','" + Address + "','" + Sodt + "','" + Email + "','" +Username + "','" +Password + "','" +Role + "','" + createDate + "','" + createDate + "')";
                 }
                 else
                 {
-                    NhaccID = txtNhanvienID.Text;
+                    NhanvienID = txtNhanvienID.Text;
                     string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-                    // Ten khach hang
-                    Name = txtName.Text;
-                    // Mota
-                    Mota = txtMota.Text;
+                    // Ho
+                    Ho = txtHo.Text;
+                    // Ten
+                    Ten = txtTen.Text;
                     // Address
                     Address = txtAddress.Text;
                     // Sodt
                     Sodt = txtSodt.Text;
                     // Email
                     Email = txtEmail.Text;
+                    // Username
+                    Username = txtUsername.Text;
+                    // Password
+                    Password = txtPassword.Text;
+                    // Role
+                    Role = cbRole.SelectedValue.ToString();
 
-                    query = "UPDATE [Supplier] SET[Ten] ='" + Name + "',[Mota]= '" + Mota + "',[Diachi]= '" + Address + "',[Sodt]= '" + Sodt + "',[Email]= '" + Email + "',[Ngaysua]= '" + modifyDate + "' WHERE NhaccID ='" + NhaccID + "';";
+                    query = "UPDATE [Staff] SET[Ho] ='" + Ho + "',[Ten]= '" + Ten + "',[Diachi]= '" + Address + "',[Sodt]= '" + Sodt + "',[Email]= '" + Email + "',[Tendangnhap]= '" + Username + "',[Matkhau]= '" + Password + "',[RoleID]= '" + Role + "',[Ngaysua]= '" + modifyDate + "' WHERE NhanvienID ='" + NhanvienID + "';";
 
                 }
 
@@ -122,13 +143,20 @@ namespace iClothing
                 {
                     foreach (DataGridViewRow row in dgvStaff.SelectedRows)
                     {
+                        bool isExisted = DBHelper.CheckItemExist("[Staff]", "Tendangnhap", "1");
 
-                        string NhaccID = row.Cells[0].Value.ToString();
-                        string query = "DELETE FROM[Supplier] WHERE NhaccID = '" + NhaccID + "'";
-                        isSuccess = DBAccess.ExecuteQuery(query);
-                        if (!isSuccess) return;
-                        dgvStaff.Rows.Remove(row);
-
+                        if (!isExisted)
+                        {
+                            string NhanvienID = row.Cells[0].Value.ToString();
+                            string query = "DELETE FROM[Staff] WHERE NhanvienID = '" + NhanvienID + "'";
+                            isSuccess = DBAccess.ExecuteQuery(query);
+                            if (!isSuccess) return;
+                            dgvStaff.Rows.Remove(row);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không thể xóa, tên truy cập đang sử dụng!");
+                        }
                     }
                     GetTotalRow();
                     GetAllData(1, rowPerPage);
@@ -199,11 +227,16 @@ namespace iClothing
             if (e.RowIndex != -1)
             {
                 DataGridViewRow dgvRow = dgvStaff.Rows[e.RowIndex];
-                txtNhaccID.Text = dgvRow.Cells[0].Value.ToString();
-                txtName.Text = dgvRow.Cells[1].Value.ToString();
-                txtAddress.Text = dgvRow.Cells[2].Value.ToString();
-                txtSodt.Text = dgvRow.Cells[3].Value.ToString();
-                txtEmail.Text = dgvRow.Cells[4].Value.ToString();
+                txtNhanvienID.Text = dgvRow.Cells[0].Value.ToString();
+                txtHo.Text = dgvRow.Cells[1].Value.ToString();
+                txtTen.Text = dgvRow.Cells[2].Value.ToString();
+                txtAddress.Text = dgvRow.Cells[3].Value.ToString();
+                txtSodt.Text = dgvRow.Cells[4].Value.ToString();
+                txtEmail.Text = dgvRow.Cells[5].Value.ToString();
+                txtUsername.Text = dgvRow.Cells[6].Value.ToString();
+                txtPassword.Text = dgvRow.Cells[7].Value.ToString();
+                cbRole.SelectedValue = DBHelper.Lookup("Roles", "RoleID", "Ten", dgvRow.Cells[8].Value.ToString());
+                cbRole.Text = dgvRow.Cells[8].Value.ToString();
             }
         }
 
@@ -216,12 +249,15 @@ namespace iClothing
 
         private void ClearText()
         {
-            txtNhaccID.Text = string.Empty;
-            txtName.Text = string.Empty;
+            txtNhanvienID.Text = string.Empty;
+            txtHo.Text = string.Empty;
+            txtTen.Text = string.Empty;
             txtAddress.Text = string.Empty;
             txtSodt.Text = string.Empty;
             txtEmail.Text = string.Empty;
-
+            txtUsername.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            cbRole.SelectedIndex = 0;
         }
 
         private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -239,7 +275,7 @@ namespace iClothing
 
         private void GetTotalRow()
         {
-            string queryAll = "SELECT COUNT(*) AS Total FROM [Supplier]";
+            string queryAll = "SELECT COUNT(*) AS Total FROM [Staff]";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
@@ -264,7 +300,7 @@ namespace iClothing
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
-            string query = "Select NhaccID, Ten [Nhà Cung Ứng], Diachi [Địa Chỉ], Sodt [Số ĐT], Email from Supplier order by Ngaysua DESC" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            string query = "Select NhanvienID, Ho [Họ], Staff.Ten [Tên], Diachi [Địa Chỉ], Sodt [Số ĐT], Email, Tendangnhap [Tên Truy Cập], Matkhau [Mật Khẩu], Roles.Ten [Quyền Truy Cập] from Staff join Roles on Staff.RoleID = Roles.RoleID order by Ngaysua DESC" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))

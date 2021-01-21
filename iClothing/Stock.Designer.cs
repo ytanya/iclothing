@@ -35,7 +35,7 @@ namespace iClothing
             // stockManagement1
             // 
             this.stockManagement1.BackColor = System.Drawing.Color.White;
-            this.stockManagement1.Location = new System.Drawing.Point(39, 28);
+            this.stockManagement1.Location = new System.Drawing.Point(0, 0);
             this.stockManagement1.Name = "stockManagement1";
             this.stockManagement1.Size = new System.Drawing.Size(870, 750);
             this.stockManagement1.TabIndex = 0;
@@ -45,7 +45,7 @@ namespace iClothing
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1126, 772);
+            this.ClientSize = new System.Drawing.Size(1074, 775);
             this.Controls.Add(this.stockManagement1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Stock";

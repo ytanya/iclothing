@@ -18,15 +18,12 @@ namespace iClothing
 {
     public partial class StockManagement : UserControl
     {
-        Thread delayedCalculationThread;
-        int delay = 0;
-        string conn = DBAccess.ConnectionString;
         DataTable dtMain = new DataTable();
-        string pathCSV = System.AppDomain.CurrentDomain.BaseDirectory + "taphoaviet.csv";
+        public string ConnectionString = DBAccess.ConnectionString;
+        private int currentPageNumber, rowPerPage, pageSize, rowCount;
+        string strFilter = string.Empty;
+        
         DataTable dtStockNew = new DataTable();
-        private int currentPageNumber = 1;
-        private int pageSize = 0;
-        private int rowPerPage = 10;
 
         public StockManagement()
         {
@@ -35,64 +32,104 @@ namespace iClothing
 
         }
 
-        private void CalculateAfterStopTyping()
+        //private void CalculateAfterStopTyping()
+        //{
+
+        //    delay += 30;
+        //    if (delayedCalculationThread != null && delayedCalculationThread.IsAlive)
+        //        return;
+
+        //    delayedCalculationThread = new Thread(() =>
+        //    {
+        //        while (delay >= 20)
+        //        {
+        //            delay = delay - 20;
+        //            try
+        //            {
+        //                Thread.Sleep(20);
+        //            }
+        //            catch (Exception) { }
+        //        }
+        //        Invoke(new Action(() =>
+        //        {
+                    
+        //            string id = txtBarcode.Text;
+        //            int skipRecord = currentPageNumber - 1;
+        //            if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
+        //            if (DBAccess.IsServerConnected())
+        //            {
+                        
+
+        //                using (SqlCeConnection connection = new SqlCeConnection(conn))
+        //                {
+        //                    using (SqlCeCommand command = new SqlCeCommand(query, connection))
+        //                    {
+        //                        SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+        //                        DataTable dt = new DataTable();
+        //                        sda.Fill(dt);
+        //                        dtMain.Merge(dt);
+        //                        dvgStock.DataSource = dtMain;
+        //                        GetTotalRow(strSearch);
+
+
+        //                    }
+        //                }
+        //            }
+
+        //        }));
+        //    });
+
+        //    delayedCalculationThread.Start();
+        //}
+
+        private void GetTotalRow(string query)
         {
-            delay += 30;
-            if (delayedCalculationThread != null && delayedCalculationThread.IsAlive)
-                return;
-
-            delayedCalculationThread = new Thread(() =>
+            string queryAll = "SELECT COUNT(*) AS Total FROM [Stock] " + query;
+            using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
-                while (delay >= 20)
+                using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
                 {
-                    delay = delay - 20;
-                    try
-                    {
-                        Thread.Sleep(20);
-                    }
-                    catch (Exception) { }
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+
+                    rowCount = Convert.ToInt32(dt.Rows[0][0].ToString());
+                    pageSize = rowCount / rowPerPage;
+                    // if any row left after calculated pages, add one more page 
+                    if (rowCount % rowPerPage > 0)
+                        pageSize += 1;
+                    txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+                    lblTotalPage.Text = "Tổng số:" + rowCount.ToString();
                 }
-                Invoke(new Action(() =>
-                {
-                    string id = txtBarcode.Text;
-                    if (DBAccess.IsServerConnected())
-                    {
-                        string query = "Select  DISTINCT(NewProduct.Kyhieu) [Ký Hiệu],NewProduct.MaSP [Mã Sản Phẩm],New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock GROUP BY Barcode) New on New.Barcode = Stock.Barcode; ";
-
-                        using (SqlCeConnection connection = new SqlCeConnection(conn))
-                        {
-                            using (SqlCeCommand command = new SqlCeCommand(query, connection))
-                            {
-                                SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
-                                DataTable dt = new DataTable();
-                                sda.Fill(dt);
-                                dtMain.Merge(dt);
-                                string barcode = txtBarcode.Text;
-                                if (barcode != string.Empty)
-                                {
-                                    string filterString = "[Barcode] IN ('" + barcode + "')";
-                                    dtMain = dtMain.Select(filterString).CopyToDataTable();
-                                }
-                                dvgStock.DataSource = dtMain;
-                                lblTotalPage.Text = dtMain.Rows.Count.ToString();
-                                
-                            }
-                        }
-                    }
-
-
-                    txtBarcode.Text = string.Empty;
-
-                }));
-            });
-
-            delayedCalculationThread.Start();
+            }
         }
-
         private void StockManagement_Load(object sender, EventArgs e)
         {
             this.ActiveControl = txtBarcode;
             btnExport.Visible = false;
+
+            dtpTuNgay.Format = DateTimePickerFormat.Custom;
+            dtpTuNgay.CustomFormat = "dd/MM/yyyy";
+            dtpTuNgay.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            dtpDenNgay.Format = DateTimePickerFormat.Custom;
+            dtpDenNgay.CustomFormat = "dd/MM/yyyy";
+            dtpDenNgay.Value = DateTime.Now;
+
+            // Init Ki hieu combobox
+            DataTable dtProduct = DBHelper.GetAllProduct();
+            if (dtProduct.Rows.Count > 0)
+            {
+                cbKyHieu.DataSource = dtProduct;
+                cbKyHieu.ValueMember = "Barcode";
+                cbKyHieu.DisplayMember = "Kyhieu";
+                cbKyHieu.SelectedIndex = -1;
+            }
+            currentPageNumber = 1;
+            rowPerPage = 10;
+            cbPageSize.SelectedIndex = 0;
+            strFilter = "Where ngaytao >'" + dtpTuNgay.Value.AddDays(-1).ToString("yyyy-MM-dd") + "' AND ngaytao <'" + dtpDenNgay.Value.AddDays(1).ToString("yyyy-MM-dd") +"'";
+            GetTotalRow(strFilter);
+            GetAllData(currentPageNumber, rowPerPage, strFilter);
         }
 
         public System.Data.DataTable ExportToExcel()
@@ -182,51 +219,33 @@ namespace iClothing
             app.Quit();
         }
 
-        private void pbSearch_Click(object sender, EventArgs e)
-        {
-            btnExport.Visible = true;
-            dtMain = new DataTable();
-            CalculateAfterStopTyping();
-            PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
-        }
-
         private void pbFirst_Click(object sender, EventArgs e)
         {
-            currentPageNumber = 1;
-            PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
-            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            if (currentPageNumber >1)
+            {
+                currentPageNumber = 1;
+                GetAllData(currentPageNumber, rowPerPage, strFilter);
+                txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            }
         }
 
         private void pbPrev_Click(object sender, EventArgs e)
         {
-            if (currentPageNumber > 0)
+            if (currentPageNumber > 1)
             {
                 currentPageNumber -= 1;
-                PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
+                GetAllData(currentPageNumber, rowPerPage, strFilter);
             }
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
-        private void PopulateDataStock(int currentPageNumber, int rowPerPage, DataTable dtMain)
-        {
-            int skipRecord = (currentPageNumber - 1) * rowPerPage;
-
-            if (dtMain.Rows.Count > 0)
-            {
-                dvgStock.DataSource = dtMain.Rows.Cast<System.Data.DataRow>().Skip(skipRecord).Take(rowPerPage).CopyToDataTable();
-            }
-            else
-            {
-                dvgStock.DataSource = dtMain;
-            }
-        }
 
         private void pbNext_Click(object sender, EventArgs e)
         {
             if (currentPageNumber < pageSize)
             {
                 currentPageNumber += 1;
-                PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
+                GetAllData(currentPageNumber, rowPerPage, strFilter);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -236,9 +255,74 @@ namespace iClothing
             if (currentPageNumber < pageSize)
             {
                 currentPageNumber = pageSize;
-                PopulateDataStock(currentPageNumber, rowPerPage, dtMain);
+                GetAllData(currentPageNumber, rowPerPage, strFilter);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtBarcode.Text = string.Empty;
+            cbKyHieu.SelectedIndex = -1;
+            strFilter = string.Empty;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            strFilter = string.Empty;
+            string Ngay =  string.Format("ngaytao > '{0}'", dtpTuNgay.Value.AddDays(-1).ToString("yyyy-MM-dd")) + " AND " + string.Format("ngaytao < '{0}'", dtpDenNgay.Value.AddDays(1).ToString("yyyy-MM-dd"));
+            strFilter = Ngay;
+            string barcode = string.IsNullOrEmpty(txtBarcode.Text) ? string.Empty : txtBarcode.Text;
+            strFilter = string.IsNullOrEmpty(strFilter) ? (string.IsNullOrEmpty(barcode) ? "" : barcode) : (string.IsNullOrEmpty(barcode) ? strFilter : strFilter + " AND " + barcode);
+            string kihieuValue = cbKyHieu.SelectedIndex == -1 ? string.Empty : DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyHieu.SelectedValue.ToString());
+            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " [Ký Hiệu] like '" + kihieuValue + "'";
+            strFilter = string.IsNullOrEmpty(strFilter) ? (string.IsNullOrEmpty(kyhieu) ? "" : kyhieu) : (string.IsNullOrEmpty(kyhieu) ? strFilter : strFilter + " AND " + kyhieu);
+            if (!string.IsNullOrEmpty(strFilter))
+            {
+                strFilter = " WHERE " + strFilter;
+            }
+            GetTotalRow(strFilter);
+            GetAllData(currentPageNumber, rowPerPage, strFilter);
+           
+        }
+
+        private void GetAllData(int currentPageNumber, int rowPerPage, string strSearch)
+        {
+            DataTable dtMain = new DataTable();
+            int skipRecord = currentPageNumber - 1;
+            if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
+
+            
+            string query = "Select  DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], ngaytao [Ngày], NewProduct.MaSP [Mã Sản Phẩm],New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock GROUP BY Barcode) New on New.Barcode = Stock.Barcode " + strSearch + " order by ngaytao OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
+            {
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    dtMain.Merge(dt);
+                    dvgStock.DataSource = dtMain;
+                    //dgvOrder.Columns[0].Visible = false;
+                    //dgvOrder.Columns[1].Visible = false;
+                    //dgvOrder.Columns[3].Width = 130;
+                    dvgStock.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dvgStock.Columns[1].Width = 150;
+                    //dgvOrder.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    //dgvOrder.Columns[2].Width = 150;
+                    //dgvOrder.Columns["Ký Hiệu"].Width = 60;
+                    dvgStock.Columns["BTP Chưa in"].Width = 120;
+                    this.dvgStock.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgStock.Columns["BTP Đã in"].Width = 100;
+                    this.dvgStock.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgStock.Columns["Thành Phẩm"].Width = 120;
+                    this.dvgStock.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgStock.Columns["Sản phẩm lỗi"].Width = 110;
+                    this.dvgStock.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgStock.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+            }
+
         }
     }
 }

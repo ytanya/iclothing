@@ -122,6 +122,14 @@ namespace iClothing
             return dtnew;
         }
 
+        public static DataTable GetAllRole()
+        {
+            DataTable dt = new DataTable();
+            DataTable dtnew = new DataTable();
+            string query = "Select RoleID, Ten FROM Roles";
+            dtnew = DBAccess.FillDataTable(query, dt);
+            return dtnew;
+        }
         public static bool CheckItemExist(string tableName, string whereItem, string whereValue)
         {
             bool isExisted = false;

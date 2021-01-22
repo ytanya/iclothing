@@ -13,8 +13,9 @@ namespace iClothing
     {
         private static SqlCeConnection objConnection;
         private static SqlCeDataAdapter objDataAdapter;
-        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
-        public static string ConnectionString = "Data Source=|DataDirectory|C:\\Users\\Huy Vo\\Desktop\\iClothing\\iclothing\\DB\\iClothing.sdf; Persist Security Info=False";
+        public static string currentpath = "D:\\C#\\iClothing\\iclothing\\DB\\iClothing.sdf"; //ConfigurationManager.AppSettings["datapath"];
+
+        public static string ConnectionString = "Data Source=|DataDirectory|"+currentpath +"; Persist Security Info=False";
         private static void OpenConnection()
         {
             try

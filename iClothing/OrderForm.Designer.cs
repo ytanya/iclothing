@@ -30,12 +30,13 @@
         {
             this.tbManageInOutOrder = new System.Windows.Forms.TabControl();
             this.tabInputNhap = new System.Windows.Forms.TabPage();
+            this.quanLyNhap1 = new iClothing.QuanLyNhap();
             this.rbXuat = new System.Windows.Forms.RadioButton();
             this.rbNhap = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.tpFilter = new System.Windows.Forms.TabPage();
             this.chiTietNhapXuat1 = new iClothing.ChiTietNhapXuat();
-            this.quanLyNhap1 = new iClothing.QuanLyNhap();
+            this.quanLyXuat1 = new iClothing.QuanLyXuat();
             this.tbManageInOutOrder.SuspendLayout();
             this.tabInputNhap.SuspendLayout();
             this.tpFilter.SuspendLayout();
@@ -55,6 +56,7 @@
             // tabInputNhap
             // 
             this.tabInputNhap.BackColor = System.Drawing.Color.White;
+            this.tabInputNhap.Controls.Add(this.quanLyXuat1);
             this.tabInputNhap.Controls.Add(this.quanLyNhap1);
             this.tabInputNhap.Controls.Add(this.rbXuat);
             this.tabInputNhap.Controls.Add(this.rbNhap);
@@ -68,6 +70,16 @@
             this.tabInputNhap.TabIndex = 0;
             this.tabInputNhap.Text = "Quản Lý Nhập Xuất";
             // 
+            // quanLyNhap1
+            // 
+            this.quanLyNhap1.AutoScroll = true;
+            this.quanLyNhap1.BackColor = System.Drawing.Color.White;
+            this.quanLyNhap1.Location = new System.Drawing.Point(0, 39);
+            this.quanLyNhap1.Margin = new System.Windows.Forms.Padding(4);
+            this.quanLyNhap1.Name = "quanLyNhap1";
+            this.quanLyNhap1.Size = new System.Drawing.Size(1200, 654);
+            this.quanLyNhap1.TabIndex = 61;
+            // 
             // rbXuat
             // 
             this.rbXuat.AutoSize = true;
@@ -79,6 +91,7 @@
             this.rbXuat.TabIndex = 59;
             this.rbXuat.Text = "Xuất";
             this.rbXuat.UseVisualStyleBackColor = true;
+            this.rbXuat.CheckedChanged += new System.EventHandler(this.rbXuat_CheckedChanged);
             // 
             // rbNhap
             // 
@@ -93,6 +106,7 @@
             this.rbNhap.TabStop = true;
             this.rbNhap.Text = "Nhập";
             this.rbNhap.UseVisualStyleBackColor = true;
+            this.rbNhap.CheckedChanged += new System.EventHandler(this.rbNhap_CheckedChanged);
             // 
             // label1
             // 
@@ -123,15 +137,13 @@
             this.chiTietNhapXuat1.Size = new System.Drawing.Size(1190, 700);
             this.chiTietNhapXuat1.TabIndex = 34;
             // 
-            // quanLyNhap1
+            // quanLyXuat1
             // 
-            this.quanLyNhap1.AutoScroll = true;
-            this.quanLyNhap1.BackColor = System.Drawing.Color.White;
-            this.quanLyNhap1.Location = new System.Drawing.Point(0, 39);
-            this.quanLyNhap1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.quanLyNhap1.Name = "quanLyNhap1";
-            this.quanLyNhap1.Size = new System.Drawing.Size(1200, 654);
-            this.quanLyNhap1.TabIndex = 61;
+            this.quanLyXuat1.Location = new System.Drawing.Point(0, 39);
+            this.quanLyXuat1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.quanLyXuat1.Name = "quanLyXuat1";
+            this.quanLyXuat1.Size = new System.Drawing.Size(1200, 654);
+            this.quanLyXuat1.TabIndex = 62;
             // 
             // OrderForm
             // 
@@ -143,6 +155,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "OrderForm";
             this.Text = "OrderForm";
+            this.Load += new System.EventHandler(this.OrderForm_Load);
             this.tbManageInOutOrder.ResumeLayout(false);
             this.tabInputNhap.ResumeLayout(false);
             this.tabInputNhap.PerformLayout();
@@ -160,5 +173,6 @@
         private System.Windows.Forms.RadioButton rbNhap;
         private System.Windows.Forms.Label label1;
         private QuanLyNhap quanLyNhap1;
+        private QuanLyXuat quanLyXuat1;
     }
 }

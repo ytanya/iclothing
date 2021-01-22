@@ -16,8 +16,10 @@ namespace iClothing
     {
         public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
+        private int currentPageNumberFilter, rowPerPageFilter, pageSizeFilter, rowCountFilter;
         private string IsCompleted = "false";
         private bool ngayXuatFilterChanged = false, ngayXongFilterChanged = false;
+        string strSearch = string.Empty;
         public QuanLyXuat()
         {
             InitializeComponent();
@@ -381,9 +383,19 @@ namespace iClothing
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            InitSearch();
+            GetTotalRowFilter(strSearch);
+            GetAllDataOrderFilter(currentPageNumberFilter, rowPerPageFilter, strSearch);
+        }
+
+        private void InitSearch()
+        {
+            currentPageNumberFilter = 1;
+            rowPerPageFilter = 10;
+            cbKyHieuFilter.SelectedIndex = -1;
             dtpNgayXuatFilter.Value = DateTime.Today;
             dtpNgayXongFilter.Value = DateTime.Today;
-            cbKyHieuFilter.SelectedIndex = -1;
+            ngayXongFilterChanged = false;
             txtBTPChuaInFilter.Text = string.Empty;
             txtDaInFilter.Text = string.Empty;
             txtTPFilter.Text = string.Empty;
@@ -392,45 +404,101 @@ namespace iClothing
             cbSignDaInFilter.SelectedIndex = -1;
             cbSignTP.SelectedIndex = -1;
             cbSignSPLoi.SelectedIndex = -1;
-            if (dgvOrder.DataSource != null)
-            {
-                (dgvOrder.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
-            }
+            ngayXuatFilterChanged = false;
+            strSearch = string.Empty;
         }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string strSearch = string.Empty;
-            string ngayXuat = ngayXuatFilterChanged ? string.Format("[Ngày Xuất] > '{0}' AND [Ngày Xuất] < '{1}'", dtpNgayXuatFilter.Value.AddDays(-1), dtpNgayXuatFilter.Value.AddDays(1)) : string.Empty;
+    
+            string ngayXuat = ngayXuatFilterChanged ? string.Format("total.[Ngày Xuất] > '{0}' AND total.[Ngày Xuất] < '{1}'", dtpNgayXuatFilter.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpNgayXuatFilter.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
             strSearch = ngayXuat;
-            string ngayXong = ngayXongFilterChanged ? string.Format("[Ngày Xong] >= '{0}' AND [Ngày Xong] < '{1}'", dtpNgayXongFilter.Value.AddDays(-1), dtpNgayXongFilter.Value.AddDays(1)) : string.Empty;
+            string ngayXong = ngayXongFilterChanged ? string.Format("total.[Ngày Hoàn Thành] >= '{0}' AND total.[Ngày Hoàn Thành] < '{1}'", dtpNgayXongFilter.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpNgayXongFilter.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
-
             //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());
             //string nhacc = string.IsNullOrEmpty(nhaccValue) ? string.Empty : " [Nhà Cung Cấp] like '% " + nhaccValue + "%'";
             //strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(nhacc) ? "" : nhacc) : (string.IsNullOrEmpty(nhacc) ? strSearch : strSearch + " AND " + nhacc);
 
             string kihieuValue = cbKyHieuFilter.SelectedIndex == -1 ? string.Empty : DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyHieuFilter.SelectedValue.ToString());
-            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " [Ký Hiệu] like '" + kihieuValue + "'";
+            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " total.[Ký Hiệu] like '" + kihieuValue + "'";
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(kyhieu) ? "" : kyhieu) : (string.IsNullOrEmpty(kyhieu) ? strSearch : strSearch + " AND " + kyhieu);
 
             string btpchuainFilter, btpdainFilter, tpFilter, sploiFilter;
-            btpchuainFilter = string.IsNullOrEmpty(txtBTPChuaInFilter.Text) ? string.Empty : " [BTP Chưa In] " + cbChuaInSign.Text + " " + txtBTPChuaInFilter.Text;
+            btpchuainFilter = string.IsNullOrEmpty(txtBTPChuaInFilter.Text) ? string.Empty : " total.[BTP Chưa In] " + cbChuaInSign.Text + " " + txtBTPChuaInFilter.Text;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(btpchuainFilter) ? "" : btpchuainFilter) : (string.IsNullOrEmpty(btpchuainFilter) ? strSearch : strSearch + " AND " + btpchuainFilter);
 
-            btpdainFilter = string.IsNullOrEmpty(txtDaInFilter.Text) ? string.Empty : " [BTP Đã In] " + cbSignDaInFilter.Text + " " + txtDaInFilter.Text;
+            btpdainFilter = string.IsNullOrEmpty(txtDaInFilter.Text) ? string.Empty : " total.[BTP Đã In] " + cbSignDaInFilter.Text + " " + txtDaInFilter.Text;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(btpdainFilter) ? "" : btpdainFilter) : (string.IsNullOrEmpty(btpdainFilter) ? strSearch : strSearch + " AND " + btpdainFilter);
 
-            tpFilter = string.IsNullOrEmpty(txtTPFilter.Text) ? string.Empty : " [Thành Phẩm] " + cbSignTP.Text + " " + txtTPFilter.Text;
+            tpFilter = string.IsNullOrEmpty(txtTPFilter.Text) ? string.Empty : " total.[Thành Phẩm] " + cbSignTP.Text + " " + txtTPFilter.Text;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(tpFilter) ? "" : tpFilter) : (string.IsNullOrEmpty(tpFilter) ? strSearch : strSearch + " AND " + tpFilter);
 
-            sploiFilter = string.IsNullOrEmpty(txtSPLoi.Text) ? string.Empty : " [Sản Phẩm Lỗi] " + cbSignSPLoi.Text + " " + txtSPLoi.Text;
+            sploiFilter = string.IsNullOrEmpty(txtSPLoiFilter.Text) ? string.Empty : " total.[Sản Phẩm Lỗi] " + cbSignSPLoi.Text + " " + txtSPLoiFilter.Text;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(sploiFilter) ? "" : sploiFilter) : (string.IsNullOrEmpty(sploiFilter) ? strSearch : strSearch + " AND " + sploiFilter);
             //string filterQuery = string.Format("[Ngày Nhập] like '%{0}%' AND [Ngày Xong] like '%{1}%' {2} {3} {4} {5} {6} {7}", "", "", nhacc, kyhieu, btpchuainFilter, btpdainFilter, tpFilter, sploiFilter);
 
-            (dgvOrder.DataSource as DataTable).DefaultView.RowFilter = strSearch;
+            if (!string.IsNullOrEmpty(strSearch)) strSearch = " WHERE " + strSearch;
+            GetTotalRowFilter(strSearch);
+            GetAllDataOrderFilter(currentPageNumberFilter, rowPerPageFilter, strSearch);
         }
 
+        private void GetTotalRowFilter(string query)
+        {
+            string queryAll = "Select Count (*) AS Total FROM (Select New.DonhangID [Mã Đơn Hàng], Customer.HoTen [Tên Khách Hàng],[Order].Xong [Hoàn Thành],[Order].Ngaynhap [Ngày Xuất], [Order].Ngayxong [Ngày Hoàn Thành], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Customer on[Order].KHID = Customer.KHID) total " + query;
+            using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
+            {
+                using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
+                {
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+
+                    rowCountFilter = Convert.ToInt32(dt.Rows[0][0].ToString());
+                    pageSizeFilter = rowCountFilter / rowPerPageFilter;
+                    // if any row left after calculated pages, add one more page 
+                    if (rowCountFilter % rowPerPageFilter > 0)
+                        pageSizeFilter += 1;
+                    txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
+                    lblTotalPageFilter.Text = "Tổng số:" + rowCountFilter.ToString();
+                }
+            }
+        }
+        private void GetAllDataOrderFilter(int currentPageNumber, int rowPerPage, string strSearch)
+        {
+            DataTable dtMain = new DataTable();
+            int skipRecord = currentPageNumber - 1;
+            if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
+
+            string query = "select * from(Select New.DonhangID [Mã Đơn Hàng], Customer.HoTen [Tên Khách Hàng],[Order].Xong [Hoàn Thành],[Order].Ngaynhap [Ngày Xuất], [Order].Ngayxong [Ngày Hoàn Thành], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Customer on[Order].KHID = Customer.KHID ) total " + strSearch + " order by total.[Ngày Xuất] DESC OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY;";
+            using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
+            {
+                using (SqlCeCommand command = new SqlCeCommand(query, connection))
+                {
+                    SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    dtMain.Merge(dt);
+                    dgvOrderFilter.DataSource = dtMain;
+                    dgvOrderFilter.Columns[0].Visible = false;
+                    dgvOrderFilter.Columns[1].Visible = false;
+                    dgvOrderFilter.Columns[3].Width = 130;
+                    dgvOrderFilter.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrderFilter.Columns[4].Width = 130;
+                    dgvOrderFilter.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrderFilter.Columns[2].Width = 150;
+                    dgvOrderFilter.Columns["Ký Hiệu"].Width = 60;
+                    dgvOrderFilter.Columns["BTP Chưa in"].Width = 120;
+                    this.dgvOrderFilter.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderFilter.Columns["BTP Đã in"].Width = 100;
+                    this.dgvOrderFilter.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderFilter.Columns["Thành Phẩm"].Width = 120;
+                    this.dgvOrderFilter.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderFilter.Columns["Sản phẩm lỗi"].Width = 110;
+                    this.dgvOrderFilter.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrderFilter.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+            }
+
+        }
         private void dgvOrder_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1 && Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == false)
@@ -595,6 +663,94 @@ namespace iClothing
             ngayXongFilterChanged = true;
         }
 
+        private void cbPageSizeFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rowPerPageFilter = Convert.ToInt32(cbPageSizeFilter.SelectedItem.ToString());
+            currentPageNumberFilter = 1;
+            GetAllDataOrder(currentPageNumberFilter, rowPerPageFilter);
+            pageSizeFilter = rowCountFilter / rowPerPageFilter;
+            // if any row left after calculated pages, add one more page 
+            if (rowCountFilter % rowPerPageFilter > 0)
+                pageSizeFilter += 1;
+            txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
+        }
+
+        private void pbFirstFilter_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumberFilter > 1)
+            {
+                currentPageNumberFilter = 1;
+                GetAllDataOrderFilter(currentPageNumberFilter, rowPerPageFilter, strSearch);
+                txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
+            }
+        }
+
+        private void pbPrevFilter_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumberFilter > 1)
+            {
+                currentPageNumberFilter -= 1;
+                GetAllDataOrderFilter(currentPageNumberFilter, rowPerPageFilter, strSearch);
+                txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
+            }
+        }
+
+        private void pbNextFilter_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumberFilter < pageSizeFilter)
+            {
+                currentPageNumberFilter += 1;
+                GetAllDataOrderFilter(currentPageNumberFilter, rowPerPageFilter, strSearch);
+                txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
+            }
+        }
+
+        private void pbLastFilter_Click(object sender, EventArgs e)
+        {
+            if (currentPageNumberFilter < pageSizeFilter)
+            {
+                currentPageNumberFilter = pageSizeFilter;
+                GetAllDataOrderFilter(currentPageNumberFilter, rowPerPageFilter, strSearch);
+                txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
+            }
+        }
+
+        private void tbXuat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tbXuat.SelectedIndex)
+            {
+                case 0:
+                    {
+                        ClearText();
+                        currentPageNumber = 1;
+                        rowPerPage = 10;
+                        GetTotalRow();
+                        GetAllDataOrder(currentPageNumber, rowPerPage);
+                        cbPagingSize.SelectedIndex = 0;
+                    }
+                    break;
+                case 1:
+                    {
+                        InitSearch();
+                    }
+                    break;
+            }
+        }
+
+        private void txtChuaInFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void dtpFilterNgayXong_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpFilterNgayNhap_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
 
         private void QuanLyXuat_Load(object sender, EventArgs e)
         {

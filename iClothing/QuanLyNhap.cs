@@ -600,7 +600,7 @@ namespace iClothing
             
             string ngayNhap = ngayNhapFilterChanged ? string.Format("total.[Ngày Nhập] > '{0}' AND total.[Ngày Nhập] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhap.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
             strSearch = ngayNhap;
-            string ngayXong = ngayXongFilterChanged ? string.Format("total.[Ngày Xong] >= '{0}' AND total.[Ngày Xong] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXong.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
+            string ngayXong = ngayXongFilterChanged ? string.Format("total.[Ngày Hoàn Thành] >= '{0}' AND total.[Ngày Hoàn Thành] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXong.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
 
             //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());

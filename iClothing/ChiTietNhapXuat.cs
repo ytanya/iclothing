@@ -15,7 +15,7 @@ namespace iClothing
     public partial class ChiTietNhapXuat : UserControl
     {
         public string ConnectionString = DBAccess.ConnectionString;
-        private bool ngayNhapXuatFilterChanged = false;
+        private bool ngayTuNgayFilterChanged = false, ngayDenNgayFilterChanged = false;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
         public ChiTietNhapXuat()
         {
@@ -24,8 +24,10 @@ namespace iClothing
 
         private void ChiTietNhapXuat_Load(object sender, EventArgs e)
         {
-            dtpNhapXuatFilter.Format = DateTimePickerFormat.Custom;
-            dtpNhapXuatFilter.CustomFormat = "dd/MM/yyyy";
+            dtpTuNgay.Format = DateTimePickerFormat.Custom;
+            dtpTuNgay.CustomFormat = "dd/MM/yyyy";
+            dtpDenNgay.Format = DateTimePickerFormat.Custom;
+            dtpDenNgay.CustomFormat = "dd/MM/yyyy";
             currentPageNumber = 1;
             rowPerPage = 10;
             GetTotalRow();
@@ -47,7 +49,7 @@ namespace iClothing
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            dtpNhapXuatFilter.Value = DateTime.Today;
+            dtpTuNgay.Value = DateTime.Today;
 
             cbKyHieuFilter.SelectedIndex = -1;
             if (dvgOrder.DataSource != null)
@@ -59,7 +61,7 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string strSearch = string.Empty;
-            string ngayNhapXuat = ngayNhapXuatFilterChanged ? string.Format("[Ngày Nhập/ Xuất] > '{0}' AND [Ngày Nhập/ Xuất] < '{1}'", dtpNhapXuatFilter.Value.AddDays(-1), dtpNhapXuatFilter.Value.AddDays(1)) : string.Empty;
+            string ngayNhapXuat = ngayTuNgayFilterChanged ? string.Format("[Ngày Nhập/ Xuất] > '{0}' AND [Ngày Nhập/ Xuất] < '{1}'", dtpTuNgay.Value.AddDays(-1), dtpDenNgay.Value.AddDays(1)) : string.Empty;
             strSearch = ngayNhapXuat;
 
             string kihieuValue = cbKyHieuFilter.SelectedIndex ==-1?string.Empty: DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyHieuFilter.SelectedValue.ToString());
@@ -109,6 +111,16 @@ namespace iClothing
             }
         }
 
+        private void dtpTuNgay_ValueChanged(object sender, EventArgs e)
+        {
+            ngayTuNgayFilterChanged = true;
+        }
+
+        private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
+        {
+            ngayDenNgayFilterChanged = true;
+        }
+
         private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             rowPerPage = Convert.ToInt32(cbPageSize.SelectedItem.ToString());
@@ -119,11 +131,6 @@ namespace iClothing
             if (rowCount % rowPerPage > 0)
                 pageSize += 1;
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
-        }
-
-        private void dtpNhapXuatFilter_ValueChanged(object sender, EventArgs e)
-        {
-            ngayNhapXuatFilterChanged = true;
         }
 
         private void GetAllOrder(int currentPageNumber, int rowPerPage)
@@ -153,8 +160,11 @@ namespace iClothing
                     DataTable dt = new DataTable();
                     sda.Fill(dt);
                     dvgOrder.DataSource = dt;
+                    dvgOrder.Columns[0].Width = 150;
+                    dvgOrder.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                     dvgOrder.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                     dvgOrder.Columns[1].Width = 130;
+                    
                     //dgvOrderNhap.Columns["Xong"].ReadOnly = true;
                     dvgOrder.Columns["Ký Hiệu"].Width = 60;
                     dvgOrder.Columns["Nhập BTP Chưa in"].Width = 120;

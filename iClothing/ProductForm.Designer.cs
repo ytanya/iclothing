@@ -38,7 +38,7 @@
             this.productManagement11.Location = new System.Drawing.Point(2, 2);
             this.productManagement11.Margin = new System.Windows.Forms.Padding(4);
             this.productManagement11.Name = "productManagement11";
-            this.productManagement11.Size = new System.Drawing.Size(870, 750);
+            this.productManagement11.Size = new System.Drawing.Size(1200, 730);
             this.productManagement11.TabIndex = 0;
             // 
             // ProductForm
@@ -46,7 +46,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(870, 750);
+            this.ClientSize = new System.Drawing.Size(1200, 730);
             this.Controls.Add(this.productManagement11);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProductForm";

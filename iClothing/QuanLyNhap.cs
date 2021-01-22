@@ -420,7 +420,7 @@ namespace iClothing
                     // if any row left after calculated pages, add one more page 
                     if (rowCount % rowPerPage > 0)
                         pageSize += 1;
-                    txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+                    if (pageSize > 0) txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
                     lblTotalPage.Text = "Tổng số:" + rowCount.ToString();
                 }
             }
@@ -431,7 +431,7 @@ namespace iClothing
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
-            string query = "Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong [Hoàn Thành],[Order].Ngaynhap [Ngày Nhập], [Order].Ngayxong [Ngày Hoàn Thành], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID order by [Order].Ngaynhap DESC" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            string query = "Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong [Nhập Kho],[Order].Ngaynhap [Phiếu Nhập], [Order].Ngayxong [Ngày Nhập Kho], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID order by [Order].Ngaynhap DESC" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
@@ -472,7 +472,7 @@ namespace iClothing
             // if any row left after calculated pages, add one more page 
             if (rowCount % rowPerPage > 0)
                 pageSize += 1;
-            txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
+            if (pageSize > 0) txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
         private void SaveOrderToTransactionDB(string barcode, string LoaiID, string Mota, string soluong, string Nhap, string Xong)
@@ -598,9 +598,9 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             
-            string ngayNhap = ngayNhapFilterChanged ? string.Format("total.[Ngày Nhập] > '{0}' AND total.[Ngày Nhập] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhap.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
+            string ngayNhap = ngayNhapFilterChanged ? string.Format("total.[Phiếu Nhập] > '{0}' AND total.[Phiếu Nhập] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhap.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
             strSearch = ngayNhap;
-            string ngayXong = ngayXongFilterChanged ? string.Format("total.[Ngày Hoàn Thành] >= '{0}' AND total.[Ngày Hoàn Thành] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXong.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
+            string ngayXong = ngayXongFilterChanged ? string.Format("total.[Ngày Nhập Kho] >= '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXong.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
 
             //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());
@@ -710,7 +710,7 @@ namespace iClothing
             // if any row left after calculated pages, add one more page 
             if (rowCountFilter % rowPerPageFilter > 0)
                 pageSizeFilter += 1;
-            txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
+            if (pageSizeFilter > 0) txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
         }
 
         private void tbNhap_SelectedIndexChanged(object sender, EventArgs e)
@@ -793,7 +793,7 @@ namespace iClothing
 
         private void GetTotalRowFilter(string query)
         {
-            string queryAll = "Select Count (*) AS Total FROM (Select New.DonhangID[Mã Đơn Hàng], Supplier.Ten[Nhà Cung Cấp],[Order].Xong[Hoàn Thành],[Order].Ngaynhap[Ngày Nhập], [Order].Ngayxong[Ngày Hoàn Thành], Product.Kyhieu[Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from(SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID) total "+query;
+            string queryAll = "Select Count (*) AS Total FROM (Select New.DonhangID[Mã Đơn Hàng], Supplier.Ten[Nhà Cung Cấp],[Order].Xong[Nhập Kho],[Order].Ngaynhap[Phiếu Nhập], [Order].Ngayxong[Ngày Nhập Kho], Product.Kyhieu[Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from(SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID) total "+query;
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
@@ -807,7 +807,7 @@ namespace iClothing
                     // if any row left after calculated pages, add one more page 
                     if (rowCountFilter % rowPerPageFilter > 0)
                         pageSizeFilter += 1;
-                    txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
+                    if (pageSizeFilter > 0) txtPageSizeFilter.Text = currentPageNumberFilter.ToString() + " /" + pageSizeFilter.ToString();
                     lblTotalPageFilter.Text = "Tổng số:" + rowCountFilter.ToString();
                 }
             }
@@ -818,7 +818,7 @@ namespace iClothing
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
-            string query = "select * from(Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong [Hoàn Thành],[Order].Ngaynhap [Ngày Nhập], [Order].Ngayxong [Ngày Hoàn Thành], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID ) total " + strSearch + " order by total.[Ngày Nhập] DESC OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            string query = "select * from(Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong [Nhập Kho],[Order].Ngaynhap [Phiếu Nhập], [Order].Ngayxong [Ngày Nhập Kho], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID ) total " + strSearch + " order by total.[Phiếu Nhập] DESC OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))

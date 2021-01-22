@@ -28,32 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyXuat));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnXuat = new System.Windows.Forms.Panel();
-            this.cbPagingSize = new System.Windows.Forms.ComboBox();
-            this.lblTotalPage = new System.Windows.Forms.Label();
-            this.txtPaging = new System.Windows.Forms.TextBox();
-            this.pbLast = new System.Windows.Forms.PictureBox();
-            this.pbPrev = new System.Windows.Forms.PictureBox();
-            this.pbFirst = new System.Windows.Forms.PictureBox();
-            this.pbNext = new System.Windows.Forms.PictureBox();
             this.tbXuat = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblTotalPage = new System.Windows.Forms.Label();
+            this.cbPagingSize = new System.Windows.Forms.ComboBox();
             this.dgvOrder = new System.Windows.Forms.DataGridView();
             this.dtpNgayXuat = new System.Windows.Forms.DateTimePicker();
+            this.pbLast = new System.Windows.Forms.PictureBox();
+            this.txtPaging = new System.Windows.Forms.TextBox();
+            this.pbNext = new System.Windows.Forms.PictureBox();
             this.txtOrder = new System.Windows.Forms.TextBox();
             this.lblNgayXuat = new System.Windows.Forms.Label();
+            this.pbPrev = new System.Windows.Forms.PictureBox();
             this.lblTPXuat = new System.Windows.Forms.Label();
+            this.pbFirst = new System.Windows.Forms.PictureBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.txtSPLoi = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.cbKyHieu = new System.Windows.Forms.ComboBox();
             this.lblSPLoiXuat = new System.Windows.Forms.Label();
@@ -67,6 +68,13 @@
             this.txtBTPChuaIn = new System.Windows.Forms.TextBox();
             this.lblBTPChuaInXuat = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pbNextFilter = new System.Windows.Forms.PictureBox();
+            this.cbPageSizeFilter = new System.Windows.Forms.ComboBox();
+            this.lblTotalPageFilter = new System.Windows.Forms.Label();
+            this.pbLastFilter = new System.Windows.Forms.PictureBox();
+            this.pbFirstFilter = new System.Windows.Forms.PictureBox();
+            this.pbPrevFilter = new System.Windows.Forms.PictureBox();
+            this.txtPageSizeFilter = new System.Windows.Forms.TextBox();
             this.dgvOrderFilter = new System.Windows.Forms.DataGridView();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -88,28 +96,20 @@
             this.lblNgayXongNhapFilter = new System.Windows.Forms.Label();
             this.dtpNgayXuatFilter = new System.Windows.Forms.DateTimePicker();
             this.lblNgayXuatFilter = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.pbNextFilter = new System.Windows.Forms.PictureBox();
-            this.cbPageSizeFilter = new System.Windows.Forms.ComboBox();
-            this.lblTotalPageFilter = new System.Windows.Forms.Label();
-            this.pbLastFilter = new System.Windows.Forms.PictureBox();
-            this.pbFirstFilter = new System.Windows.Forms.PictureBox();
-            this.pbPrevFilter = new System.Windows.Forms.PictureBox();
-            this.txtPageSizeFilter = new System.Windows.Forms.TextBox();
             this.pnXuat.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             this.tbXuat.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderFilter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextFilter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLastFilter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirstFilter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrevFilter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderFilter)).BeginInit();
             this.SuspendLayout();
             // 
             // pnXuat
@@ -120,84 +120,6 @@
             this.pnXuat.Name = "pnXuat";
             this.pnXuat.Size = new System.Drawing.Size(900, 510);
             this.pnXuat.TabIndex = 56;
-            // 
-            // cbPagingSize
-            // 
-            this.cbPagingSize.ForeColor = System.Drawing.Color.Orange;
-            this.cbPagingSize.FormattingEnabled = true;
-            this.cbPagingSize.Items.AddRange(new object[] {
-            "10",
-            "25",
-            "50",
-            "100",
-            "200"});
-            this.cbPagingSize.Location = new System.Drawing.Point(724, 443);
-            this.cbPagingSize.Name = "cbPagingSize";
-            this.cbPagingSize.Size = new System.Drawing.Size(45, 21);
-            this.cbPagingSize.TabIndex = 164;
-            this.cbPagingSize.SelectedIndexChanged += new System.EventHandler(this.cbPagingSize_SelectedIndexChanged);
-            // 
-            // lblTotalPage
-            // 
-            this.lblTotalPage.AutoSize = true;
-            this.lblTotalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
-            this.lblTotalPage.Location = new System.Drawing.Point(799, 446);
-            this.lblTotalPage.Name = "lblTotalPage";
-            this.lblTotalPage.Size = new System.Drawing.Size(68, 13);
-            this.lblTotalPage.TabIndex = 158;
-            this.lblTotalPage.Text = "Tổng số: 0";
-            // 
-            // txtPaging
-            // 
-            this.txtPaging.Location = new System.Drawing.Point(488, 443);
-            this.txtPaging.Name = "txtPaging";
-            this.txtPaging.Size = new System.Drawing.Size(93, 20);
-            this.txtPaging.TabIndex = 159;
-            // 
-            // pbLast
-            // 
-            this.pbLast.Image = ((System.Drawing.Image)(resources.GetObject("pbLast.Image")));
-            this.pbLast.Location = new System.Drawing.Point(660, 443);
-            this.pbLast.Name = "pbLast";
-            this.pbLast.Size = new System.Drawing.Size(38, 21);
-            this.pbLast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLast.TabIndex = 163;
-            this.pbLast.TabStop = false;
-            this.pbLast.Click += new System.EventHandler(this.pbLast_Click);
-            // 
-            // pbPrev
-            // 
-            this.pbPrev.Image = ((System.Drawing.Image)(resources.GetObject("pbPrev.Image")));
-            this.pbPrev.Location = new System.Drawing.Point(426, 443);
-            this.pbPrev.Name = "pbPrev";
-            this.pbPrev.Size = new System.Drawing.Size(47, 21);
-            this.pbPrev.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPrev.TabIndex = 161;
-            this.pbPrev.TabStop = false;
-            this.pbPrev.Click += new System.EventHandler(this.pbPrev_Click);
-            // 
-            // pbFirst
-            // 
-            this.pbFirst.Image = ((System.Drawing.Image)(resources.GetObject("pbFirst.Image")));
-            this.pbFirst.Location = new System.Drawing.Point(359, 443);
-            this.pbFirst.Name = "pbFirst";
-            this.pbFirst.Size = new System.Drawing.Size(48, 20);
-            this.pbFirst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbFirst.TabIndex = 160;
-            this.pbFirst.TabStop = false;
-            this.pbFirst.Click += new System.EventHandler(this.pbFirst_Click);
-            // 
-            // pbNext
-            // 
-            this.pbNext.Image = ((System.Drawing.Image)(resources.GetObject("pbNext.Image")));
-            this.pbNext.Location = new System.Drawing.Point(608, 443);
-            this.pbNext.Name = "pbNext";
-            this.pbNext.Size = new System.Drawing.Size(39, 20);
-            this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbNext.TabIndex = 162;
-            this.pbNext.TabStop = false;
-            this.pbNext.Click += new System.EventHandler(this.pbNext_Click);
             // 
             // tbXuat
             // 
@@ -247,42 +169,69 @@
             this.tabPage1.Text = "Tạo Mới";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lblTotalPage
+            // 
+            this.lblTotalPage.AutoSize = true;
+            this.lblTotalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
+            this.lblTotalPage.Location = new System.Drawing.Point(799, 446);
+            this.lblTotalPage.Name = "lblTotalPage";
+            this.lblTotalPage.Size = new System.Drawing.Size(68, 13);
+            this.lblTotalPage.TabIndex = 158;
+            this.lblTotalPage.Text = "Tổng số: 0";
+            // 
+            // cbPagingSize
+            // 
+            this.cbPagingSize.ForeColor = System.Drawing.Color.Orange;
+            this.cbPagingSize.FormattingEnabled = true;
+            this.cbPagingSize.Items.AddRange(new object[] {
+            "10",
+            "25",
+            "50",
+            "100",
+            "200"});
+            this.cbPagingSize.Location = new System.Drawing.Point(724, 443);
+            this.cbPagingSize.Name = "cbPagingSize";
+            this.cbPagingSize.Size = new System.Drawing.Size(45, 21);
+            this.cbPagingSize.TabIndex = 164;
+            this.cbPagingSize.SelectedIndexChanged += new System.EventHandler(this.cbPagingSize_SelectedIndexChanged);
+            // 
             // dgvOrder
             // 
             this.dgvOrder.AllowUserToAddRows = false;
-            dataGridViewCellStyle33.BackColor = System.Drawing.Color.Orange;
-            this.dgvOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Orange;
+            this.dgvOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvOrder.BackgroundColor = System.Drawing.Color.White;
             this.dgvOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrder.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle34.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle35.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle35.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrder.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrder.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvOrder.EnableHeadersVisualStyles = false;
             this.dgvOrder.GridColor = System.Drawing.Color.White;
             this.dgvOrder.Location = new System.Drawing.Point(344, 66);
             this.dgvOrder.Name = "dgvOrder";
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrder.RowHeadersDefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrder.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvOrder.RowTemplate.Height = 35;
             this.dgvOrder.Size = new System.Drawing.Size(545, 373);
             this.dgvOrder.TabIndex = 156;
@@ -296,6 +245,35 @@
             this.dtpNgayXuat.Name = "dtpNgayXuat";
             this.dtpNgayXuat.Size = new System.Drawing.Size(107, 20);
             this.dtpNgayXuat.TabIndex = 154;
+            // 
+            // pbLast
+            // 
+            this.pbLast.Image = ((System.Drawing.Image)(resources.GetObject("pbLast.Image")));
+            this.pbLast.Location = new System.Drawing.Point(660, 443);
+            this.pbLast.Name = "pbLast";
+            this.pbLast.Size = new System.Drawing.Size(38, 21);
+            this.pbLast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLast.TabIndex = 163;
+            this.pbLast.TabStop = false;
+            this.pbLast.Click += new System.EventHandler(this.pbLast_Click);
+            // 
+            // txtPaging
+            // 
+            this.txtPaging.Location = new System.Drawing.Point(488, 443);
+            this.txtPaging.Name = "txtPaging";
+            this.txtPaging.Size = new System.Drawing.Size(93, 20);
+            this.txtPaging.TabIndex = 159;
+            // 
+            // pbNext
+            // 
+            this.pbNext.Image = ((System.Drawing.Image)(resources.GetObject("pbNext.Image")));
+            this.pbNext.Location = new System.Drawing.Point(608, 443);
+            this.pbNext.Name = "pbNext";
+            this.pbNext.Size = new System.Drawing.Size(39, 20);
+            this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbNext.TabIndex = 162;
+            this.pbNext.TabStop = false;
+            this.pbNext.Click += new System.EventHandler(this.pbNext_Click);
             // 
             // txtOrder
             // 
@@ -319,6 +297,17 @@
             this.lblNgayXuat.TabIndex = 155;
             this.lblNgayXuat.Text = "Ngày Xuất";
             // 
+            // pbPrev
+            // 
+            this.pbPrev.Image = ((System.Drawing.Image)(resources.GetObject("pbPrev.Image")));
+            this.pbPrev.Location = new System.Drawing.Point(426, 443);
+            this.pbPrev.Name = "pbPrev";
+            this.pbPrev.Size = new System.Drawing.Size(47, 21);
+            this.pbPrev.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPrev.TabIndex = 161;
+            this.pbPrev.TabStop = false;
+            this.pbPrev.Click += new System.EventHandler(this.pbPrev_Click);
+            // 
             // lblTPXuat
             // 
             this.lblTPXuat.AutoSize = true;
@@ -330,6 +319,17 @@
             this.lblTPXuat.TabIndex = 142;
             this.lblTPXuat.Text = "Thành Phẩm";
             // 
+            // pbFirst
+            // 
+            this.pbFirst.Image = ((System.Drawing.Image)(resources.GetObject("pbFirst.Image")));
+            this.pbFirst.Location = new System.Drawing.Point(359, 443);
+            this.pbFirst.Name = "pbFirst";
+            this.pbFirst.Size = new System.Drawing.Size(48, 20);
+            this.pbFirst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbFirst.TabIndex = 160;
+            this.pbFirst.TabStop = false;
+            this.pbFirst.Click += new System.EventHandler(this.pbFirst_Click);
+            // 
             // btnNew
             // 
             this.btnNew.AutoSize = true;
@@ -337,7 +337,7 @@
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.Color.White;
-            this.btnNew.Location = new System.Drawing.Point(122, 338);
+            this.btnNew.Location = new System.Drawing.Point(115, 338);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 30);
             this.btnNew.TabIndex = 44;
@@ -350,12 +350,21 @@
             this.txtSPLoi.BackColor = System.Drawing.Color.White;
             this.txtSPLoi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSPLoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSPLoi.Location = new System.Drawing.Point(120, 294);
+            this.txtSPLoi.Location = new System.Drawing.Point(115, 294);
             this.txtSPLoi.Name = "txtSPLoi";
-            this.txtSPLoi.Size = new System.Drawing.Size(89, 24);
+            this.txtSPLoi.Size = new System.Drawing.Size(82, 24);
             this.txtSPLoi.TabIndex = 37;
             this.txtSPLoi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSPLoi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSPLoi_KeyPress);
+            // 
+            // label20
+            // 
+            this.label20.BackColor = System.Drawing.Color.Orange;
+            this.label20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label20.Location = new System.Drawing.Point(25, 52);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(826, 3);
+            this.label20.TabIndex = 36;
             // 
             // label21
             // 
@@ -392,7 +401,7 @@
             this.txtTP.BackColor = System.Drawing.Color.White;
             this.txtTP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTP.Location = new System.Drawing.Point(120, 258);
+            this.txtTP.Location = new System.Drawing.Point(115, 258);
             this.txtTP.Name = "txtTP";
             this.txtTP.Size = new System.Drawing.Size(80, 24);
             this.txtTP.TabIndex = 141;
@@ -456,7 +465,7 @@
             this.txtBTPDaIn.BackColor = System.Drawing.Color.White;
             this.txtBTPDaIn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBTPDaIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBTPDaIn.Location = new System.Drawing.Point(120, 222);
+            this.txtBTPDaIn.Location = new System.Drawing.Point(115, 222);
             this.txtBTPDaIn.Name = "txtBTPDaIn";
             this.txtBTPDaIn.Size = new System.Drawing.Size(80, 24);
             this.txtBTPDaIn.TabIndex = 139;
@@ -476,7 +485,7 @@
             this.txtBTPChuaIn.BackColor = System.Drawing.Color.White;
             this.txtBTPChuaIn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBTPChuaIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBTPChuaIn.Location = new System.Drawing.Point(116, 186);
+            this.txtBTPChuaIn.Location = new System.Drawing.Point(115, 186);
             this.txtBTPChuaIn.Name = "txtBTPChuaIn";
             this.txtBTPChuaIn.Size = new System.Drawing.Size(80, 24);
             this.txtBTPChuaIn.TabIndex = 137;
@@ -533,42 +542,120 @@
             this.tabPage3.Text = "Tìm Kiếm";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // pbNextFilter
+            // 
+            this.pbNextFilter.Image = ((System.Drawing.Image)(resources.GetObject("pbNextFilter.Image")));
+            this.pbNextFilter.Location = new System.Drawing.Point(538, 446);
+            this.pbNextFilter.Name = "pbNextFilter";
+            this.pbNextFilter.Size = new System.Drawing.Size(39, 20);
+            this.pbNextFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbNextFilter.TabIndex = 190;
+            this.pbNextFilter.TabStop = false;
+            this.pbNextFilter.Click += new System.EventHandler(this.pbNextFilter_Click);
+            // 
+            // cbPageSizeFilter
+            // 
+            this.cbPageSizeFilter.ForeColor = System.Drawing.Color.Orange;
+            this.cbPageSizeFilter.FormattingEnabled = true;
+            this.cbPageSizeFilter.Items.AddRange(new object[] {
+            "10",
+            "25",
+            "50",
+            "100",
+            "200"});
+            this.cbPageSizeFilter.Location = new System.Drawing.Point(720, 442);
+            this.cbPageSizeFilter.Name = "cbPageSizeFilter";
+            this.cbPageSizeFilter.Size = new System.Drawing.Size(45, 24);
+            this.cbPageSizeFilter.TabIndex = 192;
+            this.cbPageSizeFilter.SelectedIndexChanged += new System.EventHandler(this.cbPageSizeFilter_SelectedIndexChanged);
+            // 
+            // lblTotalPageFilter
+            // 
+            this.lblTotalPageFilter.AutoSize = true;
+            this.lblTotalPageFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalPageFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblTotalPageFilter.Location = new System.Drawing.Point(810, 449);
+            this.lblTotalPageFilter.Name = "lblTotalPageFilter";
+            this.lblTotalPageFilter.Size = new System.Drawing.Size(68, 13);
+            this.lblTotalPageFilter.TabIndex = 186;
+            this.lblTotalPageFilter.Text = "Tổng số: 0";
+            // 
+            // pbLastFilter
+            // 
+            this.pbLastFilter.Image = ((System.Drawing.Image)(resources.GetObject("pbLastFilter.Image")));
+            this.pbLastFilter.Location = new System.Drawing.Point(599, 445);
+            this.pbLastFilter.Name = "pbLastFilter";
+            this.pbLastFilter.Size = new System.Drawing.Size(66, 20);
+            this.pbLastFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLastFilter.TabIndex = 191;
+            this.pbLastFilter.TabStop = false;
+            this.pbLastFilter.Click += new System.EventHandler(this.pbLastFilter_Click);
+            // 
+            // pbFirstFilter
+            // 
+            this.pbFirstFilter.Image = ((System.Drawing.Image)(resources.GetObject("pbFirstFilter.Image")));
+            this.pbFirstFilter.Location = new System.Drawing.Point(279, 446);
+            this.pbFirstFilter.Name = "pbFirstFilter";
+            this.pbFirstFilter.Size = new System.Drawing.Size(48, 20);
+            this.pbFirstFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbFirstFilter.TabIndex = 188;
+            this.pbFirstFilter.TabStop = false;
+            this.pbFirstFilter.Click += new System.EventHandler(this.pbFirstFilter_Click);
+            // 
+            // pbPrevFilter
+            // 
+            this.pbPrevFilter.Image = ((System.Drawing.Image)(resources.GetObject("pbPrevFilter.Image")));
+            this.pbPrevFilter.Location = new System.Drawing.Point(352, 446);
+            this.pbPrevFilter.Name = "pbPrevFilter";
+            this.pbPrevFilter.Size = new System.Drawing.Size(47, 20);
+            this.pbPrevFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPrevFilter.TabIndex = 189;
+            this.pbPrevFilter.TabStop = false;
+            this.pbPrevFilter.Click += new System.EventHandler(this.pbPrevFilter_Click);
+            // 
+            // txtPageSizeFilter
+            // 
+            this.txtPageSizeFilter.Location = new System.Drawing.Point(420, 446);
+            this.txtPageSizeFilter.Name = "txtPageSizeFilter";
+            this.txtPageSizeFilter.Size = new System.Drawing.Size(93, 22);
+            this.txtPageSizeFilter.TabIndex = 187;
+            // 
             // dgvOrderFilter
             // 
             this.dgvOrderFilter.AllowUserToAddRows = false;
-            dataGridViewCellStyle37.BackColor = System.Drawing.Color.Orange;
-            this.dgvOrderFilter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.Orange;
+            this.dgvOrderFilter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvOrderFilter.BackgroundColor = System.Drawing.Color.White;
             this.dgvOrderFilter.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrderFilter.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle38.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderFilter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderFilter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvOrderFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle39.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrderFilter.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrderFilter.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvOrderFilter.EnableHeadersVisualStyles = false;
             this.dgvOrderFilter.GridColor = System.Drawing.Color.White;
             this.dgvOrderFilter.Location = new System.Drawing.Point(274, 22);
             this.dgvOrderFilter.Name = "dgvOrderFilter";
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle40.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderFilter.RowHeadersDefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderFilter.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvOrderFilter.RowTemplate.Height = 35;
             this.dgvOrderFilter.Size = new System.Drawing.Size(612, 405);
             this.dgvOrderFilter.TabIndex = 178;
@@ -778,9 +865,9 @@
             this.lblNgayXongNhapFilter.ForeColor = System.Drawing.Color.Orange;
             this.lblNgayXongNhapFilter.Location = new System.Drawing.Point(17, 63);
             this.lblNgayXongNhapFilter.Name = "lblNgayXongNhapFilter";
-            this.lblNgayXongNhapFilter.Size = new System.Drawing.Size(84, 16);
+            this.lblNgayXongNhapFilter.Size = new System.Drawing.Size(109, 16);
             this.lblNgayXongNhapFilter.TabIndex = 159;
-            this.lblNgayXongNhapFilter.Text = "Ngày Xong";
+            this.lblNgayXongNhapFilter.Text = "Ngày Xuất Kho";
             // 
             // dtpNgayXuatFilter
             // 
@@ -798,96 +885,9 @@
             this.lblNgayXuatFilter.ForeColor = System.Drawing.Color.Orange;
             this.lblNgayXuatFilter.Location = new System.Drawing.Point(17, 23);
             this.lblNgayXuatFilter.Name = "lblNgayXuatFilter";
-            this.lblNgayXuatFilter.Size = new System.Drawing.Size(79, 16);
+            this.lblNgayXuatFilter.Size = new System.Drawing.Size(81, 16);
             this.lblNgayXuatFilter.TabIndex = 157;
-            this.lblNgayXuatFilter.Text = "Ngày Xuất";
-            // 
-            // label20
-            // 
-            this.label20.BackColor = System.Drawing.Color.Orange;
-            this.label20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label20.Location = new System.Drawing.Point(25, 52);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(826, 3);
-            this.label20.TabIndex = 36;
-            // 
-            // pbNextFilter
-            // 
-            this.pbNextFilter.Image = ((System.Drawing.Image)(resources.GetObject("pbNextFilter.Image")));
-            this.pbNextFilter.Location = new System.Drawing.Point(538, 446);
-            this.pbNextFilter.Name = "pbNextFilter";
-            this.pbNextFilter.Size = new System.Drawing.Size(39, 20);
-            this.pbNextFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbNextFilter.TabIndex = 190;
-            this.pbNextFilter.TabStop = false;
-            this.pbNextFilter.Click += new System.EventHandler(this.pbNextFilter_Click);
-            // 
-            // cbPageSizeFilter
-            // 
-            this.cbPageSizeFilter.ForeColor = System.Drawing.Color.Orange;
-            this.cbPageSizeFilter.FormattingEnabled = true;
-            this.cbPageSizeFilter.Items.AddRange(new object[] {
-            "10",
-            "25",
-            "50",
-            "100",
-            "200"});
-            this.cbPageSizeFilter.Location = new System.Drawing.Point(720, 442);
-            this.cbPageSizeFilter.Name = "cbPageSizeFilter";
-            this.cbPageSizeFilter.Size = new System.Drawing.Size(45, 24);
-            this.cbPageSizeFilter.TabIndex = 192;
-            this.cbPageSizeFilter.SelectedIndexChanged += new System.EventHandler(this.cbPageSizeFilter_SelectedIndexChanged);
-            // 
-            // lblTotalPageFilter
-            // 
-            this.lblTotalPageFilter.AutoSize = true;
-            this.lblTotalPageFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalPageFilter.ForeColor = System.Drawing.Color.Orange;
-            this.lblTotalPageFilter.Location = new System.Drawing.Point(810, 449);
-            this.lblTotalPageFilter.Name = "lblTotalPageFilter";
-            this.lblTotalPageFilter.Size = new System.Drawing.Size(68, 13);
-            this.lblTotalPageFilter.TabIndex = 186;
-            this.lblTotalPageFilter.Text = "Tổng số: 0";
-            // 
-            // pbLastFilter
-            // 
-            this.pbLastFilter.Image = ((System.Drawing.Image)(resources.GetObject("pbLastFilter.Image")));
-            this.pbLastFilter.Location = new System.Drawing.Point(599, 445);
-            this.pbLastFilter.Name = "pbLastFilter";
-            this.pbLastFilter.Size = new System.Drawing.Size(66, 20);
-            this.pbLastFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLastFilter.TabIndex = 191;
-            this.pbLastFilter.TabStop = false;
-            this.pbLastFilter.Click += new System.EventHandler(this.pbLastFilter_Click);
-            // 
-            // pbFirstFilter
-            // 
-            this.pbFirstFilter.Image = ((System.Drawing.Image)(resources.GetObject("pbFirstFilter.Image")));
-            this.pbFirstFilter.Location = new System.Drawing.Point(279, 446);
-            this.pbFirstFilter.Name = "pbFirstFilter";
-            this.pbFirstFilter.Size = new System.Drawing.Size(48, 20);
-            this.pbFirstFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbFirstFilter.TabIndex = 188;
-            this.pbFirstFilter.TabStop = false;
-            this.pbFirstFilter.Click += new System.EventHandler(this.pbFirstFilter_Click);
-            // 
-            // pbPrevFilter
-            // 
-            this.pbPrevFilter.Image = ((System.Drawing.Image)(resources.GetObject("pbPrevFilter.Image")));
-            this.pbPrevFilter.Location = new System.Drawing.Point(352, 446);
-            this.pbPrevFilter.Name = "pbPrevFilter";
-            this.pbPrevFilter.Size = new System.Drawing.Size(47, 20);
-            this.pbPrevFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPrevFilter.TabIndex = 189;
-            this.pbPrevFilter.TabStop = false;
-            this.pbPrevFilter.Click += new System.EventHandler(this.pbPrevFilter_Click);
-            // 
-            // txtPageSizeFilter
-            // 
-            this.txtPageSizeFilter.Location = new System.Drawing.Point(420, 446);
-            this.txtPageSizeFilter.Name = "txtPageSizeFilter";
-            this.txtPageSizeFilter.Size = new System.Drawing.Size(93, 22);
-            this.txtPageSizeFilter.TabIndex = 187;
+            this.lblNgayXuatFilter.Text = "Phiếu Xuất";
             // 
             // QuanLyXuat
             // 
@@ -898,21 +898,21 @@
             this.Size = new System.Drawing.Size(900, 510);
             this.Load += new System.EventHandler(this.QuanLyXuat_Load);
             this.pnXuat.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
             this.tbXuat.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLastFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirstFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrevFilter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderFilter)).EndInit();
             this.ResumeLayout(false);
 
         }

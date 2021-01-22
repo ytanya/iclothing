@@ -1,7 +1,7 @@
 ﻿
 namespace iClothing
 {
-    partial class Stock
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,33 +29,33 @@ namespace iClothing
         /// </summary>
         private void InitializeComponent()
         {
-            this.stockManagement1 = new iClothing.StockManagement();
+            this.login1 = new iClothing.Login();
             this.SuspendLayout();
             // 
-            // stockManagement1
+            // login1
             // 
-            this.stockManagement1.BackColor = System.Drawing.Color.White;
-            this.stockManagement1.Location = new System.Drawing.Point(0, 0);
-            this.stockManagement1.Name = "stockManagement1";
-            this.stockManagement1.Size = new System.Drawing.Size(1200, 730);
-            this.stockManagement1.TabIndex = 0;
+            this.login1.BackColor = System.Drawing.Color.White;
+            this.login1.Location = new System.Drawing.Point(0, 0);
+            this.login1.Name = "login1";
+            this.login1.Size = new System.Drawing.Size(1074, 736);
+            this.login1.TabIndex = 0;
             // 
-            // Stock
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1200, 730);
-            this.Controls.Add(this.stockManagement1);
+            this.ClientSize = new System.Drawing.Size(1074, 736);
+            this.Controls.Add(this.login1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Stock";
-            this.Text = "Stock";
+            this.Name = "LoginForm";
+            this.Text = "LoginForm";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private StockManagement stockManagement1;
+        private Login login1;
     }
 }

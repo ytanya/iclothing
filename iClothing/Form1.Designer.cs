@@ -54,6 +54,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.pnRight = new System.Windows.Forms.Panel();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.btnMini = new System.Windows.Forms.Button();
             this.pnMenu.SuspendLayout();
             this.pnLeft.SuspendLayout();
             this.pnStuff.SuspendLayout();
@@ -96,6 +98,7 @@
             // pnLeft
             // 
             this.pnLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(156)))), ((int)(((byte)(29)))));
+            this.pnLeft.Controls.Add(this.btnMini);
             this.pnLeft.Controls.Add(this.pnStuff);
             this.pnLeft.Controls.Add(this.pnSystem);
             this.pnLeft.Controls.Add(this.lblVersion);
@@ -271,6 +274,20 @@
             resources.ApplyResources(this.pnRight, "pnRight");
             this.pnRight.Name = "pnRight";
             // 
+            // timer3
+            // 
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // btnMini
+            // 
+            this.btnMini.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(156)))), ((int)(((byte)(29)))));
+            this.btnMini.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnMini, "btnMini");
+            this.btnMini.ForeColor = System.Drawing.Color.White;
+            this.btnMini.Name = "btnMini";
+            this.btnMini.UseVisualStyleBackColor = false;
+            this.btnMini.Click += new System.EventHandler(this.btnMini_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -317,5 +334,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Panel pnRight;
+        private System.Windows.Forms.Button btnMini;
+        private System.Windows.Forms.Timer timer3;
     }
 }

@@ -272,7 +272,7 @@ namespace iClothing
             strFilter = string.Empty;
             string Ngay =  string.Format("ngaytao < '{0}'", dtpDenNgay.Value.AddDays(1).ToString("yyyy-MM-dd"));
             strFilter = Ngay;
-            string barcode = string.IsNullOrEmpty(txtBarcode.Text) ? string.Empty : txtBarcode.Text;
+            string barcode = string.IsNullOrEmpty(txtBarcode.Text) ? string.Empty : " Barcode like '" + txtBarcode.Text + "'";
             strFilter = string.IsNullOrEmpty(strFilter) ? (string.IsNullOrEmpty(barcode) ? "" : barcode) : (string.IsNullOrEmpty(barcode) ? strFilter : strFilter + " AND " + barcode);
             string kihieuValue = cbKyHieu.SelectedIndex == -1 ? string.Empty :  cbKyHieu.SelectedValue.ToString();
             string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " Barcode like '" + kihieuValue + "'";
@@ -311,13 +311,13 @@ namespace iClothing
                     //dgvOrder.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                     //dgvOrder.Columns[2].Width = 150;
                     //dgvOrder.Columns["Ký Hiệu"].Width = 60;
-                    dvgStock.Columns["BTP Chưa in"].Width = 120;
+                    dvgStock.Columns["BTP Chưa in"].Width = 100;
                     this.dvgStock.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dvgStock.Columns["BTP Đã in"].Width = 100;
                     this.dvgStock.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgStock.Columns["Thành Phẩm"].Width = 120;
+                    dvgStock.Columns["Thành Phẩm"].Width = 100;
                     this.dvgStock.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgStock.Columns["Sản phẩm lỗi"].Width = 110;
+                    dvgStock.Columns["Sản phẩm lỗi"].Width = 100;
                     this.dvgStock.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dvgStock.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }

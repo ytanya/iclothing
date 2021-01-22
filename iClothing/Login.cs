@@ -46,17 +46,27 @@ namespace iClothing
                                 {
                                     string currentUser = dt.Rows[0].Field<string>("Tendangnhap").ToString();
                                     string currentRole = dt.Rows[0].Field<string>("Ten1").ToString();
-                                    Panel pnMenu = (this.Parent as MainPage).Controls["pnMenu"] as Panel;
-                                    Panel pnLeft = (this.Parent as MainPage).Controls["pnLeft"] as Panel;
+
+
+                                    LoginForm childForm = (LoginForm)this.ParentForm;
+                                    Form1 parentForm = (Form1)childForm.ParentForm;
+                                    Panel pnMenu = parentForm.Controls["pnMenu"] as Panel;
                                     pnMenu.Visible = true;
+                                    Panel pnLeft = parentForm.Controls["pnLeft"] as Panel;
+                                    pnLeft.Width = 238;
                                     if (currentRole == "Admin")
                                     {
                                         
                                         Panel pnSystem = pnLeft.Controls["pnSystem"] as Panel;
+                                        pnSystem.Visible = true;
                                         Button btnStaff = pnSystem.Controls["btnStaff"] as Button;
                                         btnStaff.Visible = true;
                                         
                                     }
+                                    Panel pnStuff = pnLeft.Controls["pnStuff"] as Panel;
+                                    Button btnMini = pnLeft.Controls["btnMini"] as Button;
+                                    
+                                    pnStuff.Visible = true;
                                     Label lblCurrentUser = pnMenu.Controls["lblCurrentUser"] as Label;
                                     lblCurrentUser.Text = username;
                                     Panel SidePanelLeft = pnLeft.Controls["SidePanelLeft"] as Panel;

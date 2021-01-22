@@ -114,7 +114,7 @@
             this.pnXuat.Controls.Add(this.tbXuat);
             this.pnXuat.Location = new System.Drawing.Point(0, 0);
             this.pnXuat.Name = "pnXuat";
-            this.pnXuat.Size = new System.Drawing.Size(815, 518);
+            this.pnXuat.Size = new System.Drawing.Size(1000, 510);
             this.pnXuat.TabIndex = 56;
             // 
             // cbPagingSize
@@ -202,7 +202,7 @@
             this.tbXuat.Location = new System.Drawing.Point(3, 3);
             this.tbXuat.Name = "tbXuat";
             this.tbXuat.SelectedIndex = 0;
-            this.tbXuat.Size = new System.Drawing.Size(812, 481);
+            this.tbXuat.Size = new System.Drawing.Size(1000, 510);
             this.tbXuat.TabIndex = 157;
             // 
             // tabPage1
@@ -230,7 +230,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(804, 455);
+            this.tabPage1.Size = new System.Drawing.Size(992, 484);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tạo Mới";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -518,7 +518,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(804, 455);
+            this.tabPage3.Size = new System.Drawing.Size(992, 484);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "Tìm Kiếm";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -798,7 +798,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnXuat);
             this.Name = "QuanLyXuat";
-            this.Size = new System.Drawing.Size(815, 518);
+            this.Size = new System.Drawing.Size(1000, 510);
             this.Load += new System.EventHandler(this.QuanLyXuat_Load);
             this.pnXuat.ResumeLayout(false);
             this.pnXuat.PerformLayout();

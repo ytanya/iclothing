@@ -76,9 +76,9 @@
             // 
             this.quanLyNhap1.AutoScroll = true;
             this.quanLyNhap1.BackColor = System.Drawing.Color.White;
-            this.quanLyNhap1.Location = new System.Drawing.Point(5, 55);
+            this.quanLyNhap1.Location = new System.Drawing.Point(0, 52);
             this.quanLyNhap1.Name = "quanLyNhap1";
-            this.quanLyNhap1.Size = new System.Drawing.Size(927, 706);
+            this.quanLyNhap1.Size = new System.Drawing.Size(1190, 640);
             this.quanLyNhap1.TabIndex = 58;
             // 
             // quanLyXuat1
@@ -99,7 +99,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.quanLyXuat1);
             this.Name = "QuanLyNhapXuat";
-            this.Size = new System.Drawing.Size(927, 761);
+            this.Size = new System.Drawing.Size(1190, 700);
             this.Load += new System.EventHandler(this.QuanLyNhapXuat_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

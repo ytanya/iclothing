@@ -64,7 +64,7 @@
             this.lblSoluong.AutoSize = true;
             this.lblSoluong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSoluong.ForeColor = System.Drawing.Color.Orange;
-            this.lblSoluong.Location = new System.Drawing.Point(506, 55);
+            this.lblSoluong.Location = new System.Drawing.Point(26, 176);
             this.lblSoluong.Name = "lblSoluong";
             this.lblSoluong.Size = new System.Drawing.Size(60, 15);
             this.lblSoluong.TabIndex = 44;
@@ -75,7 +75,7 @@
             this.txtBarcode.BackColor = System.Drawing.Color.White;
             this.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarcode.Location = new System.Drawing.Point(619, 51);
+            this.txtBarcode.Location = new System.Drawing.Point(148, 172);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(200, 24);
             this.txtBarcode.TabIndex = 43;
@@ -84,9 +84,9 @@
             // 
             this.label1.BackColor = System.Drawing.Color.Orange;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(25, 179);
+            this.label1.Location = new System.Drawing.Point(95, 62);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(826, 3);
+            this.label1.Size = new System.Drawing.Size(900, 3);
             this.label1.TabIndex = 55;
             // 
             // dvgStock
@@ -114,7 +114,7 @@
             this.dvgStock.DefaultCellStyle = dataGridViewCellStyle5;
             this.dvgStock.EnableHeadersVisualStyles = false;
             this.dvgStock.GridColor = System.Drawing.Color.White;
-            this.dvgStock.Location = new System.Drawing.Point(37, 267);
+            this.dvgStock.Location = new System.Drawing.Point(354, 77);
             this.dvgStock.Name = "dvgStock";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -123,7 +123,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dvgStock.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dvgStock.Size = new System.Drawing.Size(801, 383);
+            this.dvgStock.Size = new System.Drawing.Size(831, 531);
             this.dvgStock.TabIndex = 56;
             // 
             // btnExport
@@ -147,7 +147,7 @@
             this.lblTotalPage.AutoSize = true;
             this.lblTotalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
-            this.lblTotalPage.Location = new System.Drawing.Point(713, 686);
+            this.lblTotalPage.Location = new System.Drawing.Point(1047, 644);
             this.lblTotalPage.Name = "lblTotalPage";
             this.lblTotalPage.Size = new System.Drawing.Size(68, 13);
             this.lblTotalPage.TabIndex = 95;
@@ -163,7 +163,7 @@
             "50",
             "100",
             "200"});
-            this.cbPageSize.Location = new System.Drawing.Point(576, 683);
+            this.cbPageSize.Location = new System.Drawing.Point(910, 641);
             this.cbPageSize.Name = "cbPageSize";
             this.cbPageSize.Size = new System.Drawing.Size(45, 21);
             this.cbPageSize.TabIndex = 141;
@@ -171,7 +171,7 @@
             // pbLast
             // 
             this.pbLast.Image = ((System.Drawing.Image)(resources.GetObject("pbLast.Image")));
-            this.pbLast.Location = new System.Drawing.Point(439, 683);
+            this.pbLast.Location = new System.Drawing.Point(773, 641);
             this.pbLast.Name = "pbLast";
             this.pbLast.Size = new System.Drawing.Size(38, 21);
             this.pbLast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -182,7 +182,7 @@
             // pbNext
             // 
             this.pbNext.Image = ((System.Drawing.Image)(resources.GetObject("pbNext.Image")));
-            this.pbNext.Location = new System.Drawing.Point(370, 683);
+            this.pbNext.Location = new System.Drawing.Point(704, 641);
             this.pbNext.Name = "pbNext";
             this.pbNext.Size = new System.Drawing.Size(39, 20);
             this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -193,7 +193,7 @@
             // pbFirst
             // 
             this.pbFirst.Image = ((System.Drawing.Image)(resources.GetObject("pbFirst.Image")));
-            this.pbFirst.Location = new System.Drawing.Point(122, 683);
+            this.pbFirst.Location = new System.Drawing.Point(456, 641);
             this.pbFirst.Name = "pbFirst";
             this.pbFirst.Size = new System.Drawing.Size(48, 20);
             this.pbFirst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -204,7 +204,7 @@
             // pbPrev
             // 
             this.pbPrev.Image = ((System.Drawing.Image)(resources.GetObject("pbPrev.Image")));
-            this.pbPrev.Location = new System.Drawing.Point(202, 683);
+            this.pbPrev.Location = new System.Drawing.Point(536, 641);
             this.pbPrev.Name = "pbPrev";
             this.pbPrev.Size = new System.Drawing.Size(47, 20);
             this.pbPrev.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -214,7 +214,7 @@
             // 
             // txtPaging
             // 
-            this.txtPaging.Location = new System.Drawing.Point(264, 683);
+            this.txtPaging.Location = new System.Drawing.Point(598, 641);
             this.txtPaging.Name = "txtPaging";
             this.txtPaging.Size = new System.Drawing.Size(93, 20);
             this.txtPaging.TabIndex = 136;
@@ -226,9 +226,9 @@
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.Location = new System.Drawing.Point(613, 146);
+            this.btnReset.Location = new System.Drawing.Point(148, 293);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(113, 30);
+            this.btnReset.Size = new System.Drawing.Size(82, 30);
             this.btnReset.TabIndex = 180;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = false;
@@ -241,7 +241,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(736, 146);
+            this.btnSearch.Location = new System.Drawing.Point(264, 293);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(83, 30);
             this.btnSearch.TabIndex = 179;
@@ -254,7 +254,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Orange;
-            this.label2.Location = new System.Drawing.Point(506, 106);
+            this.label2.Location = new System.Drawing.Point(26, 228);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 15);
             this.label2.TabIndex = 182;
@@ -263,7 +263,7 @@
             // cbKyHieu
             // 
             this.cbKyHieu.FormattingEnabled = true;
-            this.cbKyHieu.Location = new System.Drawing.Point(619, 106);
+            this.cbKyHieu.Location = new System.Drawing.Point(148, 227);
             this.cbKyHieu.Name = "cbKyHieu";
             this.cbKyHieu.Size = new System.Drawing.Size(107, 21);
             this.cbKyHieu.TabIndex = 183;
@@ -273,7 +273,7 @@
             this.lblTuNgay.AutoSize = true;
             this.lblTuNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTuNgay.ForeColor = System.Drawing.Color.Orange;
-            this.lblTuNgay.Location = new System.Drawing.Point(58, 55);
+            this.lblTuNgay.Location = new System.Drawing.Point(26, 81);
             this.lblTuNgay.Name = "lblTuNgay";
             this.lblTuNgay.Size = new System.Drawing.Size(59, 15);
             this.lblTuNgay.TabIndex = 184;
@@ -284,7 +284,7 @@
             this.lblDenNgay.AutoSize = true;
             this.lblDenNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDenNgay.ForeColor = System.Drawing.Color.Orange;
-            this.lblDenNgay.Location = new System.Drawing.Point(58, 106);
+            this.lblDenNgay.Location = new System.Drawing.Point(26, 132);
             this.lblDenNgay.Name = "lblDenNgay";
             this.lblDenNgay.Size = new System.Drawing.Size(69, 15);
             this.lblDenNgay.TabIndex = 185;
@@ -292,14 +292,14 @@
             // 
             // dtpTuNgay
             // 
-            this.dtpTuNgay.Location = new System.Drawing.Point(180, 51);
+            this.dtpTuNgay.Location = new System.Drawing.Point(148, 77);
             this.dtpTuNgay.Name = "dtpTuNgay";
             this.dtpTuNgay.Size = new System.Drawing.Size(200, 20);
             this.dtpTuNgay.TabIndex = 186;
             // 
             // dtpDenNgay
             // 
-            this.dtpDenNgay.Location = new System.Drawing.Point(180, 101);
+            this.dtpDenNgay.Location = new System.Drawing.Point(148, 127);
             this.dtpDenNgay.Name = "dtpDenNgay";
             this.dtpDenNgay.Size = new System.Drawing.Size(200, 20);
             this.dtpDenNgay.TabIndex = 187;
@@ -330,7 +330,7 @@
             this.Controls.Add(this.lblSoluong);
             this.Controls.Add(this.txtBarcode);
             this.Name = "StockManagement";
-            this.Size = new System.Drawing.Size(1074, 775);
+            this.Size = new System.Drawing.Size(1200, 730);
             this.Load += new System.EventHandler(this.StockManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvgStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();

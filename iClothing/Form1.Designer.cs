@@ -35,6 +35,7 @@
             this.pnMenu = new System.Windows.Forms.Panel();
             this.lblCurrentUser = new System.Windows.Forms.Label();
             this.pnLeft = new System.Windows.Forms.Panel();
+            this.btnMini = new System.Windows.Forms.Button();
             this.pnStuff = new System.Windows.Forms.Panel();
             this.btnStuff = new System.Windows.Forms.Button();
             this.btnOrder = new System.Windows.Forms.Button();
@@ -55,7 +56,6 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.pnRight = new System.Windows.Forms.Panel();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.btnMini = new System.Windows.Forms.Button();
             this.pnMenu.SuspendLayout();
             this.pnLeft.SuspendLayout();
             this.pnStuff.SuspendLayout();
@@ -105,6 +105,16 @@
             this.pnLeft.Controls.Add(this.SidePanelLeft);
             resources.ApplyResources(this.pnLeft, "pnLeft");
             this.pnLeft.Name = "pnLeft";
+            // 
+            // btnMini
+            // 
+            this.btnMini.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(156)))), ((int)(((byte)(29)))));
+            this.btnMini.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnMini, "btnMini");
+            this.btnMini.ForeColor = System.Drawing.Color.White;
+            this.btnMini.Name = "btnMini";
+            this.btnMini.UseVisualStyleBackColor = false;
+            this.btnMini.Click += new System.EventHandler(this.btnMini_Click);
             // 
             // pnStuff
             // 
@@ -277,16 +287,6 @@
             // timer3
             // 
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
-            // 
-            // btnMini
-            // 
-            this.btnMini.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(156)))), ((int)(((byte)(29)))));
-            this.btnMini.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btnMini, "btnMini");
-            this.btnMini.ForeColor = System.Drawing.Color.White;
-            this.btnMini.Name = "btnMini";
-            this.btnMini.UseVisualStyleBackColor = false;
-            this.btnMini.Click += new System.EventHandler(this.btnMini_Click);
             // 
             // Form1
             // 

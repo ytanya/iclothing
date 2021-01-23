@@ -18,6 +18,8 @@ namespace iClothing
 {
     public partial class StockManagement : UserControl
     {
+        Thread delayedCalculationThread;
+        int delay = 0;
         DataTable dtMain = new DataTable();
         public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
@@ -31,56 +33,6 @@ namespace iClothing
             cbPageSize.SelectedItem = "10";
 
         }
-
-        //private void CalculateAfterStopTyping()
-        //{
-
-        //    delay += 30;
-        //    if (delayedCalculationThread != null && delayedCalculationThread.IsAlive)
-        //        return;
-
-        //    delayedCalculationThread = new Thread(() =>
-        //    {
-        //        while (delay >= 20)
-        //        {
-        //            delay = delay - 20;
-        //            try
-        //            {
-        //                Thread.Sleep(20);
-        //            }
-        //            catch (Exception) { }
-        //        }
-        //        Invoke(new Action(() =>
-        //        {
-                    
-        //            string id = txtBarcode.Text;
-        //            int skipRecord = currentPageNumber - 1;
-        //            if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
-        //            if (DBAccess.IsServerConnected())
-        //            {
-                        
-
-        //                using (SqlCeConnection connection = new SqlCeConnection(conn))
-        //                {
-        //                    using (SqlCeCommand command = new SqlCeCommand(query, connection))
-        //                    {
-        //                        SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
-        //                        DataTable dt = new DataTable();
-        //                        sda.Fill(dt);
-        //                        dtMain.Merge(dt);
-        //                        dvgStock.DataSource = dtMain;
-        //                        GetTotalRow(strSearch);
-
-
-        //                    }
-        //                }
-        //            }
-
-        //        }));
-        //    });
-
-        //    delayedCalculationThread.Start();
-        //}
 
         private void GetTotalRow(string query)
         {
@@ -258,6 +210,48 @@ namespace iClothing
                 GetAllData(currentPageNumber, rowPerPage, strFilter);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
+        }
+
+        private void txtBarcode_TextChanged(object sender, EventArgs e)
+        {
+            CalculateAfterStopTyping();
+        }
+
+        private void CalculateAfterStopTyping()
+        {
+            delay += 30;
+            if (delayedCalculationThread != null && delayedCalculationThread.IsAlive)
+                return;
+
+            delayedCalculationThread = new Thread(() =>
+            {
+                while (delay >= 20)
+                {
+                    delay = delay - 20;
+                    try
+                    {
+                        Thread.Sleep(20);
+                    }
+                    catch (Exception) { }
+                }
+                Invoke(new Action(() =>
+                {
+                    string barcode = txtBarcode.Text;
+                    strFilter = " WHERE Barcode ='" + barcode + "'";
+                    GetTotalRow(strFilter);
+                    GetAllData(currentPageNumber, rowPerPage, strFilter);
+                    
+                    this.ActiveControl = txtBarcode;
+
+                }));
+            });
+
+            delayedCalculationThread.Start();
+        }
+
+        private void btnBarcode_Click(object sender, EventArgs e)
+        {
+            this.ActiveControl = txtBarcode;
         }
 
         private void btnReset_Click(object sender, EventArgs e)

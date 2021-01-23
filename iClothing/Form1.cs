@@ -27,7 +27,7 @@ namespace iClothing
             pnLeft.Width = 54;
             pnSystem.Visible = false;
             pnStuff.Visible = false;
-            btnMini.Visible = false;
+            btnMini.Enabled = false;
             pnSystem.Height = 54;
             pnStuff.Height = 54;
             pnSystem.Top = pnStuff.Height+54;
@@ -249,7 +249,7 @@ namespace iClothing
         private void btnMini_Click(object sender, EventArgs e)
         {
             enableMini = false;
-            btnMini.Visible = false;
+            btnMini.Enabled = false;
             timer3.Start();
         }
 
@@ -266,7 +266,7 @@ namespace iClothing
 
         public void MinimizeMenu()
         {
-            btnMini.Visible = true;
+            btnMini.Enabled = true;
             timer3.Start();
         }
     }

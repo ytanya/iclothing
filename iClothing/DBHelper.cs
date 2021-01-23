@@ -166,5 +166,33 @@ namespace iClothing
             }
             return isExisted;
         }
+
+        public static string getStock(string kyhieu, string chuaInSL, string daInSL, string tPSL, string SPLoiSL)
+        {
+            DataTable dt = new DataTable();
+            DataTable dtnew = new DataTable();
+            string result = string.Empty;
+            bool isStock = false;
+            int BTPChuaIn, BTPDaIN, TP, SPLoi;
+            string query = "Select DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản Phẩm Lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock  GROUP BY Barcode) New on New.Barcode = Stock.Barcode where NewProduct.Kyhieu = '" + kyhieu + "'";
+            dtnew = DBAccess.FillDataTable(query, dt);
+            if (dtnew != null)
+            {
+                if (dtnew.Rows.Count > 0)
+                {
+                    BTPChuaIn = Convert.ToInt32(dtnew.Rows[0][1].ToString());
+                    BTPDaIN= Convert.ToInt32(dtnew.Rows[0][2].ToString());
+                    TP = Convert.ToInt32(dtnew.Rows[0][3].ToString());
+                    SPLoi = Convert.ToInt32(dtnew.Rows[0][4].ToString());
+                    if (Convert.ToInt32(chuaInSL) <= BTPChuaIn && Convert.ToInt32(daInSL) <= BTPDaIN && Convert.ToInt32(tPSL) <= TP && Convert.ToInt32(SPLoiSL) <= SPLoi) isStock = true;
+                    if (!isStock) result = "BTP Chưa in: " + BTPChuaIn + " BTP Đã in: " + BTPDaIN + " Thành Phẩm: " + TP + " Sản Phẩm Lỗi: " + SPLoi;
+                }
+                else
+                {
+                    result = "Không có sản phẩm này trong kho.";
+                }
+            }
+            return result;
+        }
     }
 }

@@ -11,13 +11,16 @@ using System.IO;
 using ExcelDataReader;
 using System.Data.SqlServerCe;
 using System.Configuration;
+using Microsoft.Office.Interop.Excel;
+using IronBarCode;
 
 namespace iClothing
 {
     public partial class ProductManagement1 : UserControl
     {
-        private DataTable dtMain = new DataTable();
-        private DataTable dtCurrent = new DataTable();
+        private System.Data.DataTable dtMain = new System.Data.DataTable();
+        private System.Data.DataTable dtCurrent = new System.Data.DataTable();
+        System.Data.DataTable dtProductNew = new System.Data.DataTable();
         bool isSuccess = true;
         public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
@@ -30,6 +33,8 @@ namespace iClothing
 
         private void btnImport_Click(object sender, EventArgs e)
         {
+            string Barcode, Kyhieu, MaSP, Dai, Rong, ARTID, SonID, DVT, Mieuta, ngaytao, ngaysua;
+            Barcode= Kyhieu= MaSP= Dai= Rong= ARTID= SonID= DVT= Mieuta= ngaytao= ngaysua = string.Empty;
             try
             {
                 using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx|Excel Workbook 97-2003|*.xls", ValidateNames = true })
@@ -55,19 +60,23 @@ namespace iClothing
                                     UseHeaderRow = true
                                 }
                             });
-                            foreach (System.Data.DataTable dt in ds.Tables)
-                            {
-                                string Barcode, Kyhieu, MaSP, Dai, Rong, ARTID, SonID, DVT, Mieuta, ngaytao, ngaysua;
+                            
+                                
                                 string InsertItemQry = "";
                                 int count = 0;
+                                System.Data.DataTable dt = ds.Tables[0];
                                 string[] columnNames = dt.Columns.Cast<DataColumn>()
                                  .Select(x => x.ColumnName)
                                  .ToArray();
-
+                                
                                 for (int i = 7; i < dt.Rows.Count; i++)
                                 {
-
-                                    Barcode = CommonHelper.RandomString(14);
+                                    //BarcodeWriter writer = new BarcodeWriter() { Format = BarcodeFormat.CODE_128 };
+                                    //pictureBox1.Image = writer.Write(textBox1.Text);
+                                    //Barcode = BarcodeFormat.CODE_128;
+                                    string now = DateTime.Now.ToString("ddmmyyyyhhssmmff");
+                                    GeneratedBarcode newbarcode = BarcodeWriter.CreateBarcode(now, BarcodeWriterEncoding.Code128);
+                                    Barcode = newbarcode.ToString();
                                     Kyhieu = Convert.ToString(dt.Rows[i][1]);
                                     MaSP = Convert.ToString(dt.Rows[i][2]);
                                     Dai = Convert.ToString(dt.Rows[i][3]);
@@ -78,29 +87,37 @@ namespace iClothing
                                     Mieuta = string.Empty;
                                     ngaytao = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
                                     ngaysua = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                                    if (Kyhieu != "")
+                                if (Kyhieu != string.Empty)
+                                {
+                                    InsertItemQry = "Insert into Product([Barcode],[Kyhieu],[Dai],[Rong],[ArtID],[SonID],[DVT],[Mieuta],[Ngaytao],[Ngaysua],[MaSP]) Values ('" + Barcode + "','" + Kyhieu + "','" + Dai + "','" + Rong + "','" + ARTID + "','" + SonID + "','" + DVT + "','" + "" + "','" + ngaysua + "','" + ngaytao + "','" + MaSP + "')";
+                                    if (DBAccess.IsServerConnected())
                                     {
-                                        InsertItemQry = "Insert into Product([Barcode],[Kyhieu],[Dai],[Rong],[ArtID],[SonID],[DVT],[Mieuta],[Ngaytao],[Ngaysua],[MaSP]) Values ('" + Barcode + "','" + Kyhieu + "','" + Dai + "','" + Rong + "','" + ARTID + "','" + SonID + "','" + DVT + "','" + "" + "','" + ngaysua + "','" + ngaytao + "','" + MaSP + "')";
-                                        if (DBAccess.IsServerConnected())
+                                        if (InsertItemQry.Length > 5)
                                         {
-                                            if (InsertItemQry.Length > 5)
-                                            {
-                                                isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                                            isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
 
-                                            }
                                         }
                                     }
+                                    count++;
                                 }
-
+                                else
+                                {
+                                    GetTotalRow();
+                                    GetAllDataProduct(1, 50);
+                                    MessageBox.Show("Import " + count + " dòng thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    return;
+                                }
+                                
+                                
                             }
                             if (isSuccess)
                             {
-
-                                MessageBox.Show("Import file thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Import " + count + " dòng thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                               
                             }
                             else
                             {
-                                MessageBox.Show("Import file không thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Import dòng " + count + " không thành công!Kyhieu = "+ Kyhieu, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
@@ -157,7 +174,7 @@ namespace iClothing
                     currentPageNumber = 1;
                     ClearText();
                     // Update datalist
-                    GetAllDataOrder(currentPageNumber, rowPerPage);
+                    GetAllDataProduct(currentPageNumber, rowPerPage);
                     MessageBox.Show("Đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -196,7 +213,7 @@ namespace iClothing
                     dvgProduct.Rows.Remove(row);
                 }
                 GetTotalRow();
-                GetAllDataOrder(1, 10);
+                GetAllDataProduct(1, 50);
                 ClearText();
             }
             else
@@ -228,10 +245,10 @@ namespace iClothing
             currentPageNumber = 1;
             rowPerPage = 10;
             GetTotalRow();
-            GetAllDataOrder(currentPageNumber, rowPerPage);
+            GetAllDataProduct(currentPageNumber, rowPerPage);
             cbPageSize.SelectedIndex = 0;
             // Init Color combobox
-            DataTable dtColor = DBHelper.GetAllColor();
+            System.Data.DataTable dtColor = DBHelper.GetAllColor();
             if (dtColor.Rows.Count > 0)
             {
                 cbSon.DataSource = dtColor;
@@ -241,7 +258,7 @@ namespace iClothing
             }
 
             // Init Art combobox
-            DataTable dtArt = DBHelper.GetAllArt();
+            System.Data.DataTable dtArt = DBHelper.GetAllArt();
             if (dtArt.Rows.Count > 0)
             {
                 cbArt.DataSource = dtArt;
@@ -258,7 +275,7 @@ namespace iClothing
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
                 {
                     SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
-                    DataTable dt = new DataTable();
+                    System.Data.DataTable dt = new System.Data.DataTable();
                     sda.Fill(dt);
 
                     rowCount = Convert.ToInt32(dt.Rows[0][0].ToString());
@@ -271,9 +288,9 @@ namespace iClothing
                 }
             }
         }
-        private void GetAllDataOrder(int currentPageNumber, int rowPerPage)
+        private void GetAllDataProduct(int currentPageNumber, int rowPerPage)
         {
-            DataTable dtMain = new DataTable();
+             dtMain = new System.Data.DataTable();
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
@@ -283,7 +300,7 @@ namespace iClothing
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
                 {
                     SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
-                    DataTable dt = new DataTable();
+                    System.Data.DataTable dt = new System.Data.DataTable();
                     sda.Fill(dt);
                     dtMain.Merge(dt);
                     dvgProduct.DataSource = dtMain;
@@ -304,7 +321,7 @@ namespace iClothing
             if (currentPageNumber > 1)
             {
                 currentPageNumber = 1;
-                GetAllDataOrder(currentPageNumber, rowPerPage);
+                GetAllDataProduct(currentPageNumber, rowPerPage);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -314,7 +331,7 @@ namespace iClothing
             if (currentPageNumber > 1)
             {
                 currentPageNumber -= 1;
-                GetAllDataOrder(currentPageNumber, rowPerPage);
+                GetAllDataProduct(currentPageNumber, rowPerPage);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -324,7 +341,7 @@ namespace iClothing
             if (currentPageNumber < pageSize)
             {
                 currentPageNumber += 1;
-                GetAllDataOrder(currentPageNumber, rowPerPage);
+                GetAllDataProduct(currentPageNumber, rowPerPage);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -334,7 +351,7 @@ namespace iClothing
             if (currentPageNumber < pageSize)
             {
                 currentPageNumber = pageSize;
-                GetAllDataOrder(currentPageNumber, rowPerPage);
+                GetAllDataProduct(currentPageNumber, rowPerPage);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -369,7 +386,7 @@ namespace iClothing
         {
             rowPerPage = Convert.ToInt32(cbPageSize.SelectedItem.ToString());
             currentPageNumber = 1;
-            GetAllDataOrder(currentPageNumber, rowPerPage);
+            GetAllDataProduct(currentPageNumber, rowPerPage);
             pageSize = rowCount / rowPerPage;
             // if any row left after calculated pages, add one more page 
             if (rowCount % rowPerPage > 0)
@@ -400,6 +417,97 @@ namespace iClothing
             }
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            //Creating Save File Dialog
+            SaveFileDialog save = new SaveFileDialog();
+            //Showing the dialog
+            save.ShowDialog();
+            //Setting default directory
+            save.InitialDirectory = @"C:\";
+            save.RestoreDirectory = true;
+            string fileName = save.FileName;
+            save.AddExtension = true;
+            save.Filter = "Excel|*.xls|Excel 2010|*.xlsx";
+            //Setting title
+            save.Title = "Select save location and input file name";
+            //filtering to only show .xlsx files in the directory
+            save.DefaultExt = "xlsx";
+            // Write Data to DataTable
+            ExportToExcel();
+            //Write Data To Excel
+            ToExcel(fileName);
+        }
+
+        private void ToExcel(string fileName)
+        {
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), fileName + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".xlsx");
+            // creating Excel Application  
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = false;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            worksheet = workbook.Sheets["Sheet1"];
+            worksheet = workbook.ActiveSheet;
+            // changing the name of active sheet  
+            worksheet.Name = "Sheet1";
+            // storing header part in Excel  
+            //var columnHeadingsRange = worksheet.Range[worksheet.Cells[1, 4], worksheet.Cells[1, 8]];
+            //columnHeadingsRange.Interior.Color = XlRgbColor.rgbOrange;
+            for (int i = 0; i < dtProductNew.Columns.Count; i++)
+            {
+                worksheet.Cells[1, i + 1] = dtProductNew.Columns[i].ToString();
+            }
+            // storing Each row and column value to excel sheet  
+            for (int i = 0; i < dtProductNew.Rows.Count; i++)
+            {
+                for (int j = 0; j < dtProductNew.Columns.Count; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1] = dtProductNew.Rows[i][j].ToString();
+                }
+            }
+            // save the application  
+            workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            // Exit from the application  
+            app.Quit();
+        }
+
+        public System.Data.DataTable ExportToExcel()
+        {
+            dtProductNew = new System.Data.DataTable();
+            dtProductNew.Columns.Add("STT", typeof(int));
+            dtProductNew.Columns.Add("Barcode", typeof(string));
+            dtProductNew.Columns.Add("Ký Hiệu", typeof(string));
+            dtProductNew.Columns.Add("Mã Sản Phẩm", typeof(string));
+            dtProductNew.Columns.Add("Dài", typeof(int));
+            dtProductNew.Columns.Add("Rộng", typeof(int));
+            dtProductNew.Columns.Add("ART", typeof(string));
+            dtProductNew.Columns.Add("Sơn", typeof(string));
+            dtProductNew.Columns.Add("DVT", typeof(string));
+            dtProductNew.Columns.Add("Miêu tả", typeof(string));
+
+            DataRow row;
+            string barcode, kyhieu, masp, dai, rong, art, son, dvt, mieuta;
+            for (int i = 0; i < dtMain.Rows.Count; i++)
+            {
+                barcode = dtMain.Rows[i][0].ToString();
+                kyhieu = dtMain.Rows[i][1].ToString();
+                masp = dtMain.Rows[i][2].ToString();
+                dai = dtMain.Rows[i][3].ToString();
+                rong = dtMain.Rows[i][4].ToString();
+                art = dtMain.Rows[i][5].ToString();
+                son = dtMain.Rows[i][6].ToString();
+                dvt = dtMain.Rows[i][7].ToString();
+                mieuta = dtMain.Rows[i][7].ToString();
+                dtProductNew.Rows.Add(i + 1, barcode, kyhieu, masp, dai, rong, art, son, dvt, mieuta);
+            }
+            return dtProductNew;
+        }
         private void CreateNew()
         {
             string query = "";
@@ -441,7 +549,7 @@ namespace iClothing
                     ClearText();
                     // Update datalist
                     GetTotalRow();
-                    GetAllDataOrder(currentPageNumber, rowPerPage);
+                    GetAllDataProduct(currentPageNumber, rowPerPage);
 
                     MessageBox.Show("Đã thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

@@ -62,11 +62,11 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string strSearch = string.Empty;
-            string ngayNhapXuat = ngayTuNgayFilterChanged ? string.Format("[Ngày Nhập/ Xuất] > '{0}' AND [Ngày Nhập/ Xuất] < '{1}'", dtpTuNgay.Value.AddDays(-1), dtpDenNgay.Value.AddDays(1)) : string.Empty;
+            string ngayNhapXuat = ngayTuNgayFilterChanged ? string.Format("NewAll.[Ngày Nhập/ Xuất] > '{0}' AND NewAll.[Ngày Nhập/ Xuất] < '{1}'", dtpTuNgay.Value.AddDays(-1), dtpDenNgay.Value.AddDays(1)) : string.Empty;
             strSearch = ngayNhapXuat;
 
             string kihieuValue = cbKyHieuFilter.SelectedIndex ==-1?string.Empty: DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyHieuFilter.SelectedValue.ToString());
-            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " [Ký Hiệu] like '" + kihieuValue + "'";
+            string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " NewAll.[Ký Hiệu] like '" + kihieuValue + "'";
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(kyhieu) ? "" : kyhieu) : (string.IsNullOrEmpty(kyhieu) ? strSearch : strSearch + " AND " + kyhieu);
 
             if (!string.IsNullOrEmpty(strSearch)) strSearch = " WHERE " + strSearch;
@@ -142,7 +142,7 @@ namespace iClothing
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
-            string query = "select * from (select  CONVERT(NVARCHAR(10), [order].ngayxong, 101) AS [Ngày Nhập/ Xuất], product.kyhieu [Ký Hiệu], product.masp [Mã Sản Phẩm], "
+            string query = "select * from (select * from (select  CONVERT(NVARCHAR(10), [order].ngayxong, 103) AS [Ngày Nhập/ Xuất], product.kyhieu [Ký Hiệu], product.masp [Mã Sản Phẩm], "
                             + "SUM(CASE WHEN LoaiID = 0000001 AND[order].NhacciD is not null Then Soluong else 0 end)[Nhập BTP Chưa in], "
                             + "SUM(CASE WHEN LoaiID = 0000002 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập BTP Đã in], "
                             + "SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Thành Phẩm], "
@@ -155,7 +155,7 @@ namespace iClothing
                             + "join [order] on orderdetail.donhangid = [order].donhangid "
                             + "join product on orderdetail.barcode = product.barcode "
                             + "where [order].xong = 1 "
-                            + "GROUP BY CONVERT(NVARCHAR(10), [order].ngayxong, 101), product.kyhieu,product.masp) New " + strSearch + "order by New.[Ngày Nhập/ Xuất]" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+                            + "GROUP BY CONVERT(NVARCHAR(10), [order].ngayxong, 103), product.kyhieu,product.masp) New ) NewAll " + strSearch + "order by NewAll.[Ngày Nhập/ Xuất]" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
@@ -165,8 +165,8 @@ namespace iClothing
                     sda.Fill(dt);
                     dvgOrder.DataSource = dt;
                     dvgOrder.Columns[0].Width = 150;
-                    dvgOrder.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-                    dvgOrder.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    //dvgOrder.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    //dvgOrder.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                     dvgOrder.Columns[1].Width = 130;
                     
                     //dgvOrderNhap.Columns["Xong"].ReadOnly = true;
@@ -195,7 +195,20 @@ namespace iClothing
 
         private void GetTotalRow(string query)
         {
-            string queryAll = "SELECT COUNT(*) AS Total FROM [Order]" + query;
+            string queryAll = "SELECT COUNT(*) AS Total FROM (select * from (select CONVERT(NVARCHAR(10), [order].ngayxong, 101) AS [Ngày Nhập/ Xuất], product.kyhieu[Ký Hiệu], product.masp[Mã Sản Phẩm], "
+                            + "SUM(CASE WHEN LoaiID = 0000001 AND[order].NhacciD is not null Then Soluong else 0 end)[Nhập BTP Chưa in], "
+                            + "SUM(CASE WHEN LoaiID = 0000002 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập BTP Đã in], "
+                            + "SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Thành Phẩm], "
+                            + "SUM(CASE WHEN LoaiID = 000004 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Sản phẩm lỗi], "
+                            + "SUM(CASE WHEN LoaiID = 0000001 AND[order].KHID is not null Then Soluong else 0 end)[Xuất BTP Chưa in], "
+                            + "SUM(CASE WHEN LoaiID = 0000002 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất BTP Đã in], "
+                            + "SUM(CASE WHEN LoaiID = 0000003 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất Thành Phẩm], "
+                            + "SUM(CASE WHEN LoaiID = 000004 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất Sản phẩm lỗi] "
+                            + "from orderdetail "
+                            + "join [order] on orderdetail.donhangid = [order].donhangid "
+                            + "join product on orderdetail.barcode = product.barcode "
+                            + "where [order].xong = 1 "
+                            + "GROUP BY CONVERT(NVARCHAR(10), [order].ngayxong, 101), product.kyhieu,product.masp) New ) NewAll " + query;
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))

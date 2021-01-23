@@ -9,6 +9,12 @@ namespace iClothing
 {
     class DBHelper
     {
+        public static bool checkValidField(string str)
+        {
+            bool isValid = true;
+            if (string.IsNullOrEmpty(str) || str != "0") isValid = false;
+            return isValid;
+        }
         public static string Lookup(string tablename, string selectColumnName, string whereColumnName, string value)
         {
             DataTable dt = new DataTable();

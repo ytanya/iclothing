@@ -68,22 +68,25 @@ namespace iClothing
             if (string.IsNullOrEmpty(txtTP.Text)) txtTP.Text = "0";
             if (string.IsNullOrEmpty(txtSPLoi.Text)) txtSPLoi.Text = "0";
 
-            
+            if (DBHelper.checkValidField(txtBTPChuaIn.Text) && DBHelper.checkValidField(txtBTPDaIn.Text) && DBHelper.checkValidField(txtTP.Text) && DBHelper.checkValidField(txtSPLoi.Text))
+                MessageBox.Show("Mời nhập số lượng sản phẩm!");
+            else
+            {
                 // DonhangID
                 DonhangID = CommonHelper.RandomString(8);
                 // Customer
                 KHID = cbCustomer.SelectedValue.ToString();
                 // Ngay xuat
                 Ngay = dtpNgaytaophieu.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
-            // Ngay nhap kho
-            if (bool.Parse(IsCompleted)) Ngayxong = dtpNgayXuat.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
-            // Ngay xong
+                // Ngay nhap kho
+                if (bool.Parse(IsCompleted)) Ngayxong = dtpNgayXuat.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
+                // Ngay xong
 
-            // Barcode
-            barcode = cbKyHieu.SelectedValue.ToString();
-            kihieu = DBHelper.Lookup("Product", "Kyhieu", "barcode", barcode);
-            // BTPChuaIn
-            BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
+                // Barcode
+                barcode = cbKyHieu.SelectedValue.ToString();
+                kihieu = DBHelper.Lookup("Product", "Kyhieu", "barcode", barcode);
+                // BTPChuaIn
+                BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
                 BTPChuaInSL = txtBTPChuaIn.Text;
                 // BTPDaIn
                 BTPDaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
@@ -97,44 +100,45 @@ namespace iClothing
 
                 // Created Date
                 string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-            if (bool.Parse(IsCompleted)) itemInStock= DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
-            if (string.IsNullOrEmpty(itemInStock))
-            {
-                ItemQryList = AddNewOrder(Ngay, Ngayxong, DonhangID, KHID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
-                if (DBAccess.IsServerConnected())
+                if (bool.Parse(IsCompleted)) itemInStock = DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                if (string.IsNullOrEmpty(itemInStock))
                 {
-                    if (ItemQryList.Count > 0)
+                    ItemQryList = AddNewOrder(Ngay, Ngayxong, DonhangID, KHID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                    if (DBAccess.IsServerConnected())
                     {
-
-                        foreach (var item in ItemQryList)
+                        if (ItemQryList.Count > 0)
                         {
-                            isSuccess = DBAccess.ExecuteQuery(item);
-                        }
+
+                            foreach (var item in ItemQryList)
+                            {
+                                isSuccess = DBAccess.ExecuteQuery(item);
+                            }
 
 
-                        if (isSuccess)
-                        {
-                            SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
-                            SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
-                            SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
-                            SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
+                            if (isSuccess)
+                            {
+                                SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
+                                SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
+                                SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
+                                SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
 
-                            cbCustomer.SelectedIndex = 0;
-                            currentPageNumber = 1;
-                            ClearText();
-                            // Update datalist
-                            GetTotalRow();
-                            GetAllDataOrder(currentPageNumber, rowPerPage);
+                                cbCustomer.SelectedIndex = 0;
+                                currentPageNumber = 1;
+                                ClearText();
+                                // Update datalist
+                                GetTotalRow();
+                                GetAllDataOrder(currentPageNumber, rowPerPage);
 
-                            MessageBox.Show("Đã thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Đã thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                     }
+
                 }
-                
-            }
-            else
-            {
-                MessageBox.Show(itemInStock, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    MessageBox.Show(itemInStock, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
             private void btnSave_Click(object sender, EventArgs e)
@@ -154,6 +158,10 @@ namespace iClothing
                 if (string.IsNullOrEmpty(txtTP.Text)) txtTP.Text = "0";
                 if (string.IsNullOrEmpty(txtSPLoi.Text)) txtSPLoi.Text = "0";
 
+                if (DBHelper.checkValidField(txtBTPChuaIn.Text) && DBHelper.checkValidField(txtBTPDaIn.Text) && DBHelper.checkValidField(txtTP.Text) && DBHelper.checkValidField(txtSPLoi.Text))
+                    MessageBox.Show("Mời nhập số lượng sản phẩm!");
+                else
+                {
                     DonhangID = txtOrder.Text;
                     string ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
@@ -165,12 +173,12 @@ namespace iClothing
                     if (!DBHelper.isXong(DonhangID) && bool.Parse(IsCompleted))
                     {
                         ngayxong = dtpNgayXuat.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
-                }
+                    }
                     // Barcode
                     barcode = cbKyHieu.SelectedValue.ToString();
-                kihieu = DBHelper.Lookup("Product", "Kyhieu", "barcode", barcode);
-                // BTPChuaIn
-                BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
+                    kihieu = DBHelper.Lookup("Product", "Kyhieu", "barcode", barcode);
+                    // BTPChuaIn
+                    BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
                     BTPChuaInSL = txtBTPChuaIn.Text;
                     // BTPDaIn
                     BTPDaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
@@ -181,47 +189,48 @@ namespace iClothing
                     // SPLoi
                     SPLoiID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
                     SPLoiSL = txtSPLoi.Text;
-                if(bool.Parse(IsCompleted)) itemInStock = DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
-                if (string.IsNullOrEmpty(itemInStock))
-                {
-                    ItemQryList = UpdateOrder(DonhangID, barcode, KHID, ngayxong, ngaysua, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, IsCompleted);
-
-
-                    if (DBAccess.IsServerConnected())
+                    if (bool.Parse(IsCompleted)) itemInStock = DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                    if (string.IsNullOrEmpty(itemInStock))
                     {
-                        if (ItemQryList.Count > 0)
+                        ItemQryList = UpdateOrder(DonhangID, barcode, KHID, ngayxong, ngaysua, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, IsCompleted);
+
+
+                        if (DBAccess.IsServerConnected())
                         {
-
-                            foreach (var item in ItemQryList)
+                            if (ItemQryList.Count > 0)
                             {
-                                isSuccess = DBAccess.ExecuteQuery(item);
-                            }
 
-
-                            if (isSuccess)
-                            {
-                                SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
-                                SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
-                                SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
-                                SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
-                                if (IsCompleted.ToLower() == "true")
+                                foreach (var item in ItemQryList)
                                 {
-                                    AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
+                                    isSuccess = DBAccess.ExecuteQuery(item);
                                 }
 
-                                cbCustomer.SelectedIndex = 0;
-                                currentPageNumber = 1;
-                                ClearText();
-                                // Update datalist
-                                GetAllDataOrder(currentPageNumber, rowPerPage);
-                                MessageBox.Show("Đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                if (isSuccess)
+                                {
+                                    SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
+                                    SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
+                                    SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
+                                    SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
+                                    if (IsCompleted.ToLower() == "true")
+                                    {
+                                        AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
+                                    }
+
+                                    cbCustomer.SelectedIndex = 0;
+                                    currentPageNumber = 1;
+                                    ClearText();
+                                    // Update datalist
+                                    GetAllDataOrder(currentPageNumber, rowPerPage);
+                                    MessageBox.Show("Đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    MessageBox.Show(itemInStock, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                    {
+                        MessageBox.Show(itemInStock, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
             catch (Exception ex)

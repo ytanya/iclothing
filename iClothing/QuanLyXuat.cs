@@ -734,10 +734,15 @@ namespace iClothing
 
         private void cbEnableXuatKho_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbEnableXuatKho.Checked)
+            if (ckEnableXuatKho.Checked)
             {
                 dtpNgayXuat.Enabled = true;
                 IsCompleted = "true";
+            }
+            else
+            {
+                dtpNgayXuat.Enabled = false;
+                IsCompleted = "false";
             }
         }
 
@@ -794,7 +799,8 @@ namespace iClothing
             dtpNgaytaophieu.CustomFormat = "dd/MM/yyyy";
             dtpNgayXuat.Format = DateTimePickerFormat.Custom;
             dtpNgayXuat.CustomFormat = "dd/MM/yyyy";
-            dtpNgayXuat.Enabled = false;
+            dtpNgayXuat.Enabled = true;
+            ckEnableXuatKho.Checked = true;
             dtpNgayXuatFilter.Format = DateTimePickerFormat.Custom;
             dtpNgayXuatFilter.CustomFormat = "dd/MM/yyyy";
             dtpNgayXongFilter.Format = DateTimePickerFormat.Custom;
@@ -872,20 +878,27 @@ namespace iClothing
                     {
                         dgvOrder.Columns[0].Visible = false;
                         dgvOrder.Columns[1].Visible = false;
+                        dgvOrder.Columns[2].Width = 45;
                         dgvOrder.Columns[3].Width = 130;
                         dgvOrder.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                        dgvOrder.Columns[3].ReadOnly = true;
                         dgvOrder.Columns[4].Width = 130;
                         dgvOrder.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-                        dgvOrder.Columns[2].Width = 45;
+                        dgvOrder.Columns[4].ReadOnly = true;
                         dgvOrder.Columns["Ký Hiệu"].Width = 60;
+                        dgvOrder.Columns["Ký Hiệu"].ReadOnly = true;
                         dgvOrder.Columns["BTP Chưa in"].Width = 80;
                         this.dgvOrder.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        dgvOrder.Columns["BTP Chưa in"].ReadOnly = true;
                         dgvOrder.Columns["BTP Đã in"].Width = 80;
                         this.dgvOrder.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        dgvOrder.Columns["BTP Đã in"].ReadOnly = true;
                         dgvOrder.Columns["Thành Phẩm"].Width = 80;
                         this.dgvOrder.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        dgvOrder.Columns["Thành Phẩm"].ReadOnly = true;
                         dgvOrder.Columns["Sản phẩm lỗi"].Width = 80;
                         this.dgvOrder.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        dgvOrder.Columns["Sản phẩm lỗi"].ReadOnly = true;
                         dgvOrder.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
 

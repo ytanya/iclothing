@@ -379,7 +379,8 @@ namespace iClothing
             dtpNgayTaoPhieu.CustomFormat = "dd/MM/yyyy";
             dtpNgayNhapKho.Format = DateTimePickerFormat.Custom;
             dtpNgayNhapKho.CustomFormat = "dd/MM/yyyy";
-            dtpNgayNhapKho.Enabled = false;
+            dtpNgayNhapKho.Enabled = true;
+            ckEnableNhapKho.Checked = true;
             dtpFilterNgayNhap.Format = DateTimePickerFormat.Custom;
             dtpFilterNgayNhap.CustomFormat = "dd/MM/yyyy";
             dtpFilterNgayXong.Format = DateTimePickerFormat.Custom;
@@ -457,17 +458,24 @@ namespace iClothing
                     dgvOrder.Columns[2].Width = 45;
                     dgvOrder.Columns[3].Width = 130;
                     dgvOrder.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrder.Columns[3].ReadOnly = true;
                     dgvOrder.Columns[4].Width = 130;
-                    dgvOrder.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";                   
+                    dgvOrder.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    dgvOrder.Columns[4].ReadOnly = true;
                     dgvOrder.Columns["Ký Hiệu"].Width = 60;
+                    dgvOrder.Columns["Ký Hiệu"].ReadOnly = true;
                     dgvOrder.Columns["BTP Chưa in"].Width = 80;
                     this.dgvOrder.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrder.Columns["BTP Chưa in"].ReadOnly = true;
                     dgvOrder.Columns["BTP Đã in"].Width = 80;
                     this.dgvOrder.Columns["BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrder.Columns["BTP Đã in"].ReadOnly = true;
                     dgvOrder.Columns["Thành Phẩm"].Width = 80;
                     this.dgvOrder.Columns["Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrder.Columns["Thành Phẩm"].ReadOnly = true;
                     dgvOrder.Columns["Sản phẩm lỗi"].Width = 80;
                     this.dgvOrder.Columns["Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dgvOrder.Columns["Sản phẩm lỗi"].ReadOnly = true;
                     dgvOrder.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
             }
@@ -723,12 +731,16 @@ namespace iClothing
 
         private void cbEnableNhapKho_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbEnableNhapKho.Checked)
+            if (ckEnableNhapKho.Checked)
             {
                 dtpNgayNhapKho.Enabled = true;
                 IsCompleted = "true";
             }
-            
+            else
+            {
+                dtpNgayNhapKho.Enabled = false;
+                IsCompleted = "false";
+            }
         }
 
         private void cbPageSizeFilter_SelectedIndexChanged(object sender, EventArgs e)

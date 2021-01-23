@@ -78,7 +78,7 @@
             this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBarcode.Location = new System.Drawing.Point(148, 172);
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(200, 24);
+            this.txtBarcode.Size = new System.Drawing.Size(107, 24);
             this.txtBarcode.TabIndex = 43;
             this.txtBarcode.TextChanged += new System.EventHandler(this.txtBarcode_TextChanged);
             // 
@@ -116,8 +116,9 @@
             this.dvgStock.DefaultCellStyle = dataGridViewCellStyle2;
             this.dvgStock.EnableHeadersVisualStyles = false;
             this.dvgStock.GridColor = System.Drawing.Color.White;
-            this.dvgStock.Location = new System.Drawing.Point(354, 77);
+            this.dvgStock.Location = new System.Drawing.Point(272, 77);
             this.dvgStock.Name = "dvgStock";
+            this.dvgStock.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -125,7 +126,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dvgStock.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dvgStock.Size = new System.Drawing.Size(831, 531);
+            this.dvgStock.Size = new System.Drawing.Size(913, 513);
             this.dvgStock.TabIndex = 56;
             // 
             // btnExport
@@ -228,7 +229,7 @@
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.Location = new System.Drawing.Point(148, 293);
+            this.btnReset.Location = new System.Drawing.Point(148, 596);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(82, 30);
             this.btnReset.TabIndex = 180;
@@ -243,9 +244,9 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(264, 293);
+            this.btnSearch.Location = new System.Drawing.Point(236, 596);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(83, 30);
+            this.btnSearch.Size = new System.Drawing.Size(100, 30);
             this.btnSearch.TabIndex = 179;
             this.btnSearch.Text = "Tìm Kiếm";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -294,16 +295,20 @@
             // 
             // dtpTuNgay
             // 
+            this.dtpTuNgay.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpTuNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpTuNgay.Location = new System.Drawing.Point(148, 77);
             this.dtpTuNgay.Name = "dtpTuNgay";
-            this.dtpTuNgay.Size = new System.Drawing.Size(200, 20);
+            this.dtpTuNgay.Size = new System.Drawing.Size(107, 22);
             this.dtpTuNgay.TabIndex = 186;
             // 
             // dtpDenNgay
             // 
+            this.dtpDenNgay.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDenNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDenNgay.Location = new System.Drawing.Point(148, 127);
             this.dtpDenNgay.Name = "dtpDenNgay";
-            this.dtpDenNgay.Size = new System.Drawing.Size(200, 20);
+            this.dtpDenNgay.Size = new System.Drawing.Size(107, 22);
             this.dtpDenNgay.TabIndex = 187;
             // 
             // btnBarcode
@@ -313,9 +318,9 @@
             this.btnBarcode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBarcode.ForeColor = System.Drawing.Color.White;
-            this.btnBarcode.Location = new System.Drawing.Point(211, 345);
+            this.btnBarcode.Location = new System.Drawing.Point(148, 632);
             this.btnBarcode.Name = "btnBarcode";
-            this.btnBarcode.Size = new System.Drawing.Size(137, 30);
+            this.btnBarcode.Size = new System.Drawing.Size(188, 30);
             this.btnBarcode.TabIndex = 188;
             this.btnBarcode.Text = "Sử Dụng Barcode";
             this.btnBarcode.UseVisualStyleBackColor = false;

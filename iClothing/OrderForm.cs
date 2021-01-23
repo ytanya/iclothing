@@ -45,5 +45,10 @@ namespace iClothing
 
             rbNhap.Checked = true;
         }
+
+        private void quanLyXuat1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

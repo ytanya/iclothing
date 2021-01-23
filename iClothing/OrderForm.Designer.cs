@@ -66,7 +66,7 @@
             this.tabInputNhap.Location = new System.Drawing.Point(4, 27);
             this.tabInputNhap.Name = "tabInputNhap";
             this.tabInputNhap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInputNhap.Size = new System.Drawing.Size(1194, 697);
+            this.tabInputNhap.Size = new System.Drawing.Size(1228, 697);
             this.tabInputNhap.TabIndex = 0;
             this.tabInputNhap.Text = "Quản Lý Nhập Xuất";
             // 
@@ -77,6 +77,7 @@
             this.quanLyXuat1.Name = "quanLyXuat1";
             this.quanLyXuat1.Size = new System.Drawing.Size(1200, 654);
             this.quanLyXuat1.TabIndex = 62;
+            this.quanLyXuat1.Load += new System.EventHandler(this.quanLyXuat1_Load);
             // 
             // quanLyNhap1
             // 

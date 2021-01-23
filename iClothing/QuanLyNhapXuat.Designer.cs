@@ -80,6 +80,7 @@
             this.quanLyNhap1.Name = "quanLyNhap1";
             this.quanLyNhap1.Size = new System.Drawing.Size(1190, 640);
             this.quanLyNhap1.TabIndex = 58;
+            this.quanLyNhap1.Load += new System.EventHandler(this.quanLyNhap1_Load);
             // 
             // quanLyXuat1
             // 

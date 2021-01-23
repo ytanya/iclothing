@@ -240,7 +240,8 @@ namespace iClothing
                     strFilter = " WHERE Barcode ='" + barcode + "'";
                     GetTotalRow(strFilter);
                     GetAllData(currentPageNumber, rowPerPage, strFilter);
-                    
+
+                    txtBarcode.Text = string.Empty;
                     this.ActiveControl = txtBarcode;
 
                 }));

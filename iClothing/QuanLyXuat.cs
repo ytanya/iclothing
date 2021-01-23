@@ -44,9 +44,6 @@ namespace iClothing
                     txtSPLoi.Text = "0";
                     dtpNgaytaophieu.Enabled = true;
                     dtpNgaytaophieu.Value = DateTime.Today;
-                    dtpNgayXuat.Enabled = true;
-                    dtpNgayXuat.Value = DateTime.Today;
-                    IsCompleted = "false";
                 }
             }
             else
@@ -64,7 +61,7 @@ namespace iClothing
             string isNhap = "false";
             string itemInStock = string.Empty;
             string Ngay, Ngayxong, DonhangID, barcode, kihieu, KHID, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL;
-            kihieu = Ngay = DonhangID = barcode = KHID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = string.Empty;
+            kihieu = Ngay = Ngayxong = DonhangID = barcode = KHID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = string.Empty;
             // Set value for number field
             if (string.IsNullOrEmpty(txtBTPChuaIn.Text)) txtBTPChuaIn.Text = "0";
             if (string.IsNullOrEmpty(txtBTPDaIn.Text)) txtBTPDaIn.Text = "0";
@@ -78,8 +75,10 @@ namespace iClothing
                 KHID = cbCustomer.SelectedValue.ToString();
                 // Ngay xuat
                 Ngay = dtpNgaytaophieu.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
+            // Ngay nhap kho
+            if (bool.Parse(IsCompleted)) Ngayxong = dtpNgayXuat.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
             // Ngay xong
-            Ngayxong = dtpNgayXuat.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
+
             // Barcode
             barcode = cbKyHieu.SelectedValue.ToString();
             kihieu = DBHelper.Lookup("Product", "Kyhieu", "barcode", barcode);
@@ -101,7 +100,7 @@ namespace iClothing
             if (bool.Parse(IsCompleted)) itemInStock= DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
             if (string.IsNullOrEmpty(itemInStock))
             {
-                ItemQryList = AddNewOrder(Ngay, DonhangID, KHID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                ItemQryList = AddNewOrder(Ngay, Ngayxong, DonhangID, KHID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
                 if (DBAccess.IsServerConnected())
                 {
                     if (ItemQryList.Count > 0)
@@ -231,7 +230,7 @@ namespace iClothing
             }
         }
 
-        private List<string> AddNewOrder(string Ngaynhap, string DonhangID, string KHID, string barcode, string IsCompleted, string createDate,
+        private List<string> AddNewOrder(string Ngaynhap, string Ngayxong, string DonhangID, string KHID, string barcode, string IsCompleted, string createDate,
             string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
             string TPSL, string SPLoiSL)
         {
@@ -243,7 +242,12 @@ namespace iClothing
             string orderDetailID4 = CommonHelper.RandomString(7) + 4;
 
             // query insert
-            InsertItemQry = "INSERT INTO [Order] ([DonhangID],[KHID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap])VALUES('" + DonhangID + "','" + KHID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + Ngaynhap + "')";
+            if (string.IsNullOrEmpty(Ngayxong))
+            {
+                InsertItemQry = "INSERT INTO [Order] ([DonhangID],[KHID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap])VALUES('" + DonhangID + "','" + KHID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + Ngaynhap + "')";
+            }
+            else
+                InsertItemQry = "INSERT INTO [Order] ([DonhangID],[KHID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap],[Ngayxong])VALUES('" + DonhangID + "','" + KHID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + Ngaynhap + "','" + Ngayxong + "')";
             InsertItemQryList.Add(InsertItemQry);
             InsertItemQry = "INSERT INTO [OrderDetail] ([OrderDetailID],[DonhangID],[Barcode],[LoaiID],[Soluong],[Ngaytao],[Ngaysua])VALUES('" + orderDetailID1 + "','" + DonhangID + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
@@ -396,7 +400,6 @@ namespace iClothing
             txtTP.Text = string.Empty;
             txtSPLoi.Text = string.Empty;
             dtpNgaytaophieu.Enabled = true;
-            dtpNgayXuat.Enabled = true;
             IsCompleted = "false";
         }
         private void dtpNgayXuatFilter_ValueChanged(object sender, EventArgs e)
@@ -729,6 +732,15 @@ namespace iClothing
             IsCompleted = "true";
         }
 
+        private void cbEnableXuatKho_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbEnableXuatKho.Checked)
+            {
+                dtpNgayXuat.Enabled = true;
+                IsCompleted = "true";
+            }
+        }
+
         private void pbNextFilter_Click(object sender, EventArgs e)
         {
             if (currentPageNumberFilter < pageSizeFilter)
@@ -782,6 +794,7 @@ namespace iClothing
             dtpNgaytaophieu.CustomFormat = "dd/MM/yyyy";
             dtpNgayXuat.Format = DateTimePickerFormat.Custom;
             dtpNgayXuat.CustomFormat = "dd/MM/yyyy";
+            dtpNgayXuat.Enabled = false;
             dtpNgayXuatFilter.Format = DateTimePickerFormat.Custom;
             dtpNgayXuatFilter.CustomFormat = "dd/MM/yyyy";
             dtpNgayXongFilter.Format = DateTimePickerFormat.Custom;

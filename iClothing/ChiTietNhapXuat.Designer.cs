@@ -267,7 +267,7 @@
             this.dvgOrder.DefaultCellStyle = dataGridViewCellStyle3;
             this.dvgOrder.EnableHeadersVisualStyles = false;
             this.dvgOrder.GridColor = System.Drawing.Color.White;
-            this.dvgOrder.Location = new System.Drawing.Point(276, 73);
+            this.dvgOrder.Location = new System.Drawing.Point(260, 73);
             this.dvgOrder.Name = "dvgOrder";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

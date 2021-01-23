@@ -30,13 +30,13 @@
         {
             this.tbManageInOutOrder = new System.Windows.Forms.TabControl();
             this.tabInputNhap = new System.Windows.Forms.TabPage();
+            this.quanLyXuat1 = new iClothing.QuanLyXuat();
             this.quanLyNhap1 = new iClothing.QuanLyNhap();
             this.rbXuat = new System.Windows.Forms.RadioButton();
             this.rbNhap = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.tpFilter = new System.Windows.Forms.TabPage();
             this.chiTietNhapXuat1 = new iClothing.ChiTietNhapXuat();
-            this.quanLyXuat1 = new iClothing.QuanLyXuat();
             this.tbManageInOutOrder.SuspendLayout();
             this.tabInputNhap.SuspendLayout();
             this.tpFilter.SuspendLayout();
@@ -50,7 +50,7 @@
             this.tbManageInOutOrder.Location = new System.Drawing.Point(0, 0);
             this.tbManageInOutOrder.Name = "tbManageInOutOrder";
             this.tbManageInOutOrder.SelectedIndex = 0;
-            this.tbManageInOutOrder.Size = new System.Drawing.Size(1202, 728);
+            this.tbManageInOutOrder.Size = new System.Drawing.Size(1236, 728);
             this.tbManageInOutOrder.TabIndex = 66;
             // 
             // tabInputNhap
@@ -69,6 +69,14 @@
             this.tabInputNhap.Size = new System.Drawing.Size(1194, 697);
             this.tabInputNhap.TabIndex = 0;
             this.tabInputNhap.Text = "Quản Lý Nhập Xuất";
+            // 
+            // quanLyXuat1
+            // 
+            this.quanLyXuat1.Location = new System.Drawing.Point(0, 39);
+            this.quanLyXuat1.Margin = new System.Windows.Forms.Padding(4);
+            this.quanLyXuat1.Name = "quanLyXuat1";
+            this.quanLyXuat1.Size = new System.Drawing.Size(1200, 654);
+            this.quanLyXuat1.TabIndex = 62;
             // 
             // quanLyNhap1
             // 
@@ -123,7 +131,7 @@
             this.tpFilter.Location = new System.Drawing.Point(4, 27);
             this.tpFilter.Name = "tpFilter";
             this.tpFilter.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFilter.Size = new System.Drawing.Size(1194, 697);
+            this.tpFilter.Size = new System.Drawing.Size(1228, 697);
             this.tpFilter.TabIndex = 1;
             this.tpFilter.Text = "Chi Tiết Nhập Xuất";
             this.tpFilter.UseVisualStyleBackColor = true;
@@ -136,14 +144,6 @@
             this.chiTietNhapXuat1.Name = "chiTietNhapXuat1";
             this.chiTietNhapXuat1.Size = new System.Drawing.Size(1190, 700);
             this.chiTietNhapXuat1.TabIndex = 34;
-            // 
-            // quanLyXuat1
-            // 
-            this.quanLyXuat1.Location = new System.Drawing.Point(0, 39);
-            this.quanLyXuat1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.quanLyXuat1.Name = "quanLyXuat1";
-            this.quanLyXuat1.Size = new System.Drawing.Size(1200, 654);
-            this.quanLyXuat1.TabIndex = 62;
             // 
             // OrderForm
             // 

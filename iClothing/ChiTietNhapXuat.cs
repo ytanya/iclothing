@@ -17,6 +17,7 @@ namespace iClothing
         public string ConnectionString = DBAccess.ConnectionString;
         private bool ngayTuNgayFilterChanged = false, ngayDenNgayFilterChanged = false;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
+        string strSearch = string.Empty;
         public ChiTietNhapXuat()
         {
             InitializeComponent();
@@ -30,8 +31,8 @@ namespace iClothing
             dtpDenNgay.CustomFormat = "dd/MM/yyyy";
             currentPageNumber = 1;
             rowPerPage = 10;
-            GetTotalRow();
-            GetAllOrder(currentPageNumber, rowPerPage);
+            GetTotalRow(strSearch);
+            GetAllOrder(currentPageNumber, rowPerPage,strSearch);
             cbPageSize.SelectedIndex = 0;
 
             // Init Ki hieu combobox
@@ -68,7 +69,10 @@ namespace iClothing
             string kyhieu = string.IsNullOrEmpty(kihieuValue) ? string.Empty : " [Ký Hiệu] like '" + kihieuValue + "'";
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(kyhieu) ? "" : kyhieu) : (string.IsNullOrEmpty(kyhieu) ? strSearch : strSearch + " AND " + kyhieu);
 
-            (dvgOrder.DataSource as DataTable).DefaultView.RowFilter = strSearch;
+            if (!string.IsNullOrEmpty(strSearch)) strSearch = " WHERE " + strSearch;
+            GetTotalRow(strSearch);
+            GetAllOrder(currentPageNumber, rowPerPage, strSearch);
+            //(dvgOrder.DataSource as DataTable).DefaultView.RowFilter = strSearch;
         }
 
         private void pbFirst_Click(object sender, EventArgs e)
@@ -76,7 +80,7 @@ namespace iClothing
             if (currentPageNumber > 1)
             {
                 currentPageNumber = 1;
-                GetAllOrder(currentPageNumber, rowPerPage);
+                GetAllOrder(currentPageNumber, rowPerPage, strSearch);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -86,7 +90,7 @@ namespace iClothing
             if (currentPageNumber > 1)
             {
                 currentPageNumber -= 1;
-                GetAllOrder(currentPageNumber, rowPerPage);
+                GetAllOrder(currentPageNumber, rowPerPage, strSearch);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -96,7 +100,7 @@ namespace iClothing
             if (currentPageNumber < pageSize)
             {
                 currentPageNumber += 1;
-                GetAllOrder(currentPageNumber, rowPerPage);
+                GetAllOrder(currentPageNumber, rowPerPage, strSearch);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -106,7 +110,7 @@ namespace iClothing
             if (currentPageNumber < pageSize)
             {
                 currentPageNumber = pageSize;
-                GetAllOrder(currentPageNumber, rowPerPage);
+                GetAllOrder(currentPageNumber, rowPerPage, strSearch);
                 txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
             }
         }
@@ -125,7 +129,7 @@ namespace iClothing
         {
             rowPerPage = Convert.ToInt32(cbPageSize.SelectedItem.ToString());
             currentPageNumber = 1;
-            GetAllOrder(currentPageNumber, rowPerPage);
+            GetAllOrder(currentPageNumber, rowPerPage, strSearch);
             pageSize = rowCount / rowPerPage;
             // if any row left after calculated pages, add one more page 
             if (rowCount % rowPerPage > 0)
@@ -133,17 +137,17 @@ namespace iClothing
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
-        private void GetAllOrder(int currentPageNumber, int rowPerPage)
+        private void GetAllOrder(int currentPageNumber, int rowPerPage, string strSearch)
         {
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
-            string query = "select * from (select [order].ngayxong [Ngày Nhập/ Xuất], product.kyhieu [Ký Hiệu], product.masp [Mã Sản Phẩm],"
+            string query = "select * from (select  CONVERT(NVARCHAR(10), [order].ngayxong, 101) AS [Ngày Nhập/ Xuất], product.kyhieu [Ký Hiệu], product.masp [Mã Sản Phẩm], "
                             + "SUM(CASE WHEN LoaiID = 0000001 AND[order].NhacciD is not null Then Soluong else 0 end)[Nhập BTP Chưa in], "
                             + "SUM(CASE WHEN LoaiID = 0000002 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập BTP Đã in], "
-                            + "SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Thành Phẩm],"
-                            + "SUM(CASE WHEN LoaiID = 000004 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Sản phẩm lỗi],"
-                            + "SUM(CASE WHEN LoaiID = 0000001 AND[order].KHID is not null Then Soluong else 0 end)[Xuất BTP Chưa in],"
+                            + "SUM(CASE WHEN LoaiID = 0000003 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Thành Phẩm], "
+                            + "SUM(CASE WHEN LoaiID = 000004 AND[order].NhacciD is not null Then Soluong ELSE 0 END)[Nhập Sản phẩm lỗi], "
+                            + "SUM(CASE WHEN LoaiID = 0000001 AND[order].KHID is not null Then Soluong else 0 end)[Xuất BTP Chưa in], "
                             + "SUM(CASE WHEN LoaiID = 0000002 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất BTP Đã in], "
                             + "SUM(CASE WHEN LoaiID = 0000003 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất Thành Phẩm], "
                             + "SUM(CASE WHEN LoaiID = 000004 AND[order].KHID is not null Then Soluong ELSE 0 END)[Xuất Sản phẩm lỗi] "
@@ -151,7 +155,7 @@ namespace iClothing
                             + "join [order] on orderdetail.donhangid = [order].donhangid "
                             + "join product on orderdetail.barcode = product.barcode "
                             + "where [order].xong = 1 "
-                            + "GROUP BY[order].donhangid, product.kyhieu,product.masp, [order].ngayxong) New order by New.[Ngày Nhập/ Xuất]" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+                            + "GROUP BY CONVERT(NVARCHAR(10), [order].ngayxong, 101), product.kyhieu,product.masp) New " + strSearch + "order by New.[Ngày Nhập/ Xuất]" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
@@ -166,22 +170,22 @@ namespace iClothing
                     dvgOrder.Columns[1].Width = 130;
                     
                     //dgvOrderNhap.Columns["Xong"].ReadOnly = true;
-                    dvgOrder.Columns["Ký Hiệu"].Width = 60;
-                    dvgOrder.Columns["Nhập BTP Chưa in"].Width = 120;
+                    dvgOrder.Columns["Ký Hiệu"].Width = 45;
+                    dvgOrder.Columns["Nhập BTP Chưa in"].Width = 60;
                     this.dvgOrder.Columns["Nhập BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgOrder.Columns["Nhập BTP Đã in"].Width = 100;
+                    dvgOrder.Columns["Nhập BTP Đã in"].Width = 60;
                     this.dvgOrder.Columns["Nhập BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgOrder.Columns["Nhập Thành Phẩm"].Width = 120;
+                    dvgOrder.Columns["Nhập Thành Phẩm"].Width = 55;
                     this.dvgOrder.Columns["Nhập Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgOrder.Columns["Nhập Sản phẩm lỗi"].Width = 110;
+                    dvgOrder.Columns["Nhập Sản phẩm lỗi"].Width = 60;
                     this.dvgOrder.Columns["Nhập Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgOrder.Columns["Xuất BTP Chưa in"].Width = 120;
+                    dvgOrder.Columns["Xuất BTP Chưa in"].Width = 60;
                     this.dvgOrder.Columns["Xuất BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgOrder.Columns["Xuất BTP Đã in"].Width = 100;
+                    dvgOrder.Columns["Xuất BTP Đã in"].Width = 50;
                     this.dvgOrder.Columns["Xuất BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgOrder.Columns["Xuất Thành Phẩm"].Width = 120;
+                    dvgOrder.Columns["Xuất Thành Phẩm"].Width = 60;
                     this.dvgOrder.Columns["Xuất Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dvgOrder.Columns["Xuất Sản phẩm lỗi"].Width = 110;
+                    dvgOrder.Columns["Xuất Sản phẩm lỗi"].Width = 60;
                     this.dvgOrder.Columns["Xuất Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dvgOrder.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     dvgOrder.Sort(dvgOrder.Columns["Ngày Nhập/ Xuất"], ListSortDirection.Descending);
@@ -189,9 +193,9 @@ namespace iClothing
             }
         }
 
-        private void GetTotalRow()
+        private void GetTotalRow(string query)
         {
-            string queryAll = "SELECT COUNT(*) AS Total FROM [Order]";
+            string queryAll = "SELECT COUNT(*) AS Total FROM [Order]" + query;
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))

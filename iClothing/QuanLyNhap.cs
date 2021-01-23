@@ -44,8 +44,6 @@ namespace iClothing
                     txtSPLoi.Text = "0";
                     dtpNgayTaoPhieu.Enabled = true;
                     dtpNgayTaoPhieu.Value = DateTime.Today;
-                    dtpNgayNhapKho.Enabled = true;
-                    dtpNgayNhapKho.Value = DateTime.Today;
                     IsCompleted = "false";
                 }
             }
@@ -233,7 +231,6 @@ namespace iClothing
             txtTP.Text = string.Empty;
             txtSPLoi.Text = string.Empty;
             dtpNgayTaoPhieu.Enabled = true;
-            dtpNgayNhapKho.Enabled = true;
             IsCompleted = "false";
         }
 
@@ -382,6 +379,7 @@ namespace iClothing
             dtpNgayTaoPhieu.CustomFormat = "dd/MM/yyyy";
             dtpNgayNhapKho.Format = DateTimePickerFormat.Custom;
             dtpNgayNhapKho.CustomFormat = "dd/MM/yyyy";
+            dtpNgayNhapKho.Enabled = false;
             dtpFilterNgayNhap.Format = DateTimePickerFormat.Custom;
             dtpFilterNgayNhap.CustomFormat = "dd/MM/yyyy";
             dtpFilterNgayXong.Format = DateTimePickerFormat.Custom;
@@ -530,8 +528,6 @@ namespace iClothing
             string orderDetailID2 = CommonHelper.RandomString(7) + 2;
             string orderDetailID3 = CommonHelper.RandomString(7) + 3;
             string orderDetailID4 = CommonHelper.RandomString(7) + 4;
-
-            var nullValue = DBNull.Value;
             // query insert
             if (string.IsNullOrEmpty(Ngayxong))
             {
@@ -723,6 +719,16 @@ namespace iClothing
         private void dtpNgayNhapKho_ValueChanged(object sender, EventArgs e)
         {
             IsCompleted = "true";
+        }
+
+        private void cbEnableNhapKho_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbEnableNhapKho.Checked)
+            {
+                dtpNgayNhapKho.Enabled = true;
+                IsCompleted = "true";
+            }
+            
         }
 
         private void cbPageSizeFilter_SelectedIndexChanged(object sender, EventArgs e)

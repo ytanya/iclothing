@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace iClothing
 {
-    public partial class Form2 : Form
+    public partial class CustomerOrder : Form
     {
-        public Form2()
+        public CustomerOrder()
         {
             InitializeComponent();
         }

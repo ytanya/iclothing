@@ -259,7 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnMenu.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>2</value>
   </data>
   <data name="lblVersion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1165,7 +1165,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pnLeft.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>1</value>
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -1192,7 +1192,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;transactionManagement11.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="stockManagement1.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 45</value>
@@ -1213,7 +1213,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;stockManagement1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="artManagement11.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 45</value>
@@ -1234,7 +1234,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;artManagement11.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="productManagement11.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
@@ -1261,7 +1261,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;productManagement11.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="orderManagement1.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 45</value>
@@ -1282,7 +1282,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;orderManagement1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="login2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 43</value>
@@ -1306,7 +1306,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;login2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>3</value>
   </data>
   <data name="customerManagement11.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 45</value>
@@ -1327,7 +1327,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;customerManagement11.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

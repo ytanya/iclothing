@@ -20,6 +20,7 @@ namespace iClothing
         private string IsCompleted = "false";
         private bool ngayNhapFilterChanged = false, ngayXongFilterChanged = false;
         string strSearch = string.Empty;
+        private bool isEdit = true;
         public QuanLyNhap()
         {
             InitializeComponent();
@@ -59,8 +60,8 @@ namespace iClothing
             string isNhap = "true";
             bool isSuccess = false;
             string ngayxong = string.Empty;
-            string Ngay, Ngayxong, DonhangID, barcode, NhaccID, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL;
-            Ngay = Ngayxong = DonhangID = barcode = NhaccID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = string.Empty;
+            string Ngay, Ngayxong, DonhangID, barcode, NhaccID, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, GhiChu;
+            Ngay = Ngayxong = DonhangID = barcode = NhaccID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = GhiChu = string.Empty;
             //IsCompleted = "false";
             // Set value for number field
             if (string.IsNullOrEmpty(txtBTPChuaIn.Text)) txtBTPChuaIn.Text = "0";
@@ -82,6 +83,7 @@ namespace iClothing
                 if (bool.Parse(IsCompleted)) Ngayxong = dtpNgayNhapKho.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
                 // Barcode
                 barcode = cbKihieu.SelectedValue.ToString();
+                GhiChu = txtghichu.Text;
                 // BTPChuaIn
                 BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
                 BTPChuaInSL = txtBTPChuaIn.Text;
@@ -98,7 +100,7 @@ namespace iClothing
                 // Created Date
                 string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
-                ItemQryList = AddNewOrder(Ngay, Ngayxong, DonhangID, NhaccID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                ItemQryList = AddNewOrder(Ngay, Ngayxong, DonhangID, NhaccID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, GhiChu);
                 if (DBAccess.IsServerConnected())
                 {
 
@@ -147,81 +149,85 @@ namespace iClothing
                 bool isSuccess = false;
                 string isNhap = "true";
                 string ngayxong = string.Empty;
-                string Ngay, DonhangID, barcode, NhaccID, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL;
-                Ngay = DonhangID = barcode = NhaccID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = string.Empty;
+                string Ngay, DonhangID, barcode, NhaccID, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, GhiChu;
+                Ngay = DonhangID = barcode = NhaccID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = GhiChu = string.Empty;
                 // Set value for number field
                 if (string.IsNullOrEmpty(txtBTPChuaIn.Text)) txtBTPChuaIn.Text = "0";
                 if (string.IsNullOrEmpty(txtBTPDaIn.Text)) txtBTPDaIn.Text = "0";
                 if (string.IsNullOrEmpty(txtTP.Text)) txtTP.Text = "0";
                 if (string.IsNullOrEmpty(txtSPLoi.Text)) txtSPLoi.Text = "0";
 
-                if (DBHelper.checkValidField(txtBTPChuaIn.Text) && DBHelper.checkValidField(txtBTPDaIn.Text) && DBHelper.checkValidField(txtTP.Text) && DBHelper.checkValidField(txtSPLoi.Text))
-                    MessageBox.Show("Mời nhập số lượng sản phẩm!");
-                else
+                if (isEdit)
                 {
-                    DonhangID = txtOrderIDNhap.Text;
-                    string ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-
-                    // NhaccID
-                    NhaccID = cbNhacc.SelectedValue.ToString();
-
-                    // Ngay nhap
-                    ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
-                    // Ngay xong
-                    if (!DBHelper.isXong(DonhangID) && bool.Parse(IsCompleted))
+                    if (DBHelper.checkValidField(txtBTPChuaIn.Text) && DBHelper.checkValidField(txtBTPDaIn.Text) && DBHelper.checkValidField(txtTP.Text) && DBHelper.checkValidField(txtSPLoi.Text))
+                        MessageBox.Show("Mời nhập số lượng sản phẩm!");
+                    else
                     {
-                        ngayxong = dtpNgayNhapKho.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
-                    }
-                    // Barcode
-                    barcode = cbKihieu.SelectedValue.ToString();
-                    // BTPChuaIn
-                    BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
-                    BTPChuaInSL = txtBTPChuaIn.Text;
-                    // BTPDaIn
-                    BTPDaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
-                    BTPDaInSL = txtBTPDaIn.Text;
-                    // TP
-                    TPID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
-                    TPSL = txtTP.Text;
-                    // SPLoi
-                    SPLoiID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
-                    SPLoiSL = txtSPLoi.Text;
+                        DonhangID = txtOrderIDNhap.Text;
+                        string ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
 
-                    ItemQryList = UpdateOrder(DonhangID, barcode, NhaccID, ngayxong, ngaysua, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, IsCompleted);
+                        // NhaccID
+                        NhaccID = cbNhacc.SelectedValue.ToString();
+
+                        // Ngay nhap
+                        ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                        // Ngay xong
+                        if (!DBHelper.isXong(DonhangID) && bool.Parse(IsCompleted))
+                        {
+                            ngayxong = dtpNgayNhapKho.Value.ToString("MM/dd/yyyy hh:mm:ss tt");
+                        }
+                        // Barcode
+                        barcode = cbKihieu.SelectedValue.ToString();
+                        GhiChu = txtghichu.Text;
+                        // BTPChuaIn
+                        BTPChuaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Chưa in");
+                        BTPChuaInSL = txtBTPChuaIn.Text;
+                        // BTPDaIn
+                        BTPDaInID = DBHelper.Lookup("Type", "LoaiID", "Ten", "BTP Đã in");
+                        BTPDaInSL = txtBTPDaIn.Text;
+                        // TP
+                        TPID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Thành Phẩm");
+                        TPSL = txtTP.Text;
+                        // SPLoi
+                        SPLoiID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
+                        SPLoiSL = txtSPLoi.Text;
+
+                        ItemQryList = UpdateOrder(DonhangID, barcode, NhaccID, ngayxong, ngaysua, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, IsCompleted, GhiChu);
 
 
-                    if (DBAccess.IsServerConnected())
-                    {
-
-                        if (ItemQryList.Count > 0)
+                        if (DBAccess.IsServerConnected())
                         {
 
-                            foreach (var item in ItemQryList)
+                            if (ItemQryList.Count > 0)
                             {
-                                isSuccess = DBAccess.ExecuteQuery(item);
-                            }
 
-
-                            if (isSuccess)
-                            {
-                                SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
-                                SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
-                                SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
-                                SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
-
-                                if (IsCompleted.ToLower() == "true")
+                                foreach (var item in ItemQryList)
                                 {
-                                    AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                                    isSuccess = DBAccess.ExecuteQuery(item);
                                 }
-                                cbNhacc.SelectedIndex = 0;
-                                currentPageNumber = 1;
-                                ClearText();
-                                // Update datalist
-                                GetAllDataOrder(currentPageNumber, rowPerPage);
-                                MessageBox.Show("Đơn hàng này đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
 
+
+                                if (isSuccess)
+                                {
+                                    SaveOrderToTransactionDB(barcode, BTPChuaInID, "", BTPChuaInSL, isNhap, IsCompleted);
+                                    SaveOrderToTransactionDB(barcode, BTPDaInID, "", BTPDaInSL, isNhap, IsCompleted);
+                                    SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
+                                    SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
+
+                                    if (IsCompleted.ToLower() == "true")
+                                    {
+                                        AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                                    }
+                                    cbNhacc.SelectedIndex = 0;
+                                    currentPageNumber = 1;
+                                    ClearText();
+                                    // Update datalist
+                                    GetAllDataOrder(currentPageNumber, rowPerPage);
+                                    MessageBox.Show("Đơn hàng này đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+
+                        }
                     }
                 }
             }
@@ -243,7 +249,10 @@ namespace iClothing
             txtBTPDaIn.Text = string.Empty;
             txtTP.Text = string.Empty;
             txtSPLoi.Text = string.Empty;
+            txtghichu.Text = string.Empty;
             dtpNgayTaoPhieu.Enabled = true;
+            dtpNgayNhapKho.Enabled = false;
+            ckEnableNhapKho.Checked = false;
             IsCompleted = "false";
         }
 
@@ -255,7 +264,7 @@ namespace iClothing
                 foreach (DataGridViewRow row in dgvOrder.SelectedRows)
                 {
 
-                    if (Convert.ToBoolean(row.Cells[2].Value.ToString()) == false)
+                    if(isEdit)
                     {
                         string orderID = row.Cells[0].Value.ToString();
                         string query = "DELETE FROM[OrderDetail] WHERE DonhangID = '" + orderID + "'";
@@ -392,8 +401,8 @@ namespace iClothing
             dtpNgayTaoPhieu.CustomFormat = "dd/MM/yyyy";
             dtpNgayNhapKho.Format = DateTimePickerFormat.Custom;
             dtpNgayNhapKho.CustomFormat = "dd/MM/yyyy";
-            dtpNgayNhapKho.Enabled = true;
-            ckEnableNhapKho.Checked = true;
+            dtpNgayNhapKho.Enabled = false;
+            ckEnableNhapKho.Checked = false;
             dtpFilterNgayNhap.Format = DateTimePickerFormat.Custom;
             dtpFilterNgayNhap.CustomFormat = "dd/MM/yyyy";
             dtpFilterNgayXong.Format = DateTimePickerFormat.Custom;
@@ -456,7 +465,7 @@ namespace iClothing
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
-            string query = "Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong [Nhập Kho],[Order].Ngaynhap [Ngày Tạo Phiếu], [Order].Ngayxong [Ngày Nhập Kho], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID order by [Order].Ngaynhap DESC" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            string query = "Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong [Nhập Kho],[Order].Ngaynhap [Ngày Tạo Phiếu], [Order].Ngayxong [Ngày Nhập Kho], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].Ghichu   from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID order by [Order].Ngaynhap DESC" + " OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
@@ -468,6 +477,7 @@ namespace iClothing
                     dgvOrder.DataSource = dtMain;
                     dgvOrder.Columns[0].Visible = false;
                     dgvOrder.Columns[1].Visible = false;
+                    dgvOrder.Columns[10].Visible = false;
                     dgvOrder.Columns[2].Width = 45;
                     dgvOrder.Columns[3].Width = 130;
                     dgvOrder.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
@@ -541,7 +551,7 @@ namespace iClothing
 
         private List<string> AddNewOrder(string Ngaynhap, string Ngayxong, string DonhangID, string NhaccID, string barcode, string IsCompleted, string createDate,
             string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
-            string TPSL, string SPLoiSL)
+            string TPSL, string SPLoiSL, string GhiChu)
         {
             List<string> InsertItemQryList = new List<string>();
             string InsertItemQry = "";
@@ -552,7 +562,7 @@ namespace iClothing
             // query insert
             if (string.IsNullOrEmpty(Ngayxong))
             {
-                InsertItemQry = "INSERT INTO [Order] ([DonhangID],[NhaccID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap])VALUES('" + DonhangID + "','" + NhaccID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + Ngaynhap +  "')";
+                InsertItemQry = "INSERT INTO [Order] ([DonhangID],[NhaccID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap], [Ghichu])VALUES('" + DonhangID + "','" + NhaccID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + Ngaynhap + "','" + GhiChu +  "')";
             }
             else
             InsertItemQry = "INSERT INTO [Order] ([DonhangID],[NhaccID],[Xong],[Ngaytao],[Ngaysua],[Ngaynhap],[Ngayxong])VALUES('" + DonhangID + "','" + NhaccID + "','" + IsCompleted + "','" + createDate + "','" + createDate + "','" + Ngaynhap + "','" + Ngayxong + "')";
@@ -569,7 +579,7 @@ namespace iClothing
         }
 
         private List<string> UpdateOrder(string DonhangID, string barcode, string NhaccID, string ngayxong, string ngaysua, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
-            string TPSL, string SPLoiSL, string xong)
+            string TPSL, string SPLoiSL, string xong, string GhiChu)
         {
             List<string> UpdateItemQryList = new List<string>();
             string UpdateItemQry = "";
@@ -583,7 +593,7 @@ namespace iClothing
                 ngayxong = "',[Ngayxong]= '" + ngayxong;
             }
             // query update
-            UpdateItemQry = "UPDATE [Order] SET[NhaccID] ='" + NhaccID + ngayxong + "',[Ngaysua]= '" + ngaysua + "',[Xong]= '" + xong + "' WHERE DonhangID ='" + DonhangID + "';";
+            UpdateItemQry = "UPDATE [Order] SET[NhaccID] ='" + NhaccID + ngayxong + "',[Ngaysua]= '" + ngaysua + "',[Ghichu]= '" + GhiChu + "',[Xong]= '" + xong + "' WHERE DonhangID ='" + DonhangID + "';";
             UpdateItemQryList.Add(UpdateItemQry);
             UpdateItemQry = "UPDATE[OrderDetail] SET [Barcode] = '" + barcode + "',[Soluong]= '" + BTPChuaInSL + "',[Ngaysua]= '" + ngaysua + "' WHERE DonhangID ='" + DonhangID + "' AND LoaiID='" + BTPChuaInID + "';";
             UpdateItemQryList.Add(UpdateItemQry);
@@ -598,45 +608,61 @@ namespace iClothing
 
         private void dgvOrder_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1 && Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == false)
+            if (e.RowIndex != -1)               
             {
-                DataGridViewRow dgvRow = dgvOrder.Rows[e.RowIndex];
+                //if (Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == false)
+                //{
+                
+                    DataGridViewRow dgvRow = dgvOrder.Rows[e.RowIndex];
                 txtOrderIDNhap.Text = dgvRow.Cells[0].Value.ToString();
                 cbNhacc.SelectedValue = DBHelper.Lookup("Supplier", "NhaccID", "Ten", dgvRow.Cells[1].Value.ToString());
                 cbNhacc.Text = dgvRow.Cells[1].Value.ToString();
+                    ckEnableNhapKho.Checked = Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue);
                 if (Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true)
                 {
+                    isEdit = false;
                     IsCompleted = "true";
 
                 }
-                else IsCompleted = "false";
+                else
+                {
+                    isEdit = true;
+                    IsCompleted = "false";
+                }
                 dtpNgayTaoPhieu.Value = DateTime.Parse(dgvRow.Cells[3].Value.ToString());
                 if(!string.IsNullOrEmpty(dgvRow.Cells[4].Value.ToString())) dtpNgayNhapKho.Value = DateTime.Parse(dgvRow.Cells[4].Value.ToString());
                 cbKihieu.SelectedValue = DBHelper.Lookup("Product", "Barcode", "Kyhieu", dgvRow.Cells[5].Value.ToString());
                 cbKihieu.Text = dgvRow.Cells[5].Value.ToString();
+                
                 txtBTPChuaIn.Text = dgvRow.Cells[6].Value.ToString();
                 txtBTPDaIn.Text = dgvRow.Cells[7].Value.ToString();
                 txtTP.Text = dgvRow.Cells[8].Value.ToString();
                 txtSPLoi.Text = dgvRow.Cells[9].Value.ToString();
+                txtghichu.Text = dgvRow.Cells[10].Value.ToString();
                 dtpNgayTaoPhieu.Enabled = false;
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Không thể cập nhật đơn hàng hoàn thành!");
+            //}
+        }
         }
 
         private void dgvOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (!bool.Parse(IsCompleted))
-            {
-                if (e.ColumnIndex == dgvOrder.Columns[2].Index)
-                    if (Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true) IsCompleted = "true"; else IsCompleted = "false";
-            }
+            //if (!bool.Parse(IsCompleted))
+            //{
+            //    if (e.ColumnIndex == dgvOrder.Columns[2].Index)
+            //        if (Convert.ToBoolean(dgvOrder.Rows[e.RowIndex].Cells[2].EditedFormattedValue) == true) IsCompleted = "true"; else IsCompleted = "false";
+            //}
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             
-            string ngayNhap = ngayNhapFilterChanged ? string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhap.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
+            string ngayNhap = string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhap.Value.AddDays(1).ToString("yyyy-MM-dd"));
             strSearch = ngayNhap;
-            string ngayXong = ngayXongFilterChanged ? string.Format("total.[Ngày Nhập Kho] >= '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXong.Value.AddDays(1).ToString("yyyy-MM-dd")) : string.Empty;
+            string ngayXong = string.Format("total.[Ngày Nhập Kho] >= '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXong.Value.AddDays(1).ToString("yyyy-MM-dd"));
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
 
             //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());
@@ -756,6 +782,16 @@ namespace iClothing
             }
         }
 
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            gboxNNK.Enabled = CBNNK.Checked;
+        }
+
+        private void CBoxNTP_CheckedChanged(object sender, EventArgs e)
+        {
+            gBoxNTP.Enabled = CBoxNTP.Checked;
+        }
+
         private void cbPageSizeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             rowPerPageFilter = Convert.ToInt32(cbPageSizeFilter.SelectedItem.ToString());
@@ -850,7 +886,7 @@ namespace iClothing
 
         private void GetTotalRowFilter(string query)
         {
-            string queryAll = "Select Count (*) AS Total FROM (Select New.DonhangID[Mã Đơn Hàng], Supplier.Ten[Nhà Cung Cấp],[Order].Xong[Nhập Kho],[Order].Ngaynhap[Ngày Tạo Phiếu], [Order].Ngayxong[Ngày Nhập Kho], Product.Kyhieu[Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from(SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID) total "+query;
+            string queryAll = "Select Count (*) AS Total FROM (Select New.DonhangID[Mã Đơn Hàng], Supplier.Ten[Nhà Cung Cấp],[Order].Xong[Nhập Kho],[Order].Ngaynhap[Ngày Tạo Phiếu], [Order].Ngayxong[Ngày Nhập Kho], Product.Kyhieu[Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].GhiChu  from(SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID) total " + query;
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
@@ -875,7 +911,7 @@ namespace iClothing
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
-            string query = "select * from(Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong [Nhập Kho],[Order].Ngaynhap [Ngày Tạo Phiếu], [Order].Ngayxong [Ngày Nhập Kho], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi]  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID ) total " + strSearch + " order by total.[Ngày Tạo Phiếu] DESC OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
+            string query = "select * from(Select New.DonhangID [Mã Đơn Hàng],Supplier.Ten [Nhà Cung Cấp],[Order].Xong [Nhập Kho],[Order].Ngaynhap [Ngày Tạo Phiếu], [Order].Ngayxong [Ngày Nhập Kho], Product.Kyhieu [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản phẩm lỗi], [Order].GhiChu  from (SELECT DonhangID, Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluong ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluong ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluong ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluong ELSE 0 END)[Sản phẩm lỗi] FROM OrderDetail group by DonhangID, Barcode, Ngaysua) New join Product on New.Barcode = Product.Barcode join[Order] on[Order].DonhangID = New.DonhangID join Supplier on[Order].NhaccID = Supplier.NhaccID ) total " + strSearch + " order by total.[Ngày Tạo Phiếu] DESC OFFSET " + skipRecord.ToString() + " ROWS FETCH NEXT " + rowPerPage.ToString() + " ROWS ONLY; ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(query, connection))
@@ -892,6 +928,7 @@ namespace iClothing
                     dgvOrderFilter.Columns[4].Width = 130;
                     dgvOrderFilter.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                     dgvOrderFilter.Columns[2].Width = 45;
+
                     dgvOrderFilter.Columns["Ký Hiệu"].Width = 60;
                     dgvOrderFilter.Columns["BTP Chưa in"].Width = 80;
                     this.dgvOrderFilter.Columns["BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;

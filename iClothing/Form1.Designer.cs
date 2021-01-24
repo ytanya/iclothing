@@ -56,6 +56,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.pnRight = new System.Windows.Forms.Panel();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.btnCusOrder = new System.Windows.Forms.Button();
             this.pnMenu.SuspendLayout();
             this.pnLeft.SuspendLayout();
             this.pnStuff.SuspendLayout();
@@ -119,6 +120,7 @@
             // pnStuff
             // 
             this.pnStuff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(156)))), ((int)(((byte)(29)))));
+            this.pnStuff.Controls.Add(this.btnCusOrder);
             this.pnStuff.Controls.Add(this.btnStuff);
             this.pnStuff.Controls.Add(this.btnOrder);
             this.pnStuff.Controls.Add(this.btnStock);
@@ -288,6 +290,16 @@
             // 
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
+            // btnCusOrder
+            // 
+            this.btnCusOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
+            this.btnCusOrder.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnCusOrder, "btnCusOrder");
+            this.btnCusOrder.ForeColor = System.Drawing.Color.White;
+            this.btnCusOrder.Name = "btnCusOrder";
+            this.btnCusOrder.UseVisualStyleBackColor = false;
+            this.btnCusOrder.Click += new System.EventHandler(this.btnCusOrder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -336,5 +348,6 @@
         private System.Windows.Forms.Panel pnRight;
         private System.Windows.Forms.Button btnMini;
         private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Button btnCusOrder;
     }
 }

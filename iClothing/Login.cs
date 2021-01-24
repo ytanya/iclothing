@@ -65,6 +65,7 @@ namespace iClothing
                                     }
                                     Panel pnStuff = pnLeft.Controls["pnStuff"] as Panel;
                                     Button btnMini = pnLeft.Controls["btnMini"] as Button;
+                                    btnMini.Visible = true;
                                     
                                     pnStuff.Visible = true;
                                     Label lblCurrentUser = pnMenu.Controls["lblCurrentUser"] as Label;

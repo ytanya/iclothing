@@ -37,7 +37,7 @@ namespace iClothing
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            Form2 orderfrm = new Form2() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true } ;
+            CustomerOrder orderfrm = new CustomerOrder() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true } ;
             this.pnRight.Controls.Add(orderfrm);
             orderfrm.Show();
             //closeForm();

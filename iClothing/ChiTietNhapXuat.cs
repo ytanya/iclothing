@@ -62,7 +62,7 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string strSearch = string.Empty;
-            string ngayNhapXuat = ngayTuNgayFilterChanged ? string.Format("NewAll.[Ngày Nhập/ Xuất] > '{0}' AND NewAll.[Ngày Nhập/ Xuất] < '{1}'", dtpTuNgay.Value.AddDays(-1), dtpDenNgay.Value.AddDays(1)) : string.Empty;
+            string ngayNhapXuat = string.Format("NewAll.[Ngày Nhập/ Xuất] > '{0}' AND NewAll.[Ngày Nhập/ Xuất] < '{1}'", dtpTuNgay.Value.AddDays(-1).Date, dtpDenNgay.Value.Date);
             strSearch = ngayNhapXuat;
 
             string kihieuValue = cbKyHieuFilter.SelectedIndex ==-1?string.Empty: DBHelper.Lookup("Product", "Kyhieu", "Barcode", cbKyHieuFilter.SelectedValue.ToString());

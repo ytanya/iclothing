@@ -30,11 +30,11 @@
         {
             this.tbManageInOutOrder = new System.Windows.Forms.TabControl();
             this.tabInputNhap = new System.Windows.Forms.TabPage();
-            this.quanLyXuat1 = new iClothing.QuanLyXuat();
             this.quanLyNhap1 = new iClothing.QuanLyNhap();
             this.rbXuat = new System.Windows.Forms.RadioButton();
             this.rbNhap = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.quanLyXuat1 = new iClothing.QuanLyXuat();
             this.tpFilter = new System.Windows.Forms.TabPage();
             this.chiTietNhapXuat1 = new iClothing.ChiTietNhapXuat();
             this.tbManageInOutOrder.SuspendLayout();
@@ -56,11 +56,11 @@
             // tabInputNhap
             // 
             this.tabInputNhap.BackColor = System.Drawing.Color.White;
-            this.tabInputNhap.Controls.Add(this.quanLyXuat1);
             this.tabInputNhap.Controls.Add(this.quanLyNhap1);
             this.tabInputNhap.Controls.Add(this.rbXuat);
             this.tabInputNhap.Controls.Add(this.rbNhap);
             this.tabInputNhap.Controls.Add(this.label1);
+            this.tabInputNhap.Controls.Add(this.quanLyXuat1);
             this.tabInputNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabInputNhap.ForeColor = System.Drawing.Color.Black;
             this.tabInputNhap.Location = new System.Drawing.Point(4, 27);
@@ -70,21 +70,12 @@
             this.tabInputNhap.TabIndex = 0;
             this.tabInputNhap.Text = "Quản Lý Nhập Xuất";
             // 
-            // quanLyXuat1
-            // 
-            this.quanLyXuat1.Location = new System.Drawing.Point(0, 39);
-            this.quanLyXuat1.Margin = new System.Windows.Forms.Padding(4);
-            this.quanLyXuat1.Name = "quanLyXuat1";
-            this.quanLyXuat1.Size = new System.Drawing.Size(1200, 654);
-            this.quanLyXuat1.TabIndex = 62;
-            this.quanLyXuat1.Load += new System.EventHandler(this.quanLyXuat1_Load);
-            // 
             // quanLyNhap1
             // 
             this.quanLyNhap1.AutoScroll = true;
             this.quanLyNhap1.BackColor = System.Drawing.Color.White;
             this.quanLyNhap1.Location = new System.Drawing.Point(0, 39);
-            this.quanLyNhap1.Margin = new System.Windows.Forms.Padding(4);
+            this.quanLyNhap1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.quanLyNhap1.Name = "quanLyNhap1";
             this.quanLyNhap1.Size = new System.Drawing.Size(1200, 654);
             this.quanLyNhap1.TabIndex = 61;
@@ -125,6 +116,15 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(1190, 3);
             this.label1.TabIndex = 60;
+            // 
+            // quanLyXuat1
+            // 
+            this.quanLyXuat1.Location = new System.Drawing.Point(0, 39);
+            this.quanLyXuat1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.quanLyXuat1.Name = "quanLyXuat1";
+            this.quanLyXuat1.Size = new System.Drawing.Size(1200, 654);
+            this.quanLyXuat1.TabIndex = 62;
+            this.quanLyXuat1.Load += new System.EventHandler(this.quanLyXuat1_Load);
             // 
             // tpFilter
             // 

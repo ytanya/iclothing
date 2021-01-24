@@ -24,6 +24,7 @@ namespace iClothing
         bool isSuccess = true;
         public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
+
         public ProductManagement1()
         {
             InitializeComponent();
@@ -384,7 +385,10 @@ namespace iClothing
 
         private void cbPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rowPerPage = Convert.ToInt32(cbPageSize.SelectedItem.ToString());
+            if (cbPageSize.SelectedItem.ToString().ToLower() == "all") { GetTotalRow(); rowPerPage = rowCount; }
+
+            else rowPerPage = Convert.ToInt32(cbPageSize.SelectedItem.ToString());
+
             currentPageNumber = 1;
             GetAllDataProduct(currentPageNumber, rowPerPage);
             pageSize = rowCount / rowPerPage;

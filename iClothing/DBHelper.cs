@@ -173,14 +173,15 @@ namespace iClothing
             return isExisted;
         }
 
-        public static string getStock(string kyhieu, string chuaInSL, string daInSL, string tPSL, string SPLoiSL)
+        public static string getStock(string kyhieu, string chuaInSL, string daInSL, string tPSL, string SPLoiSL, string ngayXuat)
         {
             DataTable dt = new DataTable();
             DataTable dtnew = new DataTable();
             string result = string.Empty;
             bool isStock = false;
             int BTPChuaIn, BTPDaIN, TP, SPLoi;
-            string query = "Select DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản Phẩm Lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock  GROUP BY Barcode) New on New.Barcode = Stock.Barcode where NewProduct.Kyhieu = '" + kyhieu + "'";
+            BTPChuaIn = BTPDaIN = TP = SPLoi = 0;
+            string query = "Select DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản Phẩm Lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock  GROUP BY Barcode) New on New.Barcode = Stock.Barcode where ngaytao <= " + ngayXuat + " And NewProduct.Kyhieu = '" + kyhieu + "'";
             dtnew = DBAccess.FillDataTable(query, dt);
             if (dtnew != null)
             {
@@ -195,8 +196,12 @@ namespace iClothing
                 }
                 else
                 {
-                    result = "Không có sản phẩm này trong kho.";
+                    result = "BTP Chưa in: " + BTPChuaIn + " BTP Đã in: " + BTPDaIN + " Thành Phẩm: " + TP + " Sản Phẩm Lỗi: " + SPLoi;
                 }
+            }
+            else
+            {
+                result = "BTP Chưa in: " + BTPChuaIn + " BTP Đã in: " + BTPDaIN + " Thành Phẩm: " + TP + " Sản Phẩm Lỗi: " + SPLoi;
             }
             return result;
         }

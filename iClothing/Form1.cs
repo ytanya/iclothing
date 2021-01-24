@@ -27,6 +27,7 @@ namespace iClothing
             pnLeft.Width = 54;
             pnSystem.Visible = false;
             pnStuff.Visible = false;
+            btnMini.Visible = false;
             btnMini.Enabled = false;
             pnSystem.Height = 54;
             pnStuff.Height = 54;
@@ -206,6 +207,15 @@ namespace iClothing
             StaffForm stafffrm = new StaffForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
             this.pnRight.Controls.Add(stafffrm);
             stafffrm.Show();
+        }
+
+        private void btnCusOrder_Click(object sender, EventArgs e)
+        {
+            MinimizeMenu();
+            pnRight.Controls.Clear();
+            CustomerOrder custOrderfrm = new CustomerOrder() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(custOrderfrm);
+            custOrderfrm.Show();
         }
 
         private void btnSystem_Click(object sender, EventArgs e)

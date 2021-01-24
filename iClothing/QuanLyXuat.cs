@@ -101,7 +101,7 @@ namespace iClothing
 
                 // Created Date
                 string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
-                if (bool.Parse(IsCompleted)) itemInStock = DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, dtpNgayXuat.Value.ToString("MM/dd/yyyy"));
+                if (bool.Parse(IsCompleted)) itemInStock = DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, dtpNgayXuat.Value.ToString("dd/MM/yyyy"));
                 if (string.IsNullOrEmpty(itemInStock))
                 {
                     ItemQryList = AddNewOrder(Ngay, Ngayxong, DonhangID, KHID, barcode, IsCompleted, createDate, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, GhiChu);
@@ -456,9 +456,9 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
     
-            string ngayXuat = string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpNgayXuatFilter.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpNgayXuatFilter.Value.AddDays(1).ToString("yyyy-MM-dd"));
+            string ngayXuat = cBoxNXPX.Checked ?string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpNgayXuatFilter.Value.ToString("yyyy-MM-dd"), dtpNgayXuatFilter.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
             strSearch = ngayXuat;
-            string ngayXong = string.Format("total.[Ngày Xuất Kho] >= '{0}' AND total.[Ngày Xuất Kho] < '{1}'", dtpNgayXongFilter.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpNgayXongFilter.Value.AddDays(1).ToString("yyyy-MM-dd"));
+            string ngayXong = cBoxNXKX.Checked ? string.Format("total.[Ngày Xuất Kho] >= '{0}' AND total.[Ngày Xuất Kho] < '{1}'", dtpNgayXongFilter.Value.ToString("yyyy-MM-dd"), dtpNgayXongFilter.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
             //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());
             //string nhacc = string.IsNullOrEmpty(nhaccValue) ? string.Empty : " [Nhà Cung Cấp] like '% " + nhaccValue + "%'";

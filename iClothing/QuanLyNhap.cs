@@ -238,8 +238,8 @@ namespace iClothing
 
         private void ClearText()
         {
-            dtpNgayTaoPhieu.Value = DateTime.Today;
-            dtpNgayNhapKho.Value = DateTime.Today;
+            //dtpNgayTaoPhieu.Value = DateTime.Today;
+            //dtpNgayNhapKho.Value = DateTime.Today;
             txtOrderIDNhap.Text = string.Empty;
             cbNhacc.Enabled = true;
             cbNhacc.SelectedIndex = 0;
@@ -659,9 +659,9 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             
-            string ngayNhap = CBoxNTP.Checked ? string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhapTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
+            string ngayNhap = CBoxNTP.Checked ? string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpFilterNgayNhap.Value.ToString("yyyy-MM-dd"), dtpFilterNgayNhapTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
             strSearch = ngayNhap;
-            string ngayXong = CBNNK.Checked ? string.Format("total.[Ngày Nhập Kho] >= '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXongTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
+            string ngayXong = CBNNK.Checked ? string.Format("total.[Ngày Nhập Kho] > '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.ToString("yyyy-MM-dd"), dtpFilterNgayXongTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
 
             //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());
@@ -815,8 +815,8 @@ namespace iClothing
                         GetTotalRow();
                         GetAllDataOrder(currentPageNumber, rowPerPage);
                         cbPageSize.SelectedIndex = 0;
-                        dtpNgayTaoPhieu.Value = DateTime.Today;
-                        dtpNgayNhapKho.Value = DateTime.Today;
+                        //dtpNgayTaoPhieu.Value = DateTime.Today;
+                        //dtpNgayNhapKho.Value = DateTime.Today;
                     }
                     break;
                 case 1:

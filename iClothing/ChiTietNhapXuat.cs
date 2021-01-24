@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlServerCe;
 using System.Configuration;
+using System.IO;
 
 namespace iClothing
 {
@@ -18,6 +19,8 @@ namespace iClothing
         private bool ngayTuNgayFilterChanged = false, ngayDenNgayFilterChanged = false;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
         string strSearch = string.Empty;
+        System.Data.DataTable dtOrderNew = new System.Data.DataTable();
+        private System.Data.DataTable dtMain = new System.Data.DataTable();
         public ChiTietNhapXuat()
         {
             InitializeComponent();
@@ -120,6 +123,101 @@ namespace iClothing
             ngayTuNgayFilterChanged = true;
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            //Creating Save File Dialog
+            SaveFileDialog save = new SaveFileDialog();
+            //Showing the dialog
+            save.ShowDialog();
+            //Setting default directory
+            save.InitialDirectory = @"C:\";
+            save.RestoreDirectory = true;
+            string fileName = save.FileName;
+            save.AddExtension = true;
+            save.Filter = "Excel|*.xls|Excel 2010|*.xlsx";
+            //Setting title
+            save.Title = "Select save location and input file name";
+            //filtering to only show .xlsx files in the directory
+            save.DefaultExt = "xlsx";
+            // Write Data to DataTable
+            ExportToExcel();
+            //Write Data To Excel
+            ToExcel(fileName);
+        }
+
+        private void ToExcel(string fileName)
+        {
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), fileName + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".xlsx");
+            // creating Excel Application  
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = false;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            worksheet = workbook.Sheets["Sheet1"];
+            worksheet = workbook.ActiveSheet;
+            // changing the name of active sheet  
+            worksheet.Name = "Sheet1";
+            // storing header part in Excel  
+            //var columnHeadingsRange = worksheet.Range[worksheet.Cells[1, 4], worksheet.Cells[1, 8]];
+            //columnHeadingsRange.Interior.Color = XlRgbColor.rgbOrange;
+            for (int i = 0; i < dtOrderNew.Columns.Count; i++)
+            {
+                worksheet.Cells[1, i + 1] = dtOrderNew.Columns[i].ToString();
+            }
+            // storing Each row and column value to excel sheet  
+            for (int i = 0; i < dtOrderNew.Rows.Count; i++)
+            {
+                for (int j = 0; j < dtOrderNew.Columns.Count; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1] = dtOrderNew.Rows[i][j].ToString();
+                }
+            }
+            // save the application  
+            workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            // Exit from the application  
+            app.Quit();
+        }
+
+        public System.Data.DataTable ExportToExcel()
+        {
+            dtOrderNew = new System.Data.DataTable();
+            dtOrderNew.Columns.Add("STT", typeof(int));
+            dtOrderNew.Columns.Add("Ngày Nhập/ Xuất", typeof(string));
+            dtOrderNew.Columns.Add("Ký Hiệu", typeof(string));
+            dtOrderNew.Columns.Add("Mã Sản Phẩm", typeof(string));
+            dtOrderNew.Columns.Add("Nhập BTP Chưa in", typeof(int));
+            dtOrderNew.Columns.Add("Nhập BTP Đã in", typeof(int));
+            dtOrderNew.Columns.Add("Nhập Thành Phẩm", typeof(string));
+            dtOrderNew.Columns.Add("Nhập Sản phẩm lỗi", typeof(string));
+            dtOrderNew.Columns.Add("Xuất BTP Chưa in", typeof(string));
+            dtOrderNew.Columns.Add("Xuất BTP Đã in", typeof(string));
+            dtOrderNew.Columns.Add("Xuất Thành Phẩm", typeof(string));
+            dtOrderNew.Columns.Add("Xuất Sản phẩm lỗi", typeof(string));
+
+            DataRow row;
+            string ngaynhapxuat, kyhieu, masp, nhapchuain, nhapdain, nhaptp, nhapsploi, xuatchuain, xuatdain, xuatptp, xuatsploi;
+            for (int i = 0; i < dtMain.Rows.Count; i++)
+            {
+                ngaynhapxuat = dtMain.Rows[i][0].ToString();
+                kyhieu = dtMain.Rows[i][1].ToString();
+                masp = dtMain.Rows[i][2].ToString();
+                nhapchuain = dtMain.Rows[i][3].ToString();
+                nhapdain = dtMain.Rows[i][4].ToString();
+                nhaptp = dtMain.Rows[i][5].ToString();
+                nhapsploi = dtMain.Rows[i][6].ToString();
+                xuatchuain = dtMain.Rows[i][7].ToString();
+                xuatdain = dtMain.Rows[i][8].ToString();
+                xuatptp = dtMain.Rows[i][9].ToString();
+                xuatsploi = dtMain.Rows[i][10].ToString();
+                dtOrderNew.Rows.Add(i + 1, ngaynhapxuat, kyhieu, masp, nhapchuain, nhapdain, nhaptp, nhapsploi, xuatchuain, xuatdain, xuatptp, xuatsploi);
+            }
+            return dtOrderNew;
+        }
         private void dtpDenNgay_ValueChanged(object sender, EventArgs e)
         {
             ngayDenNgayFilterChanged = true;
@@ -139,6 +237,7 @@ namespace iClothing
 
         private void GetAllOrder(int currentPageNumber, int rowPerPage, string strSearch)
         {
+            dtMain = new System.Data.DataTable();
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 
@@ -163,7 +262,8 @@ namespace iClothing
                     SqlCeDataAdapter sda = new SqlCeDataAdapter(command);
                     DataTable dt = new DataTable();
                     sda.Fill(dt);
-                    dvgOrder.DataSource = dt;
+                    dtMain.Merge(dt);
+                    dvgOrder.DataSource = dtMain;
                     dvgOrder.Columns[0].Width = 150;
                     //dvgOrder.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                     //dvgOrder.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";

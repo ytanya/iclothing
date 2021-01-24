@@ -35,6 +35,9 @@ namespace iClothing
             SidePanelLeft.Visible = false;
             btnSignout.Visible = false;
             //btnStaff.Visible = false;
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(btnSignout, "Đăng xuất");
+            tt.SetToolTip(btnClose, "Đóng");
             this.CenterToScreen();
         }
 
@@ -71,7 +74,18 @@ namespace iClothing
 
         private void btnSignout_Click(object sender, EventArgs e)
         {
-            
+            pnRight.Controls.Clear();
+            LoginForm loginfrm = new LoginForm() { Dock = DockStyle.Fill, TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            //stockfrm.AutoScroll = true;
+            this.pnRight.Controls.Add(loginfrm);
+            //orderfrm.Location = new Point(-20, 0);
+            loginfrm.Show();
+            btnSignout.Visible = false;
+            pnLeft.Width = 54;
+            pnSystem.Visible = false;
+            pnStuff.Visible = false;
+            btnMini.Visible = false;
+            btnMini.Enabled = false;
         }
 
         private void btnStock_Click(object sender, EventArgs e)

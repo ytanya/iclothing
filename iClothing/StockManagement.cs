@@ -255,6 +255,11 @@ namespace iClothing
             this.ActiveControl = txtBarcode;
         }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             txtBarcode.Text = string.Empty;

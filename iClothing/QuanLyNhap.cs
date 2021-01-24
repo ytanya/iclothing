@@ -44,7 +44,7 @@ namespace iClothing
                     txtTP.Text = "0";
                     txtSPLoi.Text = "0";
                     dtpNgayTaoPhieu.Enabled = true;
-                    dtpNgayTaoPhieu.Value = DateTime.Today;
+                    //dtpNgayTaoPhieu.Value = DateTime.Today;
                     IsCompleted = "false";
                 }
             }
@@ -59,7 +59,6 @@ namespace iClothing
             List<string> ItemQryList = new List<string>();
             string isNhap = "true";
             bool isSuccess = false;
-            string ngayxong = string.Empty;
             string Ngay, Ngayxong, DonhangID, barcode, NhaccID, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, GhiChu;
             Ngay = Ngayxong = DonhangID = barcode = NhaccID = BTPChuaInID = BTPDaInID = TPID = SPLoiID = BTPChuaInSL = BTPDaInSL = TPSL = SPLoiSL = GhiChu = string.Empty;
             //IsCompleted = "false";
@@ -120,7 +119,7 @@ namespace iClothing
 
                             if (IsCompleted.ToLower() == "true")
                             {
-                                AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                                AddIntoStock(barcode, Ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
                             }
                             cbNhacc.SelectedIndex = 0;
                             currentPageNumber = 1;
@@ -660,9 +659,9 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             
-            string ngayNhap = string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhap.Value.AddDays(1).ToString("yyyy-MM-dd"));
+            string ngayNhap = CBoxNTP.Checked ? string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhapTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
             strSearch = ngayNhap;
-            string ngayXong = string.Format("total.[Ngày Nhập Kho] >= '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXong.Value.AddDays(1).ToString("yyyy-MM-dd"));
+            string ngayXong = CBNNK.Checked ? string.Format("total.[Ngày Nhập Kho] >= '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXongTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
 
             //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());

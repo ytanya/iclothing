@@ -44,7 +44,7 @@ namespace iClothing
                     txtTP.Text = "0";
                     txtSPLoi.Text = "0";
                     dtpNgaytaophieu.Enabled = true;
-                    dtpNgaytaophieu.Value = DateTime.Today;
+                    //dtpNgaytaophieu.Value = DateTime.Today;
                 }
             }
             else
@@ -123,6 +123,10 @@ namespace iClothing
                                 SaveOrderToTransactionDB(barcode, TPID, "", TPSL, isNhap, IsCompleted);
                                 SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
 
+                                if (IsCompleted.ToLower() == "true")
+                                {
+                                    AddIntoStock(barcode, Ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
+                                }
                                 cbCustomer.SelectedIndex = 0;
                                 currentPageNumber = 1;
                                 ClearText();

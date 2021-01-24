@@ -69,7 +69,7 @@ namespace iClothing
             if (string.IsNullOrEmpty(txtSPLoi.Text)) txtSPLoi.Text = "0";
 
             if (DBHelper.checkValidField(txtBTPChuaIn.Text) && DBHelper.checkValidField(txtBTPDaIn.Text) && DBHelper.checkValidField(txtTP.Text) && DBHelper.checkValidField(txtSPLoi.Text))
-                MessageBox.Show("Mời nhập số lượng sản phẩm!");
+                 CommonHelper.showDialog("Mời nhập số lượng sản phẩm!", Color.FromArgb(255,187,51));
             else
             {
                 // DonhangID
@@ -128,7 +128,7 @@ namespace iClothing
                             GetTotalRow();
                             GetAllDataOrder(currentPageNumber, rowPerPage);
 
-                            MessageBox.Show("Đã thêm thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            CommonHelper.showDialog("Đã thêm thành công!",Color.FromArgb(0,200,81));
                         }
                     }
                 }
@@ -159,7 +159,7 @@ namespace iClothing
                 if (isEdit)
                 {
                     if (DBHelper.checkValidField(txtBTPChuaIn.Text) && DBHelper.checkValidField(txtBTPDaIn.Text) && DBHelper.checkValidField(txtTP.Text) && DBHelper.checkValidField(txtSPLoi.Text))
-                        MessageBox.Show("Mời nhập số lượng sản phẩm!");
+                        CommonHelper.showDialog("Mời nhập số lượng sản phẩm!", Color.FromArgb(255, 187, 51));
                     else
                     {
                         DonhangID = txtOrderIDNhap.Text;
@@ -222,7 +222,7 @@ namespace iClothing
                                     ClearText();
                                     // Update datalist
                                     GetAllDataOrder(currentPageNumber, rowPerPage);
-                                    MessageBox.Show("Đơn hàng này đã cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    CommonHelper.showDialog("Đã cập nhật thành công!", Color.FromArgb(0, 200, 81));
                                 }
                             }
 
@@ -232,14 +232,14 @@ namespace iClothing
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
+                CommonHelper.showDialog("Đang Hoàn Thiện Hệ Thống!", Color.FromArgb(255,53,71));
             }
         }
 
         private void ClearText()
         {
-            dtpNgayTaoPhieu.Value = DateTime.Today;
-            dtpNgayNhapKho.Value = DateTime.Today;
+            //dtpNgayTaoPhieu.Value = DateTime.Today;
+            //dtpNgayNhapKho.Value = DateTime.Today;
             txtOrderIDNhap.Text = string.Empty;
             cbNhacc.Enabled = true;
             cbNhacc.SelectedIndex = 0;
@@ -282,7 +282,8 @@ namespace iClothing
             }
             else
             {
-                MessageBox.Show("Mời chọn đơn hàng muốn xóa!");
+                CommonHelper.showDialog("Mời chọn đơn hàng muốn xóa!", Color.FromArgb(255, 187, 51));
+
             }
         }
 
@@ -540,7 +541,7 @@ namespace iClothing
                         }
                         else
                         {
-                            MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            CommonHelper.showDialog("Barcode chưa tồn tại!", Color.FromArgb(255, 53, 71));
                         }
                     }
                 }
@@ -659,9 +660,9 @@ namespace iClothing
         private void btnSearch_Click(object sender, EventArgs e)
         {
             
-            string ngayNhap = CBoxNTP.Checked ? string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpFilterNgayNhap.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayNhapTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
+            string ngayNhap = CBoxNTP.Checked ? string.Format("total.[Ngày Tạo Phiếu] > '{0}' AND total.[Ngày Tạo Phiếu] < '{1}'", dtpFilterNgayNhap.Value.ToString("yyyy-MM-dd"), dtpFilterNgayNhapTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
             strSearch = ngayNhap;
-            string ngayXong = CBNNK.Checked ? string.Format("total.[Ngày Nhập Kho] >= '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.AddDays(-1).ToString("yyyy-MM-dd"), dtpFilterNgayXongTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
+            string ngayXong = CBNNK.Checked ? string.Format("total.[Ngày Nhập Kho] > '{0}' AND total.[Ngày Nhập Kho] < '{1}'", dtpFilterNgayXong.Value.ToString("yyyy-MM-dd"), dtpFilterNgayXongTo.Value.AddDays(1).ToString("yyyy-MM-dd")):string.Empty;
             strSearch = string.IsNullOrEmpty(strSearch) ? (string.IsNullOrEmpty(ngayXong) ? "" : ngayXong) : (string.IsNullOrEmpty(ngayXong) ? strSearch : strSearch + " AND " + ngayXong);
 
             //string nhaccValue = DBHelper.Lookup("Supplier", "Ten", "NhaccID", cbNhaccFilter.SelectedValue.ToString());
@@ -815,8 +816,8 @@ namespace iClothing
                         GetTotalRow();
                         GetAllDataOrder(currentPageNumber, rowPerPage);
                         cbPageSize.SelectedIndex = 0;
-                        dtpNgayTaoPhieu.Value = DateTime.Today;
-                        dtpNgayNhapKho.Value = DateTime.Today;
+                        //dtpNgayTaoPhieu.Value = DateTime.Today;
+                        //dtpNgayNhapKho.Value = DateTime.Today;
                     }
                     break;
                 case 1:
@@ -877,7 +878,8 @@ namespace iClothing
                 }
                 else
                 {
-                    MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CommonHelper.showDialog("Barcode chưa tồn tại!", Color.FromArgb(255, 53, 71));
+                    //MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 //  }
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,12 @@ namespace iClothing
             }
 
             return builder.ToString();
+        }
+
+        public static void showDialog(string message, Color bgColor)
+        {
+            DialogForm form = new DialogForm(message, bgColor);
+            form.Show();
         }
     }
 }

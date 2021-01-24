@@ -273,20 +273,36 @@ namespace iClothing
                     dvgOrder.Columns["Ký Hiệu"].Width = 45;
                     dvgOrder.Columns["Nhập BTP Chưa in"].Width = 60;
                     this.dvgOrder.Columns["Nhập BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgOrder.Columns["Nhập BTP Chưa in"].DefaultCellStyle.BackColor = Color.Aqua;
+
                     dvgOrder.Columns["Nhập BTP Đã in"].Width = 60;
                     this.dvgOrder.Columns["Nhập BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgOrder.Columns["Nhập BTP Đã in"].DefaultCellStyle.BackColor = Color.Aqua;
+
                     dvgOrder.Columns["Nhập Thành Phẩm"].Width = 55;
                     this.dvgOrder.Columns["Nhập Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgOrder.Columns["Nhập Thành Phẩm"].DefaultCellStyle.BackColor = Color.Aqua;
+
                     dvgOrder.Columns["Nhập Sản phẩm lỗi"].Width = 60;
                     this.dvgOrder.Columns["Nhập Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgOrder.Columns["Nhập Sản phẩm lỗi"].DefaultCellStyle.BackColor = Color.Aqua;
+
                     dvgOrder.Columns["Xuất BTP Chưa in"].Width = 60;
                     this.dvgOrder.Columns["Xuất BTP Chưa in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgOrder.Columns["Xuất BTP Chưa in"].DefaultCellStyle.BackColor = Color.OrangeRed;
+
                     dvgOrder.Columns["Xuất BTP Đã in"].Width = 50;
                     this.dvgOrder.Columns["Xuất BTP Đã in"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgOrder.Columns["Xuất BTP Đã in"].DefaultCellStyle.BackColor = Color.OrangeRed;
+
                     dvgOrder.Columns["Xuất Thành Phẩm"].Width = 60;
                     this.dvgOrder.Columns["Xuất Thành Phẩm"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgOrder.Columns["Xuất Thành Phẩm"].DefaultCellStyle.BackColor = Color.OrangeRed;
+
                     dvgOrder.Columns["Xuất Sản phẩm lỗi"].Width = 60;
                     this.dvgOrder.Columns["Xuất Sản phẩm lỗi"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dvgOrder.Columns["Xuất Sản phẩm lỗi"].DefaultCellStyle.BackColor = Color.OrangeRed;
+
                     dvgOrder.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     dvgOrder.Sort(dvgOrder.Columns["Ngày Nhập/ Xuất"], ListSortDirection.Descending);
                 }

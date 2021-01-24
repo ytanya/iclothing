@@ -134,7 +134,7 @@
             this.tpFilter.Padding = new System.Windows.Forms.Padding(3);
             this.tpFilter.Size = new System.Drawing.Size(1228, 697);
             this.tpFilter.TabIndex = 1;
-            this.tpFilter.Text = "Chi Tiết Nhập Xuất";
+            this.tpFilter.Text = "Tổng Hợp Xuất Nhập";
             this.tpFilter.UseVisualStyleBackColor = true;
             // 
             // chiTietNhapXuat1

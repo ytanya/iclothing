@@ -88,14 +88,14 @@ namespace iClothing
                             // Update datalist
                             GetAllData(currentPageNumber, rowPerPage);
                         }
-                        MessageBox.Show("Cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CommonHelper.showDialog("Đã cập nhật thành công!", Color.FromArgb(0, 200, 81));
                     }
 
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
+                CommonHelper.showDialog("Đang Hoàn Thiện Hệ Thống!", Color.FromArgb(255, 53, 71));
             }
         }
 
@@ -110,10 +110,18 @@ namespace iClothing
                     {
 
                         string NhaccID = row.Cells[0].Value.ToString();
-                        string query = "DELETE FROM[Supplier] WHERE NhaccID = '" + NhaccID + "'";
-                        isSuccess = DBAccess.ExecuteQuery(query);
-                        if (!isSuccess) return;
-                        dgvSupplier.Rows.Remove(row);
+                        bool isExisted = DBHelper.CheckItemExist("[Order]", "NhaccID", NhaccID);
+                        if (!isExisted)
+                        {
+                            string query = "DELETE FROM[Supplier] WHERE NhaccID = '" + NhaccID + "'";
+                            isSuccess = DBAccess.ExecuteQuery(query);
+                            if (!isSuccess) return;
+                            dgvSupplier.Rows.Remove(row);
+                        }
+                        else
+                        {
+                            CommonHelper.showDialog("Nhà cung ứng đang giao dịch!", Color.FromArgb(255, 53, 71));
+                        }
 
                     }
                     GetTotalRow();
@@ -122,17 +130,17 @@ namespace iClothing
                 }
                 else
                 {
-                    MessageBox.Show("Mời chọn dòng muốn xóa!");
+                    CommonHelper.showDialog("Mời chọn dòng muốn xóa!", Color.FromArgb(255, 187, 51));
                 }
                 if (isSuccess)
                 {
-                    MessageBox.Show("Đã xóa thành công!");
+                    CommonHelper.showDialog("Đã xóa thành công!", Color.FromArgb(0, 200, 81));
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("Mời chọn dòng muốn xóa!");
+                CommonHelper.showDialog("Mời chọn dòng muốn xóa!", Color.FromArgb(255, 187, 51));
             }
         }
 
@@ -188,40 +196,7 @@ namespace iClothing
             txtPaging.Text = currentPageNumber.ToString() + " /" + pageSize.ToString();
         }
 
-        private void pbFirstFilter_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbPrevFilter_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbNextFilter_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbLastFilter_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbPageSizeFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void txtSodtFilter_KeyPress(object sender, KeyPressEventArgs e)
         {

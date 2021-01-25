@@ -75,19 +75,24 @@ namespace iClothing
                                     //BarcodeWriter writer = new BarcodeWriter() { Format = BarcodeFormat.CODE_128 };
                                     //pictureBox1.Image = writer.Write(textBox1.Text);
                                     //Barcode = BarcodeFormat.CODE_128;
-                                    string now = DateTime.Now.ToString("ddmmyyyyhhssmmff");
-                                    GeneratedBarcode newbarcode = BarcodeWriter.CreateBarcode(now, BarcodeWriterEncoding.Code128);
+                                    string now = DateTime.Now.ToString("ddmmyyyhhmmssff");
+                                GeneratedBarcode newbarcode = BarcodeWriter.CreateBarcode(now, BarcodeWriterEncoding.Code128);
+                                
                                     Barcode = newbarcode.ToString();
-                                    Kyhieu = Convert.ToString(dt.Rows[i][1]);
-                                    MaSP = Convert.ToString(dt.Rows[i][2]);
-                                    Dai = Convert.ToString(dt.Rows[i][3]);
-                                    Rong = Convert.ToString(dt.Rows[i][4]);
-                                    ARTID = DBHelper.Lookup("ART", "ARTID", "Ten", Convert.ToString(dt.Rows[i][5]).Trim('\''));
-                                    SonID = DBHelper.Lookup("Color", "SonID", "Ten", Convert.ToString(dt.Rows[i][6]).Trim('\''));
-                                    DVT = Convert.ToString(dt.Rows[i][8]);
+                                    Kyhieu = Convert.ToString(dt.Rows[i][1]).Trim();
+                                    MaSP = Convert.ToString(dt.Rows[i][2]).Trim();
+                                    Dai = Convert.ToString(dt.Rows[i][3]).Trim();
+                                    Rong = Convert.ToString(dt.Rows[i][4]).Trim();
+                                    ARTID = DBHelper.Lookup("ART", "ARTID", "Ten", Convert.ToString(dt.Rows[i][5]).Trim('\'').Trim());
+                                if (string.IsNullOrEmpty(ARTID))
+                                    MessageBox.Show(Convert.ToString(dt.Rows[i][5]).Trim('\''));
+                                    SonID = DBHelper.Lookup("Color", "SonID", "Ten", Convert.ToString(dt.Rows[i][6]).Trim('\'').Trim());
+                                if (string.IsNullOrEmpty(SonID))
+                                    MessageBox.Show(Convert.ToString(dt.Rows[i][6]).Trim('\''));
+                                DVT = Convert.ToString(dt.Rows[i][8]).Trim();
                                     Mieuta = string.Empty;
-                                    ngaytao = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
-                                    ngaysua = DateTime.Now.ToString("MM-dd-yyyy hh:mm:ss");
+                                    ngaytao = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                                ngaysua = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
                                 if (Kyhieu != string.Empty)
                                 {
                                     InsertItemQry = "Insert into Product([Barcode],[Kyhieu],[Dai],[Rong],[ArtID],[SonID],[DVT],[Mieuta],[Ngaytao],[Ngaysua],[MaSP]) Values ('" + Barcode + "','" + Kyhieu + "','" + Dai + "','" + Rong + "','" + ARTID + "','" + SonID + "','" + DVT + "','" + "" + "','" + ngaysua + "','" + ngaytao + "','" + MaSP + "')";
@@ -99,7 +104,12 @@ namespace iClothing
 
                                         }
                                     }
-                                    count++;
+                                    if(isSuccess) count++;
+                                    else
+                                    {
+                                        MessageBox.Show(InsertItemQry);
+                                    }
+
                                 }
                                 else
                                 {
@@ -157,7 +167,7 @@ namespace iClothing
                 MaSP = txtMaSP.Text;
                 Mieuta = txtMieuta.Text;
 
-                string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
                 query = "UPDATE [Product] SET[Kyhieu] ='" + Kyhieu + "',[Dai]= '" + Dai + "',[Rong]= '" + Rong + "',[ARTID]= '" + ARTID + "',[SonID]= '" + SonID + "',[DVT]= '" + DVT + "',[Mieuta]= '" + Mieuta + "',[Ngaysua]= '" + modifyDate + "' WHERE Barcode ='" + Barcode + "';";
 
 
@@ -445,47 +455,96 @@ namespace iClothing
 
         private void ToExcel(string fileName)
         {
-            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), fileName + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".xlsx");
-            // creating Excel Application  
-            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-            // creating new WorkBook within Excel application  
-            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-            // creating new Excelsheet in workbook  
-            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-            // see the excel sheet behind the program  
-            app.Visible = false;
-            // get the reference of first sheet. By default its name is Sheet1.  
-            // store its reference to worksheet  
-            worksheet = workbook.Sheets["Sheet1"];
-            worksheet = workbook.ActiveSheet;
-            // changing the name of active sheet  
-            worksheet.Name = "Sheet1";
-            // storing header part in Excel  
-            //var columnHeadingsRange = worksheet.Range[worksheet.Cells[1, 4], worksheet.Cells[1, 8]];
-            //columnHeadingsRange.Interior.Color = XlRgbColor.rgbOrange;
-            for (int i = 0; i < dtProductNew.Columns.Count; i++)
+            int rowSuccess = 0;
+            int row = 0, column = 0;
+            try
             {
-                worksheet.Cells[1, i + 1] = dtProductNew.Columns[i].ToString();
-            }
-            // storing Each row and column value to excel sheet  
-            for (int i = 0; i < dtProductNew.Rows.Count; i++)
-            {
-                for (int j = 0; j < dtProductNew.Columns.Count; j++)
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), fileName + DateTime.Now.ToString("dd-MM-yyyy-HH.mm.ss") + ".xlsx");
+                // creating Excel Application  
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                // creating new WorkBook within Excel application  
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                // creating new Excelsheet in workbook  
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                // see the excel sheet behind the program  
+                app.Visible = false;
+                // get the reference of first sheet. By default its name is Sheet1.  
+                // store its reference to worksheet  
+                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.ActiveSheet;
+                // changing the name of active sheet  
+                worksheet.Name = "Sheet1";
+                // storing header part in Excel  
+                //var columnHeadingsRange = worksheet.Range[worksheet.Cells[1, 4], worksheet.Cells[1, 8]];
+                //columnHeadingsRange.Interior.Color = XlRgbColor.rgbOrange;
+                Bitmap bmp;
+                byte[] imgData;
+                //using (var ms = new MemoryStream(imgData))
+                //{
+                //    bmp = new Bitmap(ms);
+                //    System.Windows.Forms.Clipboard.SetDataObject(bmp, false);
+                //    var rng = worksheet.Cells[2,1];
+                //    worksheet.Paste(rng, bmp);
+                //}
+                int columnHeader = 0;
+                
+                for (int i = 0; i < dtProductNew.Columns.Count; i++)
                 {
-                    worksheet.Cells[i + 2, j + 1] = dtProductNew.Rows[i][j].ToString();
+                    if (dtProductNew.Columns[i].ColumnName == "Barcode")
+                    {
+                        columnHeader += 1;
+                    }
+                    worksheet.Cells[1, columnHeader + 1] = dtProductNew.Columns[i].ToString();
+                    columnHeader++;
                 }
+                
+                // storing Each row and column value to excel sheet  
+                for (int i = 0; i < dtProductNew.Rows.Count; i++)
+                {
+                    rowSuccess++;
+                    for (int j = 0; j < dtProductNew.Columns.Count; j++)
+                    {
+                        if (dtProductNew.Columns[j].ColumnName == "Barcode")
+                        {
+                            imgData = (byte[])dtProductNew.Rows[i][j];
+                            using (var ms = new MemoryStream(imgData))
+                            {
+                                bmp = new Bitmap(ms);
+                                System.Windows.Forms.Clipboard.SetDataObject(bmp, false);
+                                var rng = worksheet.Cells[row + 2, column + 1];
+                                worksheet.Paste(rng, bmp);
+                                column += 2;
+                            }
+                        }
+                        else
+                        {
+                            worksheet.Cells[row + 2, column + 1] = dtProductNew.Rows[i][j].ToString();
+                            //row++;
+                            column++;
+                        }
+                    }
+                    column = 0;
+                    row += 5;
+                }
+                // save the application  
+                workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                workbook.Close();
+                // Exit from the application  
+                app.Quit();
             }
-            // save the application  
-            workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-            // Exit from the application  
-            app.Quit();
+            
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("NOT SUCCESS" + rowSuccess);
+            }
         }
 
         public System.Data.DataTable ExportToExcel()
         {
             dtProductNew = new System.Data.DataTable();
             dtProductNew.Columns.Add("STT", typeof(int));
-            dtProductNew.Columns.Add("Barcode", typeof(string));
+            dtProductNew.Columns.Add("Barcode", typeof(byte[]));
             dtProductNew.Columns.Add("Ký Hiệu", typeof(string));
             dtProductNew.Columns.Add("Mã Sản Phẩm", typeof(string));
             dtProductNew.Columns.Add("Dài", typeof(int));
@@ -496,11 +555,19 @@ namespace iClothing
             dtProductNew.Columns.Add("Miêu tả", typeof(string));
 
             DataRow row;
-            string barcode, kyhieu, masp, dai, rong, art, son, dvt, mieuta;
+            string kyhieu, masp, dai, rong, art, son, dvt, mieuta;
+            Bitmap bmbarcode;
+            byte[] barcode;
             for (int i = 0; i < dtMain.Rows.Count; i++)
             {
-                barcode = dtMain.Rows[i][0].ToString();
-                kyhieu = dtMain.Rows[i][1].ToString();
+                //BarcodeResult[] Results = BarcodeReader.
+                ZXing.BarcodeWriter writer = new ZXing.BarcodeWriter() { Format = ZXing.BarcodeFormat.CODE_128 };
+                bmbarcode = writer.Write(dtMain.Rows[i][0].ToString());
+                byte[] byteArray = CommonHelper.imageToByteArray(bmbarcode);
+                //Stream stream = new MemoryStream(byteArray, false);
+                barcode = byteArray;
+                    //Bitmap bmbarcode = new Bitmap(barcode.Length * 50, 90);                
+                    kyhieu = dtMain.Rows[i][1].ToString();
                 masp = dtMain.Rows[i][2].ToString();
                 dai = dtMain.Rows[i][3].ToString();
                 rong = dtMain.Rows[i][4].ToString();
@@ -537,7 +604,7 @@ namespace iClothing
             MaSP = txtMaSP.Text;
             Mieuta = txtMieuta.Text;
             // Created Date
-            string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+            string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
 
             query = "Insert into Product([Barcode],[Kyhieu],[Dai],[Rong],[ArtID],[SonID],[DVT],[Mieuta],[Ngaytao],[Ngaysua],[MaSP]) Values ('" + Barcode + "','" + Kyhieu + "','" + Dai + "','" + Rong + "','" + ARTID + "','" + SonID + "','" + DVT + "','" + Mieuta + "','" + createDate + "','" + createDate + "','" + MaSP + "')";
             if (DBAccess.IsServerConnected())

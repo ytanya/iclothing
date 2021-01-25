@@ -54,100 +54,85 @@ namespace iClothing
                                     UseHeaderRow = true
                                 }
                             });
-
-                            foreach (System.Data.DataTable dt in ds.Tables)
+                            System.Data.DataTable dt = ds.Tables[0];
+                            bool isSuccess = false;
+                            int count = 0;
+                            string[] columnNames = dt.Columns.Cast<DataColumn>()
+                             .Select(x => x.ColumnName)
+                             .ToArray();
+                            for (int i = 7; i < dt.Rows.Count; i++)
                             {
-                                if (Convert.ToString(dt.Columns[0]).ToLower() != "ART")
+
+                                string id, name, desc, createDate, modifyDate;
+                                string InsertItemQry = "";
+                                
+                                var csv = new StringBuilder();
+                                //foreach (DataRow dr in dtItem.Rows)
+                                //{
+                                id = CommonHelper.RandomString(8);
+                                name = Convert.ToString(dt.Rows[i][5]).Trim('\'');
+                                desc = txtMota.Text;
+                                createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                                modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                                if (id != "")
                                 {
-                                    MessageBox.Show("File bị lỗi!");
-                                    btnSave.Enabled = false;
-                                    return;
+                                    InsertItemQry += "INSERT INTO [ART] (ARTID,Ten,Mota,Ngaytao,Ngaysua)VALUES('" + id + "','" + name + "','" + desc + "','" + createDate + "','" + modifyDate + "');";
+                                    //var newLine = $"{id},{name},{desc},{createDate},{modifyDate}";
+                                    //csv.AppendLine(newLine);
+                                    //count++;
                                 }
-                                else
+                                //
+                                if (DBAccess.IsServerConnected())
                                 {
-                                    string id, name, desc, createDate, modifyDate;
-                                    string InsertItemQry = "";
-                                    int count = 0;
-                                    var csv = new StringBuilder();
-                                    //foreach (DataRow dr in dtItem.Rows)
-                                    //{
-                                    id = txtARTID.Text;
-                                    name = txtMaArt.Text;
-                                    desc = txtMota.Text;
-                                    createDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
-                                    modifyDate = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
-                                    if (id != "")
+                                    if (InsertItemQry.Length > 5)
                                     {
-                                        InsertItemQry += "INSERT INTO [ART] (ARTID,Ten,Mota,Anh, Ngaytao,Ngaysua)VALUES('" + id + "','" + name + "','" + desc + "','" + null + "','" + createDate + "','" + modifyDate + "');";
-                                        //var newLine = $"{id},{name},{desc},{createDate},{modifyDate}";
-                                        //csv.AppendLine(newLine);
-                                        //count++;
-                                    }
-                                    //
-                                    if (DBAccess.IsServerConnected())
-                                    {
-                                        if (InsertItemQry.Length > 5)
-                                        {
-                                            bool isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
-                                            if (isSuccess)
-                                            {
-                                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                            }
-                                        }
+                                        isSuccess = DBAccess.ExecuteQuery(InsertItemQry);
+                                        count++;
                                     }
                                 }
+                            }
+                            if (isSuccess)
+                            {
+                                MessageBox.Show("Thành công, Số sản phẩm đã nhập : " + count + "", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             reader.Close();
 
                         }
                     }
 
-                    OpenFileDialog dialog = new OpenFileDialog();
-                    dialog.ShowDialog();
-                    int ImportedRecord = 0, inValidItem = 0;
-                    string SourceURl = "";
 
-                    if (dialog.FileName != "")
-                    {
-                        if (dialog.FileName.EndsWith(".xlsx"))
-                        {
 
-                            //dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
-                            //if (Convert.ToString(dtNew.Columns[0]).ToLower() != "ART")
-                            //{
-                            //    MessageBox.Show("File bị lỗi!");
-                            //    btnSave.Enabled = false;
-                            //    return;
-                            //}
-                            //txtFile.Text = dialog.SafeFileName;
-                            //SourceURl = dialog.FileName;
-                            //if (dtNew.Rows != null && dtNew.Rows.ToString() != String.Empty)
-                            //{
-                            //    dvgArt.DataSource = dtNew;
-                            //}
-                            foreach (DataGridViewRow row in dgvArt.Rows)
-                            {
-                                if (Convert.ToString(row.Cells["ART"].Value) == "")
-                                {
-                                    row.DefaultCellStyle.BackColor = Color.Red;
-                                    inValidItem += 1;
-                                }
-                                else
-                                {
-                                    ImportedRecord += 1;
-                                }
-                            }
-                            if (dgvArt.Rows.Count == 0)
-                            {
-                                btnSave.Enabled = false;
-                                MessageBox.Show("Không đọc được dữ liệu trong file", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Vui lòng chọn file excel.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
+                    //dtNew = CSVHelper.GetDataTabletFromCSVFile(dialog.FileName, "");
+                    //if (Convert.ToString(dtNew.Columns[0]).ToLower() != "ART")
+                    //{
+                    //    MessageBox.Show("File bị lỗi!");
+                    //    btnSave.Enabled = false;
+                    //    return;
+                    //}
+                    //txtFile.Text = dialog.SafeFileName;
+                    //SourceURl = dialog.FileName;
+                    //if (dtNew.Rows != null && dtNew.Rows.ToString() != String.Empty)
+                    //{
+                    //    dvgArt.DataSource = dtNew;
+                    //}
+                    //foreach (DataGridViewRow row in dgvArt.Rows)
+                    //{
+                    //    if (Convert.ToString(row.Cells["ART"].Value) == "")
+                    //    {
+                    //        row.DefaultCellStyle.BackColor = Color.Red;
+                    //        inValidItem += 1;
+                    //    }
+                    //    else
+                    //    {
+                    //        ImportedRecord += 1;
+                    //    }
+                    //}
+                    //if (dgvArt.Rows.Count == 0)
+                    //{
+                    //    btnSave.Enabled = false;
+                    //    MessageBox.Show("Không đọc được dữ liệu trong file", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //}
+                    // }
                 }
             }
             catch (Exception ex)
@@ -183,14 +168,14 @@ namespace iClothing
                     Mota = txtMota.Text;
 
                     // Created Date
-                    string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                    string createDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
 
                     query = "INSERT INTO [ART] ([ARTID],[Ten],[Mota],[Ngaytao],[Ngaysua])VALUES('" + ARTID + "','" + MaART + "','" + Mota + "','" + createDate + "','" + createDate + "')";
                 }
                 else
                 {
                     ARTID = txtARTID.Text;
-                    string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss");
+                    string modifyDate = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
 
                     // MaART
                     MaART = txtMaArt.Text;
@@ -269,8 +254,8 @@ namespace iClothing
 
                 MessageBox.Show("Mời chọn dòng muốn xóa!");
             }
-            
-            
+
+
         }
 
         private void ClearText()
@@ -278,7 +263,7 @@ namespace iClothing
             txtARTID.Text = string.Empty;
             txtMaArt.Text = string.Empty;
             txtMota.Text = string.Empty;
-            
+
         }
         private void pbFirst_Click(object sender, EventArgs e)
         {
@@ -334,7 +319,7 @@ namespace iClothing
             if (e.RowIndex != -1)
             {
                 DataGridViewRow dgvRow = dgvArt.Rows[e.RowIndex];
-                txtARTID.Text = dgvRow.Cells[0].Value.ToString();                
+                txtARTID.Text = dgvRow.Cells[0].Value.ToString();
                 txtMaArt.Text = dgvRow.Cells[1].Value.ToString();
                 txtMota.Text = dgvRow.Cells[2].Value.ToString();
 

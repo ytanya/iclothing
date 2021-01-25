@@ -112,14 +112,14 @@ namespace iClothing
                             // Update datalist
                             GetAllData(currentPageNumber, rowPerPage);
                         }
-                        MessageBox.Show("Cập nhật thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CommonHelper.showDialog("Đã cập nhật thành công!", Color.FromArgb(0, 200, 81));
                     }
 
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Đang Hoàn Thiện Hệ Thống!");
+                CommonHelper.showDialog("Đang Hoàn Thiện Hệ Thống!", Color.FromArgb(255, 53, 71));
             }
         }
 
@@ -134,11 +134,18 @@ namespace iClothing
                     {
 
                         string KHID = row.Cells[0].Value.ToString();
-                        string query = "DELETE FROM[Customer] WHERE KHID = '" + KHID + "'";
-                        isSuccess = DBAccess.ExecuteQuery(query);
-                        if (!isSuccess) return;
-                        dgvCustomer.Rows.Remove(row);
-
+                        bool isExisted = DBHelper.CheckItemExist("[Order]", "KHID", KHID);
+                        if (!isExisted)
+                        {
+                            string query = "DELETE FROM[Customer] WHERE KHID = '" + KHID + "'";
+                            isSuccess = DBAccess.ExecuteQuery(query);
+                            if (!isSuccess) return;
+                            dgvCustomer.Rows.Remove(row);
+                        }
+                        else
+                        {
+                            CommonHelper.showDialog("Khách hàng đang giao dịch!", Color.FromArgb(255, 53, 71));
+                        }
                     }
                     GetTotalRow();
                     GetAllData(1, rowPerPage);
@@ -146,17 +153,17 @@ namespace iClothing
                 }
                 else
                 {
-                    MessageBox.Show("Mời chọn dòng muốn xóa!");
+                    CommonHelper.showDialog("Mời chọn dòng muốn xóa!", Color.FromArgb(255, 187, 51));
                 }
                 if (isSuccess)
                 {
-                    MessageBox.Show("Đã xóa thành công!");
+                    CommonHelper.showDialog("Đã xóa thành công!", Color.FromArgb(0, 200, 81));
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("Mời chọn dòng muốn xóa!");
+                CommonHelper.showDialog("Mời chọn dòng muốn xóa!", Color.FromArgb(255, 187, 51));
             }
         }
 

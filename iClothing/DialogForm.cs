@@ -21,8 +21,9 @@ namespace iClothing
 
         private void DialogForm_Load(object sender, EventArgs e)
         {
-            Top = 70;
-            Left = Screen.PrimaryScreen.Bounds.Width - Width - 110;
+            Form1 form1 = new Form1();
+            Top = form1.Top+60;
+            Left = form1.Right - this.Width;
             timerClose.Start();
         }
 

@@ -39,9 +39,10 @@ namespace iClothing
             this.lblMessage.AutoSize = true;
             this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessage.ForeColor = System.Drawing.Color.White;
-            this.lblMessage.Location = new System.Drawing.Point(28, 35);
+            this.lblMessage.Location = new System.Drawing.Point(21, 28);
+            this.lblMessage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(0, 20);
+            this.lblMessage.Size = new System.Drawing.Size(0, 17);
             this.lblMessage.TabIndex = 0;
             // 
             // timerClose
@@ -51,13 +52,12 @@ namespace iClothing
             // 
             // DialogForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
-            this.ClientSize = new System.Drawing.Size(479, 96);
+            this.ClientSize = new System.Drawing.Size(467, 78);
             this.Controls.Add(this.lblMessage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DialogForm";
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.DialogForm_Load);

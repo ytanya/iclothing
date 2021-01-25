@@ -38,8 +38,9 @@ namespace iClothing
         private int rowPerPage = 10;
         //private string currentOrderByItem = "Ngaytao";
         private Bitmap bmp;
-        public static string currentpath = System.IO.Directory.GetCurrentDirectory();
-        public static string conn = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
+        public string conn = DBAccess.ConnectionString;
+        //public static string currentpath = System.IO.Directory.GetCurrentDirectory();
+        //public static string conn = "Data Source=" + currentpath + ConfigurationManager.AppSettings["datapath"] + "; Persist Security Info=False";
         public OrderManagement()
         {
             InitializeComponent();

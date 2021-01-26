@@ -37,6 +37,7 @@
             this.pnLeft = new System.Windows.Forms.Panel();
             this.btnMini = new System.Windows.Forms.Button();
             this.pnStuff = new System.Windows.Forms.Panel();
+            this.btnCusOrder = new System.Windows.Forms.Button();
             this.btnStuff = new System.Windows.Forms.Button();
             this.btnOrder = new System.Windows.Forms.Button();
             this.btnStock = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.pnRight = new System.Windows.Forms.Panel();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.btnCusOrder = new System.Windows.Forms.Button();
             this.pnMenu.SuspendLayout();
             this.pnLeft.SuspendLayout();
             this.pnStuff.SuspendLayout();
@@ -126,6 +126,16 @@
             this.pnStuff.Controls.Add(this.btnStock);
             resources.ApplyResources(this.pnStuff, "pnStuff");
             this.pnStuff.Name = "pnStuff";
+            // 
+            // btnCusOrder
+            // 
+            this.btnCusOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
+            this.btnCusOrder.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnCusOrder, "btnCusOrder");
+            this.btnCusOrder.ForeColor = System.Drawing.Color.White;
+            this.btnCusOrder.Name = "btnCusOrder";
+            this.btnCusOrder.UseVisualStyleBackColor = false;
+            this.btnCusOrder.Click += new System.EventHandler(this.btnCusOrder_Click);
             // 
             // btnStuff
             // 
@@ -289,16 +299,6 @@
             // timer3
             // 
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
-            // 
-            // btnCusOrder
-            // 
-            this.btnCusOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(177)))), ((int)(((byte)(27)))));
-            this.btnCusOrder.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btnCusOrder, "btnCusOrder");
-            this.btnCusOrder.ForeColor = System.Drawing.Color.White;
-            this.btnCusOrder.Name = "btnCusOrder";
-            this.btnCusOrder.UseVisualStyleBackColor = false;
-            this.btnCusOrder.Click += new System.EventHandler(this.btnCusOrder_Click);
             // 
             // Form1
             // 

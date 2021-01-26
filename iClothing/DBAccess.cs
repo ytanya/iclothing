@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlServerCe;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,6 +123,7 @@ namespace iClothing
                 }
                 catch (SqlCeException ex)
                 {
+                    CommonHelper.showDialog("Lỗi kết nối dữ liệu!", Color.FromArgb(255, 53, 71));
                     return false;
                 }
             }

@@ -75,9 +75,9 @@
             this.quanLyNhap1.AutoScroll = true;
             this.quanLyNhap1.BackColor = System.Drawing.Color.White;
             this.quanLyNhap1.Location = new System.Drawing.Point(0, 39);
-            this.quanLyNhap1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.quanLyNhap1.Margin = new System.Windows.Forms.Padding(4);
             this.quanLyNhap1.Name = "quanLyNhap1";
-            this.quanLyNhap1.Size = new System.Drawing.Size(1200, 654);
+            this.quanLyNhap1.Size = new System.Drawing.Size(1183, 654);
             this.quanLyNhap1.TabIndex = 61;
             // 
             // rbXuat
@@ -120,9 +120,9 @@
             // quanLyXuat1
             // 
             this.quanLyXuat1.Location = new System.Drawing.Point(0, 39);
-            this.quanLyXuat1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.quanLyXuat1.Margin = new System.Windows.Forms.Padding(4);
             this.quanLyXuat1.Name = "quanLyXuat1";
-            this.quanLyXuat1.Size = new System.Drawing.Size(1200, 654);
+            this.quanLyXuat1.Size = new System.Drawing.Size(1196, 654);
             this.quanLyXuat1.TabIndex = 62;
             this.quanLyXuat1.Load += new System.EventHandler(this.quanLyXuat1_Load);
             // 

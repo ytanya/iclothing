@@ -161,6 +161,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tbManageInOutOrder = new System.Windows.Forms.TabControl();
+            this.tabInputNhap = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnNhapXuatReset = new System.Windows.Forms.Button();
             this.btnNhapXuatSearch = new System.Windows.Forms.Button();
@@ -179,7 +180,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dvgManageInOut = new System.Windows.Forms.DataGridView();
-            this.tabInputNhap = new System.Windows.Forms.TabPage();
             this.pnXuat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderXuat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLastXuat)).BeginInit();
@@ -203,13 +203,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.tbManageInOutOrder.SuspendLayout();
+            this.tabInputNhap.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirst1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgManageInOut)).BeginInit();
-            this.tabInputNhap.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblKH
@@ -1684,7 +1684,6 @@
             // 
             this.tbManageInOutOrder.Controls.Add(this.tabInputNhap);
             this.tbManageInOutOrder.Controls.Add(this.tabPage2);
-            
             this.tbManageInOutOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbManageInOutOrder.Location = new System.Drawing.Point(15, 30);
             this.tbManageInOutOrder.Name = "tbManageInOutOrder";
@@ -1692,6 +1691,23 @@
             this.tbManageInOutOrder.Size = new System.Drawing.Size(826, 720);
             this.tbManageInOutOrder.TabIndex = 65;
             this.tbManageInOutOrder.SelectedIndexChanged += new System.EventHandler(this.tbNewOrder_SelectedIndexChanged);
+            // 
+            // tabInputNhap
+            // 
+            this.tabInputNhap.BackColor = System.Drawing.Color.White;
+            this.tabInputNhap.Controls.Add(this.rbXuat);
+            this.tabInputNhap.Controls.Add(this.rbNhap);
+            this.tabInputNhap.Controls.Add(this.label1);
+            this.tabInputNhap.Controls.Add(this.pnXuat);
+            this.tabInputNhap.Controls.Add(this.pnNhap);
+            this.tabInputNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabInputNhap.ForeColor = System.Drawing.Color.Black;
+            this.tabInputNhap.Location = new System.Drawing.Point(4, 27);
+            this.tabInputNhap.Name = "tabInputNhap";
+            this.tabInputNhap.Padding = new System.Windows.Forms.Padding(3);
+            this.tabInputNhap.Size = new System.Drawing.Size(818, 689);
+            this.tabInputNhap.TabIndex = 0;
+            this.tabInputNhap.Text = "Quản Lý Nhập Xuất";
             // 
             // tabPage2
             // 
@@ -1938,23 +1954,6 @@
             this.dvgManageInOut.Size = new System.Drawing.Size(771, 350);
             this.dvgManageInOut.TabIndex = 33;
             // 
-            // tabInputNhap
-            // 
-            this.tabInputNhap.BackColor = System.Drawing.Color.White;
-            this.tabInputNhap.Controls.Add(this.rbXuat);
-            this.tabInputNhap.Controls.Add(this.rbNhap);
-            this.tabInputNhap.Controls.Add(this.label1);
-            this.tabInputNhap.Controls.Add(this.pnXuat);
-            this.tabInputNhap.Controls.Add(this.pnNhap);
-            this.tabInputNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabInputNhap.ForeColor = System.Drawing.Color.Black;
-            this.tabInputNhap.Location = new System.Drawing.Point(4, 27);
-            this.tabInputNhap.Name = "tabInputNhap";
-            this.tabInputNhap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabInputNhap.Size = new System.Drawing.Size(818, 689);
-            this.tabInputNhap.TabIndex = 0;
-            this.tabInputNhap.Text = "Quản Lý Nhập Xuất";
-            // 
             // OrderManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1971,7 +1970,7 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lblMess);
             this.Name = "OrderManagement";
-            this.Size = new System.Drawing.Size(870, 750);
+            this.Size = new System.Drawing.Size(843, 744);
             this.Load += new System.EventHandler(this.OrderManagement_Load);
             this.pnXuat.ResumeLayout(false);
             this.pnXuat.PerformLayout();
@@ -2002,6 +2001,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.tbManageInOutOrder.ResumeLayout(false);
+            this.tabInputNhap.ResumeLayout(false);
+            this.tabInputNhap.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast1)).EndInit();
@@ -2009,8 +2010,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbFirst1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgManageInOut)).EndInit();
-            this.tabInputNhap.ResumeLayout(false);
-            this.tabInputNhap.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

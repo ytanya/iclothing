@@ -79,7 +79,7 @@ namespace iClothing
                                 }
                                 else
                                 {
-                                    lblMess.Text = "*Sai tên đăng nhập hoặc mật khẩu.";
+                                    CommonHelper.showDialog("Sai tên đăng nhập hoặc mật khẩu.", Color.FromArgb(255, 53, 71));
                                 }
                             }
                         }
@@ -88,7 +88,7 @@ namespace iClothing
                 }
                 else
                 {
-                    lblMess.Text = "*Mời tên đăng nhập và mật khẩu.";
+                    CommonHelper.showDialog("Mời tên đăng nhập và mật khẩu.", Color.FromArgb(255, 187, 51));
                 }
             }
             catch(SqlCeException Ceex)

@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Data.SqlServerCe;
 using System.Configuration;
 using System.IO;
+using Microsoft.Office.Interop.Excel;
+using DataTable = System.Data.DataTable;
 
 namespace iClothing
 {
@@ -163,24 +165,69 @@ namespace iClothing
             // changing the name of active sheet  
             worksheet.Name = "Sheet1";
             // storing header part in Excel  
-            //var columnHeadingsRange = worksheet.Range[worksheet.Cells[1, 4], worksheet.Cells[1, 8]];
-            //columnHeadingsRange.Interior.Color = XlRgbColor.rgbOrange;
-            for (int i = 0; i < dtOrderNew.Columns.Count; i++)
-            {
-                worksheet.Cells[1, i + 1] = dtOrderNew.Columns[i].ToString();
-            }
+            var columnHeadingsRange1 = worksheet.Range[worksheet.Cells[1, 5], worksheet.Cells[1, 8]];
+            columnHeadingsRange1.Interior.Color = XlRgbColor.rgbOrange;
+            var columnHeadingsRange2 = worksheet.Range[worksheet.Cells[1, 9], worksheet.Cells[1, 12]];
+            columnHeadingsRange2.Interior.Color = XlRgbColor.rgbDarkOliveGreen;
+            var columnSTT = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[2, 1]].Merge();
+            var columnNgay = worksheet.Range[worksheet.Cells[1, 2], worksheet.Cells[2, 2]].Merge();
+            var columnKyhieu = worksheet.Range[worksheet.Cells[1, 3], worksheet.Cells[2, 3]].Merge();
+            var columnMahang = worksheet.Range[worksheet.Cells[1, 4], worksheet.Cells[2, 4]].Merge();
+            var columnNhap = worksheet.Range[worksheet.Cells[1, 5], worksheet.Cells[1, 8]].Merge();
+            var columnXuat = worksheet.Range[worksheet.Cells[1, 9], worksheet.Cells[1, 12]].Merge();
+            worksheet.Range["A1"].Value = dtOrderNew.Columns[0].ToString();
+            worksheet.get_Range("A1", "A1").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Range["A1"].ColumnWidth = 5;
+            worksheet.Range["B1"].Value = dtOrderNew.Columns[1].ToString();
+            worksheet.get_Range("B1", "B1").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Range["B1"].ColumnWidth = 15;
+            worksheet.Range["C1"].Value = dtOrderNew.Columns[2].ToString();
+            worksheet.Range["C1"].ColumnWidth = 10;
+            worksheet.get_Range("C1", "C1").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Range["D1"].Value = dtOrderNew.Columns[3].ToString();
+            worksheet.Range["D1"].ColumnWidth = 15;
+            worksheet.get_Range("D1", "D1").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Range["E1:H1"].Value = "NHẬP";
+            worksheet.get_Range("E1", "H1").Cells.HorizontalAlignment =Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Cells[2, 5] = "BTP Chưa in";
+            worksheet.Cells[2, 5].Interior.Color = XlRgbColor.rgbOrange;
+            worksheet.Range["E2"].ColumnWidth = 15;
+            worksheet.Cells[2, 6] = "BTP Đã in";
+            worksheet.Range["F2"].ColumnWidth = 15;
+            worksheet.Cells[2, 6].Interior.Color = XlRgbColor.rgbOrange;
+            worksheet.Cells[2, 7] = "Thành Phẩm";
+            worksheet.Range["G2"].ColumnWidth = 15;
+            worksheet.Cells[2, 7].Interior.Color = XlRgbColor.rgbOrange;
+            worksheet.Cells[2, 8] = "Sản phẩm lỗi";
+            worksheet.Range["H2"].ColumnWidth = 15;
+            worksheet.Cells[2, 8].Interior.Color = XlRgbColor.rgbOrange;
+            worksheet.Range["I1:L1"].Value = "XUẤT";
+            worksheet.get_Range("I1", "L1").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Cells[2, 9] = "BTP Chưa in";
+            worksheet.Range["I2"].ColumnWidth = 15;
+            worksheet.Cells[2, 9].Interior.Color = XlRgbColor.rgbDarkOliveGreen;
+            worksheet.Cells[2, 10] = "BTP Đã in";
+            worksheet.Range["J2"].ColumnWidth = 15;
+            worksheet.Cells[2, 10].Interior.Color = XlRgbColor.rgbDarkOliveGreen;
+            worksheet.Cells[2, 11] = "Thành Phẩm";
+            worksheet.Range["K2"].ColumnWidth = 15;
+            worksheet.Cells[2, 11].Interior.Color = XlRgbColor.rgbDarkOliveGreen;
+            worksheet.Cells[2, 12] = "Sản phẩm lỗi";
+            worksheet.Range["L2"].ColumnWidth = 15;
+            worksheet.Cells[2, 12].Interior.Color = XlRgbColor.rgbDarkOliveGreen;
             // storing Each row and column value to excel sheet  
             for (int i = 0; i < dtOrderNew.Rows.Count; i++)
             {
                 for (int j = 0; j < dtOrderNew.Columns.Count; j++)
                 {
-                    worksheet.Cells[i + 2, j + 1] = dtOrderNew.Rows[i][j].ToString();
+                    worksheet.Cells[i + 3, j + 1] = dtOrderNew.Rows[i][j].ToString();
                 }
             }
             // save the application  
             workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
             // Exit from the application  
             app.Quit();
+            CommonHelper.showDialog("Đã xuất thành công " + dtOrderNew.Rows.Count + " dòng!", Color.FromArgb(4, 132, 75));
         }
 
         public System.Data.DataTable ExportToExcel()
@@ -265,8 +312,8 @@ namespace iClothing
                     dtMain.Merge(dt);
                     dvgOrder.DataSource = dtMain;
                     dvgOrder.Columns[0].Width = 150;
-                    //dvgOrder.Columns[0].DefaultCellStyle.Format = "MM/dd/yyyy HH:mm:ss";
-                    //dvgOrder.Columns[1].DefaultCellStyle.Format = "MM/dd/yyyy HH:mm:ss";
+                    //dvgOrder.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+                    //dvgOrder.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
                     dvgOrder.Columns[1].Width = 130;
                     
                     //dgvOrderNhap.Columns["Xong"].ReadOnly = true;

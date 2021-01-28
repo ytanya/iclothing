@@ -92,9 +92,11 @@
             // pnMenu
             // 
             this.pnMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+
             this.pnMenu.Controls.Add(this.lblCurrentUser);
             this.pnMenu.Controls.Add(this.btnSignout);
             this.pnMenu.Controls.Add(this.btnMinimize);
+            
             this.pnMenu.Controls.Add(this.btnNormal);
             this.pnMenu.Controls.Add(this.btnMaximize);
             this.pnMenu.Controls.Add(this.btnClose);

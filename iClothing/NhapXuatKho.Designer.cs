@@ -84,7 +84,7 @@
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.Orange;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label1.Location = new System.Drawing.Point(-4, 59);
             this.label1.Name = "label1";
@@ -94,7 +94,7 @@
             // btnNhapKho
             // 
             this.btnNhapKho.AutoSize = true;
-            this.btnNhapKho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnNhapKho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnNhapKho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNhapKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNhapKho.ForeColor = System.Drawing.Color.White;
@@ -109,7 +109,7 @@
             // btnXuatKho
             // 
             this.btnXuatKho.AutoSize = true;
-            this.btnXuatKho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnXuatKho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnXuatKho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXuatKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXuatKho.ForeColor = System.Drawing.Color.White;
@@ -183,7 +183,7 @@
             // 
             this.lblRong.AutoSize = true;
             this.lblRong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRong.ForeColor = System.Drawing.Color.Orange;
+            this.lblRong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblRong.Location = new System.Drawing.Point(453, 12);
             this.lblRong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRong.Name = "lblRong";
@@ -208,7 +208,7 @@
             // 
             this.lblDai.AutoSize = true;
             this.lblDai.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDai.ForeColor = System.Drawing.Color.Orange;
+            this.lblDai.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblDai.Location = new System.Drawing.Point(332, 12);
             this.lblDai.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDai.Name = "lblDai";
@@ -232,7 +232,7 @@
             // 
             this.lblMahang.AutoSize = true;
             this.lblMahang.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMahang.ForeColor = System.Drawing.Color.Orange;
+            this.lblMahang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblMahang.Location = new System.Drawing.Point(181, 12);
             this.lblMahang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMahang.Name = "lblMahang";
@@ -254,7 +254,7 @@
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.Color.Orange;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label6.Location = new System.Drawing.Point(2, 32);
             this.label6.Name = "label6";
@@ -265,7 +265,7 @@
             // 
             this.lblKyhieu.AutoSize = true;
             this.lblKyhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKyhieu.ForeColor = System.Drawing.Color.Orange;
+            this.lblKyhieu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblKyhieu.Location = new System.Drawing.Point(37, 12);
             this.lblKyhieu.Name = "lblKyhieu";
             this.lblKyhieu.Size = new System.Drawing.Size(56, 15);
@@ -319,7 +319,7 @@
             // 
             this.lblTPKho.AutoSize = true;
             this.lblTPKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTPKho.ForeColor = System.Drawing.Color.Orange;
+            this.lblTPKho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblTPKho.Location = new System.Drawing.Point(297, 15);
             this.lblTPKho.Name = "lblTPKho";
             this.lblTPKho.Size = new System.Drawing.Size(88, 15);
@@ -340,7 +340,7 @@
             // 
             // label15
             // 
-            this.label15.BackColor = System.Drawing.Color.Orange;
+            this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label15.Location = new System.Drawing.Point(2, 32);
             this.label15.Name = "label15";
@@ -351,7 +351,7 @@
             // 
             this.lblSPLoiKho.AutoSize = true;
             this.lblSPLoiKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSPLoiKho.ForeColor = System.Drawing.Color.Orange;
+            this.lblSPLoiKho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblSPLoiKho.Location = new System.Drawing.Point(453, 15);
             this.lblSPLoiKho.Name = "lblSPLoiKho";
             this.lblSPLoiKho.Size = new System.Drawing.Size(49, 15);
@@ -374,7 +374,7 @@
             // 
             this.lblDaInKho.AutoSize = true;
             this.lblDaInKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDaInKho.ForeColor = System.Drawing.Color.Orange;
+            this.lblDaInKho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblDaInKho.Location = new System.Drawing.Point(169, 15);
             this.lblDaInKho.Name = "lblDaInKho";
             this.lblDaInKho.Size = new System.Drawing.Size(71, 15);
@@ -409,7 +409,7 @@
             // 
             this.lblChuaInKho.AutoSize = true;
             this.lblChuaInKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChuaInKho.ForeColor = System.Drawing.Color.Orange;
+            this.lblChuaInKho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblChuaInKho.Location = new System.Drawing.Point(28, 15);
             this.lblChuaInKho.Name = "lblChuaInKho";
             this.lblChuaInKho.Size = new System.Drawing.Size(86, 15);
@@ -420,7 +420,7 @@
             // 
             this.lblHoaTiet.AutoSize = true;
             this.lblHoaTiet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoaTiet.ForeColor = System.Drawing.Color.Orange;
+            this.lblHoaTiet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblHoaTiet.Location = new System.Drawing.Point(577, 11);
             this.lblHoaTiet.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHoaTiet.Name = "lblHoaTiet";
@@ -432,7 +432,7 @@
             // 
             this.lblSon.AutoSize = true;
             this.lblSon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSon.ForeColor = System.Drawing.Color.Orange;
+            this.lblSon.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblSon.Location = new System.Drawing.Point(719, 12);
             this.lblSon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSon.Name = "lblSon";
@@ -444,7 +444,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Orange;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label2.Location = new System.Drawing.Point(442, 438);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 15);
@@ -467,7 +467,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Orange;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label3.Location = new System.Drawing.Point(442, 498);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 15);
@@ -490,7 +490,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Orange;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label4.Location = new System.Drawing.Point(38, 503);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 15);
@@ -525,7 +525,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Orange;
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label5.Location = new System.Drawing.Point(38, 443);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 15);

@@ -199,7 +199,7 @@
             // 
             this.lblTitleNhap.AutoSize = true;
             this.lblTitleNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitleNhap.ForeColor = System.Drawing.Color.Orange;
+            this.lblTitleNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblTitleNhap.Location = new System.Drawing.Point(141, 3);
             this.lblTitleNhap.Name = "lblTitleNhap";
             this.lblTitleNhap.Size = new System.Drawing.Size(262, 29);
@@ -221,7 +221,7 @@
             // 
             this.lblGhiChu.AutoSize = true;
             this.lblGhiChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGhiChu.ForeColor = System.Drawing.Color.Orange;
+            this.lblGhiChu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblGhiChu.Location = new System.Drawing.Point(16, 368);
             this.lblGhiChu.Name = "lblGhiChu";
             this.lblGhiChu.Size = new System.Drawing.Size(58, 15);
@@ -232,7 +232,7 @@
             // 
             this.ckEnableXuatKho.AutoSize = true;
             this.ckEnableXuatKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckEnableXuatKho.ForeColor = System.Drawing.Color.Orange;
+            this.ckEnableXuatKho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.ckEnableXuatKho.Location = new System.Drawing.Point(137, 138);
             this.ckEnableXuatKho.Name = "ckEnableXuatKho";
             this.ckEnableXuatKho.Size = new System.Drawing.Size(78, 17);
@@ -254,7 +254,7 @@
             // 
             this.lblNgaytaophieu.AutoSize = true;
             this.lblNgaytaophieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgaytaophieu.ForeColor = System.Drawing.Color.Orange;
+            this.lblNgaytaophieu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblNgaytaophieu.Location = new System.Drawing.Point(14, 77);
             this.lblNgaytaophieu.Name = "lblNgaytaophieu";
             this.lblNgaytaophieu.Size = new System.Drawing.Size(108, 15);
@@ -265,7 +265,7 @@
             // 
             this.lblTotalPage.AutoSize = true;
             this.lblTotalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalPage.ForeColor = System.Drawing.Color.Orange;
+            this.lblTotalPage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblTotalPage.Location = new System.Drawing.Point(799, 446);
             this.lblTotalPage.Name = "lblTotalPage";
             this.lblTotalPage.Size = new System.Drawing.Size(68, 13);
@@ -274,7 +274,7 @@
             // 
             // cbPagingSize
             // 
-            this.cbPagingSize.ForeColor = System.Drawing.Color.Orange;
+            this.cbPagingSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.cbPagingSize.FormattingEnabled = true;
             this.cbPagingSize.Items.AddRange(new object[] {
             "10",
@@ -291,13 +291,13 @@
             // dgvOrder
             // 
             this.dgvOrder.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.dgvOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOrder.BackgroundColor = System.Drawing.Color.White;
             this.dgvOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrder.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -385,7 +385,7 @@
             // 
             this.lblNgayXuat.AutoSize = true;
             this.lblNgayXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayXuat.ForeColor = System.Drawing.Color.Orange;
+            this.lblNgayXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblNgayXuat.Location = new System.Drawing.Point(16, 111);
             this.lblNgayXuat.Name = "lblNgayXuat";
             this.lblNgayXuat.Size = new System.Drawing.Size(72, 15);
@@ -407,7 +407,7 @@
             // 
             this.lblTPXuat.AutoSize = true;
             this.lblTPXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTPXuat.ForeColor = System.Drawing.Color.Orange;
+            this.lblTPXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblTPXuat.Location = new System.Drawing.Point(16, 302);
             this.lblTPXuat.Name = "lblTPXuat";
             this.lblTPXuat.Size = new System.Drawing.Size(88, 15);
@@ -428,7 +428,7 @@
             // btnNew
             // 
             this.btnNew.AutoSize = true;
-            this.btnNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.Color.White;
@@ -454,7 +454,7 @@
             // 
             // label20
             // 
-            this.label20.BackColor = System.Drawing.Color.Orange;
+            this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label20.Location = new System.Drawing.Point(12, 45);
             this.label20.Name = "label20";
@@ -465,7 +465,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.Orange;
+            this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label21.Location = new System.Drawing.Point(16, 199);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(56, 15);
@@ -485,7 +485,7 @@
             // 
             this.lblSPLoiXuat.AutoSize = true;
             this.lblSPLoiXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSPLoiXuat.ForeColor = System.Drawing.Color.Orange;
+            this.lblSPLoiXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblSPLoiXuat.Location = new System.Drawing.Point(16, 338);
             this.lblSPLoiXuat.Name = "lblSPLoiXuat";
             this.lblSPLoiXuat.Size = new System.Drawing.Size(49, 15);
@@ -507,7 +507,7 @@
             // btnXoa
             // 
             this.btnXoa.AutoSize = true;
-            this.btnXoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnXoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.ForeColor = System.Drawing.Color.White;
@@ -523,7 +523,7 @@
             // 
             this.lblBTPDaInXuat.AutoSize = true;
             this.lblBTPDaInXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBTPDaInXuat.ForeColor = System.Drawing.Color.Orange;
+            this.lblBTPDaInXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblBTPDaInXuat.Location = new System.Drawing.Point(16, 266);
             this.lblBTPDaInXuat.Name = "lblBTPDaInXuat";
             this.lblBTPDaInXuat.Size = new System.Drawing.Size(71, 15);
@@ -534,7 +534,7 @@
             // 
             this.lblKH.AutoSize = true;
             this.lblKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKH.ForeColor = System.Drawing.Color.Orange;
+            this.lblKH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblKH.Location = new System.Drawing.Point(16, 168);
             this.lblKH.Name = "lblKH";
             this.lblKH.Size = new System.Drawing.Size(85, 15);
@@ -544,7 +544,7 @@
             // btnSave
             // 
             this.btnSave.AutoSize = true;
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
@@ -593,7 +593,7 @@
             // 
             this.lblBTPChuaInXuat.AutoSize = true;
             this.lblBTPChuaInXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBTPChuaInXuat.ForeColor = System.Drawing.Color.Orange;
+            this.lblBTPChuaInXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblBTPChuaInXuat.Location = new System.Drawing.Point(16, 230);
             this.lblBTPChuaInXuat.Name = "lblBTPChuaInXuat";
             this.lblBTPChuaInXuat.Size = new System.Drawing.Size(86, 15);
@@ -647,7 +647,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Orange;
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label5.Location = new System.Drawing.Point(141, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(262, 29);
@@ -656,7 +656,7 @@
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.Color.Orange;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label6.Location = new System.Drawing.Point(12, 45);
             this.label6.Name = "label6";
@@ -692,7 +692,7 @@
             this.gBoxNXKX.Controls.Add(this.dtpNgayXongFilterTo);
             this.gBoxNXKX.Controls.Add(this.dtpNgayXongFilter);
             this.gBoxNXKX.Enabled = false;
-            this.gBoxNXKX.ForeColor = System.Drawing.Color.Orange;
+            this.gBoxNXKX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.gBoxNXKX.Location = new System.Drawing.Point(8, 135);
             this.gBoxNXKX.Name = "gBoxNXKX";
             this.gBoxNXKX.Size = new System.Drawing.Size(230, 55);
@@ -704,7 +704,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Orange;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label3.Location = new System.Drawing.Point(110, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 15);
@@ -715,7 +715,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Orange;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label4.Location = new System.Drawing.Point(0, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(23, 15);
@@ -747,7 +747,7 @@
             this.gBoxNXPX.Controls.Add(this.label1);
             this.gBoxNXPX.Controls.Add(this.dtpNgayXuatFilterTo);
             this.gBoxNXPX.Controls.Add(this.dtpNgayXuatFilter);
-            this.gBoxNXPX.ForeColor = System.Drawing.Color.Orange;
+            this.gBoxNXPX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.gBoxNXPX.Location = new System.Drawing.Point(8, 74);
             this.gBoxNXPX.Name = "gBoxNXPX";
             this.gBoxNXPX.Size = new System.Drawing.Size(230, 55);
@@ -759,7 +759,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Orange;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label2.Location = new System.Drawing.Point(110, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 15);
@@ -770,7 +770,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Orange;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label1.Location = new System.Drawing.Point(0, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 15);
@@ -809,7 +809,7 @@
             // 
             // cbPageSizeFilter
             // 
-            this.cbPageSizeFilter.ForeColor = System.Drawing.Color.Orange;
+            this.cbPageSizeFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.cbPageSizeFilter.FormattingEnabled = true;
             this.cbPageSizeFilter.Items.AddRange(new object[] {
             "10",
@@ -827,7 +827,7 @@
             // 
             this.lblTotalPageFilter.AutoSize = true;
             this.lblTotalPageFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalPageFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblTotalPageFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblTotalPageFilter.Location = new System.Drawing.Point(810, 449);
             this.lblTotalPageFilter.Name = "lblTotalPageFilter";
             this.lblTotalPageFilter.Size = new System.Drawing.Size(68, 13);
@@ -877,13 +877,13 @@
             // dgvOrderFilter
             // 
             this.dgvOrderFilter.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.dgvOrderFilter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvOrderFilter.BackgroundColor = System.Drawing.Color.White;
             this.dgvOrderFilter.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrderFilter.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -919,7 +919,7 @@
             // btnReset
             // 
             this.btnReset.AutoSize = true;
-            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.ForeColor = System.Drawing.Color.White;
@@ -934,7 +934,7 @@
             // btnSearch
             // 
             this.btnSearch.AutoSize = true;
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
@@ -1025,7 +1025,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.Orange;
+            this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label25.Location = new System.Drawing.Point(8, 305);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(88, 15);
@@ -1036,7 +1036,7 @@
             // 
             this.lblSPLoiNhapFilter.AutoSize = true;
             this.lblSPLoiNhapFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSPLoiNhapFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblSPLoiNhapFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblSPLoiNhapFilter.Location = new System.Drawing.Point(8, 337);
             this.lblSPLoiNhapFilter.Name = "lblSPLoiNhapFilter";
             this.lblSPLoiNhapFilter.Size = new System.Drawing.Size(49, 15);
@@ -1047,7 +1047,7 @@
             // 
             this.lblDaInNhapFilter.AutoSize = true;
             this.lblDaInNhapFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDaInNhapFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblDaInNhapFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblDaInNhapFilter.Location = new System.Drawing.Point(8, 271);
             this.lblDaInNhapFilter.Name = "lblDaInNhapFilter";
             this.lblDaInNhapFilter.Size = new System.Drawing.Size(71, 15);
@@ -1083,7 +1083,7 @@
             // 
             this.lblChuaInNhapFilter.AutoSize = true;
             this.lblChuaInNhapFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChuaInNhapFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblChuaInNhapFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblChuaInNhapFilter.Location = new System.Drawing.Point(8, 241);
             this.lblChuaInNhapFilter.Name = "lblChuaInNhapFilter";
             this.lblChuaInNhapFilter.Size = new System.Drawing.Size(86, 15);
@@ -1094,7 +1094,7 @@
             // 
             this.lblKyhieuNhapFilter.AutoSize = true;
             this.lblKyhieuNhapFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKyhieuNhapFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblKyhieuNhapFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblKyhieuNhapFilter.Location = new System.Drawing.Point(8, 203);
             this.lblKyhieuNhapFilter.Name = "lblKyhieuNhapFilter";
             this.lblKyhieuNhapFilter.Size = new System.Drawing.Size(56, 15);
@@ -1114,7 +1114,7 @@
             // 
             this.lblNgayXongNhapFilter.AutoSize = true;
             this.lblNgayXongNhapFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayXongNhapFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblNgayXongNhapFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblNgayXongNhapFilter.Location = new System.Drawing.Point(476, 218);
             this.lblNgayXongNhapFilter.Name = "lblNgayXongNhapFilter";
             this.lblNgayXongNhapFilter.Size = new System.Drawing.Size(101, 15);
@@ -1125,7 +1125,7 @@
             // 
             this.lblNgayXuatFilter.AutoSize = true;
             this.lblNgayXuatFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayXuatFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblNgayXuatFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblNgayXuatFilter.Location = new System.Drawing.Point(436, 162);
             this.lblNgayXuatFilter.Name = "lblNgayXuatFilter";
             this.lblNgayXuatFilter.Size = new System.Drawing.Size(77, 15);

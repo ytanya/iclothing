@@ -12,7 +12,7 @@ namespace iClothing
 {
     public partial class Form1 : Form
     {
-        int PW1, PW2, PW3;
+        int PW1, PW2, PW3, PW4;
         bool submenuHided1, submenuHided2, submenuHided3, minimenuHided, enableMini;
         public Form1()
         {
@@ -20,6 +20,7 @@ namespace iClothing
             PW1 = pnSystem.Height;
             PW2 = pnStuff.Height;
             PW3 = pnLeft.Width;
+            PW4 = pnInOutStock.Height;
             submenuHided1 = false;
             submenuHided2 = false;
             submenuHided3 = false;
@@ -32,9 +33,10 @@ namespace iClothing
             pnStuff.Visible = false;
             btnMini.Visible = false;
             btnMini.Enabled = false;
-            pnSystem.Height = 54;
-            pnStuff.Height = 54;
-            pnSystem.Top = pnStuff.Height+54;
+            pnSystem.Height = 50;
+            pnStuff.Height = 50;
+            pnInOutStock.Height = 50;
+            pnSystem.Top = pnStuff.Height+50;
             SidePanelLeft.Visible = false;
             btnSignout.Visible = false;
             //btnStaff.Visible = false;
@@ -141,7 +143,7 @@ namespace iClothing
         {
             if (submenuHided2)
             {
-                pnStuff.Height = pnStuff.Height + 120;
+                pnStuff.Height = pnStuff.Height + 50;
                 if (pnStuff.Height >= PW2)
                 {
                     timer2.Stop();
@@ -151,7 +153,7 @@ namespace iClothing
             }
             else
             {
-                pnStuff.Height = pnStuff.Height - 120;
+                pnStuff.Height = pnStuff.Height - 50;
                 if (pnStuff.Height < 80)
                 {
                     timer2.Stop();
@@ -266,7 +268,7 @@ namespace iClothing
         private void btnInOutStock_Click(object sender, EventArgs e)
         {
             SidePanelLeft.Height = btnInOutStock.Height;
-            SidePanelLeft.Top = btnInOutStock.Top + btnInOutStock.Top;
+            SidePanelLeft.Top = btnInOutStock.Top+ btnInOutStock.Top;
             submenuHided3 = !(submenuHided3);
             timer4.Start();
         }
@@ -275,8 +277,8 @@ namespace iClothing
         {
             if (submenuHided3)
             {
-                pnInOutStock.Height = pnInOutStock.Height + 120;
-                if (pnInOutStock.Height >= PW2)
+                pnInOutStock.Height = pnInOutStock.Height + 50;
+                if (pnInOutStock.Height >= PW4)
                 {
                     timer4.Stop();
                     submenuHided3 = true;
@@ -285,7 +287,7 @@ namespace iClothing
             }
             else
             {
-                pnInOutStock.Height = pnInOutStock.Height - 120;
+                pnInOutStock.Height = pnInOutStock.Height - 50;
                 if (pnInOutStock.Height < 80)
                 {
                     timer4.Stop();

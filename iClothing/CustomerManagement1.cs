@@ -112,7 +112,7 @@ namespace iClothing
                             // Update datalist
                             GetAllData(currentPageNumber, rowPerPage);
                         }
-                        CommonHelper.showDialog("Đã cập nhật thành công!", Color.FromArgb(0, 200, 81));
+                        CommonHelper.showDialog("Đã cập nhật thành công!", Color.FromArgb(4, 132, 75));
                     }
 
                 }
@@ -157,7 +157,7 @@ namespace iClothing
                 }
                 if (isSuccess)
                 {
-                    CommonHelper.showDialog("Đã xóa thành công!", Color.FromArgb(0, 200, 81));
+                    CommonHelper.showDialog("Đã xóa thành công!", Color.FromArgb(4, 132, 75));
                 }
             }
             catch (Exception ex)

@@ -204,9 +204,9 @@ namespace iClothing
             {
                 GetAllData(strFilter);
                 if (isNhap)
-                    CommonHelper.showDialog("Đã nhập kho thành công!", Color.FromArgb(0, 200, 81));
+                    CommonHelper.showDialog("Đã nhập kho thành công!", Color.FromArgb(4, 132, 75));
                 else
-                    CommonHelper.showDialog("Đã xuất kho thành công!", Color.FromArgb(0, 200, 81));
+                    CommonHelper.showDialog("Đã xuất kho thành công!", Color.FromArgb(4, 132, 75));
                 txtBarCode.Text = string.Empty;
             }
               

@@ -134,5 +134,25 @@ namespace iClothing
                 CheckUserPassword(username, password);
             }
         }
+
+        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
+                CheckUserPassword(username, password);
+            }
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
+                CheckUserPassword(username, password);
+            }
+        }
     }
 }

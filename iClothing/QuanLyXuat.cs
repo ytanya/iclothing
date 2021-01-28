@@ -135,7 +135,7 @@ namespace iClothing
                                 GetTotalRow();
                                 GetAllDataOrder(currentPageNumber, rowPerPage);
 
-                                CommonHelper.showDialog("Đã thêm thành công!", Color.FromArgb(0, 200, 81));
+                                CommonHelper.showDialog("Đã thêm thành công!", Color.FromArgb(4, 132, 75));
                             }
                         }
                     }
@@ -231,7 +231,7 @@ namespace iClothing
                                         ClearText();
                                         // Update datalist
                                         GetAllDataOrder(currentPageNumber, rowPerPage);
-                                        CommonHelper.showDialog("Đã cập nhật thành công!", Color.FromArgb(0, 200, 81));
+                                        CommonHelper.showDialog("Đã cập nhật thành công!", Color.FromArgb(4, 132, 75));
                                     }
                                 }
                             }
@@ -306,6 +306,7 @@ namespace iClothing
         private void btnXoa_Click(object sender, EventArgs e)
         {
             bool isSuccess = false;
+            int count = 0;
             if (dgvOrder.SelectedRows.Count > 0)
             {
                 foreach (DataGridViewRow row in dgvOrder.SelectedRows)
@@ -322,12 +323,13 @@ namespace iClothing
                         
                         if (!isSuccess) return;
                         dgvOrder.Rows.Remove(row);
-                        
+                        count++;
                     }
                 }
                 GetTotalRow();
                 GetAllDataOrder(1, 10);
                 ClearText();
+                CommonHelper.showDialog("Đã xoá thành công " + count + " dòng!", Color.FromArgb(4, 132, 75));
             }
             else
             {

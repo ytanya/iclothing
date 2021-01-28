@@ -39,7 +39,7 @@
             // 
             this.rbXuat.AutoSize = true;
             this.rbXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbXuat.ForeColor = System.Drawing.Color.Orange;
+            this.rbXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.rbXuat.Location = new System.Drawing.Point(289, 20);
             this.rbXuat.Name = "rbXuat";
             this.rbXuat.Size = new System.Drawing.Size(60, 22);
@@ -53,7 +53,7 @@
             this.rbNhap.AutoSize = true;
             this.rbNhap.Checked = true;
             this.rbNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbNhap.ForeColor = System.Drawing.Color.Orange;
+            this.rbNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.rbNhap.Location = new System.Drawing.Point(64, 20);
             this.rbNhap.Name = "rbNhap";
             this.rbNhap.Size = new System.Drawing.Size(65, 22);
@@ -65,7 +65,7 @@
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.Orange;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label1.Location = new System.Drawing.Point(5, 46);
             this.label1.Name = "label1";

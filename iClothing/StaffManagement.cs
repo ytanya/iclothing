@@ -143,19 +143,27 @@ namespace iClothing
                 {
                     foreach (DataGridViewRow row in dgvStaff.SelectedRows)
                     {
-                        bool isExisted = DBHelper.CheckItemExist("[Staff]", "Tendangnhap", "1");
-
-                        if (!isExisted)
+                        Form1 form1 = new Form1();
+                        bool isExisted = DBHelper.CheckItemExist("[Staff]", "Tendangnhap", form1.lblCurrentUser.Text);
+                        bool isAmdin = DBHelper.CheckItemExist("[Staff]", "RoleID", "0000001");
+                        if (!isAmdin)
                         {
-                            string NhanvienID = row.Cells[0].Value.ToString();
-                            string query = "DELETE FROM[Staff] WHERE NhanvienID = '" + NhanvienID + "'";
-                            isSuccess = DBAccess.ExecuteQuery(query);
-                            if (!isSuccess) return;
-                            dgvStaff.Rows.Remove(row);
+                            if (!isExisted)
+                            {
+                                string NhanvienID = row.Cells[0].Value.ToString();
+                                string query = "DELETE FROM[Staff] WHERE NhanvienID = '" + NhanvienID + "'";
+                                isSuccess = DBAccess.ExecuteQuery(query);
+                                if (!isSuccess) return;
+                                dgvStaff.Rows.Remove(row);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Không thể xóa, tên truy cập đang sử dụng!");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Không thể xóa, tên truy cập đang sử dụng!");
+                            MessageBox.Show("Không thể xóa admin!");
                         }
                     }
                     GetTotalRow();

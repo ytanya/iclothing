@@ -58,7 +58,6 @@ namespace iClothing
         private void StockManagement_Load(object sender, EventArgs e)
         {
             this.ActiveControl = txtBarcode;
-            btnExport.Visible = false;
 
             dtpTuNgay.Format = DateTimePickerFormat.Custom;
             dtpTuNgay.CustomFormat = "dd/MM/yyyy";
@@ -288,7 +287,7 @@ namespace iClothing
 
         private void GetAllData(int currentPageNumber, int rowPerPage, string strSearch)
         {
-            DataTable dtMain = new DataTable();
+            
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 

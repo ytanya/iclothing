@@ -178,6 +178,18 @@
     <Compile Include="ManagerOrder.Designer.cs">
       <DependentUpon>ManagerOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhapXuatKho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NhapXuatKho.Designer.cs">
+      <DependentUpon>NhapXuatKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhapXuatKhoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhapXuatKhoForm.Designer.cs">
+      <DependentUpon>NhapXuatKhoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -340,6 +352,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerOrder.resx">
       <DependentUpon>ManagerOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhapXuatKho.resx">
+      <DependentUpon>NhapXuatKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhapXuatKhoForm.resx">
+      <DependentUpon>NhapXuatKhoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderForm.resx">
       <DependentUpon>OrderForm.cs</DependentUpon>

@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyNhap));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnNhap = new System.Windows.Forms.Panel();
             this.tbNhap = new System.Windows.Forms.TabControl();
             this.tpAddNhap = new System.Windows.Forms.TabPage();
@@ -47,13 +47,13 @@
             this.dtpNgayNhapKho = new System.Windows.Forms.DateTimePicker();
             this.lblNgayNhapKho = new System.Windows.Forms.Label();
             this.dgvOrder = new System.Windows.Forms.DataGridView();
-            this.pbNextNhap = new System.Windows.Forms.PictureBox();
+            this.pbNext = new System.Windows.Forms.PictureBox();
             this.dtpNgayTaoPhieu = new System.Windows.Forms.DateTimePicker();
             this.cbPageSize = new System.Windows.Forms.ComboBox();
             this.cbNhacc = new System.Windows.Forms.ComboBox();
             this.lblTotalPage = new System.Windows.Forms.Label();
             this.txtOrderIDNhap = new System.Windows.Forms.TextBox();
-            this.pbLastNhap = new System.Windows.Forms.PictureBox();
+            this.pbLast = new System.Windows.Forms.PictureBox();
             this.lblNgaytaophieu = new System.Windows.Forms.Label();
             this.pbFirst = new System.Windows.Forms.PictureBox();
             this.pbPrev = new System.Windows.Forms.PictureBox();
@@ -119,8 +119,8 @@
             this.tbNhap.SuspendLayout();
             this.tpAddNhap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNextNhap)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLastNhap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).BeginInit();
             this.tpFilterNhap.SuspendLayout();
@@ -139,17 +139,18 @@
             this.pnNhap.Controls.Add(this.tbNhap);
             this.pnNhap.Location = new System.Drawing.Point(0, 0);
             this.pnNhap.Name = "pnNhap";
-            this.pnNhap.Size = new System.Drawing.Size(900, 510);
+            this.pnNhap.Size = new System.Drawing.Size(1014, 657);
             this.pnNhap.TabIndex = 65;
             // 
             // tbNhap
             // 
             this.tbNhap.Controls.Add(this.tpAddNhap);
             this.tbNhap.Controls.Add(this.tpFilterNhap);
-            this.tbNhap.Location = new System.Drawing.Point(3, 3);
+            this.tbNhap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbNhap.Location = new System.Drawing.Point(0, 0);
             this.tbNhap.Name = "tbNhap";
             this.tbNhap.SelectedIndex = 0;
-            this.tbNhap.Size = new System.Drawing.Size(900, 507);
+            this.tbNhap.Size = new System.Drawing.Size(1014, 657);
             this.tbNhap.TabIndex = 65;
             this.tbNhap.SelectedIndexChanged += new System.EventHandler(this.tbNhap_SelectedIndexChanged);
             // 
@@ -162,13 +163,13 @@
             this.tpAddNhap.Controls.Add(this.dtpNgayNhapKho);
             this.tpAddNhap.Controls.Add(this.lblNgayNhapKho);
             this.tpAddNhap.Controls.Add(this.dgvOrder);
-            this.tpAddNhap.Controls.Add(this.pbNextNhap);
+            this.tpAddNhap.Controls.Add(this.pbNext);
             this.tpAddNhap.Controls.Add(this.dtpNgayTaoPhieu);
             this.tpAddNhap.Controls.Add(this.cbPageSize);
             this.tpAddNhap.Controls.Add(this.cbNhacc);
             this.tpAddNhap.Controls.Add(this.lblTotalPage);
             this.tpAddNhap.Controls.Add(this.txtOrderIDNhap);
-            this.tpAddNhap.Controls.Add(this.pbLastNhap);
+            this.tpAddNhap.Controls.Add(this.pbLast);
             this.tpAddNhap.Controls.Add(this.lblNgaytaophieu);
             this.tpAddNhap.Controls.Add(this.pbFirst);
             this.tpAddNhap.Controls.Add(this.pbPrev);
@@ -191,8 +192,8 @@
             this.tpAddNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpAddNhap.Location = new System.Drawing.Point(4, 22);
             this.tpAddNhap.Name = "tpAddNhap";
-            this.tpAddNhap.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tpAddNhap.Size = new System.Drawing.Size(892, 481);
+            this.tpAddNhap.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAddNhap.Size = new System.Drawing.Size(1006, 631);
             this.tpAddNhap.TabIndex = 0;
             this.tpAddNhap.Text = "Tạo Mới";
             this.tpAddNhap.UseVisualStyleBackColor = true;
@@ -201,8 +202,8 @@
             // 
             this.lblTitleNhap.AutoSize = true;
             this.lblTitleNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitleNhap.ForeColor = System.Drawing.Color.Orange;
-            this.lblTitleNhap.Location = new System.Drawing.Point(141, 3);
+            this.lblTitleNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            this.lblTitleNhap.Location = new System.Drawing.Point(141, 14);
             this.lblTitleNhap.Name = "lblTitleNhap";
             this.lblTitleNhap.Size = new System.Drawing.Size(263, 29);
             this.lblTitleNhap.TabIndex = 162;
@@ -223,7 +224,7 @@
             // 
             this.lblGhiChu.AutoSize = true;
             this.lblGhiChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGhiChu.ForeColor = System.Drawing.Color.Orange;
+            this.lblGhiChu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblGhiChu.Location = new System.Drawing.Point(14, 378);
             this.lblGhiChu.Name = "lblGhiChu";
             this.lblGhiChu.Size = new System.Drawing.Size(58, 15);
@@ -234,7 +235,7 @@
             // 
             this.ckEnableNhapKho.AutoSize = true;
             this.ckEnableNhapKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckEnableNhapKho.ForeColor = System.Drawing.Color.Orange;
+            this.ckEnableNhapKho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.ckEnableNhapKho.Location = new System.Drawing.Point(146, 139);
             this.ckEnableNhapKho.Name = "ckEnableNhapKho";
             this.ckEnableNhapKho.Size = new System.Drawing.Size(82, 17);
@@ -256,7 +257,7 @@
             // 
             this.lblNgayNhapKho.AutoSize = true;
             this.lblNgayNhapKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayNhapKho.ForeColor = System.Drawing.Color.Orange;
+            this.lblNgayNhapKho.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblNgayNhapKho.Location = new System.Drawing.Point(13, 109);
             this.lblNgayNhapKho.Name = "lblNgayNhapKho";
             this.lblNgayNhapKho.Size = new System.Drawing.Size(106, 15);
@@ -266,40 +267,40 @@
             // dgvOrder
             // 
             this.dgvOrder.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
-            this.dgvOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            this.dgvOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvOrder.BackgroundColor = System.Drawing.Color.White;
             this.dgvOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrder.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrder.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(115)))), ((int)(((byte)(120)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrder.DefaultCellStyle = dataGridViewCellStyle19;
             this.dgvOrder.EnableHeadersVisualStyles = false;
             this.dgvOrder.GridColor = System.Drawing.Color.White;
             this.dgvOrder.Location = new System.Drawing.Point(288, 61);
             this.dgvOrder.Name = "dgvOrder";
             this.dgvOrder.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrder.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrder.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dgvOrder.RowHeadersWidth = 51;
             this.dgvOrder.RowTemplate.Height = 35;
             this.dgvOrder.Size = new System.Drawing.Size(601, 373);
@@ -307,16 +308,16 @@
             this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
             this.dgvOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellContentClick);
             // 
-            // pbNextNhap
+            // pbNext
             // 
-            this.pbNextNhap.Image = ((System.Drawing.Image)(resources.GetObject("pbNextNhap.Image")));
-            this.pbNextNhap.Location = new System.Drawing.Point(607, 445);
-            this.pbNextNhap.Name = "pbNextNhap";
-            this.pbNextNhap.Size = new System.Drawing.Size(39, 20);
-            this.pbNextNhap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbNextNhap.TabIndex = 133;
-            this.pbNextNhap.TabStop = false;
-            this.pbNextNhap.Click += new System.EventHandler(this.pbNextNhap_Click);
+            this.pbNext.Image = ((System.Drawing.Image)(resources.GetObject("pbNext.Image")));
+            this.pbNext.Location = new System.Drawing.Point(607, 445);
+            this.pbNext.Name = "pbNext";
+            this.pbNext.Size = new System.Drawing.Size(39, 20);
+            this.pbNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbNext.TabIndex = 133;
+            this.pbNext.TabStop = false;
+            this.pbNext.Click += new System.EventHandler(this.pbNext_Click);
             // 
             // dtpNgayTaoPhieu
             // 
@@ -373,22 +374,22 @@
             this.txtOrderIDNhap.TabIndex = 143;
             this.txtOrderIDNhap.Visible = false;
             // 
-            // pbLastNhap
+            // pbLast
             // 
-            this.pbLastNhap.Image = ((System.Drawing.Image)(resources.GetObject("pbLastNhap.Image")));
-            this.pbLastNhap.Location = new System.Drawing.Point(663, 445);
-            this.pbLastNhap.Name = "pbLastNhap";
-            this.pbLastNhap.Size = new System.Drawing.Size(48, 20);
-            this.pbLastNhap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLastNhap.TabIndex = 134;
-            this.pbLastNhap.TabStop = false;
-            this.pbLastNhap.Click += new System.EventHandler(this.pbLastNhap_Click);
+            this.pbLast.Image = ((System.Drawing.Image)(resources.GetObject("pbLast.Image")));
+            this.pbLast.Location = new System.Drawing.Point(663, 445);
+            this.pbLast.Name = "pbLast";
+            this.pbLast.Size = new System.Drawing.Size(48, 20);
+            this.pbLast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLast.TabIndex = 134;
+            this.pbLast.TabStop = false;
+            this.pbLast.Click += new System.EventHandler(this.pbLast_Click);
             // 
             // lblNgaytaophieu
             // 
             this.lblNgaytaophieu.AutoSize = true;
             this.lblNgaytaophieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgaytaophieu.ForeColor = System.Drawing.Color.Orange;
+            this.lblNgaytaophieu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblNgaytaophieu.Location = new System.Drawing.Point(14, 78);
             this.lblNgaytaophieu.Name = "lblNgaytaophieu";
             this.lblNgaytaophieu.Size = new System.Drawing.Size(108, 15);
@@ -421,7 +422,7 @@
             // 
             this.lblNhacc.AutoSize = true;
             this.lblNhacc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNhacc.ForeColor = System.Drawing.Color.Orange;
+            this.lblNhacc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblNhacc.Location = new System.Drawing.Point(14, 163);
             this.lblNhacc.Name = "lblNhacc";
             this.lblNhacc.Size = new System.Drawing.Size(95, 15);
@@ -439,7 +440,7 @@
             // 
             this.lblThanhPham.AutoSize = true;
             this.lblThanhPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThanhPham.ForeColor = System.Drawing.Color.Orange;
+            this.lblThanhPham.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblThanhPham.Location = new System.Drawing.Point(14, 311);
             this.lblThanhPham.Name = "lblThanhPham";
             this.lblThanhPham.Size = new System.Drawing.Size(88, 15);
@@ -449,7 +450,7 @@
             // btnNew
             // 
             this.btnNew.AutoSize = true;
-            this.btnNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.Color.White;
@@ -475,7 +476,7 @@
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.Color.Orange;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label6.Location = new System.Drawing.Point(12, 45);
             this.label6.Name = "label6";
@@ -486,7 +487,7 @@
             // 
             this.lblKyhieu.AutoSize = true;
             this.lblKyhieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKyhieu.ForeColor = System.Drawing.Color.Orange;
+            this.lblKyhieu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblKyhieu.Location = new System.Drawing.Point(14, 199);
             this.lblKyhieu.Name = "lblKyhieu";
             this.lblKyhieu.Size = new System.Drawing.Size(56, 15);
@@ -506,7 +507,7 @@
             // 
             this.lblSPLoi.AutoSize = true;
             this.lblSPLoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSPLoi.ForeColor = System.Drawing.Color.Orange;
+            this.lblSPLoi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblSPLoi.Location = new System.Drawing.Point(14, 347);
             this.lblSPLoi.Name = "lblSPLoi";
             this.lblSPLoi.Size = new System.Drawing.Size(49, 15);
@@ -528,7 +529,7 @@
             // btnDelete
             // 
             this.btnDelete.AutoSize = true;
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
@@ -544,7 +545,7 @@
             // 
             this.lblBTPDaIn.AutoSize = true;
             this.lblBTPDaIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBTPDaIn.ForeColor = System.Drawing.Color.Orange;
+            this.lblBTPDaIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblBTPDaIn.Location = new System.Drawing.Point(14, 275);
             this.lblBTPDaIn.Name = "lblBTPDaIn";
             this.lblBTPDaIn.Size = new System.Drawing.Size(71, 15);
@@ -554,7 +555,7 @@
             // btnSave
             // 
             this.btnSave.AutoSize = true;
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
@@ -594,7 +595,7 @@
             // 
             this.lblBTPChuaIn.AutoSize = true;
             this.lblBTPChuaIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBTPChuaIn.ForeColor = System.Drawing.Color.Orange;
+            this.lblBTPChuaIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblBTPChuaIn.Location = new System.Drawing.Point(14, 239);
             this.lblBTPChuaIn.Name = "lblBTPChuaIn";
             this.lblBTPChuaIn.Size = new System.Drawing.Size(86, 15);
@@ -639,8 +640,8 @@
             this.tpFilterNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpFilterNhap.Location = new System.Drawing.Point(4, 22);
             this.tpFilterNhap.Name = "tpFilterNhap";
-            this.tpFilterNhap.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tpFilterNhap.Size = new System.Drawing.Size(892, 481);
+            this.tpFilterNhap.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFilterNhap.Size = new System.Drawing.Size(1006, 631);
             this.tpFilterNhap.TabIndex = 1;
             this.tpFilterNhap.Text = "Tìm Kiếm";
             this.tpFilterNhap.UseVisualStyleBackColor = true;
@@ -649,8 +650,8 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Orange;
-            this.label5.Location = new System.Drawing.Point(141, 3);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            this.label5.Location = new System.Drawing.Point(141, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(263, 29);
             this.label5.TabIndex = 195;
@@ -658,7 +659,7 @@
             // 
             // label7
             // 
-            this.label7.BackColor = System.Drawing.Color.Orange;
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label7.Location = new System.Drawing.Point(12, 45);
             this.label7.Name = "label7";
@@ -680,7 +681,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Orange;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label4.Location = new System.Drawing.Point(13, 354);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 15);
@@ -716,7 +717,7 @@
             this.gboxNNK.Controls.Add(this.dtpFilterNgayXong);
             this.gboxNNK.Controls.Add(this.dtpFilterNgayXongTo);
             this.gboxNNK.Enabled = false;
-            this.gboxNNK.ForeColor = System.Drawing.Color.Orange;
+            this.gboxNNK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.gboxNNK.Location = new System.Drawing.Point(9, 118);
             this.gboxNNK.Name = "gboxNNK";
             this.gboxNNK.Size = new System.Drawing.Size(227, 55);
@@ -728,7 +729,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Orange;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label2.Location = new System.Drawing.Point(112, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 15);
@@ -739,7 +740,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Orange;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label3.Location = new System.Drawing.Point(6, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(23, 15);
@@ -771,7 +772,7 @@
             this.gBoxNTP.Controls.Add(this.dtpFilterNgayNhap);
             this.gBoxNTP.Controls.Add(this.dtpFilterNgayNhapTo);
             this.gBoxNTP.Controls.Add(this.lblFilterNgayNhap);
-            this.gBoxNTP.ForeColor = System.Drawing.Color.Orange;
+            this.gBoxNTP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.gBoxNTP.Location = new System.Drawing.Point(10, 50);
             this.gBoxNTP.Name = "gBoxNTP";
             this.gBoxNTP.Size = new System.Drawing.Size(226, 58);
@@ -783,7 +784,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Orange;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label1.Location = new System.Drawing.Point(115, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 15);
@@ -813,7 +814,7 @@
             // 
             this.lblFilterNgayNhap.AutoSize = true;
             this.lblFilterNgayNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFilterNgayNhap.ForeColor = System.Drawing.Color.Orange;
+            this.lblFilterNgayNhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblFilterNgayNhap.Location = new System.Drawing.Point(3, 27);
             this.lblFilterNgayNhap.Name = "lblFilterNgayNhap";
             this.lblFilterNgayNhap.Size = new System.Drawing.Size(23, 15);
@@ -823,39 +824,39 @@
             // dgvOrderFilter
             // 
             this.dgvOrderFilter.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Orange;
-            this.dgvOrderFilter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            this.dgvOrderFilter.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvOrderFilter.BackgroundColor = System.Drawing.Color.White;
             this.dgvOrderFilter.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrderFilter.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderFilter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderFilter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvOrderFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrderFilter.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(89)))), ((int)(((byte)(93)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrderFilter.DefaultCellStyle = dataGridViewCellStyle23;
             this.dgvOrderFilter.EnableHeadersVisualStyles = false;
             this.dgvOrderFilter.GridColor = System.Drawing.Color.White;
             this.dgvOrderFilter.Location = new System.Drawing.Point(274, 50);
             this.dgvOrderFilter.Name = "dgvOrderFilter";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderFilter.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderFilter.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dgvOrderFilter.RowHeadersWidth = 51;
             this.dgvOrderFilter.RowTemplate.Height = 35;
             this.dgvOrderFilter.Size = new System.Drawing.Size(612, 377);
@@ -892,7 +893,7 @@
             // 
             this.lblTotalPageFilter.AutoSize = true;
             this.lblTotalPageFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalPageFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblTotalPageFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblTotalPageFilter.Location = new System.Drawing.Point(818, 440);
             this.lblTotalPageFilter.Name = "lblTotalPageFilter";
             this.lblTotalPageFilter.Size = new System.Drawing.Size(68, 13);
@@ -942,7 +943,7 @@
             // btnReset
             // 
             this.btnReset.AutoSize = true;
-            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.ForeColor = System.Drawing.Color.White;
@@ -957,7 +958,7 @@
             // btnSearch
             // 
             this.btnSearch.AutoSize = true;
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
@@ -1048,7 +1049,7 @@
             // 
             this.lblTPNhapFilter.AutoSize = true;
             this.lblTPNhapFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTPNhapFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblTPNhapFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblTPNhapFilter.Location = new System.Drawing.Point(8, 288);
             this.lblTPNhapFilter.Name = "lblTPNhapFilter";
             this.lblTPNhapFilter.Size = new System.Drawing.Size(88, 15);
@@ -1059,7 +1060,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.Orange;
+            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label16.Location = new System.Drawing.Point(8, 320);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(49, 15);
@@ -1070,7 +1071,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Orange;
+            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label17.Location = new System.Drawing.Point(8, 259);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(71, 15);
@@ -1106,7 +1107,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Orange;
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.label14.Location = new System.Drawing.Point(8, 227);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(86, 15);
@@ -1117,7 +1118,7 @@
             // 
             this.lblKyhieuFilter.AutoSize = true;
             this.lblKyhieuFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKyhieuFilter.ForeColor = System.Drawing.Color.Orange;
+            this.lblKyhieuFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
             this.lblKyhieuFilter.Location = new System.Drawing.Point(8, 192);
             this.lblKyhieuFilter.Name = "lblKyhieuFilter";
             this.lblKyhieuFilter.Size = new System.Drawing.Size(56, 15);
@@ -1152,15 +1153,15 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.pnNhap);
             this.Name = "QuanLyNhap";
-            this.Size = new System.Drawing.Size(900, 510);
+            this.Size = new System.Drawing.Size(1017, 657);
             this.Load += new System.EventHandler(this.QuanLyNhap_Load);
             this.pnNhap.ResumeLayout(false);
             this.tbNhap.ResumeLayout(false);
             this.tpAddNhap.ResumeLayout(false);
             this.tpAddNhap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNextNhap)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLastNhap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNext)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFirst)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPrev)).EndInit();
             this.tpFilterNhap.ResumeLayout(false);
@@ -1231,10 +1232,10 @@
         private System.Windows.Forms.PictureBox pbFirstFilter;
         private System.Windows.Forms.PictureBox pbPrevFilter;
         private System.Windows.Forms.TextBox txtPageSizeFilter;
-        private System.Windows.Forms.PictureBox pbNextNhap;
+        private System.Windows.Forms.PictureBox pbNext;
         private System.Windows.Forms.ComboBox cbPageSize;
         private System.Windows.Forms.Label lblTotalPage;
-        private System.Windows.Forms.PictureBox pbLastNhap;
+        private System.Windows.Forms.PictureBox pbLast;
         private System.Windows.Forms.PictureBox pbFirst;
         private System.Windows.Forms.PictureBox pbPrev;
         private System.Windows.Forms.TextBox txtPaging;

@@ -314,6 +314,7 @@
             this.dgvStaff.RowTemplate.Height = 35;
             this.dgvStaff.Size = new System.Drawing.Size(1028, 244);
             this.dgvStaff.TabIndex = 157;
+            this.dgvStaff.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgStaff_CellClick);
             // 
             // txtHo
             // 

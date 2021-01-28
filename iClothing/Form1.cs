@@ -13,7 +13,7 @@ namespace iClothing
     public partial class Form1 : Form
     {
         int PW1, PW2, PW3;
-        bool submenuHided1, submenuHided2, minimenuHided, enableMini;
+        bool submenuHided1, submenuHided2, submenuHided3, minimenuHided, enableMini;
         public Form1()
         {
             InitializeComponent();
@@ -22,8 +22,11 @@ namespace iClothing
             PW3 = pnLeft.Width;
             submenuHided1 = false;
             submenuHided2 = false;
+            submenuHided3 = false;
             minimenuHided = false;
             enableMini = false;
+            
+            pnLeft.Visible = false;
             pnLeft.Width = 54;
             pnSystem.Visible = false;
             pnStuff.Visible = false;
@@ -35,6 +38,9 @@ namespace iClothing
             SidePanelLeft.Visible = false;
             btnSignout.Visible = false;
             //btnStaff.Visible = false;
+            btnMinimize.Visible = false;
+            btnMaximize.Visible = false;
+            pnInOutStock.Visible = false;
             ToolTip tt = new ToolTip();
             tt.SetToolTip(btnSignout, "Đăng xuất");
             tt.SetToolTip(btnClose, "Đóng");
@@ -43,18 +49,21 @@ namespace iClothing
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            btnNormal.Visible = false;
             pnRight.Controls.Clear();
             LoginForm loginfrm = new LoginForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
             loginfrm.FormBorderStyle = FormBorderStyle.None;
             this.pnRight.Controls.Add(loginfrm);
             loginfrm.Show();
+            Login loginUC = loginfrm.login1;
+            this.ActiveControl = loginUC.btnLogin;
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
             MinimizeMenu();
             pnRight.Controls.Clear();
-            OrderForm orderfrm = new OrderForm() { TopLevel = false, AutoScaleMode=AutoScaleMode.None };
+            OrderForm orderfrm = new OrderForm() { Dock=DockStyle.Fill, TopLevel = false, AutoScaleMode=AutoScaleMode.None };
             orderfrm.FormBorderStyle = FormBorderStyle.None;
             orderfrm.AutoScroll = true;
             this.pnRight.Controls.Add(orderfrm);
@@ -86,6 +95,9 @@ namespace iClothing
             pnStuff.Visible = false;
             btnMini.Visible = false;
             btnMini.Enabled = false;
+            btnMaximize.Visible = false;
+            btnMinimize.Visible = false;
+            lblCurrentUser.Visible = false;
         }
 
         private void btnStock_Click(object sender, EventArgs e)
@@ -230,6 +242,68 @@ namespace iClothing
             CustomerOrder custOrderfrm = new CustomerOrder() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
             this.pnRight.Controls.Add(custOrderfrm);
             custOrderfrm.Show();
+        }
+
+        private void btnMaximize_Click(object sender, EventArgs e)
+        {
+            btnNormal.Visible = true;
+            btnMaximize.Visible = false;
+            this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnNormal_Click(object sender, EventArgs e)
+        {
+            btnNormal.Visible = false;
+            btnMaximize.Visible = true;
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void btnInOutStock_Click(object sender, EventArgs e)
+        {
+            SidePanelLeft.Height = btnInOutStock.Height;
+            SidePanelLeft.Top = btnInOutStock.Top + btnInOutStock.Top;
+            submenuHided3 = !(submenuHided3);
+            timer4.Start();
+        }
+
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            if (submenuHided3)
+            {
+                pnInOutStock.Height = pnInOutStock.Height + 120;
+                if (pnInOutStock.Height >= PW2)
+                {
+                    timer4.Stop();
+                    submenuHided3 = true;
+                    this.Refresh();
+                }
+            }
+            else
+            {
+                pnInOutStock.Height = pnInOutStock.Height - 120;
+                if (pnInOutStock.Height < 80)
+                {
+                    timer4.Stop();
+                    submenuHided3 = false;
+                    this.Refresh();
+                }
+
+
+            }
+        }
+
+        private void btnInOutProduct_Click(object sender, EventArgs e)
+        {
+            MinimizeMenu();
+            pnRight.Controls.Clear();
+            NhapXuatKhoForm inoutstockfrm = new NhapXuatKhoForm() { TopLevel = false, AutoScaleMode = AutoScaleMode.None };
+            this.pnRight.Controls.Add(inoutstockfrm);
+            inoutstockfrm.Show();
         }
 
         private void btnSystem_Click(object sender, EventArgs e)

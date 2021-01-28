@@ -14,6 +14,7 @@ namespace iClothing
 {
     public partial class QuanLyXuat : UserControl
     {
+        public static string currentpath = ConfigurationManager.AppSettings["datapath"];
         public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
         private int currentPageNumberFilter, rowPerPageFilter, pageSizeFilter, rowCountFilter;
@@ -125,7 +126,7 @@ namespace iClothing
 
                                 if (IsCompleted.ToLower() == "true")
                                 {
-                                    AddIntoStock(barcode, Ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
+                                    DBHelper.AddIntoStock(barcode, Ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
                                 }
                                 cbCustomer.SelectedIndex = 0;
                                 currentPageNumber = 1;
@@ -197,7 +198,7 @@ namespace iClothing
                         // SPLoi
                         SPLoiID = DBHelper.Lookup("Type", "LoaiID", "Ten", "Sản phẩm lỗi");
                         SPLoiSL = txtSPLoi.Text;
-                        if (bool.Parse(IsCompleted)) itemInStock = DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, ngayxong);
+                        if (bool.Parse(IsCompleted)) itemInStock = DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, dtpNgayXuat.Value.ToString("dd/MM/yyyy"));
                         if (string.IsNullOrEmpty(itemInStock))
                         {
                             ItemQryList = UpdateOrder(DonhangID, barcode, KHID, ngayxong, ngaysua, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, IsCompleted, GhiChu);
@@ -222,7 +223,7 @@ namespace iClothing
                                         SaveOrderToTransactionDB(barcode, SPLoiID, "", SPLoiSL, isNhap, IsCompleted);
                                         if (IsCompleted.ToLower() == "true")
                                         {
-                                            AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
+                                            DBHelper.AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
                                         }
 
                                         cbCustomer.SelectedIndex = 0;
@@ -301,49 +302,7 @@ namespace iClothing
             UpdateItemQryList.Add(UpdateItemQry);
             return UpdateItemQryList;
         }
-        private void AddIntoStock(string barcode, string createDate, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
-            string TPSL, string SPLoiSL)
-        {
-            List<string> InsertItemQryList = new List<string>();
-            string InsertItemQry = "";
-            bool isSuccess = false;
-            string TonkhoID1 = CommonHelper.RandomString(7) + 1;
-            string TonkhoID2 = CommonHelper.RandomString(7) + 2;
-            string TonkhoID3 = CommonHelper.RandomString(7) + 3;
-            string TonkhoID4 = CommonHelper.RandomString(7) + 4;
-
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID1 + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "')";
-            InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID2 + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "')";
-            InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID3 + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "')";
-            InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "')";
-            InsertItemQryList.Add(InsertItemQry);
-
-            //if (DBAccess.IsServerConnected())
-            //{
-
-            if (InsertItemQry.Length > 5)
-            {
-                bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
-
-                if (isExisted)
-                {
-
-                    foreach (var item in InsertItemQryList)
-                    {
-                        isSuccess = DBAccess.ExecuteQuery(item);
-                    }
-
-                }
-                else
-                {
-                    CommonHelper.showDialog("Barcode chưa tồn tại!", Color.FromArgb(255, 53, 71));
-                }
-            }
-            // }
-        }
+        
         private void btnXoa_Click(object sender, EventArgs e)
         {
             bool isSuccess = false;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -204,6 +205,51 @@ namespace iClothing
                 result = "BTP Chưa in: " + BTPChuaIn + " BTP Đã in: " + BTPDaIN + " Thành Phẩm: " + TP + " Sản Phẩm Lỗi: " + SPLoi;
             }
             return result;
+        }
+
+        public static bool AddIntoStock(string barcode, string createDate, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
+            string TPSL, string SPLoiSL)
+        {
+            List<string> InsertItemQryList = new List<string>();
+            string InsertItemQry = "";
+            bool isSuccess = false;
+            string TonkhoID1 = CommonHelper.RandomString(7) + 1;
+            string TonkhoID2 = CommonHelper.RandomString(7) + 2;
+            string TonkhoID3 = CommonHelper.RandomString(7) + 3;
+            string TonkhoID4 = CommonHelper.RandomString(7) + 4;
+
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID1 + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID2 + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID3 + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "')";
+            InsertItemQryList.Add(InsertItemQry);
+
+            //if (DBAccess.IsServerConnected())
+            //{
+
+            if (InsertItemQry.Length > 5)
+            {
+                bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
+
+                if (isExisted)
+                {
+                    foreach (var item in InsertItemQryList)
+                    {
+                        isSuccess = DBAccess.ExecuteQuery(item);
+                    }
+
+                }
+                else
+                {
+                    CommonHelper.showDialog("Barcode chưa tồn tại!", Color.FromArgb(255, 53, 71));
+                    //MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                //  }
+            }
+            return isSuccess;
         }
     }
 }

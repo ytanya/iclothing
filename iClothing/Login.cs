@@ -45,7 +45,7 @@ namespace iClothing
                                 if (dt.Rows.Count >= 1)
                                 {
                                     string currentUser = dt.Rows[0].Field<string>("Tendangnhap").ToString();
-                                    string currentRole = dt.Rows[0].Field<string>("Ten1").ToString();
+                                    string currentRole = dt.Rows[0].Field<string>("RoleID").ToString();
 
 
                                     LoginForm childForm = (LoginForm)this.ParentForm;
@@ -53,23 +53,38 @@ namespace iClothing
                                     Panel pnMenu = parentForm.Controls["pnMenu"] as Panel;
                                     pnMenu.Visible = true;
                                     Panel pnLeft = parentForm.Controls["pnLeft"] as Panel;
+                                    pnLeft.Visible = true;
                                     pnLeft.Width = 238;
-                                    if (currentRole == "Admin")
+                                    Panel pnStuff = pnLeft.Controls["pnStuff"] as Panel;
+                                    Panel pnSystem = pnLeft.Controls["pnSystem"] as Panel;
+                                    Panel pnInOutStock = pnLeft.Controls["pnInOutStock"] as Panel;
+                                    if (currentRole == "0000001")
                                     {
-                                        
-                                        Panel pnSystem = pnLeft.Controls["pnSystem"] as Panel;
+
+                                        pnStuff.Visible = true;
                                         pnSystem.Visible = true;
                                         Button btnStaff = pnSystem.Controls["btnStaff"] as Button;
                                         btnStaff.Visible = true;
+                                        pnInOutStock.Visible = false;
                                         
                                     }
-                                    Panel pnStuff = pnLeft.Controls["pnStuff"] as Panel;
+                                    else if(currentRole == "0000003")
+                                    {
+                                        pnStuff.Visible = false;
+                                        pnSystem.Visible = false;                                       
+                                        pnInOutStock.Visible = true;
+                                    }
+                                    
                                     Button btnMini = pnLeft.Controls["btnMini"] as Button;
                                     btnMini.Visible = true;
                                     
-                                    pnStuff.Visible = true;
                                     Label lblCurrentUser = pnMenu.Controls["lblCurrentUser"] as Label;
                                     lblCurrentUser.Text = username;
+                                    lblCurrentUser.Visible = true;
+                                    Button btnMinimize = pnMenu.Controls["btnMinimize"] as Button;
+                                    btnMinimize.Visible = true;
+                                    Button btnMaximize = pnMenu.Controls["btnMaximize"] as Button;
+                                    btnMaximize.Visible = true;
                                     Panel SidePanelLeft = pnLeft.Controls["SidePanelLeft"] as Panel;
                                     SidePanelLeft.Visible = true;
                                     Button btnSignout = pnMenu.Controls["btnSignout"] as Button;

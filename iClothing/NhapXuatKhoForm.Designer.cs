@@ -1,7 +1,6 @@
-﻿
-namespace iClothing
+﻿namespace iClothing
 {
-    partial class LoginForm
+    partial class NhapXuatKhoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,33 +28,33 @@ namespace iClothing
         /// </summary>
         private void InitializeComponent()
         {
-            this.login1 = new iClothing.Login();
+            this.nhapXuatKho1 = new iClothing.NhapXuatKho();
             this.SuspendLayout();
             // 
-            // login1
+            // nhapXuatKho1
             // 
-            this.login1.BackColor = System.Drawing.Color.White;
-            this.login1.Location = new System.Drawing.Point(0, 0);
-            this.login1.Name = "login1";
-            this.login1.Size = new System.Drawing.Size(1074, 736);
-            this.login1.TabIndex = 0;
+            this.nhapXuatKho1.BackColor = System.Drawing.Color.White;
+            this.nhapXuatKho1.Location = new System.Drawing.Point(-2, -3);
+            this.nhapXuatKho1.Name = "nhapXuatKho1";
+            this.nhapXuatKho1.Size = new System.Drawing.Size(953, 592);
+            this.nhapXuatKho1.TabIndex = 0;
             // 
-            // LoginForm
+            // NhapXuatKhoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1074, 736);
-            this.Controls.Add(this.login1);
+            this.ClientSize = new System.Drawing.Size(1218, 730);
+            this.Controls.Add(this.nhapXuatKho1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.Name = "NhapXuatKhoForm";
+            this.Text = "NhapXuatKhoForm";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public Login login1;
+        private NhapXuatKho nhapXuatKho1;
     }
 }

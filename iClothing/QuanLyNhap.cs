@@ -14,6 +14,7 @@ namespace iClothing
 {
     public partial class QuanLyNhap : UserControl
     {
+        public static string currentpath = ConfigurationManager.AppSettings["datapath"];
         public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
         private int currentPageNumberFilter, rowPerPageFilter, pageSizeFilter, rowCountFilter;
@@ -119,7 +120,7 @@ namespace iClothing
 
                             if (IsCompleted.ToLower() == "true")
                             {
-                                AddIntoStock(barcode, Ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                               DBHelper.AddIntoStock(barcode, Ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
                             }
                             cbNhacc.SelectedIndex = 0;
                             currentPageNumber = 1;
@@ -215,7 +216,7 @@ namespace iClothing
 
                                     if (IsCompleted.ToLower() == "true")
                                     {
-                                        AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                                        DBHelper.AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
                                     }
                                     cbNhacc.SelectedIndex = 0;
                                     currentPageNumber = 1;
@@ -370,9 +371,9 @@ namespace iClothing
             }
         }
 
-        private void pbNextNhap_Click(object sender, EventArgs e)
+        private void pbNext_Click(object sender, EventArgs e)
         {
-            if (currentPageNumber < pageSize)
+            if (currentPageNumber < pageSizeFilter)
             {
                 currentPageNumber += 1;
                 GetAllDataOrder(currentPageNumber, rowPerPage);
@@ -380,7 +381,8 @@ namespace iClothing
             }
         }
 
-        private void pbLastNhap_Click(object sender, EventArgs e)
+
+        private void pbLast_Click(object sender, EventArgs e)
         {
             if (currentPageNumber < pageSize)
             {
@@ -792,6 +794,7 @@ namespace iClothing
             gBoxNTP.Enabled = CBoxNTP.Checked;
         }
 
+
         private void cbPageSizeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             rowPerPageFilter = Convert.ToInt32(cbPageSizeFilter.SelectedItem.ToString());
@@ -841,49 +844,7 @@ namespace iClothing
             }
         }
 
-        private void AddIntoStock(string barcode, string createDate, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
-            string TPSL, string SPLoiSL)
-        {
-            List<string> InsertItemQryList = new List<string>();
-            string InsertItemQry = "";
-            bool isSuccess = false;
-            string TonkhoID1 = CommonHelper.RandomString(7) + 1;
-            string TonkhoID2 = CommonHelper.RandomString(7) + 2;
-            string TonkhoID3 = CommonHelper.RandomString(7) + 3;
-            string TonkhoID4 = CommonHelper.RandomString(7) + 4;
-
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID1 + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "')";
-            InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID2 + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "')";
-            InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID3 + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "')";
-            InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "')";
-            InsertItemQryList.Add(InsertItemQry);
-
-            //if (DBAccess.IsServerConnected())
-            //{
-
-            if (InsertItemQry.Length > 5)
-            {
-                bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
-
-                if (isExisted)
-                {
-                    foreach (var item in InsertItemQryList)
-                    {
-                        isSuccess = DBAccess.ExecuteQuery(item);
-                    }
-
-                }
-                else
-                {
-                    CommonHelper.showDialog("Barcode chưa tồn tại!", Color.FromArgb(255, 53, 71));
-                    //MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                //  }
-            }
-        }
+        
 
         private void GetTotalRowFilter(string query)
         {

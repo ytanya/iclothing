@@ -174,7 +174,7 @@ namespace iClothing
             return isExisted;
         }
 
-        public static string getStock(string kyhieu, string chuaInSL, string daInSL, string tPSL, string SPLoiSL, string ngayXuat)
+        public static string getStock(string kyhieu, string donhangID, string chuaInSL, string daInSL, string tPSL, string SPLoiSL, string ngayXuat)
         {
             DataTable dt = new DataTable();
             DataTable dtnew = new DataTable();
@@ -182,7 +182,7 @@ namespace iClothing
             bool isStock = false;
             int BTPChuaIn, BTPDaIN, TP, SPLoi;
             BTPChuaIn = BTPDaIN = TP = SPLoi = 0;
-            string query = "Select DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản Phẩm Lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock  GROUP BY Barcode) New on New.Barcode = Stock.Barcode where CONVERT(NVARCHAR(10), ngaytao, 103) <= '" + ngayXuat + "' And NewProduct.Kyhieu = '" + kyhieu + "'";
+            string query = "Select DISTINCT(NewProduct.Kyhieu) [Ký Hiệu], New.[BTP Chưa in], New.[BTP Đã in], New.[Thành Phẩm], New.[Sản Phẩm Lỗi], Stock.Mieuta [Miêu tả]  from Stock  join(SELECT Barcode, Kyhieu, MaSP from Product Group by Kyhieu, MaSP, Barcode)NewProduct on Stock.Barcode = NewProduct.Barcode join(SELECT Barcode, SUM(CASE WHEN LoaiID = 0000001 Then Soluongcon ELSE 0 END)[BTP Chưa in], SUM(CASE WHEN LoaiID = 0000002 Then Soluongcon ELSE 0 END)[BTP Đã in], SUM(CASE WHEN LoaiID = 0000003 Then Soluongcon ELSE 0 END)[Thành Phẩm], SUM(CASE WHEN LoaiID = 000004 Then Soluongcon ELSE 0 END)[Sản phẩm lỗi] FROM Stock Where DonhangID not in ('" + donhangID+ "') GROUP BY Barcode) New on New.Barcode = Stock.Barcode where CONVERT(NVARCHAR(10), ngaytao, 103) <= '" + ngayXuat + "' And NewProduct.Kyhieu = '" + kyhieu + "'";
             dtnew = DBAccess.FillDataTable(query, dt);
             if (dtnew != null)
             {
@@ -207,7 +207,7 @@ namespace iClothing
             return result;
         }
 
-        public static bool AddIntoStock(string barcode, string createDate, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
+        public static bool AddIntoStock(string barcode, string donhangID, string createDate, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
             string TPSL, string SPLoiSL)
         {
             List<string> InsertItemQryList = new List<string>();
@@ -218,13 +218,13 @@ namespace iClothing
             string TonkhoID3 = CommonHelper.RandomString(7) + 3;
             string TonkhoID4 = CommonHelper.RandomString(7) + 4;
 
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID1 + "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "')";
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID], [DonhangID], [Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID1 + "','" + donhangID+ "','" + barcode + "','" + BTPChuaInID + "','" + BTPChuaInSL + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID2 + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "')";
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[DonhangID], [Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID2 + "','" + donhangID + "','" + barcode + "','" + BTPDaInID + "','" + BTPDaInSL + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID3 + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "')";
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[DonhangID], [Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID3 + "','" + donhangID + "','" + barcode + "','" + TPID + "','" + TPSL + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
-            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "')";
+            InsertItemQry = "INSERT INTO [Stock] ([TonkhoID],[DonhangID], [Barcode],[LoaiID],[Soluongcon],[Ngaytao])VALUES('" + TonkhoID4 + "','" + donhangID + "','" + barcode + "','" + SPLoiID + "','" + SPLoiSL + "','" + createDate + "')";
             InsertItemQryList.Add(InsertItemQry);
 
             //if (DBAccess.IsServerConnected())
@@ -237,6 +237,52 @@ namespace iClothing
                 if (isExisted)
                 {
                     foreach (var item in InsertItemQryList)
+                    {
+                        isSuccess = DBAccess.ExecuteQuery(item);
+                    }
+
+                }
+                else
+                {
+                    CommonHelper.showDialog("Barcode chưa tồn tại!", Color.FromArgb(255, 53, 71));
+                    
+                    //MessageBox.Show("Barcode chưa tồn tại!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                //  }
+            }
+            return isSuccess;
+        }
+
+        public static bool UpdateStock(string barcode, string donhangID, string createDate, string BTPChuaInID, string BTPDaInID, string TPID, string SPLoiID, string BTPChuaInSL, string BTPDaInSL,
+            string TPSL, string SPLoiSL)
+        {
+            List<string> UpdateItemQryList = new List<string>();
+            string UpdateItemQry = "";
+            bool isSuccess = false;
+            string TonkhoID1 = CommonHelper.RandomString(7) + 1;
+            string TonkhoID2 = CommonHelper.RandomString(7) + 2;
+            string TonkhoID3 = CommonHelper.RandomString(7) + 3;
+            string TonkhoID4 = CommonHelper.RandomString(7) + 4;
+
+            UpdateItemQry = "UPDATE[Stock] SET [Barcode] = '" + barcode + "',[Soluongcon]= '" + BTPChuaInSL + "',[Ngaytao]= '" + createDate + "' WHERE DonhangID ='" + donhangID + "' AND LoaiID='" + BTPChuaInID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+            UpdateItemQry = "UPDATE[Stock] SET [Barcode] = '" + barcode + "',[Soluongcon]= '" + BTPDaInSL + "',[Ngaytao]= '" + createDate + "' WHERE DonhangID ='" + donhangID + "' AND LoaiID='" + BTPDaInID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+            UpdateItemQry = "UPDATE[Stock] SET [Barcode] = '" + barcode + "',[Soluongcon]= '" + TPSL + "',[Ngaytao]= '" + createDate + "' WHERE DonhangID ='" + donhangID + "' AND LoaiID='" + TPID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+            UpdateItemQry = "UPDATE[Stock] SET [Barcode] = '" + barcode + "',[Soluongcon]= '" + SPLoiSL + "',[Ngaytao]= '" + createDate + "' WHERE DonhangID ='" + donhangID + "' AND LoaiID='" + SPLoiID + "';";
+            UpdateItemQryList.Add(UpdateItemQry);
+
+            //if (DBAccess.IsServerConnected())
+            //{
+
+            if (UpdateItemQry.Length > 5)
+            {
+                bool isExisted = DBHelper.CheckItemExist("[Product]", "Barcode", barcode);
+
+                if (isExisted)
+                {
+                    foreach (var item in UpdateItemQryList)
                     {
                         isSuccess = DBAccess.ExecuteQuery(item);
                     }

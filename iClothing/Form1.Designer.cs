@@ -92,11 +92,9 @@
             // pnMenu
             // 
             this.pnMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
-
             this.pnMenu.Controls.Add(this.lblCurrentUser);
             this.pnMenu.Controls.Add(this.btnSignout);
             this.pnMenu.Controls.Add(this.btnMinimize);
-            
             this.pnMenu.Controls.Add(this.btnNormal);
             this.pnMenu.Controls.Add(this.btnMaximize);
             this.pnMenu.Controls.Add(this.btnClose);
@@ -125,6 +123,7 @@
             this.btnNormal.ForeColor = System.Drawing.Color.White;
             this.btnNormal.Name = "btnNormal";
             this.btnNormal.UseVisualStyleBackColor = true;
+            this.btnNormal.Click += new System.EventHandler(this.btnNormal_Click);
             // 
             // btnMaximize
             // 

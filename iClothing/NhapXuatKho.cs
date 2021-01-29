@@ -174,6 +174,7 @@ namespace iClothing
             if (string.IsNullOrEmpty(txtTP.Text)) txtTP.Text = "0";
             if (string.IsNullOrEmpty(txtSPLoi.Text)) txtSPLoi.Text = "0";
 
+            string DonhangID = CommonHelper.RandomString(8);
             string kihieu = txtKyhieu.Text;
             string BTPChuaInSL = txtChuaIn.Text;
             string BTPDaInSL = txtDaIn.Text;
@@ -188,11 +189,11 @@ namespace iClothing
                 CommonHelper.showDialog("Mời nhập số lượng sản phẩm!", Color.FromArgb(255, 187, 51));
             else
             {
-                string itemInStock = DBHelper.getStock(kihieu, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, DateTime.Now.ToString("dd/MM/yyyy"));
+                string itemInStock = DBHelper.getStock(kihieu, DonhangID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL, DateTime.Now.ToString("dd/MM/yyyy"));
                 if (string.IsNullOrEmpty(itemInStock))
                 {
-                    if (isNhap) isSuccess = DBHelper.AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
-                    else isSuccess = DBHelper.AddIntoStock(barcode, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
+                    if (isNhap) isSuccess = DBHelper.AddIntoStock(barcode, DonhangID, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, BTPChuaInSL, BTPDaInSL, TPSL, SPLoiSL);
+                    else isSuccess = DBHelper.AddIntoStock(barcode, DonhangID, ngayxong, BTPChuaInID, BTPDaInID, TPID, SPLoiID, "-" + BTPChuaInSL, "-" + BTPDaInSL, "-" + TPSL, "-" + SPLoiSL);
                 }
                 else
                 {

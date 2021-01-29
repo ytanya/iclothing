@@ -154,7 +154,7 @@ namespace iClothing
                 if (string.IsNullOrEmpty(txtTP.Text)) txtTP.Text = "0";
                 if (string.IsNullOrEmpty(txtSPLoi.Text)) txtSPLoi.Text = "0";
 
-                if (isEdit)
+                if (!string.IsNullOrEmpty(txtOrderIDNhap.Text))
                 {
                     if (DBHelper.checkValidField(txtBTPChuaIn.Text) && DBHelper.checkValidField(txtBTPDaIn.Text) && DBHelper.checkValidField(txtTP.Text) && DBHelper.checkValidField(txtSPLoi.Text))
                         CommonHelper.showDialog("Mời nhập số lượng sản phẩm!", Color.FromArgb(255, 187, 51));

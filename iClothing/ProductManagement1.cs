@@ -24,7 +24,7 @@ namespace iClothing
         bool isSuccess = true;
         public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
-
+        string strSearch = string.Empty;
         public ProductManagement1()
         {
             InitializeComponent();
@@ -278,9 +278,9 @@ namespace iClothing
                 cbArt.SelectedIndex = 0;
             }
         }
-        private void GetTotalRow()
+        private void GetTotalRow(string strSearch)
         {
-            string queryAll = "SELECT COUNT(*) AS Total FROM [Product]";
+            string queryAll = "SELECT COUNT(*) AS Total FROM [Product] " + strSearch;
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
@@ -299,7 +299,7 @@ namespace iClothing
                 }
             }
         }
-        private void GetAllDataProduct(int currentPageNumber, int rowPerPage)
+        private void GetAllDataProduct(int currentPageNumber, int rowPerPage, string strSearch)
         {
              dtMain = new System.Data.DataTable();
             int skipRecord = currentPageNumber - 1;
@@ -320,6 +320,24 @@ namespace iClothing
                     dvgProduct.Columns["Rộng"].Width = 60;
                     this.dvgProduct.Columns["Rộng"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dvgProduct.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    if (dtMain.Rows.Count > 0)
+                    {
+                        txtKyhieuFilter.Visible = true;
+                        txtMaSPFilter.Visible = true;
+                        txtDaiFilter.Visible = true;
+                        txtRongFilter.Visible = true;
+                        txtArtFilter.Visible = true;
+                        txtSonFilter.Visible = true;
+                    }
+                    else
+                    {
+                        txtKyhieuFilter.Visible = false;
+                        txtMaSPFilter.Visible = false;
+                        txtDaiFilter.Visible = false;
+                        txtRongFilter.Visible = false;
+                        txtArtFilter.Visible = false;
+                        txtSonFilter.Visible = false;
+                    }
                 }
             }
 
@@ -578,6 +596,55 @@ namespace iClothing
                 dtProductNew.Rows.Add(i + 1, barcode, kyhieu, masp, dai, rong, art, son, dvt, mieuta);
             }
             return dtProductNew;
+        }
+
+        private void txtKyhieuFilter_TextChanged(object sender, EventArgs e)
+        {
+            (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[Ký Hiệu] like '{0}%'", txtKyhieuFilter.Text);
+        }
+
+        private void txtMaSPFilter_TextChanged(object sender, EventArgs e)
+        {
+            (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[Mã Sản Phẩm] like '{0}%'", txtMaSPFilter.Text);
+        }
+
+        private void txtDaiFilter_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtDaiFilter.Text)) (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Empty;
+            else (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[Dài] = {0}", Convert.ToInt32(txtDaiFilter.Text));
+        }
+
+        private void txtRongFilter_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtRongFilter.Text)) (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Empty;
+            else
+                (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[Rộng] = {0}", Convert.ToInt32(txtRongFilter.Text));
+        }
+
+        private void txtArtFilter_TextChanged(object sender, EventArgs e)
+        {
+            (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[ART] like '{0}%'", txtArtFilter.Text);
+        }
+
+        private void txtSonFilter_TextChanged(object sender, EventArgs e)
+        {
+            (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[Sơn] like '{0}%'", txtSonFilter.Text);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            InitSearch();
+            GetTotalRow(strSearch);
+            GetAllDataOrder(currentPageNumber, rowPerPage, strSearch);
+        }
+        private void InitSearch()
+        {
+            txtKyhieuFilter.Text = string.Empty;
+            txtMaSPFilter.Text = string.Empty;
+            txtDaiFilter.Text = string.Empty;
+            txtRongFilter.Text = string.Empty;
+            txtArtFilter.Text = string.Empty;
+            txtSonFilter.Text = string.Empty;
         }
         private void CreateNew()
         {

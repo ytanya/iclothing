@@ -287,7 +287,7 @@ namespace iClothing
 
         private void GetAllData(int currentPageNumber, int rowPerPage, string strSearch)
         {
-            
+            dtMain = new DataTable();
             int skipRecord = currentPageNumber - 1;
             if (skipRecord != 0) skipRecord = skipRecord * rowPerPage;
 

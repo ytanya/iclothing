@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductManagement1));
             this.cbArt = new System.Windows.Forms.ComboBox();
             this.txtRong = new System.Windows.Forms.TextBox();
@@ -65,6 +66,14 @@
             this.pbPrev = new System.Windows.Forms.PictureBox();
             this.txtPaging = new System.Windows.Forms.TextBox();
             this.btnExport = new System.Windows.Forms.Button();
+            this.txtKyhieuFilter = new System.Windows.Forms.TextBox();
+            this.txtMaSPFilter = new System.Windows.Forms.TextBox();
+            this.txtDaiFilter = new System.Windows.Forms.TextBox();
+            this.txtArtFilter = new System.Windows.Forms.TextBox();
+            this.txtRongFilter = new System.Windows.Forms.TextBox();
+            this.txtSonFilter = new System.Windows.Forms.TextBox();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dvgProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLast)).BeginInit();
@@ -293,38 +302,40 @@
             // dvgProduct
             // 
             this.dvgProduct.AllowUserToAddRows = false;
+            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.dvgProduct.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle37;
             this.dvgProduct.BackgroundColor = System.Drawing.Color.White;
             this.dvgProduct.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dvgProduct.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle38;
             this.dvgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dvgProduct.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(249)))));
+            dataGridViewCellStyle39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            dataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dvgProduct.DefaultCellStyle = dataGridViewCellStyle39;
             this.dvgProduct.EnableHeadersVisualStyles = false;
             this.dvgProduct.GridColor = System.Drawing.Color.White;
             this.dvgProduct.Location = new System.Drawing.Point(300, 4);
             this.dvgProduct.Margin = new System.Windows.Forms.Padding(4);
             this.dvgProduct.Name = "dvgProduct";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dvgProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle40.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dvgProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle40;
             this.dvgProduct.Size = new System.Drawing.Size(896, 579);
             this.dvgProduct.TabIndex = 100;
             this.dvgProduct.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgProduct_CellClick);
@@ -493,11 +504,120 @@
             this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
+            // txtKyhieuFilter
+            // 
+            this.txtKyhieuFilter.BackColor = System.Drawing.Color.White;
+            this.txtKyhieuFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtKyhieuFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtKyhieuFilter.Location = new System.Drawing.Point(429, 591);
+            this.txtKyhieuFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.txtKyhieuFilter.Name = "txtKyhieuFilter";
+            this.txtKyhieuFilter.Size = new System.Drawing.Size(79, 22);
+            this.txtKyhieuFilter.TabIndex = 144;
+            this.txtKyhieuFilter.TextChanged += new System.EventHandler(this.txtKyhieuFilter_TextChanged);
+            // 
+            // txtMaSPFilter
+            // 
+            this.txtMaSPFilter.BackColor = System.Drawing.Color.White;
+            this.txtMaSPFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMaSPFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaSPFilter.Location = new System.Drawing.Point(516, 591);
+            this.txtMaSPFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMaSPFilter.Name = "txtMaSPFilter";
+            this.txtMaSPFilter.Size = new System.Drawing.Size(114, 22);
+            this.txtMaSPFilter.TabIndex = 145;
+            this.txtMaSPFilter.TextChanged += new System.EventHandler(this.txtMaSPFilter_TextChanged);
+            // 
+            // txtDaiFilter
+            // 
+            this.txtDaiFilter.BackColor = System.Drawing.Color.White;
+            this.txtDaiFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDaiFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDaiFilter.Location = new System.Drawing.Point(638, 591);
+            this.txtDaiFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDaiFilter.Name = "txtDaiFilter";
+            this.txtDaiFilter.Size = new System.Drawing.Size(61, 22);
+            this.txtDaiFilter.TabIndex = 146;
+            this.txtDaiFilter.TextChanged += new System.EventHandler(this.txtDaiFilter_TextChanged);
+            // 
+            // txtArtFilter
+            // 
+            this.txtArtFilter.BackColor = System.Drawing.Color.White;
+            this.txtArtFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtArtFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtArtFilter.Location = new System.Drawing.Point(768, 591);
+            this.txtArtFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.txtArtFilter.Name = "txtArtFilter";
+            this.txtArtFilter.Size = new System.Drawing.Size(95, 22);
+            this.txtArtFilter.TabIndex = 147;
+            this.txtArtFilter.TextChanged += new System.EventHandler(this.txtArtFilter_TextChanged);
+            // 
+            // txtRongFilter
+            // 
+            this.txtRongFilter.BackColor = System.Drawing.Color.White;
+            this.txtRongFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRongFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRongFilter.Location = new System.Drawing.Point(707, 591);
+            this.txtRongFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRongFilter.Name = "txtRongFilter";
+            this.txtRongFilter.Size = new System.Drawing.Size(52, 22);
+            this.txtRongFilter.TabIndex = 148;
+            this.txtRongFilter.TextChanged += new System.EventHandler(this.txtRongFilter_TextChanged);
+            // 
+            // txtSonFilter
+            // 
+            this.txtSonFilter.BackColor = System.Drawing.Color.White;
+            this.txtSonFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSonFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSonFilter.Location = new System.Drawing.Point(871, 591);
+            this.txtSonFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSonFilter.Name = "txtSonFilter";
+            this.txtSonFilter.Size = new System.Drawing.Size(95, 22);
+            this.txtSonFilter.TabIndex = 149;
+            this.txtSonFilter.TextChanged += new System.EventHandler(this.txtSonFilter_TextChanged);
+            // 
+            // btnReset
+            // 
+            this.btnReset.AutoSize = true;
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.Location = new System.Drawing.Point(997, 582);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(74, 36);
+            this.btnReset.TabIndex = 179;
+            this.btnReset.Text = "Clear";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.AutoSize = true;
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(62)))), ((int)(((byte)(67)))));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(1077, 582);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(83, 36);
+            this.btnSearch.TabIndex = 178;
+            this.btnSearch.Text = "Tìm Kiếm";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
             // ProductManagement1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtSonFilter);
+            this.Controls.Add(this.txtRongFilter);
+            this.Controls.Add(this.txtArtFilter);
+            this.Controls.Add(this.txtDaiFilter);
+            this.Controls.Add(this.txtMaSPFilter);
+            this.Controls.Add(this.txtKyhieuFilter);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.pbNext);
             this.Controls.Add(this.cbPageSize);
@@ -580,5 +700,13 @@
         private System.Windows.Forms.PictureBox pbPrev;
         private System.Windows.Forms.TextBox txtPaging;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.TextBox txtKyhieuFilter;
+        private System.Windows.Forms.TextBox txtMaSPFilter;
+        private System.Windows.Forms.TextBox txtDaiFilter;
+        private System.Windows.Forms.TextBox txtArtFilter;
+        private System.Windows.Forms.TextBox txtRongFilter;
+        private System.Windows.Forms.TextBox txtSonFilter;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

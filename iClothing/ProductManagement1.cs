@@ -24,7 +24,7 @@ namespace iClothing
         bool isSuccess = true;
         public string ConnectionString = DBAccess.ConnectionString;
         private int currentPageNumber, rowPerPage, pageSize, rowCount;
-        string strSearch = string.Empty;
+        List<string> strSearch = new List<string>();
         public ProductManagement1()
         {
             InitializeComponent();
@@ -278,9 +278,9 @@ namespace iClothing
                 cbArt.SelectedIndex = 0;
             }
         }
-        private void GetTotalRow(string strSearch)
+        private void GetTotalRow()
         {
-            string queryAll = "SELECT COUNT(*) AS Total FROM [Product] " + strSearch;
+            string queryAll = "SELECT COUNT(*) AS Total FROM [Product] ";
             using (SqlCeConnection connection = new SqlCeConnection(ConnectionString))
             {
                 using (SqlCeCommand command = new SqlCeCommand(queryAll, connection))
@@ -299,7 +299,7 @@ namespace iClothing
                 }
             }
         }
-        private void GetAllDataProduct(int currentPageNumber, int rowPerPage, string strSearch)
+        private void GetAllDataProduct(int currentPageNumber, int rowPerPage)
         {
              dtMain = new System.Data.DataTable();
             int skipRecord = currentPageNumber - 1;
@@ -600,7 +600,26 @@ namespace iClothing
 
         private void txtKyhieuFilter_TextChanged(object sender, EventArgs e)
         {
-            (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[Ký Hiệu] like '{0}%'", txtKyhieuFilter.Text);
+            string searchItem = string.Empty;
+            if(string.IsNullOrEmpty(txtKyhieuFilter.Text))
+            {
+                strSearch.RemoveAll(u => u.Contains("[Ký Hiệu]"));
+            }
+            else
+            {
+                int index = strSearch.FindIndex(ind => ind.Contains("[Ký Hiệu]"));
+                string kyhieufilter = string.Format("[Ký Hiệu] like '{0}%'", txtKyhieuFilter.Text);
+                if (index > -1) 
+                {
+                    strSearch[index] = kyhieufilter;
+                    
+                }
+                 else strSearch.Add(kyhieufilter);
+
+                searchItem = string.Join(" AND ", strSearch);
+                
+            }
+            (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = searchItem;
         }
 
         private void txtMaSPFilter_TextChanged(object sender, EventArgs e)
@@ -610,8 +629,28 @@ namespace iClothing
 
         private void txtDaiFilter_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtDaiFilter.Text)) (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Empty;
-            else (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = string.Format("[Dài] = {0}", Convert.ToInt32(txtDaiFilter.Text));
+            string searchItem = string.Empty;
+            if (string.IsNullOrEmpty(txtDaiFilter.Text))
+            {
+                strSearch.RemoveAll(u => u.Contains("[Dài]"));
+            }
+            else
+            {
+                int index = strSearch.FindIndex(ind => ind.Contains("[Dài]"));
+                string daifilter = string.Format("[Dài] = {0}", txtDaiFilter.Text);
+                if (index > -1)
+                {
+                    strSearch[index] = daifilter;
+
+                }
+                else
+                {
+                    strSearch.Add(daifilter);
+                    
+                }
+                searchItem = string.Join(" AND ", strSearch);
+            }
+            (dvgProduct.DataSource as System.Data.DataTable).DefaultView.RowFilter = searchItem;
         }
 
         private void txtRongFilter_TextChanged(object sender, EventArgs e)
@@ -634,8 +673,8 @@ namespace iClothing
         private void btnReset_Click(object sender, EventArgs e)
         {
             InitSearch();
-            GetTotalRow(strSearch);
-            GetAllDataOrder(currentPageNumber, rowPerPage, strSearch);
+            //GetTotalRow(strSearch);
+            //GetAllDataOrder(currentPageNumber, rowPerPage, strSearch);
         }
         private void InitSearch()
         {
